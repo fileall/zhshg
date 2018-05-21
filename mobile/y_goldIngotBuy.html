@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<title></title>
+		<script src="js/fontSize.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/custom.js"></script>
+		<script type="text/javascript" src="js/prefixfree.min.js" ></script>
+	</head>
+	
+	<body>
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">元宝购买</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<!--<div class="payment-wrap">
+				<div class="payment-logo"><span><img src="images/icon30.png"></span></div>
+				<div class="payment-name">向臻惠生活馆付款</div>
+				<div class="payment-money">￥100.00</div>
+			</div>-->
+			<div>
+				<div class="merchant-form y-merchant-form row-box y-bg-white" style="margin-top: 0;">
+					<div class="merchant-currency font-32">充值金额：</div>
+					<div class="row-flex">
+						<div class="merchant-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;">
+								<input class="font-32" type="number" placeholder="请输入充值金额">
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="y-bg-white y-goldBuy y-width94">
+					<p class="y-color-999 font-32">选择充值金额</p>
+					<ul class="buy-ul y-mar-top20 jus-bet flex-warp">
+						<li class="y-buy-li y-buy-li-select">
+							<p class="font-32">50元</p>
+							<p class="font-28">送1000银币</p>
+						</li>
+						<li class="y-buy-li">
+							<p class="font-32">100元</p>
+							<p class="font-28">送1000银币</p>
+						</li>
+						<li class="y-buy-li">
+							<p class="font-32">200元</p>
+							<p class="font-28">送1000银币</p>
+						</li>
+						<li class="y-buy-li">
+							<p class="font-32">300元</p>
+							<p class="font-28">送1000银币</p>
+						</li>
+						<li class="y-buy-li">
+							<p class="font-32">400元</p>
+							<p class="font-28">送1000银币</p>
+						</li>
+						<li class="y-buy-li">
+							<p class="font-32">500元</p>
+							<p class="font-28">送1000银币</p>
+						</li>
+					</ul>
+					<div class="submit-button y-goldBuy-button"><a>立即购买</a></div>
+				</div>
+			</div>
+			
+		</div>
+		<!--content-->
+		
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+	<script>
+		$(".y-buy-li").click(function(){
+			$(this).addClass("y-buy-li-select").siblings().removeClass("y-buy-li-select")
+		})
+		$(".y-goldBuy-button").click(function(){
+			window.location.href="y_payment.html";
+		})
+	</script>
+</html>

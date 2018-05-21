@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<script src="__MB__js/fontSize.js"></script>
+		<link rel="stylesheet" href="__MB__css/index.css" />
+		<script src="__MB__js/jquery-1.11.2.min.js"></script>
+		<script src="__MB__js/custom.js"></script>
+        <script src="__MB__js/layer/layer.js"></script>
+        <script src="__MB__js/layui/layui.js"></script>
+        <link rel="stylesheet" href="__MB__js/layui/css/layui.css">
+	</head>
+
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">确认订单</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+
+		<!--content-->
+		<div class="content">
+			<div class="y-orderDetais-address order-message">
+                <if condition="$has_addr eq null">
+                    <!--没有地址状态-->
+                    <a href="{:U('Address/location',array('attr_id'=>$id,'item_id'=>$item_id,'addr_id'=>$addr_id))}">
+                    <div class="add-location">
+                        <div class="add-location-icon">+</div>
+                        <div class="add-location-txt y-color-red">添加地址</div>
+                    </div>
+                    </a>
+                    <!--没有地址状态-->
+                    <else />
+                    <!--地址-->
+                    <a href="{:U('Address/location',array('attr_id'=>$id,'item_id'=>$item_id,'addr_id'=>$addr_id))}">
+                    <div class="jus-ali">
+                        <div class="function-list-left">
+                            <div class="function-list-icon"><img src="__MB__images/location1.png"></div>
+                        </div>
+                        <div class="flex1">
+                            <div  class="jus-bet font-28 y-orderDetais-name" >
+                                <p>{$has_addr['shperson']}</p>
+                                <p>{$has_addr['mobile']}</p>
+                            </div>
+                            <div class="font-26 y-color-999">{$has_addr['province']}{$has_addr['city']}{$has_addr['district']}{$has_addr['address']}</div>
+                        </div>
+                        <div class="order-message-right vertical-center">
+                            <div class="vertical-auto"><i class="fa fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                    </a>
+                    <!--地址-->
+                </if>
+            </div>
+			<div class="y-mar-top20 y-bg-white">
+                    <div class="row-box goods-tier-inner y-border-none">
+                        <div class="goods-img-box">
+                            <div class="level-img vertical-center">
+                                <div class="vertical-auto y-border"><img src="{:attach($item_info['item']['img'],item)}"></div>
+                            </div>
+                        </div>
+                        <div class="flex y-order-text">
+                            <div class="flavour-title ellipsis2">{$item_info['item']['title']}</div>
+                            <div class="jus-bet ali-cen">
+                                <div class="y-color-red font-28"><span id="gold" value="{$item_info['gold_fruit']}">{$item_info['gold_fruit']}</span>个金果</div>
+
+                                <div class="y-color-999">x1</div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="goldShopOrder-num ali-cen y-width94 y-border-top font-28">
+                	<p>兑换数量:</p>
+                	<div class="wicket-amount y-wicket-amount row-box">
+
+                        <div id="min"  class="wicket-amount-btn minus y-wicket-amount-btn">-</div>
+                        <div class="wicket-amount-input y-wicket-amount-input row-flex">
+                            <input id="text_box" type="number" readonly="readonly" value="1">
+                        </div>
+                        <div id="add" class="wicket-amount-btn add y-wicket-amount-btn y-bg-red">+</div>
+                    </div>
+                    <p class="y-color-666">库存<span id="kucun" value="{$item_info['attr_value']}">{$item_info['attr_value']}</span>件</p>
+                </div>
+                <div class="y-orderDetais-bottom y-bg-white y-width94 font-28 y-border-top">
+                    <p>所需金果：<span id="now" class="total">$item_info['gold_fruit']}</span>个</p>
+                    <p>我的金果：<span class="have">{$gold}</span>个</p>
+                </div>
+            </div>
+			
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<div class="footer-space"></div><!--间距-->
+		<div class="footer-wrap">
+			<div class="footer-inner inner-area">
+				<div class="row-box">
+					<div class="row-flex">
+					    <div class="order-money y-order-money font-24">
+					        <!--<p class="y-color-999">共1件商品</p>-->
+					        <p>合计：<span class="y-color-red font-30 total">{$item_info['gold_fruit']}个金果</span></p>
+					    </div>
+					</div>
+					
+					<div class="order-link">
+						<a id="sub" class="y-bg-red">提交订单</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--footer-->
+	</body>
+    <script>
+        $(function(){
+            var t = $("#text_box");
+            var kucun =$("#kucun").attr('value');
+            var gold =$("#gold").attr('value');
+            $("#add").click(function(){
+                t.val(parseInt(t.val())+1)
+                if(parseInt(t.val())>kucun){
+                    t.val(kucun);
+                }
+                setTotal();
+            })
+            $("#min").click(function(){
+                t.val(parseInt(t.val())-1)
+                if(parseInt(t.val())<1){
+                    t.val(1);
+                }
+                setTotal();
+            })
+            function setTotal(){
+                //toFixed(2) 表示保留两位小数
+                $(".total").html((parseInt(t.val())*gold).toFixed(2));
+            }
+            setTotal();
+        })
+        $(function(){
+          $("#sub").click(function sub() {
+              var now =  $("#now").text();
+              var have = $(".have").text();
+              var item_id = "{$item_id}";
+              var attr_id = "{$id}";
+              var addr_id = "{$addr_id}";
+              $.ajax({
+                  type:'post',
+                  url:'{:U("Goldfruitshop/sub_gold_order")}',
+                  data:{now:now,have:have,item_id:item_id,addr_id:addr_id,attr_id:attr_id},
+                  dataType:'json',
+                  success:function(msg){
+                      if(msg.status == 1){
+                          location.href= "{:U('Goldfruitshop/y_pay')}";
+                      }else{
+                          layer.msg(msg['msg'],{time:1000});
+                      }
+                  }
+              })
+          })
+        })
+    </script>
+</html>

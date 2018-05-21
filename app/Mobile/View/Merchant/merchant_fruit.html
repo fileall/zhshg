@@ -1,0 +1,75 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+
+<body class="body-bgColor">
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">金果</div>
+        <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+        <div class="header-right"></div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="content">
+    <div class="outstanding-box y-goldIngot-bg vertical-center">
+        <div class="vertical-auto" style="width: 100%;">
+            <div class="outstanding-title font-28">当前金果(个)</div>
+            <div class="outstanding-money">{$merchant['gold_fruit']}</div>
+        </div>
+    </div>
+
+    <ul class="y-mar-top20 y-bg-white">
+        <li class="function-list-li y-shaped-item">
+            <a href="{:U('wallet/balance_extract',['page_type'=>3])}">
+                <div class="ali-cen">
+                    <div class="function-list-left">
+                        <div class="function-list-icon"><img src="__MB__images/y_icon38.png"></div>
+                    </div>
+                    <div class="jus-bet flex1 y-shaped-item-text">
+                        <div class="row-flex flex1">
+                            <div class="function-list-name">金果提现</div>
+                        </div>
+
+                        <div class="function-list-right">
+                            <div class="function-list-arrows"><i class="fa fa-a ngle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <li class="function-list-li y-shaped-item">
+            <a href="{:U('merchant_account',['type'=>3])}">
+                <div class="ali-cen">
+                    <div class="function-list-left">
+                        <div class="function-list-icon"><img src="__MB__images/y_icon40.png"></div>
+                    </div>
+                    <div class="jus-bet flex1 y-shaped-item-text">
+                        <div class="row-flex flex1">
+                            <div class="function-list-name">金果明细</div>
+                        </div>
+
+                        <div class="function-list-right">
+                            <div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
+<!--content-->
+
+<!--footer-->
+<!--footer-->
+</body>
+</block>
+<block name="footer"></block>
+<block name="script">
+</block>
+
+</html>

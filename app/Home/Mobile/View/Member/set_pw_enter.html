@@ -1,0 +1,96 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">修改登录密码</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<form action="" name="" method="post">
+				<ul class="">
+					<li class="enter-form-li row-box">
+						<div class="enter-form-icon"><i class="fa fa-unlock-alt"></i></div>
+						<div class="row-flex">
+							<div class="enter-form-input">
+								<input id="oldpw" type="password" name="oldpw" placeholder="输入原密码">
+							</div>
+						</div>
+					</li>
+					
+					<li class="enter-form-li row-box">
+						<div class="enter-form-icon"><i class="fa fa-unlock-alt"></i></div>
+						<div class="row-flex">
+							<div class="enter-form-input">
+								<input id="password" type="password" name="password" placeholder="输入新密码">
+							</div>
+						</div>
+					</li>
+					
+					<li class="enter-form-li row-box">
+						<div class="enter-form-icon"><i class="fa fa-unlock-alt"></i></div>
+						<div class="row-flex">
+							<div class="enter-form-input">
+								<input id="pass" type="password" name="pnewpassword" placeholder="再次输入新密码">
+							</div>
+						</div>
+					</li>
+				</ul>
+				
+				<div class="enter-form-btn">
+					<button type="submit">保存</button>
+				</div>
+			</form>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>	
+<block name="footer"></block>	
+<block name="script">
+<script>
+$('form').submit(function(){	
+//	var eg = /^(?![0-9]*$)[a-zA-Z0-9]{6,20}$/;
+	if(!$('#oldpw').val()){
+		layer.msg('请填写原密码！',{icon:0,time:1000})
+		return false;
+	}
+	if(!$('#password').val()){
+		layer.msg('请填写新密码！',{icon:0,time:1000})
+		return false;
+	}
+//	if(!eg.test($('#password').val())){
+//		layer.msg('密码格式为6-20位字母数字,不能是纯数字！',{icon:0,time:1000})
+//		return false;
+//	}
+	if($('#password').val() != $('#pass').val()){
+		layer.msg('两次输入密码不一致！',{icon:0,time:1000})
+		return false;
+	}
+	
+	a=$('#oldpw').val();
+	b=$('#password').val();
+	$.post('{:U("member/set_pw_enter")}',{oldpw:a,password:b},function(d){
+		if(d.status==1){
+			layer.msg(d.msg,{icon:1,time:2000},function(){
+				window.location.href = d.url;
+			})
+		}else{
+			layer.msg(d.msg,{icon:0,time:1000});
+		}
+	},"JSON")
+	return false;
+});
+</script>	
+</block>	
+</html>

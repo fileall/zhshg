@@ -1,0 +1,134 @@
+<include file="Public:header" />
+<!--角色管理-->
+<div class="pad_lr_10">
+	 <form name="searchform" method="get"  >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <input type="hidden" name="m" value="admin" />
+                    <input type="hidden" name="c" value="outline_deal" />
+                    <input type="hidden" name="a" value="index" />
+                    <if condition="$recharge">
+                    <input type="hidden" name="recharge" value="{$recharge}" />
+                    </if>
+                    &nbsp;&nbsp;申请日期：<input type="text" name="time_start" id="J_time_start" class="date" value="{$search.time_start}" placeholder="时间开始">
+                    -
+                    <input type="text" name="time_end" id="J_time_end" class="date"  value="{$search.time_end}" placeholder="时间截止"> 
+                    &nbsp;&nbsp;关键字 :
+                    <input name="keywords" type="text" class="input-text"  value="{$search.keywords}" placeholder="姓名/手机" />
+                    <input type="submit"  class="btn" value="搜索" />
+                    <if condition="$recharge eq 1">
+                   	 <input type="button"  class="btn export" value="下载报表" />
+                    </if>
+                    
+                     <!--<a href="javascript:;" class="J_showdialog" data-uri="{:U('outline_deal/recharge')}" data-title="充值 "  data-id="add" data-width="450" data-height="20">-->
+                     <!--<if condition="$recharge neq 1">-->
+                    	<!--<input type="button"  class="btn export_dsh" size="10"  value="下载待审核报表" />-->
+                    <!--</if>-->
+                    
+                    <!--</a>-->
+                </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+    <div class="J_tablelist table_list" data-acturi="{:U('withdraw/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <!--<th width="40"><input type="checkbox" name="checkall" class="J_checkall"></th>-->
+                <th>id</th>
+                <th>会员名</th>
+                <!--<th>开户名</th>-->
+                <th>会员电话</th>
+                <th>转账金额</th>
+                <th>转账银行卡</th>
+      			<th>凭证</th>
+                <th align="left">时间</th>
+                <th>{:L('status')}</th>
+                <th width="150">{:L('operations_manage')}</th>
+            </tr>
+        </thead>
+    	<tbody>
+        	<volist name="list" id="val">
+	        	<tr>
+	                <!--<td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>-->
+                    <td align="center">{$val.id}</td>
+                    <td align="center">{$member[$val['uid']]['realname']}</td>
+                    <td align="center">{$member[$val['uid']]['mobile']}</td>
+                    <!--<td align="center">{$val.account_name}</td>-->
+                    <td align="center">{$val.totalprices}</td>
+	                <td align="center">{$val.branch_name}-{$val.branch_nums}</td>
+
+                    <td align="center">
+                        <empty name="val['img']">无
+                            <else />
+                            <a class="fancybox" rel="group" href="{:attach($val['img'],'sh_img')}">
+                                <img src="{:attach($val['img'],'sh_img')}" height="74" width="74"></a>
+                        </empty>
+                    </td>
+	                
+	                <td align="center">{:date('Y-m-d' ,$val['add_time'])}</td>
+	                <td align="center">
+	                <if condition="$val['status'] eq 2">已通过<elseif condition="$val['status'] eq 3" />已驳回<else />待审核</if>
+	                </td>
+	                <td align="center">
+                        <if condition="$val['status'] eq 1">
+                            <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="{:U('outline_deal/act', array('id'=>$val['id'],'status'=>1))}" data-msg="确定通过吗">通过</a> |
+                            <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="{:U('outline_deal/act', array('id'=>$val['id'],'status'=>2))}" data-msg="确定驳回吗">驳回</a>
+                        <else />
+                            已审核
+                        </if>
+
+	                 </td>
+	            </tr>
+            </volist>
+    	</tbody>
+    </table>
+    </div>
+    <div class="btn_wrap_fixed">
+        <!--<label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>-->
+        <!--<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('withdraw/')}" data-name="id" data-msg="{:L('confirm_delete')}" value="驳回" />-->
+        <div id="pages">{$page}</div>
+    </div>
+</div>
+<include file="Public:footer" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+
+<script type="text/javascript" src="__STATIC__/js/calendar/calendar.js"></script>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $( ".fancybox").fancybox();
+    });
+</script>
+<script>
+	Calendar.setup({
+        inputField : "J_time_start",
+        ifFormat   : "%Y-%m-%d",
+        showsTime  : false,
+        timeFormat : "24"
+    });
+
+    Calendar.setup({
+        inputField : "J_time_end",
+        ifFormat   : "%Y-%m-%d",
+        showsTime  : false,
+        timeFormat : "24"
+    });
+    
+    
+    $(".export").click(function(){
+    	$("input[name='a']").val("export");
+    	$("form").submit();
+    })
+
+    $(".export_dsh").click(function(){
+        $("input[name='a']").val("export_sh");
+        $("form").submit();
+    })
+</script>
+</html>

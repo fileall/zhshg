@@ -1,0 +1,60 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+<body class="body-bgColor">
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">意见反馈</div>
+        <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+        <div class="header-right y-header-right">提交</div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="content">
+    <form action="" method="post">
+        <div class="tickling-textarea y-tickling-textarea">
+            <textarea class="y-bg-white" id="content" placeholder="感谢您对我们的支持，留下您的宝贵意见，我们会做的更好。" name="content" maxlength="300"></textarea>
+        </div>
+
+        <div class="textarea-length y-textarea-length">还可以输入<span id="complete">300</span>个字</div>
+
+        <!--<div class="enter-form-btn">
+            <button type="button">确定</button>
+        </div>-->
+    </form>
+</div>
+<!--content-->
+
+<!--footer-->
+<!--footer-->
+</body>
+</block>
+<block name="footer"></block>
+<block name="script">
+    <script>
+        $('.header-right').click(function () {
+            var content = $('#content').val();//console.log(content);
+            if(content.length == 0){
+                layer.msg('请输入内容！',{icon:0,time:1000})
+                return false;
+            }
+            $.ajax({
+                url:"{:U('opinion')}",
+                type:"POST",
+                data:{'content':content},
+                success:function (res) {
+                    if(res.err_code==1){
+                        layer.msg('提交成功')
+                        location.reload();
+                    }
+                }
+
+            })
+        });
+    </script>
+</block>
+</html>

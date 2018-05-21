@@ -1,0 +1,37 @@
+<include file="Public/top" />
+
+<!--面包屑导航-->
+<div class="ysw-crumbs bgfff">
+    <div class="wrap">
+        <a href="/" class="item hover-blue">首页</a>
+        <span class="item ico">&gt;</span>
+        <a href="{:U('Curriculum/homeEducation')}" class="item hover-blue">家庭教育指导</a>
+        <span class="item ico">&gt;</span>
+        <span class="item">免费测评</span>
+    </div>
+</div>
+<!--面包屑导航-end-->
+
+<!--填写信息-->
+<div class="wrap ceshi4">
+    <h3 class="title">您已完成测试，点击<a href="{:U('Member/index')}">返回</a>个人中心查看测试结果。</h3>
+    <p class="title2"> <span class="red">3</span> 秒后自动返回个人中心。</p>
+</div>
+<!--填写信息-end-->
+
+<!--公共底部-->
+<include file="Public/footer" />
+<!--公共底部-end-->
+
+<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PC__js/l_main.js"></script>
+<script src="__PC__plugins/layui-v1.0.9/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.ceshi4 .title2 span').autoBack({
+            toWhere:"{:U('Member/index')}"
+        });
+    })
+</script>
+</body>
+</html>

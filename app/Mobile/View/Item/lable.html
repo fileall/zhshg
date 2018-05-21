@@ -1,0 +1,91 @@
+<extend name="Base/common"/>
+
+<block name="header">
+
+    <!--header-->
+
+    <div class="header-wrap">
+
+        <div class="header-inner">
+
+            <div class="classify-top row-box">
+
+                <div class="">
+
+                    <div class="classify-ret-icon return-prev"><i class="fa fa-angle-left"></i></div>
+
+                </div>
+
+                <div class="row-flex">
+
+                    <a class="search-link" href="{:U('Index/search')}"></a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="header-space"></div>
+
+    <!--header-->
+
+
+
+    <!--<div class="filtrate-wrap">-->
+        <!--<div class="filtrate-inner">-->
+            <!--<ul class="commodity-ul">-->
+               <!-- <li data-id="price" data-field="price"  class="commodity-li <if condition="$order['order'] eq 'price'"> active</if>">价格排序<i class="fa fa-angle-down"></i></li>
+                <li data-id="sales" data-field="sales" class="commodity-li <if condition="$order['order'] eq 'sales'"> active</if>">销量优先<i class="fa fa-angle-down"></i></li>
+                <li data-id="{$item_cate}" data-field="id" id="id" class="commodity-li <if condition="$order eq 'id'"> active</if>">新品上架</li>-->
+
+
+
+
+                <!--<div class="clear-float"></div>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="header-space"></div>-->
+</block>
+
+<block name="body">
+    <!--content-->
+    <div class="content">
+        <div class="suspect-wrap">
+            <ul class="suspect-ul" id="lists" style="padding-top: 0.1rem;">
+                <volist name="list" id="val">
+                    <li class="suspect-li" data-id="{$val['id']}">
+                        <a href="index.php?m=Mobile&c=Index&a=detail&id={$val['id']}">
+                            <div class="suspect-img vertical-center"><div class="vertical-auto">
+                                <img src="{$val.img}"></div></div><div class="suspect-img-name">
+                            {$val['title']}:{$val['intro']}</div><div class="suspect-money">
+                            <span>￥{$val['price']}</span>{$val['sales']}人已付款</div></a></li>
+                </volist>
+                <div class="clear-float"></div>
+            </ul>
+
+        </div>
+    </div>
+    <!--content-->
+
+</block>
+
+<block name="script">
+    <style>.layui-flow-more {
+
+        margin: 10px 0;
+
+        text-align: center;
+
+        color: #999;
+
+        font-size: 14px;padding:25px
+
+    }</style>
+    <script src="__MB__js/layui/layui.js" charset="utf-8"></script>
+    <script>
+    </script>
+</block>

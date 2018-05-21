@@ -1,0 +1,173 @@
+<extend name="Base/common"/>
+<block name="header">
+    <!--header-->
+    <div class="header-wrap">
+        <div class="header-inner">
+            <div class="header-title">商铺详情</div>
+            <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+            <div class="header-right"></div>
+        </div>
+    </div>
+    <div class="header-space"></div>
+    <!--header-->
+</block>
+
+<block name="body">
+    <!--content-->
+    <div class="content">
+        <!--map-->
+        <div class="map-box" id="map">
+
+        </div>
+        <!--map-->
+
+        <div class="shop-message">
+            <ul class="shop-message-ul">
+                <li class="shop-message-li">
+                    <div class="shop-message-box row-box">
+                        <div class="shop-message-name">商铺名称</div>
+
+                        <div class="row-flex">
+                            <div class="shop-message-txt">{$info.title}</div>
+                            <a class="shop-message-link" href="javascript:;" id="qdh">去导航</a>
+                            <div class="clear-float"></div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="shop-message-li">
+                    <div class="shop-message-box row-box">
+                        <div class="shop-message-name">营业时间</div>
+
+                        <div class="row-flex">
+                            <div class="shop-message-txt">{$info.start}-{$info.end}</div>
+                            <a class="shop-message-link" href="tel:{$info.tel}"><span><img src="__MB__images/icon49.png"></span></a>
+                            <div class="clear-float"></div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="shop-message-li">
+                    <div class="shop-message-box row-box">
+                        <div class="shop-message-name">商铺类型</div>
+
+                        <div class="row-flex">
+                            <div class="shop-message-txt">{$info.cate.name}</div>
+                            <div class="clear-float"></div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="shop-message-li">
+                    <div class="shop-message-box row-box">
+                        <div class="shop-message-name">所在位置</div>
+
+                        <div class="row-flex">
+                            <div class="shop-message-txt">{$info.address}</div>
+                            <div class="clear-float"></div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="shop-message-li">
+                    <div class="shop-message-box row-box">
+                        <div class="shop-message-name">商铺简介</div>
+
+                        <div class="row-flex">
+                            <div class="shop-message-txt">
+
+                            </div>
+                            <div class="clear-float"></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="" style="width: 100%;margin-top: 0.2rem;">
+            {:html_entity_decode($info['info'], ENT_QUOTES, 'UTF-8')}
+        </div>
+    </div>
+    <!--content-->
+
+    <!--footer-->
+    <!--footer-->
+
+    <script>
+        //去导航
+        $('#qdh').click(function(){
+            window.location.href = "http://api.map.baidu.com/marker?location={$info.xyz.lat},{$info.xyz.lng}" + "&title=" + "{$info.title}" + "&content=" +"{$info.address}"+ "&output=html";
+        })//lat纬度 lng经度
+
+
+
+        //地图标记(多个点)
+        var markerArr = [{ title:"{$info.title}", point: "{$info.xyz.lng},{$info.xyz.lat}", address: "{$info.address}"}];//标记点的信息
+
+        function map_load() {
+            var load = document.createElement("script");
+            load.src = "http://api.map.baidu.com/api?v=1.4&callback=map_init";
+            document.body.appendChild(load);
+        }
+        window.onload = map_load;
+
+        function map_init() {
+            var map = new BMap.Map("map");
+              // var point = new BMap.Point(115.9433814,28.754932);
+            var point = new BMap.Point("{$info.xyz.lng}","{$info.xyz.lat}");
+            map.centerAndZoom(point, 13);
+            map.enableScrollWheelZoom(true);
+            //向地图中添加缩放控件
+            var ctrlNav = new window.BMap.NavigationControl({
+                anchor: BMAP_ANCHOR_TOP_LEFT,
+                type: BMAP_NAVIGATION_CONTROL_LARGE
+            });
+            map.addControl(ctrlNav);
+
+            //向地图中添加缩略图控件
+            var ctrlOve = new window.BMap.OverviewMapControl({
+                anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
+                isOpen: 1
+            });
+            map.addControl(ctrlOve);
+
+            //向地图中添加比例尺控件
+            var ctrlSca = new window.BMap.ScaleControl({
+                anchor: BMAP_ANCHOR_BOTTOM_LEFT
+            });
+            map.addControl(ctrlSca);
+
+            var point = new Array(); //存放标注点经纬信息的数组
+            var marker = new Array(); //存放标注点对象的数组
+            var info = new Array(); //存放提示信息窗口对象的数组
+            for (var i = 0; i < markerArr.length; i++) {
+                var p0 = markerArr[i].point.split(",")[0]; //
+                var p1 = markerArr[i].point.split(",")[1]; //按照原数组的point格式将地图点坐标的经纬度分别提出来
+                point[i] = new window.BMap.Point(p0, p1); //循环生成新的地图点
+                marker[i] = new window.BMap.Marker(point[i]); //按照地图点坐标生成标记
+                map.addOverlay(marker[i]);
+                marker[i].setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                var label = new window.BMap.Label(markerArr[i].title, { offset: new window.BMap.Size(20, -10) });
+                marker[i].setLabel(label);
+                info[i] = new window.BMap.InfoWindow("<p style=’font-size:12px;lineheight:1.8em;width:100px;’>" + markerArr[i].title + "</br>地址：" + markerArr[i].address + "</br> 电话：" + markerArr[i].tel + "</br></p>"); // 创建信息窗口对象
+            }
+            marker[0].addEventListener("mouseover", function () {
+                this.openInfoWindow(info[0]);
+            });
+            // marker[1].addEventListener("mouseover", function () {
+            //     this.openInfoWindow(info[1]);
+            // });
+            // marker[2].addEventListener("mouseover", function () {
+            //     this.openInfoWindow(info[2]);
+            // });
+
+            //异步调用百度js
+            // function map_load() {
+            //     var load = document.createElement("script");
+            //     load.src = "http://api.map.baidu.com/api?v=1.4&callback=map_init";
+            //     document.body.appendChild(load);
+            // }
+            // window.onload = map_load;
+        }
+    </script>
+</block>

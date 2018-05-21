@@ -1,0 +1,96 @@
+<!--编辑管理员-->
+<div class="dialog_content">
+	<form id="info_form" action="{:U('admin/edit')}" method="post">
+	<table width="100%" class="table_form">
+		<tr>
+			<th>所属部门 :</th>
+			<td>
+				<select name="d_id">
+					<volist name="d_list" id="val">
+						<option value="{$val.id}" <if condition="$val['id'] eq $info['d_id']">selected="selected"</if>>{$val.name}</option>
+					</volist>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>所属职位 :</th>
+			<td>
+				<select name="role_id">
+					<volist name="role_list" id="val">
+						<option value="{$val.id}" <if condition="$val['id'] eq $info['role_id']">selected="selected"</if>>{$val.name}</option>
+					</volist>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>性别 :</th>
+			<td>
+				<select name="sex">
+					<option value="1" <if condition="$info['sex'] eq 1">selected</if> >男</option>
+					<option value="2" <if condition="$info['sex'] eq 2">selected</if> >女</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+      		<th width="80">账号 :</th>
+      		<td><input type="text" name="username" id="J_username" class="input-text" value="{$info.username}"></td>
+    	</tr>
+    	<tr> 
+      		<th>{:L('password')} :</th>
+      		<td><input type="password" name="password" id="J_password" class="input-text"></td>
+    	</tr>
+    	<tr>
+      		<th>{:L('cofirmpwd')} :</th>
+      		<td><input type="password" name="repassword" id="J_repassword" class="input-text"></td>
+    	</tr>
+		<tr>
+			<th>姓名 :</th>
+			<td><input type="text" name="name" class="input-text" value="{$info.name}" size="30"></td>
+		</tr>
+		<tr>
+			<th>手机 :</th>
+			<td><input type="text" name="mobile" class="input-text" value="{$info.mobile}" size="30"></td>
+		</tr>
+	  	<tr>
+			<th>{:L('admin_email')} :</th>
+			<td><input type="text" name="email" class="input-text" value="{$info.email}" size="30"></td>
+		</tr>
+		<tr>
+			<th>生日 :</th>
+			<td><input type="text" name="birthday" id="birthday" value="{$info.birthday}" class="date" size="30"></td>
+		</tr>
+	</table>
+	<input type="hidden" name="id" value="{$info.id}" />
+	</form>
+</div>
+<link rel="stylesheet" type="text/css" href="__PUBLIC_ADMIN__js/calendar/calendar-blue.css"/>
+<script src="__PUBLIC_ADMIN__js/calendar/calendar.js"></script>
+
+<script>
+var check_name_url = "{:U('admin/ajax_check_name', array('id'=>$info['id']))}";
+$(function(){
+    Calendar.setup({
+        inputField : "birthday",
+        ifFormat   : "%Y-%m-%d",
+        showsTime  : false,
+        timeFormat : "24"
+    });
+
+	$.formValidator.initConfig({formid:"info_form",autotip:true});
+
+	$("#J_username").formValidator({ onshow:'请输入账号', onfocus:'请输入账号'}).inputValidator({ min:1, onerror:'请输入账号'}).ajaxValidator({type:"get", url:check_name_url, datatype:"html", async:'false', success:function(data){	if( data == "1" ){return true;}else{return false;}}, onerror:lang.admin_name_exists, onwait:lang.connecting_please_wait}).defaultPassed();
+	$("#J_password").formValidator({ empty:true, onshow:'请输入密码', onfocus:'请输入密码'}).inputValidator({ min:6, max:20, onerror:'请输入密码'}).defaultPassed();
+	$("#J_repassword").formValidator({ empty:true, onshow:'请输入确认密码', onfocus:'请输入确认密码'}).compareValidator({desid:"J_password",operateor:"=",onerror:'两次密码输入不一致'}).defaultPassed();
+
+	$('#info_form').ajaxForm({success:complate,dataType:'json'});
+    function complate(result){
+        if(result.status == 1){
+            $.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'});
+        }
+    }
+});
+</script>

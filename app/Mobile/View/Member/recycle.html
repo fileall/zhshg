@@ -1,0 +1,98 @@
+<extend name="Base/common"/> 
+<block name="header"></block>		
+<block name="body">
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">金果回购</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right">
+					<a class="particulars" href="help.html">使用帮助</a>
+				</div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="wallet-wrap bjcolor">
+				<div class="wallet-inner vertical-center">
+					<div class="vertical-auto">
+						<div class="wallet-money">{:C('pin_jg_scj')}</div>
+						<div class="wallet-unit">金果回收价(元/个)</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="magnitude">当前可用金果个数{$member.gold_fruit}个</div>
+			
+			<ul class="add-bank-ul">
+				<li class="add-bank-li">
+					<div class="merchant-form row-box" style="margin-top: 0;">
+						<div class="merchant-currency">兑换个数：</div>
+						<div class="row-flex">
+							<div class="merchant-form-input vertical-center">
+								<div class="vertical-auto" style="width: 100%;"><input id="nums" type="number" placeholder="请输入金果个数"></div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+			
+			<!--<div class="illustrate">金果将实时转入到对方账户，无法退回，单次交易扣除15%手续费</div>-->
+			
+			<div class="agreement">
+				<label for="switch">
+					<div class="agreement-left">
+						<div class="agreement-input "><input type="checkbox" name="switch" id="switch"></div>
+						<div class="agreement-txt">同意</div>
+					</div>
+				</label>
+				<a class="agreement-link" href="agreement.html">《金果信用服务协议》</a>
+				<div class="clear-float"></div>
+			</div>
+			
+			<div class="submit-button"><a href="javascript:;" id="rh">立即兑换</a></div>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+
+	</body>
+</block>	
+<block name="footer"></block>
+<block name="script">
+<script>
+	$("#rh").click(function(){
+		var nums = $("#nums").val();
+		if($('.agreement-input.active').length != 1){
+			layer.msg('请确定同意金果信用服务协议！',{icon:0,time:1000})
+			return false;
+		}
+		
+		if(!nums){
+			layer.msg('请填写金果个数！',{icon:0,time:1000})
+			return false;
+		}
+		
+		if(parseFloat(nums) < 0 | parseFloat(nums) == 0){
+			layer.msg('请确认您输入的数字是否正确！',{icon:0,time:1000})
+			return false;
+		}
+		$.post('{:U("member/recycle")}',{nums:nums},function(d){
+		 	if(d.status ==1){
+		 		layer.msg(d.msg,{icon:1,time:1000},function(){
+		 			window.location.href = d.url;
+		 		});
+		 	}else{
+		 		layer.msg(d.msg);
+		 	}
+		 
+		 })
+	 })	
+</script>
+</block>	
+</html>

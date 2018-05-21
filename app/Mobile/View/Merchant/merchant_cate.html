@@ -1,0 +1,128 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+<body>
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">行业分类</div>
+        <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="content industry-con flex">
+    <ul class="industry-left">
+        <volist name="cate" id="val">
+            <li class="flex ali-cen y-bg-white <if condition='$i eq 1'>y-color-red</if>">
+                <div class="flex1"><span>{$val.name}</span></div>
+                <div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+            </li>
+        </volist>
+    </ul>
+    <div class="flex1">
+        <volist name="cate" id="val">
+            <ul class="industry-right <if condition='$i eq 1'>y-block</if>">
+                <volist name="cate_next" id="vv">
+                    <if condition="$val['id'] eq $vv['pid']">
+                        <li class="flex ali-cen" data-id="{$vv['id']}">
+                            <div class="flex1"><span>{$vv.name}</span></div>
+                            <div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+                        </li>
+                    </if>
+                </volist>
+            </ul>
+        </volist>
+        <!--<ul class="industry-right y-block">-->
+            <!--<li class="flex ali-cen">-->
+                <!--<div class="flex1"><span>粤菜</span></div>-->
+                <!--<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>-->
+            <!--</li>-->
+            <!--<li class="flex ali-cen">-->
+                <!--<div class="flex1"><span>鲁菜</span></div>-->
+                <!--<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>-->
+            <!--</li>-->
+            <!--<li class="flex ali-cen">-->
+                <!--<div class="flex1"><span>湘菜</span></div>-->
+                <!--<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>-->
+            <!--</li>-->
+            <!--<li class="flex ali-cen">-->
+                <!--<div class="flex1"><span>川菜</span></div>-->
+                <!--<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>-->
+            <!--</li>-->
+            <!--<li class="flex ali-cen">-->
+                <!--<div class="flex1"><span>闽菜</span></div>-->
+                <!--<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>-->
+            <!--</li>-->
+            <!--<li class="flex ali-cen">-->
+                <!--<div class="flex1"><span>菜菜菜</span></div>-->
+                <!--<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>-->
+            <!--</li>-->
+            <!--<li class="flex ali-cen">-->
+                <!--<div class="flex1"><span>菜菜菜</span></div>-->
+                <!--<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>-->
+            <!--</li>-->
+            <!--<li class="flex ali-cen">-->
+                <!--<div class="flex1"><span>菜菜菜</span></div>-->
+                <!--<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>-->
+            <!--</li>-->
+            <!--<li class="flex ali-cen">-->
+                <!--<div class="flex1"><span>菜菜菜</span></div>-->
+                <!--<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>-->
+            <!--</li>-->
+            <!--<li class="flex ali-cen">-->
+                <!--<div class="flex1"><span>菜菜菜</span></div>-->
+                <!--<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>-->
+            <!--</li>-->
+            <!--<li class="flex ali-cen">-->
+                <!--<div class="flex1"><span>菜菜菜</span></div>-->
+                <!--<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>-->
+            <!--</li>-->
+            <!--<li class="flex ali-cen">-->
+                <!--<div class="flex1"><span>菜菜菜</span></div>-->
+                <!--<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>-->
+            <!--</li>-->
+            <!--<li class="flex ali-cen">-->
+                <!--<div class="flex1"><span>菜菜菜</span></div>-->
+                <!--<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>-->
+            <!--</li>-->
+            <!--<li class="flex ali-cen">-->
+                <!--<div class="flex1"><span>菜菜菜</span></div>-->
+                <!--<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>-->
+            <!--</li>-->
+            <!--<li class="flex ali-cen">-->
+                <!--<div class="flex1"><span>菜菜菜</span></div>-->
+                <!--<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>-->
+            <!--</li>-->
+
+        <!--</ul>-->
+        <!--<ul class="industry-right">2</ul>-->
+        <!--<ul class="industry-right">3</ul>-->
+        <!--<ul class="industry-right">4</ul>-->
+        <!--<ul class="industry-right">5</ul>-->
+        <!--<ul class="industry-right">6</ul>-->
+        <!--<ul class="industry-right">7</ul>-->
+    </div>
+</div>
+
+<!--content-->
+</body>
+</block>
+<block name="footer"></block>
+<block name="script">
+<script>
+    $(".industry-left li").click(function(){
+        $(this).addClass("y-bg-white y-color-red").siblings().removeClass("y-bg-white y-color-red")
+        $(".industry-right").eq($(this).index()).show().siblings().hide();
+    })
+
+    //选择分类并跳转
+    $('.flex.ali-cen').click(function(){
+        var id=$(this).data('id');
+        location.href='index.php?s=/Merchant/merchant_add/id/'+id+'.html';
+    })
+</script>
+</block>
+</html>

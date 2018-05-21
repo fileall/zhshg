@@ -1,0 +1,213 @@
+<include file="Public:header" />
+<!--商品列表-->
+<div class="pad_lr_10" >
+    <!--<form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <input type="hidden" name="m" value="admin" />
+                    <input type="hidden" name="c" value="address" />
+                    <input type="hidden" name="a" value="index" />
+                    <input type="hidden" name="menuid" value="{$menuid}" />-->
+					<!--<if condition="$sm neq ''"><input type="hidden" name="sm" value="{$sm}" /></if>
+
+					分类：<select class="J_cate_select mr10" data-pid="0" data-uri="{:U('item_cate/ajax_getchilds', array('type'=>0))}" data-selected="{$search.selected_ids}"></select>
+
+                    <input type="hidden" name="cate_id" id="J_cate_id" value="{$search.cate_id}" />
+
+                    &nbsp;&nbsp;状态： 
+
+					<select name="status">
+
+					<option value="">-{:L('all')}-</option>
+
+					<option value="1" <if condition="$search.status eq '1'">selected="selected"</if>>正常</option>
+
+					<option value="0" <if condition="$search.status eq '0'">selected="selected"</if>>已下架</option>
+
+					</select>
+                     &nbsp;&nbsp;     发布时间：<input type="text" name="time_start" id="J_time_start" class="date" size="12" value="{$search.time_start}">
+                    -
+                    <input type="text" name="time_end" id="J_time_end" class="date" size="12" value="{$search.time_end}"> 价格区间：
+                    <input type="text" name="price_min" class="input-text" size="5" value="{$search.price_min}" />
+                    -
+                    <input type="text" name="price_max" class="input-text" size="5" value="{$search.price_max}" />
+					 &nbsp;&nbsp;关键字：
+                    <input name="keyword" type="text" class="input-text" size="25" value="{$search.keyword}" />
+					<input type="submit" name="search" class="btn" value="搜索" />-->
+                <!--</div>
+                </td>
+            </tr>
+    </table>
+    </form>-->
+    
+<!--     <div class="explain_col">  
+     <form id="addform" action="{:U('Item/upload')}" method="post" enctype="multipart/form-data">
+        <input style=" width:65px;" type="file" name="excelData" value=""  datatype="*4-50" />
+       <input type="submit" class="btn btn-primary Sub" value="导入" />
+        
+    <a href="{:U('Item/goods_export')}" class="btn btn-primary Sub" >导出</a>
+     </form>
+    </div>-->
+   
+    
+    <if condition="$sm eq 'image'">
+    <div class="J_tablelist item_imglist clearfix">
+        <volist name="list" id="val">
+        <div class="item fl">
+            <label>
+            <input type="checkbox" class="J_checkitem check" value="{$val.id}" />
+            <div class="img clearfix"><img src="{:attach(get_thumb($val['img'], '_m'), 'item')}"></div>
+            </label>
+            <span class="line_x">{$val.title}</span>
+            <ul>
+                <li><a class="J_tooltip btn_blue" title="{$cate_list[$val['cate_id']]}">{:L('cate')}</a></li>
+                <li><a class="J_tooltip btn_blue" title="{$val.uname|default=L('item_no_author')}">{:L('author')}</a></li>
+            </ul>
+        </div>
+        </volist>
+    </div>
+    <else/>
+    <div class="J_tablelist table_list" data-acturi="{:U('item/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+            <tr>
+                <th><input type="checkbox"  name="checkall" class="J_checkall"></th>
+                <th><span data-tdtype="order_by" data-field="id">ID</span></th>
+				<!--<th>编号</th>-->
+                <!--<th>商品图片</th>-->
+                <!--<th><span data-tdtype="order_by" data-field="title">商品名称</span></th>
+
+                <th><span data-tdtype="order_by" data-field="cate_id">分类</span></th>
+                
+                <th>品牌</th>-->
+                <!--<th width="60">用户名</th>-->
+
+                <th><span data-tdtype="order_by" data-field="address">地址</span></th>
+				<!--<th><span data-tdtype="order_by" data-field="unit">单位</span></th>-->
+                <th><span data-tdtype="order_by" data-field="shperson">负责人</span></th>
+				<!--<th><span data-tdtype="order_by" data-field="inv_status">库存状态</span></th>-->
+                <th><span data-tdtype="order_by" data-field="mobile">负责人电话</span></th>
+                <!--<th><span data-tdtype="order_by" data-field="hits">人气</span></th>-->
+				<!--<th style="width:200px;"><span data-tdtype="order_by" data-field="intro">简介</span></th>-->
+
+                <!--<th><span data-tdtype="order_by" data-field="ordid">{:L('sort_order')}</span></th>-->
+
+                <th><span data-tdtype="order_by" data-field="status">{:L('status')}</span></th>
+
+                <!--<th><span data-tdtype="order_by" data-field="add_time">发布时间</span></th>-->
+
+                <th>{:L('operations_manage')}</th>
+
+            </tr>
+
+       
+
+    	<!--<?php print_r($list) ; ?>-->
+
+            <volist name="list" id="val" >
+
+            <tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <td align="center">{$val.id}</td>
+				<!--<td align="center">{$val.product_id}</td>-->
+			    <!--<td align="center"><span data-tdtype="edit" data-field="product_id" data-id="{$val.id}" class="tdedit">{$val.product_id}</span></td>-->
+                <!--<td style="text-align:center; ">
+                <if condition="$val['img'] eq ''"><img scr="{:attach('haha/haha.jpg','item')}"><else /><img src="{:attach($val['img'], 'item')}" width="40" class="J_preview" data-bimg="{:attach($val['img'], 'item')}"></if>   -->
+                <!--<if condition="$val['img'] eq ''"><img scr="{:attach('haha/haha.jpg','item')}"><else /><img src="{:attach(get_thumb($val['img'], '_s'), 'item')}" width="32" class="J_preview" data-bimg="{:attach($val['img'], 'item')}"></if>-->   
+                
+               <!--     <notempty name="val['img']"><img src="{:attach(get_thumb($val['img'], '_s'), 'item')}" width="32" class="J_preview" data-bimg="{:attach($val['img'], 'item')}"></notempty>
+                    <empty name="val['img']"><img scr="{:attach('haha/haha.jpg','item')}"></empty>
+                </td>-->
+
+                <!--<td align="center"><span data-tdtype="edit" data-field="title" data-id="{$val.id}" class="tdedit" style="color:{$val.colors};">{$val.title}</span></td> 
+                <td align="center"><b><notempty name="big_cate3[$val['cate_id']]">{$big_cate3[$val['cate_id']]}|</notempty><notempty name="big_cate2[$val['cate_id']]">{$big_cate2[$val['cate_id']]}|</notempty>{$cate_list[$val['cate_id']]}</b></td>-->
+                <!--<td align="center">{$val.uname}</td>-->
+                <td align="center" >{$val.address}</td>
+                <td align="center" class="red">{$val.shperson}</td>
+				 <!--<td align="center" >{$val.unit}</td>-->
+				 <!--<td align="center"><span data-tdtype="edit" data-field="unit" data-id="{$val.id}" class="tdedit">{$val.unit}</span></td>-->
+              <!--  <td align="center"><span data-tdtype="edit" data-field="inventory" data-id="{$val.id}" class="tdedit">{$val.inventory}</span></td>-->
+				 <!--<td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="inv_status" data-value="{$val.inv_status}" src="__PUBLIC_ADMIN__/images/toggle_<if condition="$val.inv_status eq 0">disabled<else/>enabled</if>.gif" /></td>-->
+                <td align="center">{$val.mobile}</td>
+                <!-- <td align="center"><span data-tdtype="edit" data-field="intro" data-id="{$val.id}" class="tdedit">{$val.intro}</span></td>-->
+                <!--<td align="center"><span data-tdtype="edit" data-field="hits" data-id="{$val.id}" class="tdedit">{$val.hits}</span></td>-->
+
+              <!--  <td align="center"><span data-tdtype="edit" data-field="ordid" data-id="{$val.id}" class="tdedit">{$val.ordid}</span></td>-->
+
+                <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{$val.status}" src="__PUBLIC_ADMIN__/images/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
+
+                <!--<td align="center">{$val.add_time|date='Y-m-d H:i:s',###}</td>-->
+
+                <td align="center">
+                  	
+                	<a href="javascript:void(0);" class="edit fb J_showdialog" data-uri="{:u('address/edit', array('id'=>$val['id']))}" data-title="修改地址" data-id="edit"  data-width="500" data-height="200">{:L('edit')}</a> | 
+                	<a href="javascript:void(0);" class="J_confirmurl" data-uri="{:u('address/delete', array('id'=>$val['id']))}" data-acttype="ajax" data-msg="{:sprintf(L('confirm_delete_one'),$val['address'])}">{:L('delete')}</a></td>
+
+            </tr>
+
+            </volist>
+
+    	</tbody>
+
+    </table>
+
+    </div>
+
+    </if>
+
+    <div class="songkebor">
+
+        <label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('item/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
+
+        <div id="pages">{$page}</div>
+
+    </div>
+
+</div>
+
+<include file="Public:footer" />
+
+<link rel="stylesheet" href="__PUBLIC_ADMIN__js/calendar/calendar-blue.css"/>
+
+<script src="__PUBLIC_ADMIN__js/calendar/calendar.js"></script>
+
+<script>
+//
+//Calendar.setup({
+//
+//	inputField : "J_time_start",
+//
+//	ifFormat   : "%Y-%m-%d",
+//
+//	showsTime  : false,
+//
+//	timeFormat : "24"
+//
+//});
+//
+//Calendar.setup({
+//
+//	inputField : "J_time_end",
+//
+//	ifFormat   : "%Y-%m-%d",
+//
+//	showsTime  : false,
+//
+//	timeFormat : "24"
+//
+//});
+
+$('.J_preview').preview(); //查看大图
+
+$('.J_cate_select').cate_select({top_option:lang.all}); //分类联动
+
+$('.J_tooltip[title]').tooltip({offset:[10, 2], effect:'slide'}).dynamic({bottom:{direction:'down', bounce:true}});
+
+</script>
+
+</body>
+
+</html>

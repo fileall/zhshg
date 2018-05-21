@@ -1,0 +1,119 @@
+<include file="Public:header" />
+<!--添加文章-->
+<form id="info_form" action="{:U('GradeRule/add')}" method="post" enctype="multipart/form-data">
+<div class="pad_lr_10">
+	<div class="col_tab">
+		<div class="J_panes">
+			<div class="content_list pad_10">
+				<table   width="100%" cellpadding="2" cellspacing="1" class="table_form" >
+		            <tr>
+					<tr >
+						<th>级别名称 :</th>
+						<td>
+							<input type="text" name="name" id="J_name" class="input-text"  size="30">
+						</td>
+					</tr>
+					<tr>
+						<th>注册送银币 :</th>
+						<td>
+							<input type="text" name="reg_silver" class="input-text"  size="30">个
+						</td>
+					</tr>
+					<tr>
+						<th>推荐送银币 :</th>
+						<td>
+							<input type="text" name="tj_silver" class="input-text" value="{$info['tj_silver']}" size="30">个
+						</td>
+					</tr>
+					<!--<tr>-->
+						<!--<th>购买金元宝奖励银币 :</th>-->
+						<!--<td>-->
+							<!--<input type="text" name="reward_silver_multiple" class="input-text" value="{$info['reward_silver_multiple']}" size="30">倍-->
+						<!--</td>-->
+					<!--</tr>-->
+					<!--<tr>-->
+						<!--<th>最低购金买元宝数量 :</th>-->
+						<!--<td>-->
+							<!--<input type="text" name="min_acer_price" class="input-text" value="{$info['min_acer_price']}" size="30">个-->
+						<!--</td>-->
+					<!--</tr>-->
+					<tr>
+						<th>升级奖励银币:</th>
+						<td>
+							<input type="text" name="upgrade_silver" class="input-text" value="{$info['upgrade_silver']}" size="30">个
+						</td>
+					</tr>
+					<tr>
+						<th>升级费用 :</th>
+						<td>
+							<input type="text" name="upgrade_price" class="input-text" value="{$info['upgrade_price']}" size="30">元
+						</td>
+					</tr>
+					<tr>
+						<th>升级条件 :</th>
+						<td>
+							<input type="text" name="upgrade_condition" class="input-text" value="{$info['upgrade_condition']}" size="30">(推荐的会员人数)
+						</td>
+					</tr>
+					<tr>
+						<th>下线升级奖励余额 :</th>
+						<td>
+							<input type="text" name="upgrade_one_price" class="input-text" value="{$info['upgrade_one_price']}" size="30">元
+						</td>
+					</tr>
+					<tr>
+						<th>下线购买元宝奖励银币:</th>
+						<td>
+							<input type="text" name="tj_acer_silver" class="input-text" value="{$info['tj_acer_silver']}" size="30">倍
+						</td>
+					</tr>
+					<tr>
+						<th>下线消费奖励银币:</th>
+						<td>
+							<input type="text" name="tj_acer_pay_silver" class="input-text" value="{$info['tj_acer_pay_silver']}" size="30">倍
+						</td>
+					</tr>
+					<tr>
+						<th>被推荐商家盈利奖励银币:</th>
+						<td>
+							<input type="text" name="seller_none_silve" class="input-text" value="{$info['seller_none_silve']}" size="30">倍
+						</td>
+					</tr>
+
+					<!--<tr>-->
+					<!--<th>是否有二次消费奖励特权 :</th>-->
+					<!--<td>-->
+					<!--<label><input type="radio" name="acer_consume_silver" class="radio_style" value="1" <if condition="$info.acer_consume_silver eq '1'">checked="checked"</if>> {:L('yes')} </label>&nbsp;&nbsp;-->
+					<!--<label><input type="radio" name="acer_consume_silver" class="radio_style" value="0" <if condition="$info.acer_consume_silver eq '0'">checked="checked"</if>> {:L('no')}</label>-->
+					<!--</td>-->
+					<!--</tr>-->
+				</table>
+			</div>
+        </div>
+		<div class="mt10"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;"><br /><br /><br /></div>
+	</div>
+</div>
+</form>
+<include file="Public:footer" />
+<script type="text/javascript">
+    $(function() {
+        // $('ul.J_tabs').tabs('div.J_panes > div');
+
+        $.formValidator.initConfig({formid:"info_form",autotip:true});
+        $("#J_name").formValidator({onshow:lang.please_input+'等级名称',onfocus:lang.please_input+'等级名称'}).inputValidator({min:1,onerror:lang.please_input+'等级名称'}).defaultPassed();
+
+        // $('#info_form').ajaxForm({success:complate,dataType:'json'});
+        // function complate(result){
+        //     if(result.status == 1){
+        //         $.dialog.get(result.dialog).close();
+        //         $.pinphp.tip({content:result.msg});
+        //         window.location.reload();
+        //     } else {
+        //         $.pinphp.tip({content:result.msg, icon:'alert'});
+        //     }
+        // }
+
+    });
+</script>
+</body>
+</html>

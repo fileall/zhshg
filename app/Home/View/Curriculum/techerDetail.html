@@ -1,0 +1,347 @@
+<include file="Public/top" />
+
+<!--面包屑导航-->
+<div class="ysw-crumbs">
+    <div class="wrap">
+        <a href="{:U('Curriculum/classroom')}" class="item hover-blue">语数外课堂</a>
+        <span class="item ico">&gt;</span>
+        <a href="{:U('Curriculum/techerList')}" class="item hover-blue">老师课程列表</a>
+        <span class="item ico">&gt;</span>
+        <span class="item">老师详情</span>
+    </div>
+</div>
+<!--面包屑导航-end-->
+
+<!--教师-->
+<div class="courseInfo clear wrap">
+    <div class="fl courseInfoL">
+        <div class="clear">
+            <img src="{:attach($info['img'],'curriculum')}" alt="" class="courseImg">
+        </div>
+    </div>
+    <div class="fl courseBox">
+        <div class="clear title">
+            <h3>{$info['title']}</h3>
+            <!--<span class="fr">课程编号：25896444</span>-->
+        </div>
+        <p class="courseTecher clear">
+            <span>阶段：{$cate_info[1]}</span>
+            <span>年级：{$cate_info[2]}</span>
+            <span>科目：{$cate_info[3]}</span>
+            <span>老师：{$teacher['name']}</span>
+        </p>
+        <div class="clear priceBox">
+            <div class="fl left">
+                <p class="time">老师教龄：{$teacher['seniority']}年</p>
+                <p class="price">
+                    <span>价格：<strong>¥ {$info['price']}</strong></span>
+                    <s class="yuan">¥ {$info['old_price']}</s>
+                    <span>预约人数：{$info['people']}人</span>
+                    <span class="last">课程数：{:count($list)}节</span>
+                </p>
+            </div>
+            <div class="fr right">
+                <a href="javascript:;" class="share">分享</a>
+                <if condition="$user[is_collect]">
+                    <a href="javascript:;" class="collect active">已收藏</a>
+                <else />
+                    <a href="javascript:;" class="collect">收藏</a>
+                </if>
+            </div>
+        </div>
+        <div class="clear btnBox">
+            <a href="javascript:;" class="yuyue">立即预约</a>
+            <a href="" class="zixun">课程咨询</a>
+        </div>
+    </div>
+</div>
+<!--教师-end-->
+<!--详情-->
+
+<div class="wrap ysw-tabconBox mb50">
+	<div class="courseDetail-tab clear ">
+        <a href="javascript:;" class="item active">老师简介</a>
+        <a href="javascript:;" class="item ">课程介绍</a>
+        <a href="javascript:;" class="item ">相关视频</a>
+        <a href="javascript:;" class="item ">相关评分</a>
+	</div>
+    <!--老师简介-->
+    <div class="ysw-tabcon">
+        <div class="courseDetail-title ">
+            <h3>概要</h3>
+        </div>
+        <div class="courseDetail-pro">
+            {:code2html($teacher['intro'])}
+        </div>
+
+        <div class="courseDetail-title "><h3>相册</h3></div>
+        <div class="courseDetail-pro">
+
+            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-5  am-gallery-default" data-am-gallery="{ pureview: true }" >
+                <volist name="imgs" id="val">
+                    <li>
+                        <div class="am-gallery-item">
+                            <div class="courseDetail-pro-img">
+                                <img src="{:attach($val['url'],'admin')}"  alt="办公环境" title="点击查看大图"/>
+                            </div>
+                        </div>
+                    </li>
+                </volist>
+            </ul>
+            <!--</ul>-->
+        </div>
+
+        <!--<div class="courseDetail-title ">
+            <h3>视频</h3>
+        </div>
+        <div class="courseDetail-pro">
+            <div class="techerVideo">
+                <img src="__PC__images/43.jpg" alt="" />
+            </div>
+        </div>-->
+
+        <div class="courseDetail-title "><h3>服务保障</h3></div>
+        <div class="courseDetail-pro">
+            <ul class="clear techDetail-baozhang">
+                <li>
+                    <img src="__PC__images/techerDetail_ico_03.png" alt="" />
+                    <p>预定</p>
+                </li>
+                <li>
+                    <img src="__PC__images/techerDetail_ico_05.png" alt="" />
+                    <p>24小时跟踪</p>
+                </li>
+                <li>
+                    <img src="__PC__images/techerDetail_ico_07.png" alt="" />
+                    <p>全方位服务</p>
+                </li>
+                <li>
+                    <img src="__PC__images/techerDetail_ico_09.png" alt="" />
+                    <p>作业修改</p>
+                </li>
+                <li>
+                    <img src="__PC__images/techerDetail_ico_11.png" alt="" />
+                    <p>学习提升</p>
+                </li>
+                <li>
+                    <img src="__PC__images/techerDetail_ico_13.png" alt="" />
+                    <p>专业团队</p>
+                </li>
+                <li>
+                    <img src="__PC__images/techerDetail_ico_15.png" alt="" />
+                    <p>技术保障</p>
+                </li>
+            </ul>
+        </div>
+    </div><!--老师简介-end-->
+    <!--课程介绍-->
+    <div class="ysw-tabcon hide">
+        <div class="techerDetail-videopro">
+            {:code2html($info['info'])}
+        </div>
+    </div><!--课程介绍-end-->
+    <!--相关课程-->
+    <div class="ysw-tabcon hide">
+        <ul class="techerCourse clear">
+            <volist name="list" id="val">
+                <li class="techer-vod" data-id="{$val['id']}">
+                    <a href="javascript:;">
+                        <img src="{:attach($info['img'],'curriculum')}" alt="" class="techerCourse-img"/>
+                        <h3 class="title">{$info['title']}——{$val['ext_name']}</h3>
+                        <p class="num">播放次数：{$val['hits']}</p>
+                        <!--<div class="mark">高考</div>-->
+                        <div class="boxBg"></div>
+                    </a>
+                </li>
+            </volist>
+        </ul>
+    </div><!--相关课程-end-->
+    <!--相关评论-->
+    <div class="ysw-tabcon hide">
+        <ul class="yswtab-pingfen">
+            <volist name="evaluate_list" id="val">
+                <li class="clear">
+                    <div class="left"><img src="<if condition="$val['avatar']">{$val['avatar']}<else />__PC__images/moren.png</if>" alt="" /></div>
+                    <div class="middle">
+                        <div class="branch clear">
+                           <!-- <span class="item">评分：</span>
+                            <span class="item mr">
+                                <select class="branch-star" >
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </span >-->
+                            <span class="item mr">描述相符：{$val['describe']}</span>
+                            <span class="item mr">教学态度：{$val['attitude']}</span>
+                            <span class="item mr">课程质量：{$val['quality']}</span>
+                            <span class="item mr">其他：{$val['other']}</span>
+                        </div>
+                        <div class="comment">{$val['content']}</div>
+                    </div>
+                    <div class="right">{$val['add_time']|date="Y-m-d H:i",###}</div>
+                </li>
+            </volist>
+        </ul>
+        <div class="yswtab-pingfen-page">
+            <!--分页-->
+            <div class="l-page">
+                <div class="box clear">
+                    <a href="javascript:;" style="display: none;" class="prev">&lt;&lt;上一页</a>
+                    <a href="javascript:;" class="active" id="page1">1</a>
+                    <if condition="$evaluate_page gt 1">
+                        <?php for($i=2;$i<=$evaluate_page;$i++){?>
+                            <a href="javascript:;" class="item page-js" id="page<?php echo $i?>"><?php echo $i?></a>
+                        <?php }?>
+                    </if>
+                    <a href="javascript:;" <if condition="$evaluate_page elt 1">style="display: none;"</if> class="next">下一页&gt;&gt;</a>
+                </div>
+            </div><!--分页-end-->
+        </div>
+    </div><!--相关评论-end-->
+</div>
+<!--详情-end-->
+
+<!--公共底部-->
+<include file="Public/footer" />
+<!--公共底部-end-->
+<link rel="stylesheet" href="__PC__plugins/layui-v1.0.9/layui/css/modules/layer/default/layer.css">
+<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PC__plugins/layui-v1.0.9/layui/lay/modules/layer.js"></script>
+<script src="__PC__js/l_main.js"></script>
+<script src="__PC__plugins/amaze/assets/js/amazeui.min.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="__PC__css/css-stars.css"><!--评分-->
+<script src="__PC__js/jquery.barrating.min.js" type="text/javascript" charset="utf-8"></script><!--评分-->
+<script src="__PC__js/php.js" type="text/javascript" charset="utf-8"></script><!--评分-->
+
+<script>
+    $(function() {
+        /*//星级评分
+        $('.branch-star').barrating({
+            theme: 'css-stars',
+            readonly:true
+        });
+        $('.branch-star').barrating('set', 4);//修改评分的值（星星数）*/
+        var uid = {$user['id']|default=0},
+            id = {$info['id']|default=0};
+        
+        //收藏课程
+        $('.collect').click(function () {
+            var self = $(this);
+            if(uid > 0){
+                $.post("{:U('Curriculum/collect_curriculum')}",{id:id,uid:uid},function (result) {
+                    layer.msg(result[1]);
+                    if(result[0] == 1){
+                        self.addClass('active').text('已收藏');
+                    }else if(result[0] == 2){
+                        $.login_alert("{:U('Login/enter')}");
+                    }
+                },'json')
+            }else{
+                $.login_alert("{:U('Login/enter')}");
+            }
+        })
+
+        //预约登录判断
+        $('.yuyue').click(function () {
+            if(uid > 0){
+                $.post("{:U('Curriculum/check_vod')}",{id:id,uid:uid},function (result) {
+                    if(result[0] == 1){
+                        layer.alert('您已经购买了该课程，点击页面下部相关视频进行观看吧');
+                    }else if(result[0] == 2){
+                        $.login_alert("{:U('Login/enter')}");
+                    }else if(result[0] == 3){
+                        window.location.href="{:U('Order/courseBuy',array('id'=>$info['id']))}";
+                    }else{
+                        layer.msg(result[1]);
+                    }
+                },'json')
+            }else{
+                $.login_alert("{:U('Login/enter')}");
+            }
+        })
+
+        //分页
+        $(document).on('click','.prev,.page-js,.next',function(){
+            var self = $(this),
+                lei = self.attr('class'),
+                page = parseInt(self.text()),
+                current = $('.box').find('.active'),
+                current_val = parseInt(current.text()),
+                count = {$evaluate_page},
+                id = {$info['id']};
+
+            if(lei=='prev'){
+                if(current_val == 2){
+                    self.hide();
+                    $('.next').show();
+                }
+                current.attr('class','item page-js');
+                $('#page'+(current_val-1)).attr('class','active');
+                evaluate_list(current_val-1,id);
+            }else if(lei=='next'){
+                if((count-current_val) == 1){
+                    self.hide();
+                    $('.prev').show();
+                }
+                current.attr('class','item page-js');
+                $('#page'+(current_val+1)).attr('class','active');
+                evaluate_list(current_val+1,id);
+            }else{
+                if(page == 1){
+                    $('.prev').hide();
+                    $('.next').show();
+                }else if(page == count){
+                    $('.prev').show();
+                    $('.next').hide();
+                }else{
+                    $('.prev').show();
+                    $('.next').show();
+                }
+                current.attr('class','item page-js');
+                $('#page'+page).attr('class','active');
+                evaluate_list(page,id);
+            }
+        })
+
+        function evaluate_list(p,id) {
+            $.get("{:U('Curriculum/evaluate_list')}",{p:p,id:id},function (result) {
+                var ht = "";
+                $.each(result,function (k,v) {
+                    ht += '<li class="clear"><div class="left"><img src="'+v.avatar+'" alt="" /></div>'
+                       +'<div class="middle"><div class="branch clear">'
+                       +'<span class="item mr">描述相符：'+v.describe+'</span>'
+                       +'<span class="item mr">教学态度：'+v.attitude+'</span>'
+                       +'<span class="item mr">课程质量：'+v.quality+'</span>'
+                       +'</div><div class="comment">'+v.content+'</div></div>'
+                       +'<div class="right">'+v.add_time+'</div></li>';
+                })
+                $('.yswtab-pingfen').html(ht);
+            },'json');
+        }
+
+        //点击相关视频
+        $('.techer-vod').click(function () {
+            var ex_id =  $(this).data('id');
+            if(uid > 0){
+                $.post("{:U('Curriculum/check_vod')}",{id:id,uid:uid},function (result) {
+                    if(result[0] == 1){
+                        window.location.href="{:U('Curriculum/watch_videos')}"+'&id='+id+'&ex_id='+ex_id;
+                    }else if(result[0] == 2){
+                        $.login_alert("{:U('Login/enter')}");
+                    }else if(result[0] == 3){
+                        layer.alert('您还没预约该课程，点击页面上部立即预约按键进行预约');
+                    }else{
+                        layer.msg(result[1]);
+                    }
+                },'json')
+            }else{
+                $.login_alert("{:U('Login/enter')}");
+            }
+        })
+    });
+</script>
+</body>
+</html>

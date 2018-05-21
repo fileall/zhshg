@@ -1,0 +1,138 @@
+<include file="Public/member_top" />
+
+    <!--右测导航栏开始-->
+    <div class="x-right-colunm">
+        <div class="x-right-colunm-inner myCourse-right">
+            <div class="x-headline">请对订单进行评价</div><!--title name-->
+			<form>
+				<div class="l-clear makeEvaluate"><!--容器-->
+					<input type="hidden" name="o_id" value="{$id}">
+					<textarea name="content" class="makeEvaluate-font mt0" placeholder="说点什么吧！"></textarea>
+					<!--星星评分-->
+					<div class="branch clear">
+						<span class="item">描述相符：</span>
+						<span class="item mr">
+							<select name="describe" class="branch-star">
+								<option value=""></option><!--为空使得初始化时没有选中的星星-->
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4" selected>4</option>
+								<option value="5">5</option>
+							</select>
+						</span >
+					</div>
+					<div class="branch clear">
+						<span class="item">教学态度：</span>
+						<span class="item mr">
+							<select name="attitude" class="branch-star">
+								<option value=""></option><!--为空使得初始化时没有选中的星星-->
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4" selected>4</option>
+								<option value="5">5</option>
+							</select>
+						</span >
+					</div>
+					<div class="branch clear">
+						<span class="item">课程质量：</span>
+						<span class="item mr">
+							<select name="quality" class="branch-star">
+								<option value=""></option><!--为空使得初始化时没有选中的星星-->
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4" selected>4</option>
+								<option value="5">5</option>
+							</select>
+						</span >
+					</div>
+					<div class="branch clear">
+						<span class="item">其它：</span>
+						<span class="item mr">
+							<select name="other" class="branch-star">
+								<option value=""></option><!--为空使得初始化时没有选中的星星-->
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4" selected>4</option>
+								<option value="5">5</option>
+							</select>
+						</span >
+					</div>
+					<div class="makeEva-pj-btn mb20">
+						<input type="button" value="立即评价"/>
+					</div>
+				</div>
+			</form>
+        </div>
+
+
+    </div><!--/x-right-colunm-->
+    <!--右测导航栏结束-->
+</div>
+<script src="__PC__plugins/layui-v1.0.9/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="__PC__css/css-stars.css"><!--评分-->
+<script src="__PC__js/jquery.barrating.min.js" type="text/javascript" charset="utf-8"></script><!--评分-->
+
+<script type="text/javascript">
+    $(function(){
+        layui.use('layer', function(){
+            var layer = layui.layer;
+        });
+        //星级评分
+        $('.branch-star').barrating({
+            theme: 'css-stars'
+        });
+        $('.makeEva-pj-btn').click(function(){
+            var star;
+            $('.branch-star').each(function(i,e){
+                if($(this).val()==0){
+                    star = i;//没有打分的项
+                    return false;
+                }
+            });
+            //验证文本域不为空
+            if($('.makeEvaluate-font').val() == ''){
+                layer.msg('亲，请输入评论内容！',{icon:2});
+                return false;
+            }
+            //验证三项是否打分
+            switch (star){
+                case 0:
+                    layer.msg('请对描述相符进行打分！',{icon:2});
+                    return false;
+                    break;
+                case 1:
+                    layer.msg('请对教学态度进行打分！',{icon:2});
+                    return false;
+                    break;
+                case 2:
+                    layer.msg('请对课程质量进行打分！',{icon:2});
+                    return false;
+                    break;
+				case 3:
+                    layer.msg('请对其它进行打分！',{icon:2});
+                    return false;
+                    break;
+                default:
+                    break;
+            }
+			var data = $('form').serialize();
+			$.post("{:U('Member/curriculum_order_evaluate')}",data,function (result) {
+                layer.msg(result[1]);
+			    if(result[0] == 1 || result[0] == 2){
+				    setTimeout(function () {
+                        self.location=document.referrer;
+                    },2000)
+				}
+            },'json');
+        });
+
+    })
+
+
+</script>
+</body>
+</html>

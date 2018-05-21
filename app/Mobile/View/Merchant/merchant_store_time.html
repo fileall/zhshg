@@ -1,0 +1,77 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+<body>
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">营业时间</div>
+        <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+        <div class="header-right y-header-right"><a class="y-color-red" href="javascript:;">保存</a></div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="content">
+    <div class="myStoreTime-title font-30 body-bgColor">选择营业时间<span class="font-26 y-color-666">（时/分/秒）</span></div>
+    <div class="y-width94">
+        <div class="ali-cen myStoreTime-time">
+            <p class="font-28">开始时间：</p>
+            <input id="time1" class="myStoreTime-time-input font-28 y-mar-left20 start" type="text" placeholder="请选择开始时间" readonly="readonly"/>
+        </div>
+        <div class="ali-cen myStoreTime-time">
+            <p class="font-28">结束时间：</p>
+            <input id="time2" class="myStoreTime-time-input font-28 y-mar-left20 end" type="text" placeholder="请选择结束时间" readonly="readonly"/>
+        </div>
+    </div>
+</div>
+<!--content-->
+<!--footer-->
+<!--footer-->
+</body>
+</block>
+<block name="script">
+<script >
+    var calendar = new lCalendar();
+    calendar.init({
+        'trigger':"#time1", //标签id
+        'type': 'time', //date调出日期选择	datetime调出日期时间选择	time调出时间选择	ym调出年月选择,
+    });
+    var calendar2 = new lCalendar();
+    calendar2.init({
+        'trigger':"#time2", //标签id
+        'type': 'time', //date调出日期选择	datetime调出日期时间选择	time调出时间选择	ym调出年月选择,
+    });
+
+        $(".header-right.y-header-right").click(function(){
+            //不能为空string.length == 0
+            var start = $('.start').val();
+            var end = $('.end').val();
+            if(!start){
+                layer.msg('请选择开始时间！',{icon:0,time:1000})
+                return false;
+            }
+            if(!end){
+                layer.msg('请选择结束时间！',{icon:0,time:1000})
+                return false;
+            }
+            // var time = start+'-'+end;
+//		var data = new FormData('form[name="title"]');//序列化
+//		data.append('is_title',1);
+            $.post('{:U("merchant/store_update")}',{is_time:1,start:start,end:end},function(d){
+                if(d.status==1){
+                    layer.msg(d.msg,{icon:1,time:2000},function(){
+                        window.location.href=d.url;
+                    })
+                }else{
+                    layer.msg(d.msg,{icon:0,time:2000})
+                }
+            })
+            return false;
+
+        })
+    </script>
+</block>
+</html>

@@ -1,0 +1,32 @@
+<volist name="list" id="info">
+<li class="filtrate-list-li"><a href="{:U('merchant_details',['id'=>$info['id']])}">
+    <div class="filtrate-box row-box">
+        <div class="filtrate-list-left">
+            <div class="filtrate-list-img vertical-center">
+                <div class="vertical-auto"><img src="{:attach($info['img'],'avatar')}"></div>
+            </div>
+        </div>
+
+        <div class="row-flex">
+            <div class="store-name">{$info.title}</div>
+            <div class="store-date">工作时间：{$info.start}-{$info.end}</div>
+            <if condition="$info['zftype']">
+                <div class="store-txt"><span class="zhi">付</span>支持
+                        <volist name=":explode(',',$info['zftype'])" id="zftype">
+                            <if condition="$zftype eq 1">金元宝</if>
+                            <if condition="$zftype eq 3">金果</if>
+                        </volist>
+                        支付
+                </div>
+            </if>
+            <if condition="$info['set_coin'] gt 0">
+                <div class="store-txt"><span class="bei">送</span>赠送{$info.set_coin}倍银币</div>
+            </if>
+        </div>
+
+        <div class="filtrate-list-right">
+            <?php echo round($info['juli']/1000,2)?>km
+        </div>
+    </div>
+</a></li>
+</volist>

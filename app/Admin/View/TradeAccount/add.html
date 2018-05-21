@@ -1,0 +1,49 @@
+
+<div class="dialog_content">
+    <form id="info_form" name="info_form" action="{:u('trade_account/add')}" method="post">
+    <table width="100%" class="table_form">
+        <tr>
+            <th width="80">客户 :</th>
+            <td>
+                <select name="member_id">
+                    <option value="0">请选择</option>
+                    <volist name="member" id="val">
+                        <option value="{$val.id}">{$val.nickname}|{$val.mobile}</option>
+                    </volist>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th width="80">帐号 :</th>
+            <td><input type="text" name="account" id="account" class="input-text"></td>
+        </tr>
+        <tr>
+            <th width="80">密码 :</th>
+            <td><input type="text" name="password" id="password" class="input-text"></td>
+        </tr>
+        <tr>
+            <th>{:L('enabled')} :</th>
+            <td>
+                <input type="radio" name="status" class="radio_style" value="1" checked="checked"> &nbsp;{:L('yes')}&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="status" class="radio_style" value="0"> &nbsp;{:L('no')}
+            </td>
+        </tr>
+    </table>
+    </form>
+</div>
+
+<script>
+    $(function(){
+
+        $('#info_form').ajaxForm({success:complate,dataType:'json'});
+        function complate(result){
+            if(result.status == 1){
+                $.dialog.get(result.dialog).close();
+                $.pinphp.tip({content:result.msg});
+                window.location.reload();
+            } else {
+                $.pinphp.tip({content:result.msg, icon:'alert'});
+            }
+        }
+    });
+</script>

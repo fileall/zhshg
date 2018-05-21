@@ -1,0 +1,127 @@
+<include file="Public:header" />
+<style type="text/css">
+*{margin:0;}
+</style>
+
+<form id="info_form" action="{:U('workTime/add')}" method="post" enctype="multipart/form-data">
+<div class="pad_lr_10">
+	<div class="col_tab">
+		<ul class="J_tabs tab_but cu_li">
+			<li class="current">营业时间</li> 
+			<!--<li>{:L('article_seo')}</li>-->
+		</ul>
+		<div class="J_panes">
+			<div class="content_list pad_10">
+				<table width="100%" cellspacing="0" class="table_form">
+					<tr>
+						<th>(1) 时间段:</th>
+						<td> 
+		<input type="text" name="start_time1" id="start_time1"  class="date" size="8" value="<notempty name="rest[0]['start_time']">{:date('H:i:s',$rest[0]['start_time'])}</notempty> "> -
+		<input type="text" name="over_time1"    id="over_time1"  class="date" size="8" value="<notempty name="rest[0]['over_time']">{:date('H:i:s',$rest[0]['over_time'])}</notempty> ">
+						</td>
+					</tr>
+					<tr>
+						<th>(2) 时间段:</th>
+						<td> 
+		<input type="text" name="start_time2"  id="start_time2"  class="date" size="8" value="<notempty name="rest[1]['start_time']">{:date('H:i:s',$rest[1]['start_time'])}</notempty>"> -
+		<input type="text" name="over_time2"    id="over_time2"  class="date" size="8" value="<notempty name="rest[1]['over_time']">{:date('H:i:s',$rest[1]['over_time'])}</notempty> ">
+						</td>
+					</tr>
+					<tr>
+						<th>(3) 时间段:</th>
+						<td> 
+		<input type="text" name="start_time3"   id="start_time3"  class="date" size="8" value="<notempty name="rest[2]['start_time']">{:date('H:i:s',$rest[2]['start_time'])}</notempty>"> -
+		<input type="text" name="over_time3"    id="over_time3"  class="date" size="8" value="<notempty name="rest[2]['over_time']">{:date('H:i:s',$rest[2]['over_time'])}</notempty> ">
+						</td>
+					</tr>
+					<tr>
+						<th>(4) 时间段:</th>
+						<td> 
+		<input type="text" name="start_time4"   id="start_time4"  class="date" size="8" value="<notempty name="rest[3]['start_time']">{:date('H:i:s',$rest[3]['start_time'])}</notempty>"> -
+		<input type="text" name="over_time4"    id="over_time4"  class="date" size="8" value="<notempty name="rest[3]['over_time']">{:date('H:i:s',$rest[3]['over_time'])}</notempty> ">
+						</td>
+					</tr>
+					<tr>
+						<th>(5) 时间段:</th>
+						<td> 
+		<input type="text" name="start_time5"   id="start_time5"  class="date" size="8" value="<notempty name="rest[4]['start_time']">{:date('H:i:s',$rest[4]['start_time'])}</notempty>"> -
+		<input type="text" name="over_time5"    id="over_time5"  class="date" size="8" value="<notempty name="rest[4]['over_time']">{:date('H:i:s',$rest[4]['over_time'])}</notempty> ">
+						</td>
+					</tr>
+					<tr>
+						<th>(6) 时间段:</th>
+						<td> 
+		<input type="text" name="start_time6"   id="start_time6"  class="date" size="8" value="<notempty name="rest[5]['start_time']">{:date('H:i:s',$rest[5]['start_time'])}</notempty>"> -
+		<input type="text" name="over_time6"    id="over_time6"  class="date" size="8" value="<notempty name="rest[5]['over_time']">{:date('H:i:s',$rest[5]['over_time'])}</notempty> ">
+						</td>
+					</tr>
+					<tr>
+						<th>(7) 时间段:</th>
+						<td> 
+		<input type="text" name="start_time7"   id="start_time7"  class="date" size="8" value="<notempty name="rest[6]['start_time']">{:date('H:i:s',$rest[6]['start_time'])}</notempty>"> -
+		<input type="text" name="over_time7"    id="over_time7"  class="date" size="8" value="<notempty name="rest[6]['over_time']">{:date('H:i:s',$rest[6]['over_time'])}</notempty> "> 
+						</td>
+					</tr>
+					
+				</table>
+			</div>
+        </div>
+		<div class="mt10"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;"><br /><br /><br /></div>
+	</div>
+</div>
+<input type="hidden" name="menuid"  value="{$menuid}"/>
+<input type="hidden" name="id" id="id" value="{$info.id}" />
+</form>
+<include file="Public:footer" />
+<!--<link rel="stylesheet" type="text/css" href="__PUBLIC_ADMIN__js/calendar/calendar-blue.css"/>-->
+<!--<script src="__PUBLIC_ADMIN__js/calendar/calendar.js"></script>-->
+<script src="__PUBLIC_ADMIN__js/calendar/adddate.js"></script>
+<script src="__PUBLIC_ADMIN__js/calendar/adddate1.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#start_time1").click(function(){
+				SelectDate(this,'hh:mm:ss');
+			})
+			$("#start_time2").click(function(){
+				SelectDate(this,'hh:mm:ss');
+			})
+			$("#start_time3").click(function(){
+				SelectDate(this,'hh:mm:ss');
+			})
+			$("#start_time4").click(function(){
+				SelectDate(this,'hh:mm:ss');
+			})
+			$("#start_time5").click(function(){
+				SelectDate(this,'hh:mm:ss');
+			})
+			$("#start_time6").click(function(){
+				SelectDate(this,'hh:mm:ss');
+			})
+			$("#start_time7").click(function(){
+				SelectDate(this,'hh:mm:ss');
+			})
+			$("#over_time1").click(function(){
+				SelectDate(this,'hh:mm:ss');
+			})
+			$("#over_time2").click(function(){
+				SelectDate(this,'hh:mm:ss');
+			})
+			$("#over_time3").click(function(){
+				SelectDate(this,'hh:mm:ss');
+			})
+			$("#over_time4").click(function(){
+				SelectDate(this,'hh:mm:ss');
+			})
+			$("#over_time5").click(function(){
+				SelectDate(this,'hh:mm:ss');
+			})
+			$("#over_time6").click(function(){
+				SelectDate(this,'hh:mm:ss');
+			})
+			$("#over_time7").click(function(){
+				SelectDate(this,'hh:mm:ss')
+			})
+		})
+	</script>
+</body>
+</html>

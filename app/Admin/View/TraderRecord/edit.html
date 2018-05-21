@@ -1,0 +1,104 @@
+<!--编辑角色-->
+<div class="dialog_content">
+	<form id="info_form" name="info_form" action="{:u('trader_record/edit')}" method="post">
+    <table width="100%" class="table_form">
+        <tr>
+            <th width="80">借款项目 :</th>
+            <td>
+                <select name="loan_id">
+                    <option value="0">请选择</option>
+                    <volist name="loan" id="val">
+                        <option value="{$val.id}" <if condition="$info['loan_id'] eq $val['id']">selected="selected"</if>>{$val.title}</option>
+                    </volist>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th width="80">股票名称 :</th>
+            <td><input type="text" name="stock_name" id="stock_name" class="input-text" value="{$info.stock_name}"></td>
+        </tr>
+        <tr>
+            <th width="80">股票代码 :</th>
+            <td><input type="text" name="stock_code" id="stock_code" class="input-text" value="{$info.stock_code}"></td>
+        </tr>
+        <tr>
+            <th width="80">交易金额 :</th>
+            <td><input type="text" name="stock_fee" id="stock_fee" class="input-text" value="{$info.stock_fee}"></td>
+        </tr>
+        <tr>
+            <th>交易类型 :</th>
+            <td>
+                <input type="radio" name="trade_type" class="radio_style" value="1" <if condition="$info.trade_type eq 1"> checked="checked"</if>> &nbsp;买入&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="trade_type" class="radio_style" value="2" <if condition="$info.trade_type eq 2"> checked="checked"</if>> &nbsp;卖出
+            </td>
+        </tr>
+        <tr class="trader_out">
+            <th>收益类型 :</th>
+            <td>
+                <input type="radio" name="inout_type" class="radio_style" value="1" <if condition="$info.inout_type eq 1"> checked="checked"</if>> &nbsp;盈&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="inout_type" class="radio_style" value="2" <if condition="$info.inout_type eq 2"> checked="checked"</if>> &nbsp;亏&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="inout_type" class="radio_style" value="0" <if condition="$info.inout_type eq 0"> checked="checked"</if>> &nbsp;无
+            </td>
+        </tr>
+        <tr class="trader_out">
+            <th width="80">盈亏金额 :</th>
+            <td><input type="text" name="inout_fee" id="inout_fee" class="input-text" value="{$info.inout_fee}"> <span>请填写正整数</span></td>
+        </tr>
+        <tr>
+            <th>交易时间 :</th>
+            <td><input type="text" name="trade_time" class="input-text" size="30" value="{:date('Y-m-d H:i:s',$info['trade_time'])}" id="J_trade_time"></td>
+        </tr>
+
+        <tr>
+            <th width="80">排序 :</th>
+            <td><input type="text" name="ordid" id="ordid" class="input-text" value="{$info.ordid}"></td>
+        </tr>
+
+        <tr>
+            <th>{:L('enabled')} :</th>
+            <td>
+                <input type="radio" name="status" class="radio_style" value="1" <if condition="$info.status eq 1"> checked="checked"</if>> &nbsp;{:L('yes')}&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="status" class="radio_style" value="0" <if condition="$info.status eq 0"> checked="checked"</if>> &nbsp;{:L('no')}
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" name="id" id="id" value="{$info.id}" />
+    </form>
+</div>
+<link rel="stylesheet" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script src="__STATIC__/js/calendar/calendar.js"></script>
+<script>
+$(function(){
+    $('input:radio[name="trade_type"]').click(function(){
+        check_trader_type()
+    });
+    check_trader_type();
+
+    function check_trader_type(){
+        var trader_type_val = $("input[name='trade_type']:checked").val();
+        if(trader_type_val ==2){
+            $('.trader_out').show();
+        }else{
+            $('.trader_out').hide();
+        }
+    }
+
+    Calendar.setup({
+        inputField : "J_trade_time",
+        ifFormat   : "%Y-%m-%d %H:%M:%S",
+        showsTime  : true,
+        timeFormat : "24"
+    });
+
+    $('#info_form').ajaxForm({success:complate,dataType:'json'});
+    function complate(result){
+        if(result.status == 1){
+            $.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'});
+        }
+    }
+})
+</script>

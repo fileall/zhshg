@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<title></title>
+		<script src="js/fontSize.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/custom.js"></script>
+	</head>
+	
+	<body>
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">行业分类</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content industry-con flex">
+			<ul class="industry-left">
+				<li class="flex ali-cen y-bg-white y-color-red">
+					<div class="flex1"><span>餐饮1</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>餐饮2</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>餐饮3</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>餐饮4</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>餐饮5</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>餐饮6</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>餐饮7</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+			</ul>
+			<div class="flex1">
+			<ul class="industry-right y-block">
+				<li class="flex ali-cen">
+					<div class="flex1"><span>粤菜</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>鲁菜</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>湘菜</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>川菜</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>闽菜</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>菜菜菜</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>菜菜菜</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>菜菜菜</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>菜菜菜</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>菜菜菜</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>菜菜菜</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>菜菜菜</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>菜菜菜</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>菜菜菜</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				<li class="flex ali-cen">
+					<div class="flex1"><span>菜菜菜</span></div>
+					<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+				</li>
+				
+			</ul>
+			<ul class="industry-right">2</ul>
+			<ul class="industry-right">3</ul>
+			<ul class="industry-right">4</ul>
+			<ul class="industry-right">5</ul>
+			<ul class="industry-right">6</ul>
+			<ul class="industry-right">7</ul>
+			</div>
+		</div>	
+	
+		<!--content-->
+	</body>
+	<script>
+		$(".industry-left li").click(function(){
+			$(this).addClass("y-bg-white y-color-red").siblings().removeClass("y-bg-white y-color-red")
+			$(".industry-right").eq($(this).index()).show().siblings().hide();
+		})
+	</script>
+</html>

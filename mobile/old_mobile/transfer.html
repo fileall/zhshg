@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<title></title>
+		<script src="js/fontSize.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/custom.js"></script>
+	</head>
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">线下转账</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right">
+					<a class="particulars" href="transfer_record.html">转账记录</a>
+				</div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="account-wrap">
+				<ul class="">
+					<li class="account-li padd">
+						<div class="row-box">
+							<div class="account-title">收款账户</div>
+							<div class="row-flex">
+								<ul class="account-form-ul">
+									<li class="account-form-li">
+										<label for="bank1">
+											<div class="account-form-input active"><input type="radio" name="bank" id="bank1" checked="checked"></div>
+											<div class="account-form-name">中国银行</div>
+										</label>
+									</li>
+									
+									<li class="account-form-li">
+										<label for="bank2">
+											<div class="account-form-input"><input type="radio" name="bank" id="bank2"></div>
+											<div class="account-form-name">中国银行</div>
+										</label>
+									</li>
+									
+									<li class="account-form-li">
+										<label for="bank3">
+											<div class="account-form-input"><input type="radio" name="bank" id="bank3"></div>
+											<div class="account-form-name">中国银行</div>
+										</label>
+									</li>
+									
+									<li class="account-form-li">
+										<label for="bank4">
+											<div class="account-form-input"><input type="radio" name="bank" id="bank4"></div>
+											<div class="account-form-name">中国银行</div>
+										</label>
+									</li>
+									
+									<div class="clear-float"></div>
+								</ul>
+							</div>
+						</div>
+					</li>
+					
+					<li class="account-li">
+						<div class="row-box">
+							<div class="account-title">收款方：江西臻睿网络科技股份有限公司</div>
+						</div>
+					</li>
+					
+					<li class="account-li">
+						<div class="row-box">
+							<div class="account-title">收款银行：江西银行总部基地支行</div>
+						</div>
+					</li>
+					
+					<li class="account-li">
+						<div class="row-box">
+							<div class="account-title">收款账号：2000-2266-1147-556-45455-889</div>
+						</div>
+					</li>
+					
+					<li class="account-li">
+						<div class="row-box flex ali-cen">
+							<!--<div class="account-title ">-->
+								<label for="">转账金额：</label>
+								<input type="text" class="flex1 txt-noborder" placeholder="请输入转账金额" />
+							<!--</div>-->
+						</div>
+					</li>
+				</ul>
+				
+				<div class="certificate">
+					<div class="certificate-left">上传汇款凭证</div>
+					<div class="certificate-right"><a href="help.html">使用帮助</a></div>
+					<div class="clear-float"></div>
+				</div>
+				
+				<!--上传图片-->
+				<div class="uploading-certificate row-box">
+					<div class="uploading-left">
+						<div class="uploading-input"><input type="file">+</div>
+						<div class="certificate-txt">上传银行转账凭证</div>
+					</div>
+					
+					<div class="row-flex">
+						<div class="certificate-img-box">
+							<ul class="certificate-img-ul">
+								<li class="certificate-img-li vertical-center">
+									<div class="vertical-auto"><img src="images/img.jpg"></div>
+									<div class="close-certificate"><i class="fa fa-close"></i></div>
+								</li>
+								
+								<li class="certificate-img-li vertical-center">
+									<div class="vertical-auto"><img src="images/img.jpg"></div>
+									<div class="close-certificate"><i class="fa fa-close"></i></div>
+								</li>
+								
+								<li class="certificate-img-li vertical-center">
+									<div class="vertical-auto"><img src="images/img.jpg"></div>
+									<div class="close-certificate"><i class="fa fa-close"></i></div>
+								</li>
+								
+								<li class="certificate-img-li vertical-center">
+									<div class="vertical-auto"><img src="images/img.jpg"></div>
+									<div class="close-certificate"><i class="fa fa-close"></i></div>
+								</li>
+							</ul>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+				</div>
+				<!--上传图片-->
+				
+			</div>
+			
+			<div class="certificate-tis">注：工作日18:00前提交，当天审核，其余时间提交汇款凭证则在下一个工作日审核。</div>	
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<div class="footer-space"></div><!--间距-->
+		<div class="footer-wrap">
+			<div class="footer-inner">
+				<div class="audit-btn"><button type="button">提交审核</button></div>
+			</div>
+		</div>
+		<!--footer-->
+	</body>
+</html>

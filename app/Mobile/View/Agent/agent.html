@@ -1,0 +1,78 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+<body>
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">我是服务中心</div>
+        <!--<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>-->
+        <!--<div class="header-right"></div>-->
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="content">
+    <!--person-->
+    <div class="person-wrap y-service-bg">
+        <a href="{:U('member/set_person')}">
+            <div class="person-inner row-box">
+                <div class="row-flex y-service-hander">
+                    <div class="person-photo vertical-center">
+                        <div class="vertical-auto"><img src="{:attach($member['avatar'],'avatar')}"></div>
+                    </div>
+                    <div class="person-message y-text-center">
+                        <div class="person-name">{$member.nickname}</div>
+                        <div class="y-service-person-grade y-mar-top20 ellipsis1">{$member.place}</div>
+                        <!--<div class="person-grade"><a href="add_shop.html">店铺设置<i class="fa fa-angle-right"></i></a></div>-->
+                    </div>
+                </div>
+
+                <div class="popularize width vertical-center">
+                    <div class="vertical-auto y-person-right">
+                        <img class="w100" src="__MB__images/y_right_white.png"/>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!--person-->
+    <ul class="flex flex-warp y-border-top">
+        <li class="y-service-item"><a href="{:U('agent_prices')}">
+            <p class="font-32 y-color-orange">{$member.prices}<span class="font-24">个</span></p>
+            <p class="font-26">悦买工资</p></a>
+        </li>
+        <li class="y-service-item"><a href="{:U('wallet/coin')}">
+            <p class="font-32 y-color-red">{$member.silver_coin}<span class="font-24">个</span></p>
+            <p class="font-26">银币</p></a>
+        </li>
+        <li class="y-service-item y-border-right-none"><a href="{:U('agent_fruit')}">
+            <p class="font-32 y-color-green">{$member.gold_fruit}<span class="font-24">个</span></p>
+            <p class="font-26">金果</p></a>
+        </li>
+        <li class="y-service-item"><a href="javascript:;">
+            <p class="font-32 y-color-orange">{$member.merchant_count}<span class="font-24">个</span></p>
+            <p class="font-26">区域店铺</p></a>
+        </li>
+        <li class="y-service-item"><a href="javascript:;">
+            <p class="font-32 y-color-red">{$member.member_count}<span class="font-24">个</span></p>
+            <p class="font-26">区域人数</p></a>
+        </li>
+        <li class="y-service-item y-border-none"></li>
+    </ul>
+
+</div>
+<!--content-->
+
+<!--footer-->
+<!--footer-->
+</body>
+</block>
+<block name="footer"></block>
+<block name="script">
+    <script>
+    </script>
+</block>
+</html>

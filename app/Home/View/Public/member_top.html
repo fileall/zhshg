@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="__PC__css/tool.css">
+    <link rel="stylesheet" href="__PC__css/x-style.css">
+    <script src="__PC__js/jquery-2.1.4.min.js"></script>
+    <script src="__PC__js/custom.js"></script>
+</head>
+<body class="body-bgcolor">
+
+<!--顶部栏开始-->
+<div class="x-topcol">
+    <div class="x-topcol-inner l-clear">
+        <a class="x-topcol-logo" href="/" title="首页"></a><!--logo-->
+        <ul class="x-topcol-nav2">
+            <li>您好 {:W('Wg/return_name')} 同学，欢迎您！</li>
+            <li><a href="{:U('Login/sign_out')}">退出</a></li>
+            <li><a href="{:U('Member/index')}">个人中心</a></li>
+        </ul>
+    </div>
+</div>
+<!--顶部栏结束-->
+
+<div class="x-content-box l-clear">
+    <!--左测导航栏开始-->
+    <div class="x-left-colunm">
+        <ul class="x-left-colunm-nav">
+            <div class="x-left-colunm-title">
+                <i class="fa fa-cog custom-icon"></i>
+                <span>基本资料</span>
+            </div>
+            <li class="x-left-colnum-li">
+                <a class="x-left-colnum-a <if condition="ACTION_NAME eq 'self'">active</if>" href="{:U('Member/self')}">个人资料</a>
+            </li>
+            <li class="x-left-colnum-li">
+                <a class="x-left-colnum-a <if condition="ACTION_NAME eq 'security'">active</if>" href="{:U('Member/security')}">密码修改</a>
+            </li>
+			<li class="x-left-colnum-li">
+                <a class="x-left-colnum-a <if condition="ACTION_NAME eq 'integral'">active</if>" href="{:U('Member/integral')}">我的积分</a>
+            </li>
+        </ul>
+        <ul class="x-left-colunm-nav">
+            <div class="x-left-colunm-title">
+                <i class="fa fa-file-text-o custom-icon"></i>
+                <span>交易管理</span>
+            </div>
+            <li class="x-left-colnum-li">
+                <a class="x-left-colnum-a <if condition="ACTION_NAME eq 'curriculum_order'">active</if>" href="{:U('Member/curriculum_order')}">课程订单</a>
+            </li>
+            <li class="x-left-colnum-li">
+                <a class="x-left-colnum-a <if condition="ACTION_NAME eq 'item_order'">active</if>" href="{:U('Member/item_order')}">商品订单</a>
+            </li>
+            <li class="x-left-colnum-li">
+                <a class="x-left-colnum-a <if condition="ACTION_NAME eq 'shipping_address'">active</if>" href="{:U('Member/shipping_address')}">收货地址</a>
+            </li>
+            <li class="x-left-colnum-li">
+                <a class="x-left-colnum-a <if condition="ACTION_NAME eq 'my_collect'">active</if>" href="{:U('Member/my_collect')}">我的收藏</a>
+            </li>
+            <li class="x-left-colnum-li">
+                <a class="x-left-colnum-a <if condition="ACTION_NAME eq 'curriculum_evaluate'">active</if>" href="{:U('Member/curriculum_evaluate')}">评价管理</a>
+            </li>
+        </ul>
+
+        <ul class="x-left-colunm-nav">
+            <div class="x-left-colunm-title">
+                <i class="fa fa-address-book-o custom-icon"></i>
+                <span>课程管理</span>
+            </div>
+            <li class="x-left-colnum-li">
+                <a class="x-left-colnum-a <if condition="ACTION_NAME eq 'my_curriculum'">active</if>" href="{:U('Member/my_curriculum')}">我的课程</a>
+            </li>
+            <li class="x-left-colnum-li">
+                <a class="x-left-colnum-a <if condition="ACTION_NAME eq 'cycle'">active</if>" href="{:U('Member/cycle')}">服务周期</a>
+            </li>
+            <li class="x-left-colnum-li">
+                <a class="x-left-colnum-a <if condition="ACTION_NAME eq 'my_task'">active</if>" href="{:U('Member/my_task')}">我的作业</a>
+            </li>
+            <li class="x-left-colnum-li">
+                <a class="x-left-colnum-a <if condition="ACTION_NAME eq 'my_evaluation'">active</if>" href="{:U('Member/my_evaluation')}">我的测评</a>
+            </li>
+            
+        </ul>
+    </div>
+    <!--左测导航栏结束-->

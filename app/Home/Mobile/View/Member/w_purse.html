@@ -1,0 +1,63 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">我的余额</div>
+				<a href="{:U('member/wallet')}">
+					<div class="header-left"><i class="fa fa-angle-left"></i></div>
+				</a>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="outstanding-box vertical-center">
+				<div class="vertical-auto" style="width: 100%;">
+					<div class="outstanding-title">我的余额</div>
+					<div class="outstanding-money">￥{$member['prices']}</div>
+				</div>
+			</div>
+			<div class="outstanding-wrap">
+				<a class="outstanding-link active" href="{:U('member/w_extract')}">提现</a>
+				<a class="outstanding-link" href="{:U('member/w_transfer')}">线下转账</a>
+				<a class="outstanding-link" href="{:U('member/set_attestation',array('is_w'=>1))}">实名认证</a>
+			</div>
+			
+			<div class="notecase-tis">收支明细</div>
+			<ul class="particulars-ul">
+				<volist name="ye" id="y">
+					<li class="notecase-li">
+						<div class="notecase-left">
+							<div class="notecase-type">{$y.memos}</div>
+							<div class="notecase-date">{:date('Y-m-d',$y['add_time'])}</div>
+						</div>
+						<if condition="$y['type'] == 1">
+							<div class="notecase-right active">-{$y.totalprices}</div>
+						<else />
+							<div class="notecase-right">+{$y.totalprices}</div>
+						</if>
+						<div class="clear-float"></div>
+					</li>
+				</volist>	
+			</ul>
+			<div class="more-text">查看更多></div>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>	
+<block name="footer"></block>
+
+<block name="script">
+		
+</block>
+</html>
+</html>

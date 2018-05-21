@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{:C('pin_site_title')}</title>
+    <meta name="keywords" content="{:C('pin_site_keyword')}" />
+    <meta name="description" content="{:C('pin_site_description')}" />
+    <link rel="shortcut icon" type="image/x-icon" href="__PC__images/">
+    <link rel="stylesheet" href="__PC__plugins/amaze/assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="__PC__css/l_main.css" />
+    <link rel="stylesheet" href="__PC__css/animate.css" />
+</head>
+<body class="bgf0f3f5" >
+<!--head-->
+<div class="head head2">
+    <!--顶部-->
+    <div class="top">
+        <div class="wrap clear">
+            <div class="left fl">
+                <span class="fl">欢迎进入爱美创教育官方网站</span>
+                {:W('Wg/login_status')}
+            </div>
+            <ul class="right fr">
+                <li><a href="" class="hover-blue">教师入驻</a></li>
+                <li class="top-menu-box">
+                    {:W('Wg/nav')}
+                </li>
+                <li class="top-menu-box">
+                    <a href="{:U('Member/index')}" class="top-menu-box">个人中心</a>
+                    <!--<a href="{:U('Member/index')}" class="hover-blue top-menu">个人中心</a>
+                    <dl class="down-menu">
+                        <dd><a href="">选项1</a></dd>
+                        <dd><a href="">选项2</a></dd>
+                        <dd><a href="">选项3</a></dd>
+                    </dl>-->
+                </li>
+                <li class="top-menu-box saoyisao">
+                    <a href="" class="hover-blue">扫一扫</a>
+                    <div class="down-menu">
+                        <img src="__PC__images/foot-code_13.jpg" alt="" />
+                    </div>
+                </li>
+                <li class="qq">
+                    <a href="tencent://message/?uin=1563940776&amp;Site=No&amp;Menu=yes" target="_blank" class="hover-blue">在线咨询</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div><!--head-end-->
+
+<!--购物头部-->
+<div class="bgfff">
+    <div class=" clear wrap">
+        <div class="shopCart-logo clear">
+            <a href="/"><img src="__PC__images/logo.png" alt="" class="fl"/></a>
+            <!--<div class="fl">确认订单信息</div>-->
+        </div>
+        <div class="shopCart-step">
+            <ul class="list clear">
+                <li <if condition="ACTION_NAME eq 'cart'">class="active"</if>>
+                    <i class="num">1</i>
+                    <span>拍下订单</span>
+                </li>
+                <li <if condition="ACTION_NAME eq 'courseBuy' or ACTION_NAME eq 'homeCourseBuy' or ACTION_NAME eq 'confirm_order'">class="active"</if>>
+                    <i class="num">2</i>
+                    <span>确认订单信息</span>
+                </li>
+                <li <if condition="ACTION_NAME eq 'shopCart' or ACTION_NAME eq 'wxPay'">class="active"</if>>
+                    <i class="num">3</i>
+                    <span>订单支付</span>
+                </li>
+                <li <if condition="ACTION_NAME eq 'payOk'">class="active"</if>>
+                    <i class="num">4</i>
+                    <span>支付成功</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--购物头部-end-->

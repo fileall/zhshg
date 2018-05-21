@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<title></title>
+		<script src="js/fontSize.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/custom.js"></script>
+	</head>
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">我的余额</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="outstanding-box vertical-center">
+				<div class="vertical-auto" style="width: 100%;">
+					<div class="outstanding-title">我的余额</div>
+					<div class="outstanding-money">￥{$member['prices']}</div>
+				</div>
+			</div>
+			<div class="outstanding-wrap yehead">
+				<a class="outstanding-link active" href="extract.html">提现</a>
+				<a class="outstanding-link" href="transfer.html">线下转账</a>
+				<a class="outstanding-link" href="balance_recharge.html">充值</a>
+				<a class="outstanding-link" href="attestation.html">实名认证</a>
+			</div>
+			
+			<div class="notecase-tis">收支明细</div>
+			<ul class="particulars-ul">
+				<volist name="ye" id="y">
+					<li class="notecase-li">
+						<div class="notecase-left">
+							<div class="notecase-type">{$y.memos}</div>
+							<div class="notecase-date">{:date('Y-m-d',$y['add_time'])}</div>
+						</div>
+						<if condition="$y['type'] == 1">
+							<div class="notecase-right active">-{$y.totalprices}</div>
+						<else />
+							<div class="notecase-right">+{$y.totalprices}</div>
+						</if>
+						<div class="clear-float"></div>
+					</li>
+				</volist>	
+			</ul>
+			<div class="more-text">查看更多></div>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+
+		
+</block>
+</html>
+</html>

@@ -1,0 +1,39 @@
+<include file="Public:header" />
+<form id="info_form" action="{:U('member_vip/edit')}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="{$member_vip.id}">
+    <input type="hidden" name="member_id" value="{$member_vip.member_id}">
+    <div class="pad_lr_10">
+        <table width="100%" cellspacing="0" class="table_form">
+            <tr>
+                <th width="120">开始时间 :</th>
+                <td><input type="text" name="time_start" value="{$member_vip.time_start}" id="time_start" class="input-text" size="30"></td>
+            </tr>
+            <tr>
+                <th width="120">会员期限 :</th>
+                <td><input type="text" name="month" id="month" class="input-text" size="20" value="{$member_vip.month}">个月</td>
+            </tr>
+            <!--<tr>
+                <th>保证金 :</th>
+                <td><input type="text" name="bond" id="bond" class="input-text" size="30" value="{$member_vip.bond}">元</td>
+            </tr>-->
+        </table>
+        <div class="mt10"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;"><br /><br /><br /></div>
+
+    </div>
+</form>
+<include file="Public:footer" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC_ADMIN__js/calendar/calendar-blue.css"/>
+<script src="__PUBLIC_ADMIN__js/calendar/calendar.js"></script>
+<script>
+
+    $(function() {
+        Calendar.setup({
+            inputField : "time_start",
+            ifFormat   : "%Y-%m-%d",
+            showsTime  : false,
+            timeFormat : "24"
+        });
+    });
+</script>
+</body>
+</html>

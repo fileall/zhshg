@@ -1,0 +1,162 @@
+<extend name="Base/common"/> 
+
+<block name="header"></block>
+
+<block name="body">	
+
+	<body class="body-bgColor">
+
+		<!--header-->
+
+		<div class="header-wrap">
+
+			<div class="header-inner">
+
+				<div class="header-title">我的银元宝</div>
+				<a href="{:U('member/wallet')}">
+
+					<div class="header-left"><i class="fa fa-angle-left"></i></div>
+
+				</a>
+
+				<div class="header-right"></div>
+
+			</div>	
+
+		</div>
+
+		<div class="header-space"></div>
+
+		<!--header-->
+
+		
+
+		<!--content-->
+
+		<div class="content">
+
+			<div class="outstanding-box vertical-center">
+
+				<div class="vertical-auto" style="width: 100%;">
+
+					<div class="outstanding-title">我的银元宝</div>
+
+					<div class="outstanding-money">￥{$member['silver_acer']}</div>
+
+				</div>
+
+			</div>
+
+			<div class="outstanding-wrap">
+
+				<a class="outstanding-link active" href="javascript:;" id="zf">元宝支付</a>
+
+				<a class="outstanding-link" href="{:U('member/sealing_pay')}">元宝购买</a>
+
+			</div>
+
+			
+
+			<div class="notecase-tis">银元宝明细</div>
+
+			<ul class="notecase-ul" id="ul">
+
+				<!--<volist name="ye" id="y">-->
+
+					<!--<li class="notecase-li">-->
+
+						<!--<div class="notecase-left">-->
+
+							<!--<div class="notecase-type">{$y.memos}</div>-->
+
+							<!--<div class="notecase-date">{:date('Y-m-d',$y['add_time'])}</div>-->
+
+						<!--</div>-->
+
+						<!--<if condition="$y['type'] == 1">-->
+
+							<!--<div class="notecase-right active">-{$y.totalprices}</div>-->
+
+						<!--<else />-->
+
+							<!--<div class="notecase-right">+{$y.totalprices}</div>-->
+
+						<!--</if>-->
+
+						<!--<div class="clear-float"></div>-->
+
+					<!--</li>-->
+
+				<!--</volist>	-->
+
+			</ul>
+
+			<!--<div class="more-text">查看更多></div>-->
+
+		</div>
+
+		<!--content-->
+
+		
+
+		<!--footer-->
+
+		<!--footer-->
+
+	</body>
+
+</block>	
+
+<block name="footer"></block>	
+
+<block name="script">
+
+<script type="text/javascript" src="__MB__js/jquery.cookie.js"></script> 	
+
+<script>
+
+	$("#zf").click(function(){
+
+		$.cookie('zftype',2);
+
+		var zftype = $.cookie('zftype');
+
+		location.href='{:U("member/w_shaped_pay",array("zftype"=>'+zftype+'))}';
+
+	})
+
+</script>
+	<script>
+
+        //流加载
+
+        layui.use('flow', function(){
+
+            var flow = layui.flow;
+            var type = 2;//1金元宝 2银元宝 3金果 4余额 5金币 6银币
+            flow.load({
+
+                elem: '#ul' //指定列表容器
+//		    ,scrollElem: '#'//滚动所在元素
+                ,done: function(page, next){ //到达临界点（默认滚动触发），触发下一页
+//		      var lis = [];
+
+                    //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
+
+                    $.get('{:U("member/ajax_bz_liu")}',{page:page,type:type}, function(res){
+                        next(res[1], page < res[0]);
+                    }, 'json');
+                }
+
+            });
+
+        });
+
+	</script>
+
+</block>
+
+
+
+</html>
+

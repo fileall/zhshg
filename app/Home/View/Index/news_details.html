@@ -1,0 +1,76 @@
+<include file="Public/top" />
+
+<!--新闻详情-->
+<div class="bgf0f3f5">
+	<div class="wrap clear">
+	    <!--左边-->
+	    <div class="news-left">
+	        <div class="news-crumbs clear">
+	            <volist name="cate_list" id="val">
+	                <if condition="$type eq 'about'">
+	                    <a href="{:U('Index/about',array('id'=>$val['id'],'cate_id'=>$val['cate_id'],'san_id'=>$val['san_id']))}" class="item hover-blue">
+	                <else />
+	                    <a href="{:U('Index/news',array('id'=>$val['id'],'cate_id'=>$val['cate_id'],'san_id'=>$val['san_id']))}" class="item hover-blue">
+	                </if>
+	                    {$val['name']}
+	                </a> 
+	                <span class="item">&gt;&gt;</span>
+	            </volist>
+	            <span class="item">{$info['title']}</span>
+	        </div>
+	        <!--新闻详情-->
+	        <div class="newsBox">
+	            <!--标题-->
+	            <h3 class="newsDetail-title">{$info['title']}</h3>
+	            <!--作者、出处等-->
+	            <if condition="$type eq news">
+	                <div class="newsAuthor newsDetailAuthor clear">
+	                    <span class="item">作者：{$info['author']}</span>
+	                    <span class="item">来源：{$info['origin']}</span>
+	                    <span class="item">时间：{$info['add_time']|date="Y-m-d H:i",###}</span>
+	                    <span class="item see" title="浏览量">{$info['hits']}</span>
+	                    <a href="" class="item share">分享</a>
+	                </div>
+	            </if>
+	            <!--新闻内容-->
+	            <div class="newsDetail-con">
+	                {:code2html($info['info'])}
+	            </div>
+	        </div>
+	        <!--新闻详情-end-->
+	    </div>
+	    <!--右边-->
+	    <div class="news-right">
+	        <div class="news-hot">
+	            <div class="title">热门推荐</div>
+	            <ul class="list">
+	                <li>
+	                    <a href="{:U('Index/news_details',array('id'=>$list[0]['id'],'type'=>'news'))}">
+	                        <img src="{:attach($list[0]['img'],'article')}" alt="" class="firstHotNews"/>
+	                    </a>
+	                </li>
+	                <volist name="list" id="val" offset="1" length='5'>
+	                    <li class="font">
+	                        <a href="{:U('Index/news_details',array('id'=>$val['id'],'type'=>'news'))}" class="hover-blue ">
+	                            {$val['title']}
+	                        </a>
+	                    </li>
+	                </volist>
+	            </ul>
+	        </div>
+	
+	    </div>
+	</div>
+</div>
+<!--新闻详情-end-->
+
+<!--公共底部-->
+<include file="Public/footer" />
+<!--公共底部-end-->
+
+<script src="js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/l_main.js"></script>
+
+
+</body>
+</html>

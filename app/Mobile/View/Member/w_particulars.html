@@ -1,0 +1,68 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">交易记录</div>
+				<a href="/index.php?s=/member/w_golden_transfer.html">
+					<div class="header-left "><i class="fa fa-angle-left"></i></div>
+				</a>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="particulars-wrap">
+				<div class="particulars-title">
+					<div class="particulars-txt">时间</div>
+					<div class="particulars-txt">转入账户</div>
+					<div class="particulars-txt">金果数量</div>
+					<div class="clear-float"></div>
+				</div>
+				
+				<ul class="particulars-ul" id="ul">
+				</ul>
+				
+				<!--<div class="more-text">查看更多></div>-->
+			</div>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>	
+<block name="footer"></block>
+<block name="script">
+	<script>
+        //流加载
+        layui.use('flow', function(){
+
+            var flow = layui.flow;
+            flow.load({
+                elem: '#ul' //指定列表容器
+//		    ,scrollElem: '#'//滚动所在元素
+                ,done: function(page, next){ //到达临界点（默认滚动触发），触发下一页
+                    var lis = [];
+                    $.post('{:U("member/w_particulars")}',{page:page}, function(res){
+                        layui.each(res.data, function(index, list){
+                            lis.push('<li class="particulars-li"><div class="particulars-txt">'+list.add_time+'</div>'
+                            +'<div class="particulars-txt">'+list.attach_field+'</div>'
+                            +'<div class="particulars-txt">'+list.totalprices+'</div>'
+                            +'<div class="clear-float"></div></li>');
+                        });
+                        next(lis.join(''),page < res.pages);
+                    }, 'json');
+                }
+
+            });
+
+        });
+	</script>
+
+</block>
+</html>

@@ -1,0 +1,78 @@
+<include file="Public/member_top" />
+
+<!--右测导航栏开始-->
+<div class="x-right-colunm">
+    <div class="x-right-colunm-inner myCourse-right">
+
+        <div class="x-headline">我的测评</div><!--title name-->
+        <div class="x-order-content"><!--容器-->
+            <table class="myTask-list">
+                <thead>
+                <tr>
+                    <th width="200">测评单号</th>
+                    <th align="500">测评类型</th>
+                    <th width="200">测评时间</th>
+                    <th width="100">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name="list" id="val">
+                    <tr>
+                        <td>{$val['docno']}</td>
+                        <td align="left">{$types[$val['type']]}</td>
+                        <td>{$val['add_time']|date="Y-m-d H:i",###}</td>
+                        <td>
+                            <a href="{:U('Evaluation/result',array('id'=>$val['id']))}" class="myTask-dati hover-blue">测评结果</a>
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+
+            <!--分页-->
+            <div class="x-paging-box">
+                {$page}
+                <div style="clear: both;"></div><!--clearFloat-->
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+</div><!--/x-right-colunm-->
+<!--右测导航栏结束-->
+</div>
+<script src="__PC__plugins/layui-v1.0.9/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function(){
+        layui.use('layer', function(){
+            var layer = layui.layer;
+        });
+        //点击答题
+        $('.myTask-tosee').click(function(){
+            var ht = $(this).data('task');
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-demo', //样式类名
+                closeBtn: 1, //显示关闭按钮
+                area: ['1000px', '600px'],
+                anim: 2,
+                title:'老师作业',
+                shadeClose: true, //开启遮罩关闭
+                content: ht,
+                //btn: ['去答题'],
+                btn1: function(index, layero){
+                    //去答题按钮的回调，跳转答题页面
+                    location.href=""
+                },
+            });
+        });
+    })
+
+
+</script>
+</body>
+</html>

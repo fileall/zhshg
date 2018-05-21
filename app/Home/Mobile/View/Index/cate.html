@@ -1,0 +1,67 @@
+<extend name="Base/common"/> 
+<block name="header">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="classify-top row-box">
+					<div class="">
+						<div class="classify-ret-icon return-prev"><i class="fa fa-angle-left"></i></div>
+					</div>
+					<div class="row-flex">
+						<a class="search-link" href="{:U('Index/commodity?search=1')}">搜索商品</a>
+					</div>
+				</div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+			</block>
+		
+		<block name="body">
+		<!--content-->
+		<div class="classify-content">
+			<div class="classify-con-inner row-box">
+				
+				<!--分类左侧导航-->
+				<div class="classify-left">
+					<ul class="">
+					<li class="classify-nav-li <if condition="$pid eq 0"> active</if>"><a  href="{:U('Index/cate?pid=0')}">推荐分类</a></li>
+					<volist name="pcates" id="cate">
+					<li class="classify-nav-li <if condition="$pid eq $cate['id']"> active</if>">
+					<a  href="{:U('Index/cate?pid='.$cate['id'])}">{$cate.name}</a>
+					
+					</li>
+                     </volist>
+					</ul>
+				</div>
+				<!--分类左侧导航-->
+				
+				<!--分类二级类-->
+				<div class="classify-right row-flex">
+					<volist name="cates" id="cate">
+					<div class="classify-second">
+						<div class="classify-title">{$cate.name}</div>
+						<ul class="classify-second-ul">
+						
+						<volist name="cate.son" id="scate">
+							<li class="classify-second-li"><a href="{:U('Index/commodity?item_cate='.$scate['id'])}">
+								<div class="classify-second-img vertical-center">
+									<div class="vertical-auto"><img src="{:attach($scate['img'],'item_cate')}"></div>
+								</div>
+								<div class="classify-second-name">{$scate.name}</div>
+							</a></li>
+							 </volist>
+					
+							<div class="clear-float"></div>
+						</ul>
+					</div>
+					
+					 </volist>
+				</div>
+				<!--分类二级类-->
+				
+			</div>
+		</div>
+		<!--content-->
+		
+	</block>

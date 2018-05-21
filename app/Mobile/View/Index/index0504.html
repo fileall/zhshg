@@ -1,0 +1,340 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+    <body class="body-bgColor">
+    <!--header-->
+    <div class="header-wrap">
+        <div class="header-inner">
+            <div class="home-header padd row-box">
+                <div class="home-left" id="scanQRCode">
+                    <a href="javascript:;" >
+                        <div class="logo-img y-indexCode-img"><img src="__MB__images/icon01.png"></div>
+                        <div class="y-text-center font-22">扫一扫</div>
+
+                    </a>
+                </div>
+                <div class="flex1">
+                    <div class="y-over-hide y-logo-img">
+                        <img src="__MB__images/y_logo.png"/>
+                    </div>
+                </div>
+                <div class="home-right">
+                    <a href="{:U('index/new_list')}">
+                        <div class="message-img y-message-img"><img src="__MB__images/y_icon60.png"></div>
+                        <p class="y-text-center">消息</p>
+                    </a>
+                    <div class="message-tis y-message-tis y-bg-red">99</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-space"></div>
+    <!--header-->
+    <!--content-->
+    <div class="content">
+
+        <!--轮播banner-->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <volist name="lux" id="lu">
+                    <div class="swiper-slide"><a href="javascript:;">
+                        <div class="banner-image vertical-center">
+                            <!--<div class="all-auto"><img src="__MB__images//banner1.jpg"></div>-->
+                            <div class="all-auto"><img src="{:attach($lu['content'],'advert')}"></div>
+                        </div>
+                    </a></div>
+                </volist>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <!--轮播banner-->
+
+        <!--服务导航-->
+        <div class="carbolon active">
+            <ul class="carbolon-ul">
+                <li class="carbolon-li active"><a href="javascript:;">
+                    <div class="carbolon-icon"><img src="__MB__images/y_icon61.png"></div>
+                    <div class="carbolon-name">国内特产</div>
+                </a></li>
+
+                <li class="carbolon-li active"><a href="javascript:;">
+                    <div class="carbolon-icon"><img src="__MB__images/y_icon62.png"></div>
+                    <div class="carbolon-name">全球特产</div>
+                </a></li>
+
+                <li class="carbolon-li active"><a href="{:U('Goldfruitshop/gold_shop')}">
+                    <div class="carbolon-icon"><img src="__MB__images/y_icon63.png"></div>
+                    <div class="carbolon-name">金果商城</div>
+                </a></li>
+
+                <li class="carbolon-li active"><a href="javascript:;">
+                    <div class="carbolon-icon"><img src="__MB__images/y_icon64.png"></div>
+                    <div class="carbolon-name">悦买团购</div>
+                </a></li>
+
+                <li class="carbolon-li active"><a href="javascript:;">
+                    <div class="carbolon-icon"><img src="__MB__images/y_icon65.png"></div>
+                    <div class="carbolon-name">生活服务</div>
+                </a></li>
+
+                <li class="carbolon-li active"><a href="javascript:;">
+                    <div class="carbolon-icon"><img src="__MB__images/y_icon66.png"></div>
+                    <div class="carbolon-name">悦买出行</div>
+                </a></li>
+
+                <li class="carbolon-li active"><a href="javascript:;">
+                    <div class="carbolon-icon"><img src="__MB__images/y_icon67.png"></div>
+                    <div class="carbolon-name">同城配送</div>
+                </a></li>
+
+                <li class="carbolon-li active"><a href="javascript:;">
+                    <div class="carbolon-icon"><img src="__MB__images/y_icon68.png"></div>
+                    <div class="carbolon-name">悦买生鲜</div>
+                </a></li>
+
+                <div class="clear-float"></div>
+            </ul>
+        </div>
+        <!--服务导航-->
+
+        <!--滚动信息-->
+        <div class="scroll-message">
+            <div class="row-box inner-auto">
+                <div class="scroll-message-left">
+                    <div class="scroll-message-title"><img src="__MB__images/y_icon69.png"></div>
+                </div>
+                <div class="row-flex">
+                    <div class="scroll-message-data">
+                        <ul class="scroll-message-ul">
+                            <volist name="active_go" id="act">
+                                <li class="scroll-message-li">
+                                    <a href="{:U('index/new_details',array('id'=>$act['id']))}">{$act.intro}</a></li>
+                            </volist>
+                            <!--<li class="scroll-message-li"><a href="javascript:;">用户99444****112 刚刚购买元宝成功刚刚购买元宝成功</a></li>-->
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="scroll-message-more"><a href="{:U('index/new_list')}">更多</a></div>
+                <!--new_list.html-->
+            </div>
+        </div>
+        <!--滚动信息-->
+        <div class="w100 y-over-hide"><img src="{:attach($new_user['content'],'advert')}"></div>
+
+        <!--秒杀-->
+        <div class="activity-wrap"><a href="old_mobile/seckill.html">
+            <div class="inner-auto row-box">
+                <div class="activity-left">
+                    <div class="activity-name">悦买宝秒杀<span>20点场</span></div>
+                </div>
+                <div class="row-flex">
+                    <div class="activity-time vertical-center"><div class="vertical-auto">00</div></div>
+                    <div class="activity-txt">:</div>
+                    <div class="activity-time vertical-center"><div class="vertical-auto">00</div></div>
+                    <div class="activity-txt">:</div>
+                    <div class="activity-time vertical-center"><div class="vertical-auto">00</div></div>
+                    <div class="clear-float"></div>
+                </div>
+                <div class="activity-right">悦选尖货秒</div>
+            </div>
+        </a></div>
+
+        <div class="activity-content">
+            <ul class="activity-ul">
+                <li class="activity-li"><a href="javascript:;">
+                    <div class="activity-img vertical-center">
+                        <div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+                    </div>
+                    <div class="activity-money">￥120.00</div>
+                    <div class="activity-money active">￥140.00</div>
+                </a></li>
+
+                <li class="activity-li"><a href="javascript:;">
+                    <div class="activity-img vertical-center">
+                        <div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+                    </div>
+                    <div class="activity-money">￥120.00</div>
+                    <div class="activity-money active">￥140.00</div>
+                </a></li>
+
+                <li class="activity-li"><a href="javascript:;">
+                    <div class="activity-img vertical-center">
+                        <div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+                    </div>
+                    <div class="activity-money">￥120.00</div>
+                    <div class="activity-money active">￥140.00</div>
+                </a></li>
+
+                <li class="activity-li"><a href="javascript:;">
+                    <div class="activity-img vertical-center">
+                        <div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+                    </div>
+                    <div class="activity-money">￥120.00</div>
+                    <div class="activity-money active">￥140.00</div>
+                </a></li>
+
+                <li class="activity-li"><a href="javascript:;">
+                    <div class="activity-img vertical-center">
+                        <div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+                    </div>
+                    <div class="activity-money">￥120.00</div>
+                    <div class="activity-money active">￥140.00</div>
+                </a></li>
+
+                <li class="activity-li"><a href="javascript:;">
+                    <div class="activity-img vertical-center">
+                        <div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+                    </div>
+                    <div class="activity-money">￥120.00</div>
+                    <div class="activity-money active">￥140.00</div>
+                </a></li>
+                <div class="clear-float"></div>
+            </ul>
+        </div>
+        <!--秒杀-->
+
+        <!--分类-->
+        <div class="classification">
+            <div class="classification-tier">
+                <div class="classification-text-img"><img src="__MB__images/text1.png"></div>
+                <div class="classification-title">发现品质生活</div>
+                <div class="classification-img-box">
+                    <volist name="fl[0]" id="xx">
+                        <a href="{:U('index/detail',array('id'=>$xx['id']))}">
+
+                            <div class="classification-img-tier vertical-center">
+                                <div class="vertical-auto"><img src="{:attach($xx['img'],'item')}"></div>
+                            </div>
+                        </a>
+                    </volist>
+                    <div class="clear-float"></div>
+                </div>
+            </div>
+            <div class="classification-tier">
+                <div class="classification-text-img"><img src="__MB__images/text2.png"></div>
+                <div class="classification-title">教你买买买</div>
+                <div class="classification-img-box">
+                    <volist name="fl[1]" id="xx">
+                        <a href="{:U('index/detail',array('id'=>$xx['id']))}">
+                            <div class="classification-img-tier vertical-center">
+                                <div class="vertical-auto"><img src="{:attach($xx['img'],'item')}"></div>
+                            </div>
+                        </a>
+                    </volist>
+                    <div class="clear-float"></div>
+                </div>
+            </div>
+            <div class="classification-tier">
+                <div class="classification-text-img"><img src="__MB__images/text5.png"></div>
+                <div class="classification-title">新品首发,总有你要的</div>
+
+                <div class="classification-img-box">
+                    <volist name="fl[4]" id="xx">
+                        <a href="{:U('index/detail',array('id'=>$xx['id']))}">
+                            <div class="classification-img-tier vertical-center">
+                                <div class="vertical-auto"><img src="{:attach($xx['img'],'item')}"></div>
+                            </div>
+                        </a>
+                    </volist>
+                    <div class="clear-float"></div>
+                </div>
+            </div>
+            <div class="classification-tier">
+                <div class="classification-text-img"><img src="__MB__images//text4.png"></div>
+                <!--<div class="classification-title">赫斯顿红酒系列 天天1元抢</div>-->
+                <div class="classification-title">精选品质生活</div>
+
+                <div class="classification-img-box">
+                    <volist name="fl[3]" id="xx">
+                        <a href="{:U('index/detail',array('id'=>$xx['id']))}">
+                            <div class="classification-img-tier vertical-center">
+                                <div class="vertical-auto"><img src="{:attach($xx['img'],'item')}"></div>
+                            </div>
+                        </a>
+                    </volist>
+                    <div class="clear-float"></div>
+                </div>
+            </div>
+
+            <div class="clear-float"></div>
+        </div>
+        <!--分类-->
+        <!--猜你喜欢-->
+        <div class="suspect-wrap">
+            <div class="suspect-title"><span>—</span>猜你喜欢<span>—</span></div>
+            <ul class="suspect-ul">
+                <volist name="favour" id="val">
+                    <li class="suspect-li">
+                        <a href="{:U('index/detail',array('id'=>$val['id']))}">
+                            <div class="suspect-img vertical-center">
+                                <div class="vertical-auto"><img src="{:get_thumb(attach($val['img'],'item'),'_b')}" /></div>
+                            </div>
+                            <div class="suspect-img-name">
+                                {:mb_substr($val['title'],0,15,"UTF-8")}
+                                <?php if(strlen($val['title']) > 15) echo '..';?>
+                                <div class="suspect-money">
+                                    <span>￥{$val.price}</span>{$val.sales|0}人已付款
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </volist>
+                <div class="clear-float"></div>
+            </ul>
+        </div>
+        <!--猜你喜欢-->
+
+        <!--content-->
+
+        <!--footer-->
+        <block name="footer"></block>
+        <!--footer-->
+
+    </body>
+</block>
+<block name="script">
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+
+        //轮播图
+        var swiper = new Swiper('.swiper-container',
+            {
+                pagination: '.swiper-pagination',
+                paginationClickable: true,
+                autoplay:3000,
+                autoplayDisableOnInteraction:false,
+                loop:true
+            });
+
+        //微信
+        wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+
+            appId: "{$js['appId']}", // 必填，公众号的唯一标识
+
+            timestamp: "{$js['timestamp']}", // 必填，生成签名的时间戳
+
+            nonceStr: "{$js['nonceStr']}", // 必填，生成签名的随机串
+
+            signature: "{$js['signature']}",// 必填，签名，见附录1
+
+            jsApiList: [ 'scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+
+        wx.ready(function(){
+            $("#scanQRCode").on("click",function(){
+                wx.scanQRCode({
+                    needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                    scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                    success: function (res) {
+                        var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+                    }
+                });
+
+            })
+        });
+    </script>
+</block>
+
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<title></title>
+        <script src="__MB__js/fontSize.js"></script>
+        <!--<script src="__mgfontSize.js"></script>-->
+		<link rel="stylesheet" href="__MB__css/index.css" />
+		<script src="__MB__js/jquery-1.11.2.min.js"></script>
+		<script src="__MB__js/custom.js"></script>
+		<script src="__MB__js/layer/layer.js"></script>
+		<script src="__MB__js/layui/layui.js"></script>
+		<link rel="stylesheet" href="__MB__js/layui/css/layui.css">
+	</head>
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">支付订单</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="payment">
+				<div class="pay-message y-pay-message">
+					<div class="y-width94 jus-bet font-30">
+						<p>订单金额</p>
+                        <p id="y-selectCard" class="y-color-red">&yen;{$count}</p>
+					</div>
+				</div>
+				
+				<div class="pay-way">
+					<div class="inner-area">选择支付方式</div>
+				</div>
+				
+				<div class="y-width94 y-bg-white">
+					<ul>
+						<!--<li class="pay-li active">
+							<label form="yuanbao">
+								<div class="row-box">
+									<div class="pay-icon">
+										<div class="pay-icon-img"><img src="__MB__images/icon28.png"></div>
+									</div>
+									
+									<div class="row-flex">
+										<div class="pay-name">元宝支付</div>
+										&lt;!&ndash;<div class="pay-name-t">元宝支付满100减10</div>&ndash;&gt;
+										<div class="clear-float"></div>
+									</div>
+									
+									<div class="pay-input-box">
+										<div class="pay-input-inner"><input name="pay-name" type="radio" checked="checked" id="yuanbao"></div>
+									</div>
+								</div>
+							</label>
+						</li>-->
+						
+						<!--<li class="pay-li active">
+							<label form="yyb">
+								<div class="row-box">
+									<div class="pay-icon">
+										<div class="pay-icon-img"><img src="__MB__images/y_icon42.png"></div>
+									</div>
+									
+									<div class="row-flex">
+										<div class="pay-name">元宝和银币支付</div>
+										&lt;!&ndash;<div class="pay-name-t">银宝支付满100减10</div>&ndash;&gt;
+										<div class="clear-float"></div>
+									</div>
+									
+									<div class="pay-input-box">
+										<div class="pay-input-inner"><input name="pay-name" type="radio" id="yyb"></div>
+									</div>
+								</div>
+							</label>
+						</li>-->
+						
+						<li class="pay-li active">
+							<label form="jinguo">
+								<div class="row-box">
+									<div class="pay-icon">
+										<div class="pay-icon-img"><img src="__MB__images/icon29.png"></div>
+									</div>
+									
+									<div class="row-flex">
+										<div class="pay-name">金果支付</div>
+										<!--<div class="pay-name-t">金果支付满100减10</div>-->
+										<div class="clear-float"></div>
+									</div>
+									
+									<div class="pay-input-box">
+										<div class="pay-input-inner active"><input name="pay-name" type="radio" id="jinguo"></div>
+									</div>
+								</div>
+							</label>
+						</li>
+						<!--微信支付-->
+						<!--<li class="pay-li active">
+							<label form="weixing">
+								<div class="row-box">
+									<div class="pay-icon">
+										<div class="pay-icon-img"><img src="__MB__images/icon17.png"></div>
+									</div>
+
+									<div class="row-flex">
+										<div class="pay-name">微信支付</div>
+										<div class="pay-name-t"></div>
+										<div class="clear-float"></div>
+									</div>
+
+									<div class="pay-input-box">
+										<div class="pay-input-inner"><input name="pay-name" type="radio" id="weixing"></div>
+									</div>
+								</div>
+							</label>
+						</li>-->
+					</ul>
+				</div>
+				<if condition="$paypwd eq null">
+                    <div class="submit-button"><button>设置支付密码</button></div>
+                    <else />
+                    <div id="button" class="submit-button"><button type="button">确定支付</button></div>
+                </if>
+				<!--<div class="y-payfail"><button type="button">支付失败</button></div>-->
+			</div>	
+		</div>
+		<!--content-->
+		
+		<!--支付失败弹出窗 -->
+		<!--<div class="y-alert-bg y-recordAlert-bg y-hide">
+            <div class="y-minealert-div">
+                <div class="y-minealert-content">
+                    <div class="font-30">
+                        <p class="y-minealert-text y-bg-white">支付失败</p>
+                    </div>
+                    <div class="font-24 y-color-999">您的金果余额不足，是否去充值？</div>
+                </div>
+                <div class="jus-bet y-width75 y-payfail-button y-mar-auto">
+                	<p class="y-alert-closeButton y-mine-alertButton y-width100 y-border">取消</p>
+                	<p class="y-mine-alertButton y-mar-left20 y-bg-red y-width100">充值</p>
+                </div>
+            </div>
+        </div>-->
+		<!--支付失败弹出窗 -->
+		<!--余额支付密码弹窗-->
+    <div class="payment-window">
+        <div class="payment-inner-win">
+            <div class="payment-form">
+                <div class="y-color-999">
+                    <div class="payment-left pay-close">x</div>
+                    <div class="payment-title">输入支付密码</div>
+                    <div class="payment-title y-border-top">支付金额{$count}金果</div>
+                </div>
+                <!--密码区-->
+                <div class="pay-input-group row-box">
+                    <div class="row-flex pass-input-wrap">
+                        <div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+                        <input type="password" readonly="readonly" value="">
+                    </div>
+                    <div class="row-flex pass-input-wrap">
+                        <div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+                        <input type="password" readonly="readonly" value="">
+                    </div>
+                    <div class="row-flex pass-input-wrap">
+                        <div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+                        <input type="password" readonly="readonly" value="">
+                    </div>
+                    <div class="row-flex pass-input-wrap">
+                        <div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+                        <input type="password" readonly="readonly" value="">
+                    </div>
+                    <div class="row-flex pass-input-wrap">
+                        <div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+                        <input type="password" readonly="readonly" value="">
+                    </div>
+                    <div class="row-flex pass-input-wrap">
+                        <div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+                        <input type="password" readonly="readonly" value="">
+                    </div>
+                </div>
+                <!--密码区-->
+                <div class="y-text-right y-width94 y-mar-top20">
+                    <a class="y-color-red" href="{:U('member/set_pw_pay',['set_pw_pay'=>11,'param'=>$oid])}">忘记密码？</a>
+                </div>
+                <!--按钮去-->
+                <div class="pay-btn-group">
+                    <button class="pay-button figure" value="1" type="button">1</button>
+                    <button class="pay-button figure" value="2" type="button">2</button>
+                    <button class="pay-button figure" value="3" type="button">3</button>
+                    <button class="pay-button figure" value="4" type="button">4</button>
+                    <button class="pay-button figure" value="5" type="button">5</button>
+                    <button class="pay-button figure" value="6" type="button">6</button>
+                    <button class="pay-button figure" value="7" type="button">7</button>
+                    <button class="pay-button figure" value="8" type="button">8</button>
+                    <button class="pay-button figure" value="9" type="button">9</button>
+                    <button class="pay-button pay-button2" type="button"></button>
+                    <button class="pay-button figure" value="0" type="button">0</button>
+                    <button class="pay-button empty pay-button2" type="button"><i class="fa fa-times"></i></button>
+                    <div class="clear-float"></div>
+                </div>
+                <!--按钮去-->
+            </div>
+        </div>
+    </div>
+		<!--余额支付密码弹窗-->
+		<input type="hidden" value="7" id="origin_type" />
+        <input type="hidden" value="{$count}" id="y-border-top" />
+		<input type="hidden" value="{:U('Goldfruitshop/y_pay')}" id="sealing_ye" />
+		<!--footer-->
+		<!--footer-->
+	</body>
+	<script>
+	    //密码弹窗
+	    $("#button").click(function(){
+	        if($("#weixing").prop("checked") == true){
+	            //选择微信支付
+	        }else{
+	            //金果，元宝，银币支付
+	            $(".payment-window").addClass("active");
+                $(".payment-form").addClass("active");
+	        }
+        })
+        $(".pay-close").click(function(){
+            $(".payment-window").removeClass("active");
+            $(".payment-form").removeClass("active");
+        })
+        //支付失败弹窗
+        $(".y-payfail").click(function(){
+            $(".y-alert-bg").fadeIn(300);
+            $(".y-minealert-div").addClass("active");
+        })
+        $(".y-alert-closeButton").click(function(){
+            $(".y-alert-bg").fadeOut(300);
+            $(".y-minealert-div").removeClass("active");
+        })
+
+	</script>
+</html>

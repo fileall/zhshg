@@ -1,0 +1,156 @@
+<include file="Public:header" />
+<!--编辑商品-->
+<form name="info_form" id="info_form" action="{:u('loan/verify')}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="{$info.id}" />
+    <div class="pad_lr_10">
+        <div class="col_tab">
+
+            <div class="J_panes">
+                <div class="content_list pad_10">
+                    <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+                        <tr>
+                            <th>申请人 :</th>
+                            <td><span>{$info.nickname}</span></td>
+                        </tr>
+                        <tr>
+                            <th>标题 :</th>
+                            <td>
+                                {$info.title}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>借款金额:</th>
+                            <td>
+                                {$info.total}万
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>配资比例:</th>
+                            <td>
+                                {$loan_config['provide_rate'][$info['provide_rate']]}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>配资期限:</th>
+                            <td>
+                                {$loan_config['deadline'][$info['deadline']]}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>收益方案:</th>
+                            <td>
+                                {$loan_config['income_plan'][$info['income_plan']]}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>年化利率:</th>
+                            <td>
+                                {$info.interest_rate}%
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>股票分红:</th>
+                            <td>
+                                {$info.share_rate}%
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>警戒线:</th>
+                            <td>
+                                {$info.warnning_line}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>平仓线:</th>
+                            <td>
+                                {$info.open_line}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>保证金:</th>
+                            <td>
+                                {:number_format($info['total']/$info['provide_rate']*10000)}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>服务费:</th>
+                            <td>
+                                {$info.service_fee}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>分配操盘手:</th>
+                            <td>
+                                <select name="trader_id">
+                                    <option value="0">请选择</option>
+                                    <volist name="trader" id="val">
+                                        <option value="{$val.id}" <if condition="$val['id'] eq $info['trader_id']">selected="selected"</if> >{$val.username}</option>
+                                    </volist>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>开始时间 :</th>
+                            <td><input type="text" name="start_time" class="input-text" size="50" value="{:date('Y-m-d H:i:s',$info['start_time'])}" id="J_time_start"></td>
+                        </tr>
+                        <tr>
+                            <th>结束时间 :</th>
+                            <td><input type="text" name="end_time" class="input-text" size="50" value="{:date('Y-m-d H:i:s',time())}" id="J_time_end"></td>
+                        </tr>
+                        <tr>
+                            <th>投资最低额:</th>
+                            <td>
+                                <input name="minimum" value="0" class="input-text"><span>不限额度请填0</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>已缴保证金:</th>
+                            <td>
+                              {$finance.total|default=0}元 <notempty name="finance">交易单号：{$finance.order_id},缴纳时间：{:date('Y-m-d H:i:s',$finance['create_time'])}</notempty>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>目前状态:</th>
+                            <td>
+                                <span>{$loan_config['loan_status'][$info['status']]}</span>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+
+            </div>
+            <div class="mt10">
+                <input type="submit" value="审核通过" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;">
+                <input type="button" value="审核不通过" id="do_verify_back" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;">
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="menuid"  value="{$menuid}"/>
+    <input type="hidden" name="id" value="{$info.id}" />
+</form>
+<include file="Public:footer" />
+<link rel="stylesheet" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script src="__STATIC__/js/calendar/calendar.js"></script>
+<script>
+    Calendar.setup({
+        inputField : "J_time_start",
+        ifFormat   : "%Y-%m-%d %H:%M:%S",
+        showsTime  : true,
+        timeFormat : "24"
+    });
+    Calendar.setup({
+        inputField : "J_time_end",
+        ifFormat   : "%Y-%m-%d %H:%M:%S",
+        showsTime  : true,
+        timeFormat : "24"
+    });
+    $('#do_verify_back').click(function(){
+        $("form[name='info_form']").attr('action','{:U("loan/verify_back")}');
+        $("form[name='info_form']").submit();
+    })
+</script>
+
+</body>
+</html>

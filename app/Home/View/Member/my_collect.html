@@ -1,0 +1,123 @@
+<include file="Public/member_top" />
+
+    <!--右测导航栏开始-->
+    <div class="x-right-colunm">
+        <div class="x-right-colunm-inner">
+            <div class="x-goods-inner l-collect-type">
+                <div class="x-goods-top l-clear">
+                    <div class="x-goods-title">
+                        <span class="active">课程收藏</span>
+                        <span>商品收藏</span>
+                    </div>
+                </div>
+            </div>
+            <div class="x-enshrine-content"><!--容器-->
+                <!--课程收藏-->
+                <div class="x-enshrine-Box">
+                    <ul class="l-clear">
+                        <volist name="list" id="val">
+                            <li class="x-enshrine-li">
+                                <div class="x-enshrine-liborder">
+                                    <switch name="val.m_type">
+                                        <case value="1"><a href="{:U('Curriculum/playbackDetail',array('id'=>$val['m_id']))}"></case>
+                                        <case value="2"><a href="{:U('Curriculum/techerDetail',array('id'=>$val['m_id']))}"></case>
+                                        <case value="3"><a href="{:U('Curriculum/homeEduDetail',array('id'=>$val['m_cate_id']))}"></case>
+                                    </switch>
+                                        <div class="x-enshrine-img">
+                                            <img src="{:attach($val['img'],'curriculum')}">
+                                        </div>
+                                        <div class="x-enshrine-name">
+                                            {$val['title']}
+                                        </div>
+                                    </a>
+                                    <div class="x-enshrine-btn l-clear">
+                                        <div class="x-enshrine-money fl">￥{$val['price']}</div>
+                                        <div type="button" data-id="{$val['id']}" class="x-enshrine-delete fr">
+                                            取消收藏
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+                <!--商品收藏-->
+                <div class="x-enshrine-Box l-hide">
+                    <ul class="l-clear">
+                        <volist name="item_list" id="val">
+                            <li class="x-enshrine-li">
+                                <div class="x-enshrine-liborder">
+                                    <a href="{:U('Mall/goodsDetail',array('id'=>$val['i_id']))}">
+                                        <div class="x-enshrine-img">
+                                            <img src="{:attach($val['img'],'item')}">
+                                        </div>
+                                        <div class="x-enshrine-name">
+                                            {$val['title']}
+                                        </div>
+                                        <div class="x-enshrine-money">￥{$val['price']}</div>
+                                    </a>
+                                    <div class="x-enshrine-btn l-clear">
+                                        <div type="button" data-id="{$val['id']}" class="x-enshrine-delete">取消收藏</div>
+                                        <div type="button" data-id="{$val['i_id']}" class="x-enshrine-add">加入购物车</div>
+                                    </div>
+                                </div>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!--右测导航栏结束-->
+
+    <div style="clear: both;"></div><!--clearFloat-->
+</div>
+<!--公共底部-->
+<include file="Public/footer" />
+<script src="__PC__plugins/layui-v1.0.9/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function(){
+        layui.use('layer',function(){
+            var layer = layui.layer;
+        })
+        //删除收货地址
+        $('.x-enshrine-delete').click(function(){
+            var self = $(this),
+                fu = self.parents('.x-enshrine-li'),
+                id = self.data('id');
+
+            var layer1=layer.confirm('是否取消该收藏？', {
+                btn: ['是','否'] //按钮
+            }, function(){
+                $.post("{:U('Member/my_collect')}",{id:id},function (result) {
+                    if(result == 1){
+                        fu.remove();
+                        layer.msg('已取消收藏',{icon:1})
+                    }else{
+                        layer.msg('操作失败，请重试',{icon:2})
+                    }
+                })
+            }, function(){
+                layer.close(layer1);
+            });
+        })
+
+        //加入购物车
+        $('.x-enshrine-add').click(function(){
+            var id = $(this).data('id');
+            $.post("{:U('Mall/join_cart')}",{id:id,nums:1},function (result) {
+                if(result[0] == 1){
+                    layer.msg(result[1],{icon:1,time:2000});
+                }else{
+                    layer.msg(result[1],{icon:2,time:2000});
+                }
+            },'json')
+        });
+    })
+
+
+</script>
+</body>
+</html>

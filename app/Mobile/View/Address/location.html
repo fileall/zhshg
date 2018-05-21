@@ -1,0 +1,178 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+
+    <body class="body-bgColor">
+    <!--header-->
+    <div class="header-wrap">
+        <div class="header-inner">
+            <div class="header-title">地址管理</div>
+            <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+            <div class="header-right"></div>
+        </div>
+    </div>
+    <div class="header-space"></div>
+    <!--header-->
+
+    <!--content-->
+    <div class="content">
+        <!--空购物车-->
+        <div class="null-wrap vertical-center" style="display: none;">
+            <div class="vertical-auto">
+                <div class="null-page">
+                    <div class="null-page-icon"><img src="__MB__images/icon59.png"></div>
+                    <div class="null-page-txt">您还没有收货地址！</div>
+                </div>
+            </div>
+        </div>
+        <!--空购物车-->
+
+        <div>
+            <ul class="">
+                <volist name="place" id="v">
+                    <li class="location-li" data-id="{$v.id}">
+                        <if condition="$attr_id neq null">
+                            <a href="{:U('Goldfruitshop/y_goldShopOrder',array('id'=>$attr_id,'item_id'=>$item_id,'addr_id'=>$v['id']))}">
+                        </if>
+                        <div class="location-wrap inner-area">
+                            <div class="location-message">
+                                <div class="location-message-name">{$v.shperson}</div>
+                                <div class="location-message-mobile">{$v.mobile}</div>
+                                <div class="clear-float"></div>
+                            </div>
+
+                            <div class="row-box location-toponymy">
+                                <div class="location-toponymy-title">收货地址</div>
+                                <div class="row-flex">
+                                    <div class="location-toponymy-txt">{$v.province}{$v.city}{$v.county}{$v.address}</div>
+                                </div>
+                            </div>
+                            <if condition="$attr_id neq null">
+                                </a>
+                            </if>
+
+                            <div class="location-fun">
+                                <div class="location-default" data-id="{$v.id}">
+                                    <if condition="$v['is_default'] eq '1' ">
+                                        <label for="location-1">
+                                            <div class="y-location-default active">
+                                                <div class="location-default-input"><!--fa-circle-thin-->
+                                                    <i class="fa fa-check-circle"></i>
+                                                    <input type="radio" id="location-1" name="location" checked="checked" data-id="{$v.id}">
+                                                </div>
+                                                <div class="location-default-txt">默认地址</div>
+                                            </div>
+                                        </label>
+                                        <else/>
+                                        <label for="location-1">
+                                            <div class="location-default-input"><!--fa-circle-thin-->
+                                                <i class="fa fa-circle-thin"></i>
+                                                <input type="radio" id="1" name="location"  data-id="{$v.id}"  data-item_id="{$item_id}"  data-attr_id="{$attr_id}">
+                                            </div>
+                                            <div class="location-default-txt">设置为默认地址</div>
+                                        </label>
+                                    </if>
+
+                                </div>
+
+                                <div class="location-delete" data-id="{$v.id}">
+                                    <div class="location-operation">
+                                        <div class="location-operation-name">删除</div>
+                                        <!--<div class="location-operation-icon"><i class="fa fa-trash-o"></i></div>-->
+                                    </div>
+                                </div>
+
+                                <div class="location-compile">
+                                    <div class="location-operation"><a href="{:U('add_location',array('id'=>$v['id']))}">
+                                        <div class="location-operation-name">编辑</div>
+                                        <!--<div class="location-operation-icon"><i class="fa fa-file-text-o"></i></div>-->
+                                    </a></div>
+                                </div>
+                                <div class="clear-float"></div>
+                            </div>
+                        </div>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+
+    </div>
+    <!--content-->
+
+    <!--footer-->
+    <div class="footer-space"></div><!--间距-->
+    <div class="footer-wrap">
+        <div class="footer-inner">
+            <a class="add-place" href="{:U('add_location')}">添加地址</a>
+        </div>
+    </div>
+    <!--footer-->
+    </body>
+</block>
+<block name="footer"></block>
+<block name="script">
+    <script type="text/javascript" src="__MB__js/jquery.cookie.js"></script>
+
+    <script>
+        //设置默认地址
+        $("input[name = 'location']").click(function() {
+            var _this   = $(this);
+            if(_this.attr('checked')=='checked'){
+                if($.cookie('location')==2){
+                    location.href="{:U('item/gwc_settlement')}";
+                }
+                return false;
+            }
+            var status  = 1;
+            var id  = $(this).data('id');
+            var item_id  = $(this).data('item_id');
+            var attr_id  = $(this).data('attr_id');
+            $.ajax({type:"post",url:"",data:{'status':status,'id':id,'item_id':item_id,'attr_id':attr_id},success:function(res){
+                    if(res.status==1){
+                        layer.msg(res.msg,{icon:1,time:1000},function(){
+                            location.href=res.uri;
+                        })
+                    }else {
+                        layer.msg(res.msg, {icon:0, time: 1000});
+                    }
+                }
+            })
+
+        });
+        //删除地址
+        $('.location-delete').click(function(){
+            var address_id  = $(this).data('id');
+            var _this=$(this);
+            layer.confirm('确认删除吗？', { btn: ['是的','取消']}, function(){
+                $.post("{:U('delete_address')}",{'id':address_id},function(res){
+                    if(res.status==1){
+                        layer.msg(res.msg,{icon:1,time:1000},function(){
+                            _this.parents(".location-li").remove();
+                            // location.href=location.href;
+                        })
+                    }else {
+                        layer.msg(res.msg, {icon:0, time: 1000});
+                    }
+                })
+            })
+
+        })
+
+
+        //返回按钮的跳转
+        // $('.fa.fa-angle-left').click(function(){
+        //     var is_order = $.cookie('is_order');//判断哪里跳转来
+        //     var url = (is_order==1)?'{:U("item/gwc_settlement",array("zftype"=>'+zftype+'))}':'{:U("Member/myset")}';
+        //     location.href=url;
+        // })
+
+
+        //空页面展示
+        var i = $('.location-li').length;
+        if(i == 0) {
+            $('.null-wrap').css('display', '');
+        }
+
+    </script>
+</block>
+</html>

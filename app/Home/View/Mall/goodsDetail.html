@@ -1,0 +1,266 @@
+<include file="Public/mall_top" /> 
+	
+	<!--面包屑导航-->
+	<div class="ysw-crumbs">
+		<div class="wrap">
+			<a href="/" class="item hover-blue">首页</a>
+			<span class="item ico">&gt;</span>
+			<a href="{:U('Mall/index')}" class="item hover-blue">商城</a>
+			<span class="item ico">&gt;</span>
+			<span class="item">商品详情</span>
+		</div>
+	</div>
+	<!--面包屑导航-end-->
+	
+	<!--商品-->
+	<div class="goodsDetail clear wrap">
+		<!--左边放大镜-->
+		<div class="left">
+			<!--原图-->
+			<div id="l_zoom">
+				<img src="{:attach($info['img'],'item')}" alt="">
+			</div>
+			<!--缩略图-->
+			<div id="l_zoom_sm" class="clear">
+				<a href="javascript:;" class="prev fl"></a>
+				<a href="javascript:;" class="next fr"></a>
+				<div class="listBox">
+					<ul class="list clear">
+						<li class="active"><img src="{:attach($info['img'],'item')}" alt="" data-bigImgSrc='{:attach($info['img'],'item')}' /></li>
+						<volist name="imgs" id="val">
+							<li><img src="{:attach($val['url'],'item')}" alt="" data-bigImgSrc='{:attach($val['url'],'item')}'/></li>
+						</volist>
+					</ul>
+				</div>
+			</div>
+			<!--放大图-->
+			<div id="l_zoomBig"><img src="" alt="" ></div>
+		</div>
+		<!--右边-->
+		<div class="right">
+			<div class="goodsName">
+				<h3>{$info['title']}</h3>
+			</div>
+			<p class="goodsPro">{$info['intro']}</p>
+			<div class="priceBox clear">
+				<div class="fl">
+					<span>价格：<strong class="cor1">¥ {$info['price']}</strong></span>
+					<s class="cor2">¥ {$info['oldprice']}</s>
+				</div>
+				<div class="fr">
+					<a href="javascript:;" class="goods-share">分享</a>
+					<if condition="$info['coll_nums']">
+						<a href="javascript:;" class="goods-collect active" >已收藏</a>
+					<else />
+						<a href="javascript:;" class="goods-collect" >收藏</a>
+					</if>
+				</div>
+			</div>
+			<ul class="goods-peisong">
+				<li class="clear">
+					<span class="fl">服务</span>
+					<span class="fl">由<strong class="cor">{:C('pin_site_name')}</strong>发货，并提供售后服务</span>
+				</li>
+				<li class="clear">
+					<span class="fl">数量</span>
+					<div class="select-quantity fl clear">
+						<a href="javascript:void(0);" class="numdown"></a>
+						<input type="text" readonly class="num" value="1"/>
+						<a href="javascript:void(0);" class="numup"></a>
+					</div>
+				</li>
+			</ul>
+			<div class="clear goods-btns">
+				<a href="javascript:;" class="btn joincar">加入购物车</a>
+				<a href="javascript:;" class="btn buynow">立即购买</a>
+			</div>
+		</div>
+	</div>
+	<!--商品-end-->
+	<!--详情-->
+	<div class="clear wrap goods-detail-con">
+		<!--左侧-->
+		<div class="goods-recommend">
+			<div class="title">商品推荐</div>
+			<ul class="list">
+				<volist name="list" id="val">
+					<li>
+						<a href="{:U('Mall/goodsDetail',array('id'=>$val['id']))}">
+							<div class="recommend-img"><img src="{:attach($val['img'],'item')}" alt="" /></div>
+							<h3 class="name">{$val['title']}</h3>
+							<p class="price">¥ {$val['price']}</p>
+						</a>
+					</li>
+				</volist>
+			</ul>
+		</div>
+		<!--右侧-->
+		<div class="ysw-tabconBox">
+			<div class="courseDetail-tab">
+				<div class="clear">
+					<a href="javascript:;" class="item active">商品详情</a>
+					<a href="javascript:;" class="item ">相关评分</a>
+				</div>
+			</div>
+			<!--商品详情-->
+			<div class="ysw-tabcon">
+				{:code2html($info['info'])}
+			</div><!--商品详情-end-->
+			
+			<!--相关评论-->
+			<div class="ysw-tabcon hide">
+				<ul class="yswtab-pingfen goodspf">
+					<li class="clear">
+						<div class="left"><img src="__PC__images/courseDetail_07.jpg" alt="" /></div>
+						<div class="middle">
+							<div class="branch">
+								<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+								<span>好评</span>
+							</div>
+							<div class="comment">好，很好，非常好。纳爱斯！！！！</div>
+						</div>
+						<div class="right">2017-06-11 12:00</div>
+					</li>
+					<li class="clear">
+						<div class="left"><img src="__PC__images/courseDetail_07.jpg" alt="" /></div>
+						<div class="middle">
+							<div class="branch">
+								<i class="fa fa-hand-rock-o" aria-hidden="true"></i>
+								<span>中评</span>
+							</div>
+							<div class="comment">一般般喽！！！！</div>
+						</div>
+						<div class="right">2017-06-11 12:00</div>
+					</li>
+					<li class="clear">
+						<div class="left"><img src="__PC__images/courseDetail_07.jpg" alt="" /></div>
+						<div class="middle">
+							<div class="branch">
+								<i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+								<span>差评</span>
+							</div>
+							<div class="comment">东西很差！！！！</div>
+						</div>
+						<div class="right">2017-06-11 12:00</div>
+					</li>
+				</ul>
+				<div class="yswtab-pingfen-page">
+					<!--分页-->
+					<div class="l-page">
+						<div class="box clear">
+							<a href="" class="prev">&lt;&lt;上一页</a>
+							<span class="active">1</span>
+							<a href="" class="item">2</a>
+							<a href="" class="item">3</a>
+							<a href="" class="item">4</a>
+							<a href="" class="next">下一页&gt;&gt;</a>
+						</div>
+					</div><!--分页-end-->
+				</div>	
+			</div><!--相关评论-end-->
+		</div>
+	</div>	
+	<!--详情-end-->
+	
+ 	<!--公共底部-->
+	<include file="Public/footer" />
+ 	<!--公共底部-end-->
+
+ 	<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+ 	<script src="__PC__js/l_main.js"></script>
+	<link rel="stylesheet" href="__PC__css/css-stars.css"><!--评分-->
+  	<script src="__PC__js/jquery.barrating.min.js" type="text/javascript" charset="utf-8"></script><!--评分-->
+  	<script src="__PC__/plugins/layui-v1.0.9/layui/layui.js"></script>
+  	<script>        
+		$(function() {
+            //商品数量加减
+            $('.select-quantity .numdown').click(function(){
+                var txtVal = $(this).parent().find('.num').val();
+                txtVal--;
+                if( txtVal <= 1){
+                    txtVal = 1;
+                    $(this).css({
+                        'background-color':'#eee',
+                        'cursor':'no-drop'
+                    })
+                }
+                $(this).parent().find('.num').val(txtVal);
+            });
+            $('.select-quantity .numup').click(function(){
+                var txtVal = $(this).parent().find('.num').val();
+                txtVal++;
+                if( txtVal > 1){
+                    $(this).parent().find('.numdown').css({
+                        'background-color':'#fff',
+                        'cursor':'pointer'
+                    })
+                }
+                $(this).parent().find('.num').val(txtVal);
+            });
+		   	//星级评分
+	      	$('.branch-star').barrating({
+	        	theme: 'css-stars',
+	        	readonly:true
+	      	});
+	      	$('.branch-star').barrating('set', 4);//修改评分的值（星星数）
+	      	//layui-layer
+	      	layui.use('layer',function(){
+				var layer = layui.layer,
+                 	id = {$info['id']},
+                    uid = "{$uid}";
+				//加入购物车
+	      		$('.joincar').click(function(){
+                    var nums = $('.num').val();
+                    if(uid){
+                        $.post("{:U('Mall/join_cart')}",{id:id,nums:nums},function (result) {
+                            if(result[0] == 1){
+                                layer.msg(result[1],{icon:1,time:2000});
+                            }else{
+                                layer.msg(result[1],{icon:2,time:2000});
+                            }
+                        },'json')
+                    }else{
+                        layer.alert('请先登录！', {icon: 5, skin: 'layer-ext-moon'},function () {
+                            window.location.href="{:U('Login/enter')}";
+                        })
+                    }
+	      		});
+
+                //收藏
+                $('.goods-collect').click(function(){
+                    var self = $(this);
+                    if(uid){
+                        $.post("{:U('Mall/collect_item')}",{id:id},function (result) {
+                            if(result[0] == 1){
+                                self.addClass('active').text('已收藏');
+                                layer.msg(result[1],{icon:1,time:2000});
+                            }else{
+                                layer.msg(result[1],{icon:2,time:2000});
+                            }
+                        },'json')
+                    }else{
+                        layer.alert('请先登录！', {icon: 5, skin: 'layer-ext-moon'},function () {
+                            window.location.href="{:U('Login/enter')}";
+                        })
+                    }
+                });
+
+                //立即购买
+				$('.buynow').click(function () {
+                    if(uid){
+                        var nums = $('.num').val();
+                        window.location.href="{:U('Mall/buy_now')}"+"&id="+id+'&num='+nums;
+                    }else{
+                        layer.alert('请先登录！', {icon: 5, skin: 'layer-ext-moon'},function () {
+                            window.location.href="{:U('Login/enter')}";
+                        })
+                    }
+                })
+	      	})
+	      	
+		});
+		
+  </script>
+  
+</body>
+</html>

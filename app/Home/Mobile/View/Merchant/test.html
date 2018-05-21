@@ -1,0 +1,443 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">商铺加入</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<form method="" action="">
+		<div class="content">
+			<ul class="add-shop-ul">
+				<li class="add-shop-li row-box">
+					<div class="add-shop-name">商铺名称</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;"><input name="title" type="text" placeholder="请输入商铺名称"></div>
+						</div>
+					</div>
+				</li>
+				
+				<li class="add-shop-li row-box">
+					<div class="add-shop-name">推荐人</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;"><input name="tuijian" type="number" placeholder="请输入推荐人"></div>
+						</div>
+					</div>
+				</li>
+				
+				<li class="add-shop-li row-box">
+					<div class="add-shop-name">商铺类型</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;">
+								<select name="cate_id" id="">
+									<option value="">请选择</option>
+									<volist name="cate" id="c">
+										<option value="{$c['id']}">{$c['name']}</option>
+									</volist>
+								</select>
+							</div>
+						</div>
+					</div>
+				</li>
+				
+				<li class="add-shop-li row-box">
+					<div class="add-shop-name">支付类型</div>
+					
+					<div class="row-flex">
+								<input name="zftype[]" type="checkbox" value="1" />金元宝
+								<input name="zftype[]" type="checkbox" value="2" />银元宝
+								<input name="zftype[]" type="checkbox" value="3" />金果
+					</div>
+				</li>
+				
+				<!--<li class="add-shop-li row-box">
+					<div class="add-shop-name">让利点数</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;">
+								<select name="rangli" id="">
+									<option value="0">请选择</option>
+									<option value="0.1">餐饮</option>
+									<option value="0.15">服装</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</li>-->
+				
+				<li class="add-shop-li row-box">
+					<div class="add-shop-name">联系电话</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;">
+								<input name="tel" type="number" placeholder="请输入联系电话">
+							</div>
+						</div>
+					</div>
+				</li>
+				
+				
+				
+				<!--<li class="add-shop-li row-box">
+					<div class="add-shop-name">商品分类</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;">
+								<select name="" id="">
+									<option value="">请选择</option>
+									<option value="">餐饮</option>
+									<option value="">服装</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</li>-->
+				
+				<li class="add-shop-li row-box">
+					<div class="add-shop-name">营业时间</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;"><input name="shop_hours1" class="time"U type="time" placeholder="请选择时间"></div>
+						</div>
+					</div>
+					
+					<div class="add-shop-time">至</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;"><input name="shop_hours2" class="time" type="time" placeholder="请选择时间"></div>
+						</div>
+					</div>
+				</li>
+				
+				<li class="add-shop-li row-box">
+					<div class="add-shop-name">所在地区</div>
+					<div class="row-flex">
+						<div class="enter-form-input">
+							<div class="vertical-auto" style="width: 100%;">
+								<input class="form-input-celect"  id="address_info" type="text" readonly placeholder="请点击获取地址！" value="">
+	            				<input name="long_lat" type="hidden">
+                                <input name="address" type="hidden">
+							</div>
+						</div>
+					</div>
+					
+				</li>
+				
+				<li class="add-shop-li row-box">
+					<div class="add-shop-name">详细地址</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;"><input name="desc" type="text" placeholder="请输入详细地址"></div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		
+			<!--<div class="add-shop-map">
+				<div class="map-box" id="map"></div>
+			</div>-->
+			
+			<div class="add-shop-message">
+				<div class="add-shop-message-name">商铺简介</div>
+				<div class="add-shop-message-txt">
+					<textarea name="info" style="width:300px;height:80px;" placeholder="请输入简介"></textarea>
+				</div>
+				
+				<div class="add-shop-message-name">商铺简介<span>(最多上传8张)</span></div>
+				<div class="discuss-wrap">
+					<div class="evaluate-wrap-box" id="img_box1">
+						<div class="evaluate-img-tier">
+							<!--<input type="file">-->
+							<div class="add-img-icon" id="add_img1"><i class="fa fa-camera"></i></div>
+						</div>
+						
+						
+						<!--<div class="evaluate-img-tier close-event vertical-center">
+							<div class="vertical-auto"><img src="images/img.jpg"></div>
+							<div class="close-evaluate"><i class="fa fa-close"></i></div>
+						</div>-->
+						
+						
+						<div class="clear-float"></div>
+					</div>
+				</div>
+				
+				<div class="add-shop-message-name">商铺简介<span>(营业执照正面一张)</span></div>
+				<div class="discuss-wrap">
+					<div class="evaluate-wrap-box" id="img_box2">
+						<div class="evaluate-img-tier">
+							<!--<input type="file">-->
+							<div class="add-img-icon" id="add_img2"><i class="fa fa-camera"></i></div>
+						</div>
+						
+						<!--<div class="evaluate-img-tier close-event vertical-center">
+							<div class="vertical-auto"><img src="images/img.jpg"></div>
+							<div class="close-evaluate"><i class="fa fa-close"></i></div>
+						</div>-->
+						<div class="clear-float"></div>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="submit-button"><a href="javascript:;" id="sub">确定加入</a></div>
+			
+			
+		</div>
+		</form>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+        <div id="html_address" style="display: none;">
+		<div style="width: 100%;height: 100%;position: fixed;top: 0;left: 0;z-indx5">
+			<iframe id="mapPage" width="100%" height="100%" frameborder=0
+					src="http://apis.map.qq.com/tools/locpicker?search=1&type=1&key=RN5BZ-JAZ2U-FKBVV-4ZPMC-QWM5V-CNBPZ&referer=myapp">
+			</iframe>
+		</div>
+	</div>
+
+	</body>
+</block>	
+<block name="footer"></block>
+
+
+<block name="script">
+	
+		<!--<link rel="stylesheet" href="__MB__css/LArea.css">
+		<script src="__MB__js/LArea.js"></script>
+		<script src="__MB__js/LAreaData1.js"></script>
+		<script src="__MB__js/LAreaData2.js"></script>-->
+		<script>
+$('#sub').click(function(){
+	if(!$('input[name="title"]').val()){
+		layer.msg('请填写店铺名字！',{icon:0,time:1000})
+		return false;
+	}
+	if(!$('input[name="tel"]').val()){
+		layer.msg('请填写联系电话！',{icon:0,time:1000})
+		return false;
+	}
+	if(!$('input[name="shop_hours1"]').val() || !$('input[name="shop_hours2"]').val()){
+		layer.msg('请填写营业时间！',{icon:0,time:1000})
+		return false;
+	}
+	if(!$('input[name="desc"]').val()){
+		layer.msg('请填写详细地址！',{icon:0,time:1000})
+		return false;
+	}
+	
+	if(!$('textarea[name="info"]').val().length>100){
+		layer.msg('请最多输入0到100字！',{icon:0,time:1000})
+		return false;
+	}
+	var data = $('form').serialize(); 	
+	
+	//开始后台验证
+	$.post('{:U("merchant/sh_shop")}',data,function(d){
+		
+		if(d.status==1){
+			 layer.msg(d.msg, {icon:1,time: 20000,btn: ['好的!']},function(){
+			  	window.location.href='/index.php?s=/Index/location.html';
+			  });
+		}else{
+			layer.msg(d.msg,{icon:0,time:2000})
+		}
+	},"JSON")
+	return false;
+})    	
+	
+			
+			
+			
+		//选择地区
+	   /* var area1 = new LArea();
+	    area1.init({
+	    	'trigger': '#demo1',
+	        'valueTo': '#value1',
+	        'keys': {
+	        	id: 'id',
+	            name: 'name'
+	        },
+	        'type': 1,
+	        'data': LAreaData
+	    });*/
+	    
+	    /*function map_load() {  
+                var load = document.createElement("script");  
+                load.src = "http://api.map.baidu.com/api?v=1.4&callback=map_init";  
+                document.body.appendChild(load);  
+            }  
+            window.onload = map_load; 
+            
+            function map_init() {  
+                    var map = new BMap.Map("map");
+                    var point = new BMap.Point(115.9433814,28.754932); 
+                    map.centerAndZoom(point, 13);
+                    map.enableScrollWheelZoom(true);
+                    //向地图中添加缩放控件  
+                    var ctrlNav = new window.BMap.NavigationControl({  
+                        anchor: BMAP_ANCHOR_TOP_LEFT,  
+                        type: BMAP_NAVIGATION_CONTROL_LARGE  
+                    });  
+                    map.addControl(ctrlNav);  
+  
+                    //向地图中添加缩略图控件  
+                    var ctrlOve = new window.BMap.OverviewMapControl({  
+                        anchor: BMAP_ANCHOR_BOTTOM_RIGHT,  
+                        isOpen: 1  
+                    });  
+                    map.addControl(ctrlOve);  
+  
+                    //向地图中添加比例尺控件  
+                    var ctrlSca = new window.BMap.ScaleControl({  
+                        anchor: BMAP_ANCHOR_BOTTOM_LEFT  
+                    });  
+                    map.addControl(ctrlSca); 
+
+                    var point = new Array(); //存放标注点经纬信息的数组  
+                    var marker = new Array(); //存放标注点对象的数组  
+                    var info = new Array(); //存放提示信息窗口对象的数组  
+                    for (var i = 0; i < markerArr.length; i++) {  
+                        var p0 = markerArr[i].point.split(",")[0]; //  
+                        var p1 = markerArr[i].point.split(",")[1]; //按照原数组的point格式将地图点坐标的经纬度分别提出来  
+                        point[i] = new window.BMap.Point(p0, p1); //循环生成新的地图点  
+                        marker[i] = new window.BMap.Marker(point[i]); //按照地图点坐标生成标记  
+                        map.addOverlay(marker[i]);  
+                        marker[i].setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画  
+                        var label = new window.BMap.Label(markerArr[i].title, { offset: new window.BMap.Size(20, -10) });  
+                        marker[i].setLabel(label);  
+                        info[i] = new window.BMap.InfoWindow("<p style=’font-size:12px;lineheight:1.8em;width:100px;’>" + markerArr[i].title + "</br>地址：" + markerArr[i].address + "</br> 电话：" + markerArr[i].tel + "</br></p>"); // 创建信息窗口对象  
+                    }  
+                    marker[0].addEventListener("mouseover", function () {  
+                        this.openInfoWindow(info[0]);  
+                    });  
+                    marker[1].addEventListener("mouseover", function () {  
+                        this.openInfoWindow(info[1]);  
+                    });  
+                    marker[2].addEventListener("mouseover", function () {  
+                        this.openInfoWindow(info[2]);  
+                    });  
+                } */
+	</script>
+	
+	
+	<!--微信多图上传-->
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script>
+		wx.config({  
+	        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+	        appId: "{$js['appId']}", // 必填，公众号的唯一标识
+	        timestamp: "{$js['timestamp']}", // 必填，生成签名的时间戳
+	        nonceStr: "{$js['nonceStr']}", // 必填，生成签名的随机串
+	        signature: "{$js['signature']}",// 必填，签名，见附录1
+	        jsApiList: [ 'chooseImage','previewImage','uploadImage','downloadImage','getLocalImgData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	    }); 
+    	//选择图片
+	    $("#add_img1").click(function(){
+		    wx.chooseImage({
+			    count: 8, // 默认9
+			    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+			    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+			    success: function (res) {
+			        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+			        uploadImage(localIds,1);
+			    }
+			});
+		})
+	    //营业执照
+	     $("#add_img2").click(function(){
+		    wx.chooseImage({
+			    count: 1, // 默认9
+			    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+			    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+			    success: function (res) {
+			        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+			        uploadImage(localIds,2);
+			    }
+			});
+		})
+	    
+	    
+	    //上传图片
+	    function uploadImage(localIds,nums)
+	    {
+	    	var localId = localIds.pop()
+	    	wx.uploadImage({
+			    localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+			    isShowProgressTips: 1, // 默认为1，显示进度提示
+			    success: function (res) {
+			    	var serverId = res.serverId; // 返回图片的服务器端ID
+//			    	location.href = "/index.php?m=Mobile&c=Merchant&a=uploadImage&media_id="+serverId;
+		    	 	 download(serverId,nums);
+
+//			    	
+			    	if (localIds.length > 0) {  
+			    		uploadImage(localIds,nums)
+			    	} 
+			    }
+			});
+	    }
+	    
+	     //临时文件预览
+       function download(serverId,nums) {  
+//      	location.href = "/index.php?m=Mobile&c=Merchant&a=uploadImage&media_id="+serverId;
+            $.post("/index.php?m=Mobile&c=Merchant&a=uploadImage", {'media_id': serverId}, function (data) {
+            	if (data.sta == 1) {
+            		$("#img_box"+nums).append(''  
+              	    +'<div class="evaluate-img-tier close-event vertical-center">'
+					+'<div class="vertical-auto"><img  src='+data.name+' ><input type="hidden" name="img_'+nums+'[]"  value="'+data.name+'"></div>'	
+					+'<div class="close-evaluate"><i class="fa fa-close"></i></div></div>'	
+                    );
+                }
+            }, 'json');
+        }
+	    //地图选点
+	$('#address_info').click(function(){
+        $('#html_address').show();
+        layer.open({
+            type: 1
+            ,content: $('#html_address').html()
+            ,anim: 'up'
+            ,style: 'position:fixed; left:0; top:0; width:100%; height:100%; border: none; -webkit-animation-duration: .5s; animation-duration: .5s;'
+        });
+
+    })
+    window.addEventListener('message', function(event) {
+        // 接收位置信息，用户选择确认位置点后选点组件会触发该事件，回传用户的位置信息
+        var loc = event.data;
+        //防止其他应用也会向该页面post信息，需判断module是否为'locationPicker'
+        if (loc && loc.module == 'locationPicker') {
+            var lat = loc.latlng.lat,
+				city=loc.cityname,
+                lng = loc.latlng.lng;
+            $('input[name=address]').val(loc.poiaddress);
+            $('input[name=long_lat]').val(lat+','+lng);
+            layer.closeAll();
+            $('#html_address').hide();
+        }
+    }, false);
+
+	</script>
+</block>
+</html>

@@ -1,0 +1,41 @@
+<!--编辑角色-->
+<div class="dialog_content">
+	<form id="info_form" name="info_form"  method="post">
+    <table width="100%" class="table_form">
+         <!--<tr>
+            <th width="80"></th>
+            <td><img src="https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/home/img/qrcode/zbios_efde696.png"/></td>
+        </tr>
+        <tr>
+            <th width="80"></th>
+            <td><img src="https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/home/img/qrcode/zbios_efde696.png"/></td>
+        </tr>-->
+        
+		<volist name="list" id="val"> 
+			<tr>
+	            <th width="80"></th> 
+	            <td><img  class="J_preview" src="{:attach($val['img'], 'useravatar')}" width="500" /></td>
+	        </tr>
+	   </volist>   
+    </table>
+    </form>
+</div>
+<script src="__PUBLIC_ADMIN__js/fileuploader.js"></script>
+<script>
+$(function(){
+	$('.J_preview').preview(); //查看大图
+    $.formValidator.initConfig({formid:"info_form",autotip:true});
+    $("#name").formValidator({ onshow:lang.please_input+lang.role_name, onfocus:lang.please_input+lang.role_name, oncorrect:lang.input_right}).inputValidator({ min:1, onerror:lang.please_input+lang.role_name}).defaultPassed();
+
+    $('#info_form').ajaxForm({success:complate,dataType:'json'});
+    function complate(result){ 
+        if(result.status == 1){
+            $.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'});
+        }
+    }
+})
+</script>

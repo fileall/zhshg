@@ -1,0 +1,169 @@
+<include file="Public/top" />
+
+<!--banner-->
+<div class="banner" style="background:url('{:attach($cate_info['img'],'article_cate')}') no-repeat center top;"></div>
+<!--banner-end-->
+<div class="posRel" style="background: #f6f7d7;">
+    <div class="homeEdu-nav">
+        <div class="wrap">
+            <ul class="homeEdu-navlist">
+				<volist name="list" id="val">
+					<li><a href="javascript:;" class="animated">{$val['name']}</a></li>
+				</volist>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="homeEdu-BoxBox"> 
+	<div class="homeEdu-Box">
+        <div class="wrap">
+            <div class="title">
+                <p>{$list[0]['name']}</p>
+            </div>
+            <ul class="con-ul clear">
+                <li>
+                    <div class="bgfff">
+                        <img src="__PC__images/homeEdu_08.png" alt="" class="con-ul-img"/>
+                        <h3 class="con-ul-title">学习对象</h3>
+                        <div class="pro">
+	                    	<p>孩子4-12岁幼儿园和小学阶段的家长</p>
+	                    	<p>想要改善孩子拖拉磨蹭、注意力不集中、自控能力差等问题的家长</p>
+	                    	<p>重视孩子的教育，渴望学习专业知识和教育技能的父母</p>
+	                    </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bgfff">
+                        <img src="__PC__images/homeEdu_11.png" alt="" class="con-ul-img"/>
+                        <h3 class="con-ul-title">学习目标</h3>
+                        <div class="pro">
+	                    	<p>掌握家庭教育理论，了解各项教育指标的培养关键期</p>
+	                    	<p>解决孩子目前存在，让家长困惑的教育难题</p>
+	                    	<p>成为优秀父母，培养卓越孩子</p>
+	                    </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bgfff">
+                        <img src="__PC__images/homeEdu_05.png" alt="" class="con-ul-img"/>
+                        <h3 class="con-ul-title">学习方式</h3>
+                        <div class="pro">
+	                    	<p>为期2个月的定制课程训练任务</p>
+	                    	<p>父母教练一对一线上专业指导（每周一次）</p>
+	                    	<p>让父母了解专业知识，并具有实操结果</p>
+	                    </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="homeEdu-toSee">
+                <a href="{:U('Curriculum/homeEduDetail',array('id'=>$list[0]['id']))}" class="btn">加入守护计划</a>
+            </div>
+        </div>
+    </div>
+	<div class="homeEdu-Box">
+	    <div class="wrap">
+	        <div class="title">
+	            <p>{$list[1]['name']}</p>
+	        </div>
+	        <ul class="con-ul clear">
+	            <li>
+	                <div class="bgfff">
+	                    <img src="__PC__images/homeEdu_08.png" alt="" class="con-ul-img"/>
+	                    <h3 class="con-ul-title">学习对象</h3>
+	                    <div class="pro">
+	                    	<p>孩子12-13岁/初一初二阶段的家长</p>
+	                    	<p>想要改善孩子辍学，早恋，沉迷游戏、脾气急躁暴躁等问题的家长</p>
+	                    	<p>重视孩子的教育，渴望学习专业知识和教育技能的父母</p>
+	                    </div>
+	                </div>
+	            </li>
+	            <li>
+	                <div class="bgfff">
+	                    <img src="__PC__images/homeEdu_11.png" alt="" class="con-ul-img"/>
+	                    <h3 class="con-ul-title">学习目标</h3>
+	                    <div class="pro">
+	                    	<p>掌握家庭教育理论，了解各项教育指标的培养关键期</p>
+	                    	<p>解决孩子目前存在，让家长困惑的教育难题</p>
+	                    	<p>成为优秀父母，培养卓越孩子</p>
+	                    </div>
+	                </div>
+	            </li>
+	            <li>
+	                <div class="bgfff">
+	                    <img src="__PC__images/homeEdu_05.png" alt="" class="con-ul-img"/>
+	                    <h3 class="con-ul-title">学习方式</h3>
+	                    <div class="pro">
+	                    	<p>为期3个月的定制课程训练任务</p>
+	                    	<p>高级父母教练一对一线上专业指导</p>
+	                    	<p>让父母了解专业知识，并具有实操结果</p>
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+	        <div class="homeEdu-toSee">
+	            <a href="{:U('Curriculum/homeEduDetail',array('id'=>$list[1]['id']))}" class="btn">加入守护计划</a>
+	        </div>
+	    </div>
+	</div>
+	<div class="homeEdu-Box">
+	    <div class="wrap">
+	        <div class="title">
+	            <p>{$list[2]['name']}</p>
+	        </div>
+	        <ul class="con-ul clear">
+	            <li>
+	                <div class="bgfff">
+	                    <img src="__PC__images/homeEdu_08.png" alt="" class="con-ul-img"/>
+	                    <h3 class="con-ul-title">学习对象</h3>
+	                    <div class="pro">
+	                    	<p>孩子13-18岁/初三及高中阶段的家长</p>
+	                    	<p>想要改善孩子辍学，早恋，沉迷游戏、脾气急躁暴躁等问题的家长</p>
+	                    	<p>重视孩子的教育，渴望学习专业知识和教育技能的父母</p>
+	                    </div>
+	                </div>
+	            </li>
+	            <li>
+	                <div class="bgfff">
+	                    <img src="__PC__images/homeEdu_11.png" alt="" class="con-ul-img"/>
+	                    <h3 class="con-ul-title">学习目标</h3>
+	                    <div class="pro">
+	                    	<p>掌握家庭教育理论，了解各项教育指标的培养关键期</p>
+	                    	<p>解决孩子目前存在，让家长困惑的教育难题</p>
+	                    	<p>成为优秀父母，培养卓越孩子</p>
+	                    </div>
+	                </div>
+	            </li>
+	            <li>
+	                <div class="bgfff">
+	                    <img src="__PC__images/homeEdu_05.png" alt="" class="con-ul-img"/>
+	                    <h3 class="con-ul-title">学习方式</h3>
+	                    <div class="pro">
+	                    	<p>为期3个月的定制课程训练任务</p>
+	                    	<p>高级父母教练一对一线上专业指导</p>
+	                    	<p>让父母了解专业知识，并具有实操结果</p>
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+	        <div class="homeEdu-toSee">
+	            <a href="{:U('Curriculum/homeEduDetail',array('id'=>$list[2]['id']))}" class="btn">加入守护计划</a>
+	        </div>
+	    </div>
+	</div>
+</div>	
+<!---->
+<div class="ysw_adver">
+    <div class="wrap">
+        <a href="{:U('Evaluation/evaluation')}"><img src="__PC__images/ceshibg2.jpg" alt="" /></a>
+    </div>
+</div>
+<!--公共底部-->
+<include file="Public/footer" />
+<!--公共底部-end-->
+
+<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PC__js/l_main.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+[2015-11-14 16:15:56][debug] begin notify
+[2015-11-14 16:15:56][debug] call back:{"appid":"wx551a993002bf18af","openid":"oMHOwvzIpO4aQdR2GKVHXJoJ6zI0","mch_id":"1253361301","is_subscribe":"Y","nonce_str":"16Z1Fm4vTH2COmri","product_id":"wx551a993002bf18afstatic","sign":"05287BA52D6B9FFAC005E2B64955E360"}
+[2015-11-14 16:16:03][debug] begin notify
+[2015-11-14 16:16:03][debug] call back:{"appid":"wx551a993002bf18af","openid":"oMHOwvzIpO4aQdR2GKVHXJoJ6zI0","mch_id":"1253361301","is_subscribe":"Y","nonce_str":"hTMCg6eudxl3ne9w","product_id":"wx551a993002bf18afstatic","sign":"B54F1324B43FBA57B608D7F0E54CFEA1"}

@@ -1,0 +1,92 @@
+<include file="Public:header" />
+<!--添加文章-->
+<form id="info_form" action="{:U('GradeRule/add')}" method="post" enctype="multipart/form-data">
+<div class="pad_lr_10">
+	<div class="col_tab">
+		<div class="J_panes">
+			<div class="content_list pad_10">
+				<table width="100%" cellspacing="0" class="table_form">
+		            <tr>
+						<th>级别名称 :</th>
+						<td>
+							<input type="text" name="name" class="input-text" size="60">
+		                </td>
+					</tr>
+					<tr>
+						<th>注册送银币 :</th>
+						<td>
+							<input type="text" name="reg_silver" class="input-text" size="60">
+		                </td>
+					</tr>
+					<tr>
+						<th>推荐送银币 :</th>
+						<td>
+							<input type="text" name="tj_silver" class="input-text" size="60">
+		                </td>
+					</tr>
+					<tr>
+						<th>购买元宝奖励倍数 :</th>
+						<td>
+							<input type="text" name="reward_silver_multiple" class="input-text" size="60">
+		                </td>
+					</tr>
+					<tr>
+						<th>最低购买元宝数量 :</th>
+						<td>
+							<input type="text" name="min_acer_price" class="input-text" size="60">
+		                </td>
+					</tr>
+					<tr>
+						<th>升级奖励银币 :</th>
+						<td>
+							<input type="text" name="upgrade_silver" class="input-text" size="60">
+		                </td>
+					</tr>
+					<tr>
+						<th>升级费用 :</th>
+						<td>
+							<input type="text" name="upgrade_price" class="input-text" size="60">
+		                </td>
+					</tr>
+					<tr>
+						<th>推荐人升级vip奖励金额 :</th>
+						<td>
+							<input type="text" name="upgrade_one_price" class="input-text" size="60">
+		                </td>
+					</tr>
+					<tr>
+						<th>推荐人升级代理会员奖励金额 :</th>
+						<td>
+							<input type="text" name="upgrade_two_price" class="input-text" size="60">
+		                </td>
+					</tr>
+					<tr>
+						<th>推荐商家让利部分银币倍数 :</th>
+						<td>
+							<input type="text" name="seller_none_silve" class="input-text" size="60">
+		                </td>
+					</tr>
+					<tr>
+						<th>推荐人购买元宝奖励消费金额倍数银币 :</th>
+						<td>
+							<input type="text" name="tj_acer_silver" class="input-text" size="60">
+		                </td>
+					</tr>
+
+					<tr>
+						<th>元宝消费二次银币奖励 :</th>
+		 				<td>
+		                	<label><input type="radio" name="acer_consume_silver" class="radio_style" value="1"> {:L('yes')} </label>&nbsp;&nbsp;
+							<label><input type="radio" name="acer_consume_silver" class="radio_style" value="0" checked="checked"> {:L('no')}</label>
+						</td>
+					</tr>
+				</table>
+			</div>
+        </div>
+		<div class="mt10"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;"><br /><br /><br /></div>
+	</div>
+</div>
+</form>
+<include file="Public:footer" />
+</body>
+</html>

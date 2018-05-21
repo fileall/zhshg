@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<title></title>
+		<script src="js/fontSize.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/custom.js"></script>
+	</head>
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">设置</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<ul class="set-con-ul">	
+				<li class="set-con-li"><a href="personage.html">
+                    <div class="set-con-name">个人信息</div>
+                    <div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+                    <div class="clear-float"></div>
+                </a></li>
+                <li class="set-con-li"><a href="opinion.html">
+                    <div class="set-con-name">意见反馈</div>
+                    <div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+                    <div class="clear-float"></div>
+                </a></li>
+                <li class="set-con-li"><a href="javascript:;">
+                    <div class="set-con-name">客服电话</div>
+                    <div class="set-con-icon y-color-red">400-100-1000</div>
+                    <div class="clear-float"></div>
+                </a></li>
+                <li class="set-con-li"><a href="y_about.html">
+                    <div class="set-con-name">关于我们</div>
+                    <div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+                    <div class="clear-float"></div>
+                </a></li>
+				<li class="set-con-li"><a href="attestation.html">
+					<div class="set-con-name">实名认证</div>
+					<div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+					<div class="clear-float"></div>
+				</a></li>
+				
+				<li class="set-con-li"><a href="safety.html">
+					<div class="set-con-name">账户安全</div>
+					<div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+					<div class="clear-float"></div>
+				</a></li>
+				
+			</ul>
+			<div class="set-con-li y-mar-top20 y-bg-white y-width94"><a href="location.html">
+                <div class="set-con-name">收货地址管理</div>
+                <div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+                <div class="clear-float"></div>
+            </a></div>
+            
+            <div class="set-con-li y-mar-top20 y-bg-white y-width94 y-exitLogin-button"><a href="javascript:;">
+                <div class="y-text-center font-30">退出登录</div>
+                <div class="set-con-icon"></div>
+                <div class="clear-float"></div>
+            </a></div>
+		</div>
+		<!--content-->
+		<!--退出登录弹窗-->
+		<div class="y-alert-bg y-recordAlert-bg y-hide">
+            <div class="y-recordAlert y-alert-div">
+                <div class="y-alert-content y-recordAlert-content">确定退出登录吗？</div>
+                <div class="jus-bet y-alert-Button y-recordAlert-Button y-text-center">
+                    <p class="y-alert-bankButton y-color-999">取消</p>
+                    <p><a href="javascript:;" class="y-color-red y-block">确定</a></p>
+                </div>
+            </div>
+        </div>
+		<!--退出登录弹窗-->
+		<!--footer-->
+		<!--footer-->
+	</body>
+	<script>
+        $(".y-exitLogin-button").click(function(){
+            $(".y-recordAlert-bg").show();
+        })
+        $(".y-alert-bankButton").click(function(){
+            $(".y-recordAlert-bg").hide();
+        })
+    </script>
+</html>

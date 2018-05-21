@@ -1,0 +1,278 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">线下转账</div>
+				<a href="/index.php?s=/member/w_purse.html">
+					<div class="header-left "><i class="fa fa-angle-left"></i></div>
+				</a>
+				<div class="header-right">
+					<a class="particulars" href="{:U('Member/w_transfer_record')}">转账记录</a>
+				</div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="account-wrap">
+				<ul class="">
+					<li class="account-li padd">
+						<div class="row-box">
+							<div class="account-title">收款账户</div>
+							<div class="row-flex">
+								<ul class="account-form-ul">
+									<volist name="pt_card" id="pt">
+										<li class="account-form-li">
+											<label for="bank{$i}">
+												<div class="account-form-input <if condition="$i == 1">active</if> ">
+													<input type="radio" name="bank" id="bank{$i}" checked="checked" data-member-name="{$pt['member_name']}" data-card_id="{$pt['id']}"
+														data-skf="{$pt['member_name']}" data-nums="{$pt['nums']}" data-title="{$pt['title']}"></div>
+												<div class="account-form-name">{$pt.name}</div>
+											</label>
+										</li>
+									</volist>
+
+									<div class="clear-float"></div>
+								</ul>
+							</div>
+						</div>
+					</li>
+					
+					<li class="account-li">
+						<div class="row-box">
+							<div class="account-title" >收款方：<span id="member_name"></span></div>
+						</div>
+					</li>
+					<li class="account-li">
+						<div class="row-box">
+							<div class="account-title" >收款银行：<span id="title"></span></div>
+						</div>
+					</li>
+					
+					<li class="account-li">
+						<div class="row-box">
+							<div class="account-title" >收款账号：<span id="nums"></span></div>
+						</div>
+					</li>
+					<li class="account-li">
+						<div class="row-box">
+							<div class="account-title" >开户人名：<input type="text" id="account_name"/></div>
+						</div>
+					</li>
+					<li class="account-li">
+						<div class="row-box">
+							<div class="account-title" >转账金额：<input type="number" id="prices"/></div>
+						</div>
+					</li>
+				</ul>
+				
+				<div class="certificate">
+					<div class="certificate-left">上传汇款凭证</div>
+					<div class="certificate-right"><a href="help.html">使用帮助</a></div>
+					<div class="clear-float"></div>
+				</div>
+				
+				<!--上传图片-->
+				<div class="uploading-certificate row-box">
+					<div class="uploading-left">
+						<div class="uploading-input" data-id="{$id}">
+							<!--<input type="file" name="imgs" id="img_one">-->
+							<input id="aa">
+		                    <!--<input type="file" name="imgs[]" style="display: none" class="{$id}_1" data-id="{$id}" data-index="1">
+		                    <input type="file" name="imgs[]" style="display: none" class="{$id}_2" data-id="{$id}" data-index="2">
+		                    <input type="file" name="imgs[]" style="display: none" class="{$id}_3" data-id="{$id}" data-index="3">-->
+							+
+						</div>
+						<div class="certificate-txt">上传银行转账凭证</div>
+					</div>
+				<!--展示图片-->
+				<form name="imgs"></form>
+				<div class="row-flex">
+					<div class="certificate-img-box">
+						<ul class="certificate-img-ul">
+							<img id="zs" src="">
+							<input name="img_one" type="hidden">
+						</ul>
+						<div class="clear-float"></div>
+					</div>
+				</div>
+				<!--展示图片-->
+					
+					
+					
+				</div>
+				<!--上传图片-->
+				
+			</div>
+			
+			<div class="certificate-tis">注：工作日18:00前提交，当天审核，其余时间提交汇款凭证则在下一个工作日审核。</div>	
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<div class="footer-space"></div><!--间距-->
+		<div class="footer-wrap">
+			<div class="footer-inner">
+				<div class="audit-btn"><button type="button" id="now_pay">提交审核</button></div>
+			</div>
+		</div>
+		<!--footer-->
+	</body>
+</block>
+<block name="footer"></block>
+
+<block name="script">
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script>
+		wx.config({  
+	        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+	        appId: "{$js['appId']}", // 必填，公众号的唯一标识
+	        timestamp: "{$js['timestamp']}", // 必填，生成签名的时间戳
+	        nonceStr: "{$js['nonceStr']}", // 必填，生成签名的随机串
+	        signature: "{$js['signature']}",// 必填，签名，见附录1
+	        jsApiList: [ 'chooseImage','previewImage','uploadImage','downloadImage','getLocalImgData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	    }); 
+    	//选择图片
+	    $("#aa").click(function(){
+		    wx.chooseImage({
+			    count: 1, // 默认9
+			    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+			    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+			    success: function (res) {
+			        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+			        uploadImage(localIds);
+			    }
+			});
+		})
+	    
+	    //上传图片
+	    function uploadImage(localIds)
+	    {
+	    	var localId = localIds.pop()
+	    	wx.uploadImage({
+			    localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+			    isShowProgressTips: 1, // 默认为1，显示进度提示
+			    success: function (res) {
+			    	var serverId = res.serverId; // 返回图片的服务器端ID
+//			    	location.href = "/index.php?m=Mobile&c=Member&a=uploadImage&media_id="+serverId;
+		    	 	 download(serverId);
+			    	if (localIds.length > 0) {  
+			    		uploadImage(localIds)
+			    	} 
+			    }
+			});
+	    }
+	   
+	     //临时文件预览
+       function download(serverId) {
+//      	location.href = "/index.php?m=Mobile&c=Merchant&a=uploadImage&media_id="+serverId;
+            $.post("{:U('Member/upload_apply_line_img')}", {'media_id': serverId}, function (data) {
+            	if (data.sta == 1) {
+					$("#zs").attr('src','data/attachment/sh_img/'+data.name);
+					$("input[name='img_one']").val(data.name);
+                }
+            }, 'json');
+        }
+</script>       
+<script>
+		
+	
+	$(function(){ 
+		var aa = $('.account-form-ul').children(':first').find("input[name = 'bank']");
+		$('#member_name').html(aa.data('member-name'));
+		$('#skf').html(aa.data('skf'));
+		$('#title').html(aa.data('title'));
+		$('#nums').html(aa.data('nums'));
+
+	}); 
+
+	$("input[name = 'bank']").click(function(){
+		var li = $(this).parents(".account-form-li"),
+			sib = $(li).siblings(".account-form-li");
+		if(this.checked){
+			$(li).find(".account-form-input").addClass("active");
+			$(sib).find(".account-form-input").removeClass("active");
+			$('#skf').html($(this).data('skf'));
+			$('#title').html($(this).data('title'));
+			$('#nums').html($(this).data('nums'));
+		}
+	});
+	//提交申请
+	$('#now_pay').click(function(){
+		//提交前验证
+		if(!$('#account_name').val()){
+			layer.msg('请填写开户人名！',{icon:0,time:1000})
+			return false;
+		}
+		if(!$('#prices').val()){
+			layer.msg('请填写金额！',{icon:0,time:1000})
+			return false;
+		}
+		
+		if(parseInt($('#prices').val()) < 0 | parseFloat($('#prices').val()) == 0){
+			layer.msg('填写金额非法！',{icon:0,time:1000})
+			return false;
+		}
+		
+        if(!$('input[name="img_one"]').val()){
+        	layer.msg('请上传图片凭证！',{icon:0,time:1000})
+            return false;
+        }
+		
+//		if($('.certificate-img-li').length<1){
+//      	layer.msg('请上传图片凭证！',{icon:0,time:1000})
+//          return false;
+//      }
+		//生成订单
+		 var card_id = $('.account-form-input.active').find("input[name = 'bank']").data('card_id');
+
+		  var prices = $('#prices').val();
+		 var type = 2;//1提现 2线下转账3金币提现
+		 var account_name = $('#account_name').val();
+		 var  img_one = $('input[name="img_one"]').val();
+		 $.post('',{img_one:img_one,card_id:card_id,prices:prices,type:type,account_name:account_name},function(d){
+		 	if(d.status ==1){
+		 		layer.msg('已提交申请!',{icon:1,time:1000},function(){
+                	window.location.href = '{:U("member/wallet")}';
+		 		})
+		 	}	
+		 	else{
+		 		layer.msg('提交申请失败!',{icon:0,time:1000});
+		 	}
+		 
+		 })
+	})
+//	//图片1
+//		$('#img_one').change(function() {
+//			var a = $(this);
+//			var fd = new FormData('form[name="imgs"]');//序列化
+//			fd.append('file', a[0].files[0]);
+//		
+//			if(a.val() != '') {
+//				$.ajax({
+//					url: "{:U('Member/zed')}",
+//					dataType: "JSON",
+//					data: fd,
+//					type: "POST",
+//					contentType: false,
+//					processData: false,
+//					success: function(d) {
+//						if(d != 0) {
+//							$('#zs').attr('src', '/data/attachment/useravatar/'+d['img']);//展示
+//							$('input[name="img_one"]').val(d['img']);//上传后返回的照片名字
+//							
+//						}
+//					}
+//				})
+//			}
+//		})
+	
+	
+</script>	
+</block>	
+</html>

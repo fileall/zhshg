@@ -1,0 +1,154 @@
+<include file="Public/member_top" />
+
+    <!--右测导航栏开始-->
+    <div class="x-right-colunm">
+
+        <div class="x-account">
+            <div class="x-account-txt">修改手机号</div>
+
+            <div class="x-email-group">
+
+                <div class="x-step-number"><!--1步-2步-3步-状态-->
+
+                    <div class="x-step-one active">
+                        <span>1</span>
+                        <p>验证原手机号</p>
+                    </div>
+
+                    <div class="x-step-line active">
+                        <span></span>
+                    </div>
+
+                    <div class="x-step-two active">
+                        <span>2</span>
+                        <p>验证新手机号</p>
+                    </div>
+
+                    <!--<div class="x-step-line-two">
+                        <span></span>
+                    </div>
+
+                    <div class="x-step-three">
+                        <span>3</span>
+                        <p>完成</p>
+                    </div>-->
+
+                    <div style="clear: both;"></div><!--clearFloat-->
+                </div>
+
+                <div style="width: 100%;height: 120px;"></div><!--间距-->
+
+                <form action="" name="" method="post">
+
+                    <div class="x-email-input">
+                        <div class="x-information-name active">新手机号：</div>
+                        <div class="x-information-txt">
+                            <input class="x-informatio-input active" type="text" name="mobile" placeholder="请输入需要绑定的新手机号">
+                        </div>
+                        <div style="clear: both;"></div><!--clearFloat-->
+                    </div>
+
+                    <div class="x-email-input">
+                        <div class="x-information-name active">验证码：</div>
+                        <div class="x-information-txt">
+                            <input class="x-informatio-input x-in-width" type="text" name="verify_img" placeholder="图片验证码">
+                        </div>
+                        <div class="x-verification">
+                            <img src="{:U('Member/verify_code', array('t'=>time()))}" class="verify_img">
+                        </div>
+                        <div class="x-exchange">刷新验证码</div>
+
+                        <div style="clear: both;"></div><!--clearFloat-->
+                    </div>
+
+                    <div class="x-email-input">
+                        <div class="x-information-name active">短信验证码：</div>
+                        <div class="x-information-txt">
+                            <input class="x-informatio-input x-in-width" type="text" name="code" placeholder="短信验证码">
+                        </div>
+                        <div class="x-verification-btn">
+                            <input type="button" id="btn" value="获取短信验证码" onclick="settime(this)" />
+                        </div>
+
+                        <div style="clear: both;"></div><!--clearFloat-->
+                    </div>
+
+                    <div class="x-email-input">
+                        <div class="x-information-name active x-hidden" style="margin-right: 4px;">占位符：</div>
+                        <div class="x-location-sunbmit">
+                            <a href="account_mobile3.html">
+                                <button type="button">下一步</button>
+                            </a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!--右测导航栏结束-->
+
+    <div style="clear: both;"></div><!--clearFloat-->
+</div>
+<!--公共底部-->
+<include file="Public/footer" />
+<link rel="stylesheet" href="__PC__plugins/layui-v1.0.9/layui/css/modules/layer/default/layer.css">
+<script src="__PC__plugins/layui-v1.0.9/layui/lay/modules/layer.js"></script>
+<script>
+    //获取验证码倒计时
+    var countdown=60;
+    function settime(obj) {
+        if (countdown == 0) {
+            obj.removeAttribute("disabled");
+            obj.value="免费获取验证码";
+            countdown = 60;
+            return;
+        } else {
+            obj.setAttribute("disabled", true);
+            obj.value= countdown + "秒";
+            countdown--;
+        }
+        setTimeout(function(){settime(obj)},1000);
+    }
+
+    $(function () {
+        //切换图形验证码
+        $(".x-exchange").click(function(){
+            var timenow = new Date().getTime();
+            $('.verify_img').attr("src","{:U('Member/verify_code/?t='.time())}")
+        });
+
+        //发送短信
+        $('#btn').click(function () {
+            var verify_img = $('input[name=verify_img]').val();
+            $.get("{:U('Member/new_get_code')}",{verify_img:verify_img},function (result) {
+                layer.msg(result[1]);
+            },'json')
+        })
+
+        //下一步
+        $('#sub-mit').click(function () {
+            var mobile = $('input[name=mobile]').val(),
+                code = $('input[name=code]').val();
+
+            if(!mobile){
+                layer.msg('请输入手机号');
+            }
+            if(!code){
+                layer.msg('请输入手机验证码');
+            }
+
+            $.post("__SELF__",{mobile:mobile,code:code},function (result) {
+                layer.msg(result[1]);
+                if(result[0] == 1){
+                    setTimeout(function () {
+                        window.location.href="{:U('Login/enter')}";
+                    },2000)
+                }
+            },'json')
+        })
+    })
+</script>
+</body>
+</html>

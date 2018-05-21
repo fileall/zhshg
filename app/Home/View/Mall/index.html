@@ -1,0 +1,136 @@
+<include file="Public/mall_top" />
+ 
+<!--轮播-->
+<div class="index-bannerBox">
+    <!--轮播-->
+    <div class="swiper-container index-banner">
+        <div class="swiper-wrapper">
+            <volist name="ad" id="val">
+                <div class="swiper-slide">
+                    <a href="{$val['url']}" style="background:url('{:attach($val['content'],'advert')}') no-repeat center top;"></a>
+                </div>
+            </volist>
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+        <!-- 如果需要导航按钮 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+</div>
+<!--轮播-end-->
+
+<div class="wrap mall">
+    <!--电子产品-->
+    <volist name="cate_list" id="val" key="k">
+        <div class="mall-box {$val['class']}">
+            <div class="mall-box-title clear">
+                <h3 class="fl">{$val['name']}</h3>
+                <a href="{:U('Mall/dz_goods',array('id'=>$val['id']))}" class="fr hover-blue">更多 &gt;</a>
+            </div>
+            <ul class="mall-goodsList <if condition="$k eq 1">one</if> clear">
+                <volist name="val['list']" id="va">
+                    <li class="item">
+                        <a href="{:U('Mall/goodsDetail',array('id'=>$va['id']))}">
+                            <div class="mall-goodsImg">
+                                <img src="{:attach($va['img'],'item')}" alt="" />
+                            </div>
+                        </a>
+                        <p class="mall-goodsPrice">¥ {$va['price']}</p>
+                        <a href="{:U('Mall/goodsDetail',array('id'=>$va['id']))}">
+                            <h3 class="mall-goodsName">{$va['title']}</h3>
+                        </a>
+                        <if condition="$val['id'] eq 496">
+                            <div class="clear mall-goodsDuihuan">
+                                <span class="jifen">4600</span>
+                                <a href="integralGoodsDetail.html" class="duihuan">兑换</a>
+                            </div>
+                        <else/>
+                            <div class="clear mall-goodsBtns">
+                                <if condition="$va['coll_nums']">
+                                    <a href="javascript:void(0);" class="collect active" data-id="{$va['id']}">已收藏</a>
+                                <else />
+                                    <a href="javascript:void(0);" class="collect" data-id="{$va['id']}">收藏</a>
+                                </if>
+                                <a href="javascript:void(0);" class="joinCar" data-id="{$va['id']}">加入购物车</a>
+                            </div>
+                        </if>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+    </volist>
+    <!--电子产品-end-->
+</div>
+
+
+
+<!--公共底部-->
+<include file="Public/footer" />
+<!--公共底部-end-->
+
+<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="__PC__plugins/swiper3.14/css/swiper.min.css" /><!--轮播css-->
+<script src="__PC__plugins/swiper3.14/js/swiper.min.js"></script><!--轮播js-->
+<script src="__PC__/plugins/layui-v1.0.9/layui/layui.js" type="text/javascript"></script>
+<script src="__PC__js/l_main.js"></script>
+<script>
+    $(function(){
+        var uid = "{$uid}";
+        var mySwiper = new Swiper ('.swiper-container', {
+            loop: true,
+            // 如果需要分页器
+            pagination: '.swiper-pagination',
+
+            // 如果需要前进后退按钮
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            autoplayDisableOnInteraction : false,
+            paginationClickable :true
+        })
+
+		//layui-layer
+		layui.use('layer',function(){
+			var layer = layui.layer;
+		});
+		//收藏
+		$('.collect').click(function(){
+            var id = $(this).data('id'),
+                self = $(this);
+            if(uid){
+                $.post("{:U('Mall/collect_item')}",{id:id},function (result) {
+                    if(result[0] == 1){
+                        self.addClass('active').text('已收藏');
+                        layer.msg(result[1],{icon:1,time:2000});
+                    }else{
+                        layer.msg(result[1],{icon:2,time:2000});
+                    }
+                },'json')
+            }else{
+                layer.alert('请先登录！', {icon: 5, skin: 'layer-ext-moon'},function () {
+                    window.location.href="{:U('Login/enter')}";
+                })
+            }
+		});
+		//加入购物车
+		$('.joinCar').click(function(){
+		    var id = $(this).data('id');
+		    if(uid){
+		        $.post("{:U('Mall/join_cart')}",{id:id,nums:1},function (result) {
+                    if(result[0] == 1){
+                        layer.msg(result[1],{icon:1,time:2000});
+                    }else{
+                        layer.msg(result[1],{icon:2,time:2000});
+                    }
+                },'json')
+            }else{
+                layer.alert('请先登录！', {icon: 5, skin: 'layer-ext-moon'},function () {
+                    window.location.href="{:U('Login/enter')}";
+                })
+            }
+		});
+    })
+</script>
+
+</body>
+</html>

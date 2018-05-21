@@ -1,0 +1,458 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">我的</div>
+				<a href="/index.php">
+					<div class="header-left"><i class="fa fa-angle-left"></i></div>
+				</a>
+				<div class="header-right mine-toset">
+					<a class="mine-set-link" href="javascript:;"></a>
+				</div>
+			</div>	 
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<!--person-->
+			<div class="person-wrap">
+				<div class="person-inner row-box">
+					<div class="row-flex"><a href="javascript:;" id="aaa">
+						<div class="person-photo vertical-center">
+							<div class="vertical-auto"><img src="{:attach($member['avatar'],'useravatar')}"></div>
+						</div>
+						<div class="person-message">
+							<div class="person-name">{$member.nickname}</div>
+							<div class="person-grade">会员等级：{$mem.vips}</div>
+						</div>
+					</a></div>
+				
+				
+					<div class="popularize vertical-center">
+						<div class="vertical-auto">
+							<a href="{:U('member/popularize_link',array('what_ewm'=>1))}">
+								<div class="popularize-img"><img src="{:attach($member['ewm'],'ewm')}"></div>
+								<div class="popularize-name">推广码</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--person-->
+			
+			<!--order-->
+			<div class="order-wrap">
+				<div class="order-all"><a href="{:U('member/exploit')}">
+					<div class="order-all-title">我的订单</div>
+					<div class="order-all-icon"><i class="fa fa-angle-right"></i></div>
+					<div class="clear-float"></div>
+				</a></div>
+				<ul class="order-ul">
+					<li class="order-li">
+						<a href="{:U('member/exploit')}">
+							<div class="order-icon"><img src="__MB__images/icon32.png"><div class="order-link-numbers">99</div></div>
+							<div class="order-name">待付款</div>
+						</a>
+					</li>
+					
+					<li class="order-li">
+						<a href="{:U('member/exploit')}">
+							<div class="order-icon"><img src="__MB__images/icon33.png"><div class="order-link-numbers">99</div></div>
+							<div class="order-name">待发货</div>
+						</a>
+					</li>
+					
+					<li class="order-li">
+						<a href="{:U('member/exploit')}">
+							<div class="order-icon"><img src="__MB__images/icon34.png"><div class="order-link-numbers">99</div></div>
+							<div class="order-name">待收货</div>
+						</a>
+					</li>
+					
+					<li class="order-li">
+						<a href="{:U('member/exploit')}">
+							<div class="order-icon"><img src="__MB__images/icon35.png"><div class="order-link-numbers">99</div></div>
+							<div class="order-name">待评价</div>
+						</a>
+					</li>
+					
+					<li class="order-li">
+						<a href="{:U('member/exploit')}">
+							<div class="order-icon"><img src="__MB__images/icon36.png"><div class="order-link-numbers">99</div></div>
+							<div class="order-name">退款/售后</div>
+						</a>
+					</li>
+					<div class="clear-float"></div>
+				</ul>
+				
+				<div class="exponent-col">
+					<div class="exponent-inner row-box">
+						<div class="exponent-left">
+							<div class="exponent-btn">财富指数</div>
+						</div>
+						
+						<div class="row-flex">
+							<!--<div class="exponent-txt">今日财富指数：1</div>-->
+							<div class="exponent-txt">今日财富指数：{$selive_coin_day}</div>
+						</div>
+						
+						<div class="exponent-right">
+							<div class="exponent-date"><?php echo(date('Y-m-d',time())) ?></div>
+						</div>
+					</div>	
+				</div>
+			</div>
+			<!--order-->
+			
+			<!--money-->
+			<!--<div class="order-wrap">
+				<ul class="cashbox-ul">
+					<li class="cashbox-li">
+						<div class="cashbox-wrap vertical-center">
+							<div class="vertical-auto" style="width: 100%;">
+								<div class="cashbox-icon"><img src="__MB__images/icon19.png"></div>
+								<div class="cashbox-money">{$mem['gold_acer']}</div>
+								<div class="cashbox-name">金元宝</div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="cashbox-li">
+						<div class="cashbox-wrap vertical-center">
+							<div class="vertical-auto" style="width: 100%;">
+								<div class="cashbox-icon"><img src="__MB__images/icon28.png"></div>
+								<div class="cashbox-money">{$mem['silver_acer']}</div>
+								<div class="cashbox-name">银元宝</div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="cashbox-li">
+						<div class="cashbox-wrap vertical-center">
+							<div class="vertical-auto" style="width: 100%;">
+								<div class="cashbox-icon"><img src="__MB__images/icon37.png"></div>
+								<div class="cashbox-money">{$mem['silver_coin']}</div>
+								<div class="cashbox-name">银币</div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="cashbox-li">
+						<div class="cashbox-wrap vertical-center">
+							<div class="vertical-auto" style="width: 100%;">
+								<div class="cashbox-icon"><img src="__MB__images/icon38.png"></div>
+								<div class="cashbox-money">{$mem['gold_coin']}</div>
+								<div class="cashbox-name">金币</div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="cashbox-li">
+						<div class="cashbox-wrap vertical-center">
+							<div class="vertical-auto" style="width: 100%;">
+								<div class="cashbox-icon"><img src="__MB__images/icon29.png"></div>
+								<div class="cashbox-money">{$mem.gold_fruit}</div>
+								<div class="cashbox-name">金果</div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="cashbox-li"><a href="{:U('member/recycle')}">
+						<div class="cashbox-wrap vertical-center">
+							<div class="vertical-auto" style="width: 100%;">
+								<div class="cashbox-icon"><img src="__MB__images/icon39.png"></div>
+								<div class="cashbox-name">金果回购</div>
+							</div>
+						</div>
+					</a></li>
+					
+					<li class="cashbox-li"><a href="{:U('member/wallet')}">
+						<div class="cashbox-wrap vertical-center">
+							<div class="vertical-auto" style="width: 100%;">
+								<div class="cashbox-icon"><img src="__MB__images/icon40.png"></div>
+								<div class="cashbox-name">我的钱包</div>
+							</div>
+						</div>
+					</a></li>
+					
+					<li class="cashbox-li"><a href="javascript:;">
+						<div class="cashbox-wrap vertical-center">
+							<div class="vertical-auto" style="width: 100%;">
+								<div class="cashbox-icon"><img src="__MB__images/icon61.png"></div>
+								<div class="cashbox-name">购物车</div>
+							</div>
+						</div>
+					</a></li>
+					<div class="clear-float"></div>
+				</ul>
+			</div>-->
+			<!--money-->
+			
+			<!--功能列表-->
+			<div class="function-list">
+				<ul>
+					<li class="function-list-li"><a href="{:U('member/wallet')}">
+						<div class="row-box">
+							<div class="function-list-left">
+								<div class="function-list-icon"><img src="__MB__images/icon89.png"></div>
+							</div>
+							
+							<div class="row-flex">
+								<div class="function-list-name">我的钱包</div>
+							</div>
+							
+							<div class="function-list-right">
+								<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+							</div>
+						</div>
+					</a></li>
+					
+					<li class="function-list-li"><a href="{:U('Recharge/upgrade')}">
+						<div class="row-box">
+							<div class="function-list-left">
+								<div class="function-list-icon"><img src="__MB__images/icon90.png"></div>
+							</div>
+							
+							<div class="row-flex">
+								<div class="function-list-name">我要升级</div>
+							</div>
+							
+							<div class="function-list-right">
+								<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+							</div>
+						</div>
+					</a></li>
+					
+					<li class="function-list-li"><a href="{:U('member/popularize_link',array('what_ewm'=>1))}">
+						<div class="row-box">
+							<div class="function-list-left">
+								<div class="function-list-icon"><img src="__MB__images/icon42.png"></div>
+							</div>
+							
+							<div class="row-flex">
+								<div class="function-list-name">我要推荐</div>
+							</div>
+							
+							<div class="function-list-right">
+								<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+							</div>
+						</div>
+					</a></li>
+					
+					<li class="function-list-li"><a href="{:U('member/popularize')}	">
+						<div class="row-box">
+							<div class="function-list-left">
+								<div class="function-list-icon"><img src="__MB__images/icon43.png"></div>
+							</div>
+							
+							<div class="row-flex">
+								<div class="function-list-name">我已推荐</div>
+							</div>
+							
+							<div class="function-list-right">
+								<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+							</div>
+						</div>
+					</a></li>
+					
+					<!--<li class="function-list-li"><a href="evaluate.html">
+						<div class="row-box">
+							<div class="function-list-left">
+								<div class="function-list-icon"><img src="__MB__images/icon44.png"></div>
+							</div>
+							
+							<div class="row-flex">
+								<div class="function-list-name">我的评价</div>
+							</div>
+							
+							<div class="function-list-right">
+								<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+							</div>
+						</div>
+					</a></li>-->
+					
+					<li class="function-list-li">
+						<div class="row-box">
+							<div class="function-list-left">
+								<div class="function-list-icon"><img src="__MB__images/icon91.png"></div>
+							</div>
+							
+							<div class="row-flex">
+								<div class="function-list-name">购物车</div>
+							</div>
+							
+							<div class="function-list-right">
+								<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="function-list-li">
+						<div class="row-box">
+							<div class="function-list-left">
+								<div class="function-list-icon"><img src="__MB__images/icon45.png"></div>
+							</div>
+							
+							<div class="row-flex">
+								<div class="function-list-name">我的收藏</div>
+							</div>
+							
+							<div class="function-list-right">
+								<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="function-list-li">
+						<div class="row-box">
+							<div class="function-list-left">
+								<div class="function-list-icon"><img src="__MB__images/icon46.png"></div>
+							</div>
+							
+							<div class="row-flex">
+								<div class="function-list-name">我的优惠券</div>
+							</div>
+							
+							<div class="function-list-right">
+								<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="function-list-li">
+						<a href="{:U('member/my_merchant')}">
+						<!--<a href="javascript:;" id="test_realname">-->
+							
+						<div class="row-box">
+							<div class="function-list-left">
+								<div class="function-list-icon"><img src="__MB__images/icon65.png"></div>
+							</div>
+							
+							<div class="row-flex">
+								<div class="function-list-name">我是商家</div>
+							</div>
+							
+							<div class="function-list-right">
+								<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+							</div>
+						</div>
+					</a></li>
+					
+					<li class="function-list-li">
+						<a href="javascript:;">
+						<!--<a href="{:U('member/my_service')}">-->
+						<div class="row-box">
+							<div class="function-list-left">
+								<div class="function-list-icon"><img src="__MB__images/icon66.png"></div>
+							</div>
+							
+							<div class="row-flex">
+								<div class="function-list-name">我是服务中心</div>
+							</div>
+							
+							<div class="function-list-right">
+								<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+							</div>
+						</div>
+					</a></li>
+					<li class="function-list-li">
+						<a href="{:U('member/city_service')}">
+							<div class="row-box">
+								<div class="function-list-left">
+									<div class="function-list-icon"><img src="__MB__images/mine-tongcheng.png"></div>
+								</div>
+								
+								<div class="row-flex">
+									<div class="function-list-name">同城配送</div>
+								</div>
+								
+								<div class="function-list-right">
+									<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+								</div>
+							</div>
+					</a></li>
+				</ul>
+			</div>
+			
+			<div class="function-list">
+				<ul>
+					<li class="function-list-li"><a href="javascript:;" class="mine-toset">
+						<div class="row-box">
+							<div class="function-list-left">
+								<div class="function-list-icon"><img src="__MB__images/set.png"></div>
+							</div>
+							
+							<div class="row-flex">
+								<div class="function-list-name">设置</div>
+							</div>
+							
+							<div class="function-list-right">
+								<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+							</div>
+						</div>
+					</a></li>
+					
+					<li class="function-list-li">
+						<!--<a href="{:U('member/my_set2')}">-->
+						<a href="javascript:;">
+							
+						<div class="row-box">
+							<div class="function-list-left">
+								<div class="function-list-icon"><img src="__MB__images/icon92.png"></div>
+							</div>
+							
+							<div class="row-flex">
+								<div class="function-list-name">平台介绍</div>
+							</div>
+							
+							<div class="function-list-right">
+								<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+							</div>
+						</div>
+					</a></li>
+				</ul>
+			</div>		
+			<!--功能列表-->
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<block name="footer"></block>
+		<!--footer-->
+	</body>
+</block>	
+
+<block name="script">
+<script type="text/javascript" src="__MB__js/jquery.cookie.js"></script> 	
+<script>
+	$(function(){
+		$("#aaa").click(function(){
+			$.cookie('is_mine',1);
+			var is_mine = $.cookie('is_mine');
+			location.href='{:U("member/set_person",array("is_mine"=>'+is_mine+'))}';
+		})
+		
+		$(".mine-toset").click(function(){
+			$.cookie('is_mine',2);
+			var is_mine = $.cookie('is_mine');
+			location.href='{:U("member/myset",array("is_mine"=>'+is_mine+'))}';
+		})
+		
+	})	
+	
+//	$('#test_realname').click(function(){
+//		var is_sm="{$member['realname']}";
+//		if(is_sm==''){
+//			layer.msg('您还未实名认证', {icon:0,time: 1000});
+//			return false;
+//		}
+//		location.href="{:U('member/my_merchant')}";
+//	});
+</script>	
+</block>
+</html>

@@ -1,0 +1,187 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+
+<body class="body-bgColor">
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title"><if condition="!$address['id']">新添地址<else/>修改地址</if></div>
+        <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+        <div class="header-right"></div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="content">
+
+    <form action="" name="" method="post">
+        <input name="id"  value="{$address['id']}" type="hidden">
+        <div class="location-form">
+            <ul class="location-form-ul">
+                <li class="location-form-li">
+                    <div class="location-form-inner row-box">
+                        <div>
+                            <div class="location-form-left">收货人：</div>
+                        </div>
+                        <div class="row-flex">
+                            <div class="location-form-input">
+                                <div class="vertical-auto" style="width: 100%;"><input name="shperson" value="{$address['shperson']}" type="text" placeholder="请输入收货人姓名"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="location-form-li">
+                    <div class="location-form-inner row-box">
+                        <div>
+                            <div class="location-form-left">手机号码：</div>
+                        </div>
+                        <div class="row-flex">
+                            <div class="location-form-input">
+                                <div class="vertical-auto" style="width: 100%;"><input name="mobile" value="{$address['mobile']}" type="number" placeholder="请输入手机号码"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="location-form-li">
+                    <div class="location-form-inner row-box">
+                        <div>
+                            <div class="location-form-left">所在地区：</div>
+                        </div>
+                        <div class="row-flex">
+                            <div class="location-form-input">
+                                <div class="vertical-auto" style="width: 100%;">
+                                    <input name="region" value="{$address['region']}" class="form-input-celect" id="demo1" type="text" readonly placeholder="请选择所在地区！"  value="{$address['region']}"/>
+                                    <input id="value1" type="hidden" value="20,234,504"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="location-form-li">
+                    <div class="location-form-inner row-box">
+                        <div>
+                            <div class="location-form-left">详细地址：</div>
+                        </div>
+                        <div class="row-flex">
+                            <div class="location-form-input">
+                                <div class="vertical-auto" style="width: 100%;"><input name="address" value="{$address['address']}" type="text" placeholder="请输入详细地址"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="location-form-li">
+                    <div class="location-form-inner row-box">
+                        <div>
+                            <div class="default-location">设置默认地址</div>
+                        </div>
+                        <div class="row-flex">
+                            <div class="set-location">
+                                <div class="set-location-input" >
+                                    <input name="is_default" type="checkbox" value="1" id="switch">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="submit-button"><button type="button">保存</button></div>
+    </form>
+
+</div>
+<!--content-->
+
+<!--footer-->
+<!--footer-->
+
+<link rel="stylesheet" href="__MB__css/LArea.css">
+<script src="__MB__js/LArea.js"></script>
+<script src="__MB__js/LAreaData1.js"></script>
+<script src="__MB__js/LAreaData2.js"></script>
+<script>
+    //选择地区
+    var area1 = new LArea();
+    area1.init({
+        'trigger': '#demo1',
+        'valueTo': '#value1',
+        'keys': {
+            id: 'id',
+            name: 'name'
+        },
+        'type': 1,
+        'data': LAreaData
+    });
+</script>
+<script>
+    //默认地址
+    var status  = "{$address['is_default']}";
+    $('#switch').click(function(){
+        var _this=$(this);
+        if(!$('.set-location').hasClass('active')){
+            _this.val(1);
+            $(".set-location-input").animate({
+                "left":"0.4rem"
+            }, 300);
+            $('.set-location').addClass("active");
+        }else{
+            _this.val(0);
+            $(".location-form-dot").animate({
+                "left":"0.1rem"
+            },300);
+            $(".set-location").removeClass("active");
+        }
+    })
+    if(status==1){
+        $("#switch").click();
+    }
+
+    //验证
+    $(".submit-button button").click(function(){
+        // var reg_mobile = /^1[3|4|5|8|7][0-9]\d{4,8}$/;
+
+        if(!$('input[name="shperson"]').val()){
+            layer.msg($('input[name="shperson"]').attr('placeholder'),{icon:0,time:1000})
+            return false;
+        }
+        if(!$('input[name="mobile"]').val()){
+            layer.msg($('input[name="mobile"]').attr('placeholder'),{icon:0,time:1000})
+            return false;
+        }
+        if(!$('input[name="region"]').val()){
+            layer.msg($('input[name="region"]').attr('placeholder'),{icon:0,time:1000})
+            return false;
+        }
+        if(!$('input[name="address"]').val()){
+            layer.msg($('input[name="address"]').attr('placeholder'),{icon:0,time:1000})
+            return false;
+        }
+
+        var data = $("form").serialize();
+        // var aaaa=$('.set-location').attr('class').indexOf('active') > 0;
+        // var status =aaaa?1:0;
+        $.ajax({type:"post",url:"{:U('address/add_location')}",async:false,
+            data:data,success:function(res) {
+                if (res.err_code == 0) {
+                    layer.msg(res.err_msg,{icon:1,time:1000},function(){
+                        location.href = res.uri;
+                    })
+                } else {
+                    layer.msg(res.err_msg,{icon:0,time:1000})
+                }
+            }
+        });
+
+    })
+</script>
+</body>
+</block>
+</html>

@@ -1,0 +1,34 @@
+<div class="pad_lr_10">
+	<form id="info_form" name="info_form" action="{:u('Order/send')}" method="post">
+		<div class="mb10">
+			<label for="" class="cor777">快递公司：</label>
+			<input type="text" name="express_company" placeholder="快递公司名称" />
+		</div>
+		<div class="mb10">
+			<label for="" class="cor777">快递单号：</label>
+			<input type="text" name="express_num" id="express_num" placeholder="快递单号"/>
+		</div>
+		<input type="hidden" name="id" value="{$id}">
+	</form>
+</div>
+<script>
+    $(function(){
+        $.formValidator.initConfig({formid:"info_form",autotip:true});
+        $("#express_num").formValidator({onshow:'请输入快递单号', onfocus:'请输入快递单号'}).inputValidator({ min:6, max:20, onerror:'请输入6-20位的快递单号'});
+        $('#info_form').ajaxForm({success:complate,dataType:'json'});
+        function complate(result){
+            if(result.status == 1){
+                $.pinphp.tip({content:result.msg});
+                setTimeout(function () {
+                    window.location.reload();
+                },1000)
+                // $.dialog.get(result.dialog).close();
+                // $.pinphp.tip({content:result.msg});
+                // window.location.reload();
+
+            } else {
+                $.pinphp.tip({content:result.msg, icon:'alert'});
+            }
+        }
+    });
+</script>

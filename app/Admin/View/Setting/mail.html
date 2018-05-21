@@ -1,0 +1,30 @@
+<include file="Public:header" />
+<!--邮件服务器设置-->
+<div class="common-form pad_lr_10">
+	<div class="box-title">
+		运费设置
+	</div>
+	<form id="info_form" action="{:u('setting/edit')}" method="post">
+		<ul class="yunfeilist">
+			<li>
+				<input type="radio" name="yunfei"/>免运费
+			</li>
+			<li>
+				<input type="radio" name="yunfei" />每笔订单，收固定运费
+				<input type="text" class="numtext"/>元
+			</li>
+			<li>
+				<input type="radio" name="yunfei"/>每笔订单消费满
+				<input type="text" class="numtext"/>元免运费，未达到条件的每笔订单收取
+				<input type="text" class="numtext"/>元运费
+			</li>
+			<li>
+				<input type="button" class="btn w150" value="保存"/>
+			</li>
+		</ul>
+	</form>
+</div>
+<include file="Public:footer" />
+ 
+</body>
+</html>

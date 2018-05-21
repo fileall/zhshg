@@ -1,0 +1,150 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">商品评价</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right y-header-right"><a id="sub" class="y-color-999">提交</a></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<form>
+		<volist name="goods" id="good">
+		<div class="content y-bg-white">
+		    <div class="y-orderComment-title jus-ali">
+		    	<div class="y-orderComment-title-img">
+		    		<img class="w100" src="{:attach($good['img'],'item')}"/>
+		    	</div>
+				<input type="hidden" class="id" value="{$good['item_id']}">
+		    	<div class="font-28 y-mar-left20 flex1">商品评分</div>
+		    	<div class="row-flex">
+                    <div class="discuss-group">
+                        <div class="discuss-star active"><i class="fa fa-star"></i></div>
+                        <div class="discuss-star active"><i class="fa fa-star"></i></div>
+                        <div class="discuss-star active"><i class="fa fa-star"></i></div>
+                        <div class="discuss-star active"><i class="fa fa-star"></i></div>
+                        <div class="discuss-star active"><i class="fa fa-star"></i></div>
+                        <div class="clear-float"></div>
+                    </div>
+                </div>
+		    </div>
+		    <div class="orderSales-input y-width94">
+                <textarea class="orderSales-input-text y-border-top" placeholder="宝贝满足你的期待吗？请说说吧"></textarea>
+                <div class="orderSales-input-img flex flex-warp">
+                    <!--<div class="uploadimg y-border-dashed">-->
+                        <!--<input type="file" class="file" accept="image/*" multiple="multiple"/>-->
+						<!--<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">-->
+							<!--<legend>上传多张图片</legend>-->
+						<!--</fieldset>-->
+
+						<div class="layui-upload flex">
+							<img src="__MB__images/y_icon59.png"  class="uploadimg  " />
+							<!--<button type="button" class="uploadimg layui-btn " ></button>-->
+							<div class="layui-upload-list flex mar-none" id="demo2"></div>
+
+							<!--<blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+    							
+							</blockquote>-->
+						</div>
+                        <!--<img src="__MB__images/y_icon59.png" />-->
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="y-orderComment-bottom">
+            	<label class="y-order-label">
+                    <div class="niname-left ali-cen">
+                        <div class="niname-input active niming"><input name="niname" type="checkbox"  id="{$good['item_id']}" checked="checked"></div>
+                        <div class="niname-txt">匿名</div>
+                    </div>
+                    <div class="niname-right">你写的评价会以匿名的形式展现</div>
+                    <div class="clear-float"></div>
+                </label>
+            </div>
+		</div>
+		</volist>
+		</form>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>
+<block name="footer"></block>
+<block name="script">
+<script>
+    $('.y-order-label').click(function(){
+            $(this).attr('for',$(this).find('input').attr('id'))
+            $(this).unbind('click');
+	})
+
+	layui.use('upload', function(){
+        var $ = layui.jquery
+            ,upload = layui.upload;
+    //多图片上传
+    upload.render({
+        elem: '.uploadimg'
+        ,url: "?s=/Orderlist/sub_image"
+        ,multiple: true
+        ,before: function(obj){
+            //预读本地文件示例，不支持ie8
+            var index0 = $('img.uploadimg').index(this.item[0]);
+            obj.preview(function(index, file, result){
+                var demo2=$('.layui-upload-list').eq(index0);
+                demo2.append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img evaluate-img-tier">')
+            });
+        }
+        ,done: function(res){
+            //上传完毕
+			var item = this.item;
+			item.after('<input type="hidden" class="comment-img" value="'+res.path+'" />');
+        }
+    });})
+</script>
+<script>
+    $('#sub').click(function () {
+        var data = new Array();
+         $(".content.y-bg-white").each(function () {
+			var  comment= $(this).find(".discuss-group").find(".active").length,
+				 msg = $(this).find(".orderSales-input-text.y-border-top").val(),
+				 item_id = $(this).find(".id").val(),
+				 niming = $(this).find("#niname").prop(":checked"),
+				order_id = '{$order_id}',
+				 arr = new Array();
+             $(this).find(".comment-img").each(function () {
+				   arr.push($(this).val());
+             })
+			 data.push({'order_id':order_id,'comment':comment,'msg':msg,'item_id':item_id,'niming':niming,'comment_img':arr});
+         })
+        $(".orderSales-input-text-group").each(function () {
+            // console.log($(this).find(".active").length);
+            $(this).find(".active").length;
+        })
+       // var data=$('form').serialize();
+        $.ajax({
+            type:'post',
+            url:'{:U("Orderlist/y_orderComment")}',
+            data:{data:data},
+            dataType:'json',
+            success:function(msg){
+                if(msg.status == 1){
+                    layer.msg(msg['msg'],{time:1000},function(){
+                        location.href = "{:U('Index/index')}";
+                    });
+                }else{
+                    layer.msg(msg['msg'],{time:1000});
+                }
+            }
+        })
+    })
+</script>
+</block>
+</html>

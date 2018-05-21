@@ -1,0 +1,103 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+<!--元宝充值选择金额界面-->
+<body>
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">元宝购买</div>
+        <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+        <div class="header-right"></div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="content">
+    <div>
+        <div class="merchant-form y-merchant-form row-box y-bg-white" style="margin-top: 0;">
+            <div class="merchant-currency font-32">充值金额：</div>
+            <div class="row-flex">
+                <div class="merchant-form-input vertical-center">
+                    <div class="vertical-auto" style="width: 100%;">
+                        <input class="font-32" type="number" placeholder="请输入充值金额" id="price">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="y-bg-white y-goldBuy y-width94">
+            <p class="y-color-999 font-32">选择充值金额</p>
+            <ul class="buy-ul y-mar-top20 jus-bet flex-warp">
+                <volist name="list" id="val">
+                    <li class="y-buy-li">
+                        <p class="font-32" data-value="{$val.money}">{$val.money}元</p>
+                        <p class="font-28">送{$val.send_coin}银币</p>
+                    </li>
+                </volist>
+            </ul>
+            <div class="submit-button y-goldBuy-button"><a>立即购买</a></div>
+        </div>
+    </div>
+
+</div>
+<!--content-->
+
+</body>
+</block>
+
+<block name="footer"></block>
+
+<block name="script">
+    <script>
+
+        $('.y-buy-li').click(function(){
+            var price = $(this).find('p[class="font-32"]').data('value');
+            $('#price').val(price);
+
+        });
+
+
+
+        //点击购买
+        $('.submit-button.y-goldBuy-button').click(function(){
+            var price = $('#price').val();
+
+            if(!price){
+                layer.msg('请填写金额！',{icon:0,time:1000})
+                return false;
+            }
+
+            if(price < 0){
+                layer.msg('金额不能为负数！',{icon:0,time:1000})
+                return false;
+            }
+            var zs= /^[1-9]*[1-9][0-9]*$/;
+            if(!zs.test(price)){
+                layer.msg('请填写整数！',{icon:0,time:1000})
+                return false;
+            }
+
+            $.post('{:U("wallet/make_order_recharge")}',{price:price},function(d){
+                if(d.status ==1){
+                      window.location.href=d.url;
+                }else{
+                    layer.msg(d.msg);
+                }
+
+            })
+        })
+
+        $(".y-buy-li").click(function(){
+            $(this).addClass("y-buy-li-select").siblings().removeClass("y-buy-li-select")
+        })
+
+        //聚焦时候 去掉按钮样式
+        $('#price').focus(function(){
+            $('.y-buy-li').removeClass("y-buy-li-select")
+        })
+    </script>
+</block>
+</html>

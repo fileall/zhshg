@@ -1,0 +1,399 @@
+<extend name="Base/common"/> 
+<block name="header">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">注册</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+</block>
+		
+		<block name="body">
+		<!--content-->
+		<div class="content">
+			<div class="enter-form">
+			  <form action="" method="post" class="login-form">
+				<ul class="enter-form-ul">
+					<li class="enter-form-li row-box">
+						<div class="enter-form-left">
+							<div class="enter-form-icon"><i class="fa fa-user-o"></i></div>
+						</div>
+						
+						<div class="enter-form-right row-flex">
+							<div class="enter-form-input vertical-center">
+								<div class="vertical-auto" style="width: 100%;"><input id="relation_id" type="" name="relation_id" placeholder="请输入推荐人手机" value="{$tjr_id}"></div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="enter-form-li row-box">
+						<div class="enter-form-left">
+							<div class="enter-form-icon"><i class="fa fa-map-marker"></i></div>
+						</div>
+						
+						<div class="enter-form-right row-flex">
+							<!--地址-->
+							<div class="area-box">
+							<select class="J_cate_place_select mr10" data-pid="0" data-uri="{:U('Login/ajax_getPlace')}" data-selected="{$spid}"></select>
+			          	<input type="hidden" name="address" id="J_pid" />
+
+							</div>
+						</div>
+					</li>
+					
+					<li class="enter-form-li row-box">
+						<div class="enter-form-left">
+							<div class="enter-form-icon"><i class="fa fa-tablet"></i></div>
+						</div>
+						
+						<div class="enter-form-right row-flex">
+							<div class="enter-form-input vertical-center">
+								<div class="vertical-auto" style="width: 100%;"><input type="number"  id="mobile" name="mobile" placeholder="请输入手机号"></div>
+							</div>
+						</div>
+					</li>
+					
+					
+					<!--<li class="enter-form-li row-box">
+						<div class="enter-form-left">
+							<div class="enter-form-icon"><i class="fa fa-hdd-o"></i></div>
+						</div>-->
+						
+						<!--<div class="enter-form-right row-flex">
+							<div class="enter-form-input vertical-center">
+								<div class="vertical-auto" style="width: 100%;"><input name="yzm_code" id="yzm_code" type="" placeholder="请输入图形验证码"></div>
+							</div>
+						</div>-->
+						
+						<!--<div class="enter-form-verify">
+							<div class="verification-input" style="background-color: #fff;">
+								<img id="click_yzm" src="verifyImg"  onclick="this.src='__URL__/verifyImg/'+Math.random()" alt="" />
+								<!--<img src="__MB__images/0.gif">-->
+							<!--</div>
+						</div>
+					</li>-->
+					
+					<li class="enter-form-li row-box">
+						<div class="enter-form-left">
+							<div class="enter-form-icon"><i class="fa fa-hdd-o"></i></div>
+						</div>
+						
+						<div class="enter-form-right row-flex">
+							<div class="enter-form-input vertical-center">
+								<div class="vertical-auto" style="width: 100%;"><input id="m_code" type="number" name="code" placeholder="请输入验证码"></div>
+							</div>
+						</div>
+						
+						<div class="enter-form-verify">
+							<div class="verification-input">
+								<input type="button" class="verification" value="获取验证码">
+							</div>
+						</div>
+					</li>
+					
+					<li class="enter-form-li row-box">
+						<div class="enter-form-left">
+							<div class="enter-form-icon"><i class="fa fa-lock"></i></div>
+						</div>
+						
+						<div class="enter-form-right row-flex">
+							<div class="enter-form-input vertical-center">
+								<div class="vertical-auto" style="width: 100%;"><input id="password" type="password" name="password" placeholder="请新输入密码"></div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="enter-form-li row-box">
+						<div class="enter-form-left">
+							<div class="enter-form-icon"><i class="fa fa-lock"></i></div>
+						</div>
+						
+						<div class="enter-form-right row-flex">
+							<div class="enter-form-input vertical-center">
+								<div class="vertical-auto" style="width: 100%;"><input id="pass" type="password" name="confirm_password" placeholder="再次新输入密码"></div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				
+				<div class="enter-btn">
+				<!--	<button class="open-succeed-win" type="button">注册</button>-->
+					 <button class="login-btn" type="submit">
+注册
+                            </button>
+                            <div class="check-tips"></div>
+				</div>
+				
+				<div class="enter-bottom-link">
+					<div class="enroll-deal-switch">
+						<label for="deal">
+							<div class="enroll-deal-input active">
+								<input type="checkbox" checked="checked" id="deal">
+								<i class="fa fa-check-circle"></i>
+							</div>
+						</label>
+						<div class="enroll-deal-ok active">同意</div>
+					</div>
+					<a class="enter-bottom-pass active" href="protocol.html">《用户协议》</a>
+					<a class="enter-bottom-enroll" href="{:U('Login/enter')}">已有账号<span>请登录</span></a>
+					<div class="clear-float"></div>
+				</div>
+				</form>
+			</div>
+		</div>
+		<!--content-->
+		
+		<!--注册成功弹窗-->
+		<div class="succeed-win">
+			<div class="succeed-inner-box vertical-center">
+				<div class="vertical-auto" style="width: 100%;">
+					<div class="succeed-content">
+						<div class="succeed-win-title">注册成功！</div>
+						<div class="succeed-win-text">
+							恭喜你注册成功，您可以立即登录或完善资料成为商家
+						</div>
+						<div class="succeed-win-a">
+							<a class="succeed-win-link" href="{:U('Login/enter')}">立即登录</a>
+							<a class="succeed-win-link two" href="personage.html">完善资料</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--注册成功弹窗-->
+		
+		</block>
+			<block name="footer"></block>
+			<block name="script">
+ <script>	
+			   	/* 表单获取焦点变色 */
+    	$(".login-form").on("focus", "input", function(){
+            $(this).closest('.item').addClass('focus');
+        }).on("blur","input",function(){
+            $(this).closest('.item').removeClass('focus');
+        });
+        
+//注册  表单提交验证
+$('form').submit(function(){
+//	var eg = /^(?![0-9]*$)[a-zA-Z0-9]{6,20}$/;
+//	if(!$('#relation_id').val()){
+//		layer.msg('请填写推荐码！',{icon:0,time:1000})
+//		return false;
+//	}
+
+	if(!$('#mobile').val()){
+		layer.msg('请填写手机号码！',{icon:0,time:1000})
+		return false;
+	}
+	var reg = /1[3|4|5|7|8][0-9]{9}/;//手机格式
+	if(!reg.test($('#mobile').val())){
+		layer.msg('手机号码格式不正确！',{icon:0,time:1000})
+		return false;
+	}
+	
+//	if(!$('#yzm_code').val()){
+//		layer.msg('请填写图形验证码！',{icon:0,time:1000})
+//		return false;
+//	}
+	if(!$('#m_code').val()){
+		layer.msg('请填写手机验证码！',{icon:0,time:1000})
+		return false;
+	}
+	
+	if(!$('#password').val()){
+		layer.msg('请填写密码！',{icon:0,time:1000})
+		return false;
+	}
+//	if(!eg.test($('#password').val())){
+//		layer.msg('密码格式为6-20位字母数字,不能是纯数字！',{icon:0,time:1000})
+//		return false;
+//	}
+	if($('#password').val() != $('#pass').val()){
+		layer.msg('两次输入密码不一致！',{icon:0,time:1000})
+		return false;
+	}
+	
+	var data = $(this).serialize(); 	
+	
+	//点击注册  开始后台验证
+	$.post('{:U("login/register")}',data,function(d){
+		if(d.status==1){
+			 layer.msg(d.msg, {
+			 	icon:1,
+			    time: 20000, //20s后自动关闭
+			    btn: ['好的!']
+			 },function(){
+			  	window.location.href='{:U("member/mine")}';
+			  });
+		}else{
+			layer.msg(d.msg,{icon:0,time:2000})
+		}
+	},"JSON")
+	return false;
+})    
+
+//注册   点击获取手机验证码  前的验证
+$('.verification').click(function(){	
+	var reg = /1[3|4|5|7|8][0-9]{9}/;
+	if(!reg.test($('#mobile').val())){
+		layer.msg('手机格式不正确！',{icon:0,time:1000})
+		return false;
+	}
+	
+	$.post("{:U('login/aa')}",{mobile:$('#mobile').val()},function(d){
+		if(d.status==1){
+			layer.msg(''+d.msg+'',{icon:1,time:2000},function(){
+				de_time();//倒计时
+			})
+			
+		}else{
+			layer.msg(''+d.msg+'',{icon:2,time:1000})
+		}
+	
+	},"JSON")
+	
+})   
+ //倒计时
+var t = 60;
+function de_time(){
+	if(t > 0){
+		t--;    
+		$('.verification').val(''+t+'秒').attr('disabled',true);
+		setTimeout('de_time()',1000);  
+
+	} else {
+		t=60;
+//		$('.verification').css('background-color','#D91023');
+//		$('.verification').css('border',' none');
+		$('.verification').val('获取验证码');
+		$('.verification').attr('disabled',false);
+	}
+}	    
+
+//获取验证码倒计时
+//var COUNTDOWN = 60;//计时
+//function settime(obj){
+//  if (COUNTDOWN == 0) {    
+//      obj.value="获取验证码";
+//      COUNTDOWN = 60; 
+//      return;
+//  }else{ 
+//      obj.value = COUNTDOWN + "秒"; 
+//      COUNTDOWN--;
+//  }
+//	setTimeout(function(){settime(obj)},1000); 
+//}
+
+//$(".verification").click(function(){
+//	if($(this).val() != "获取验证码"){
+//		return false;
+//	}else{
+//		settime(this);
+//	}
+//});
+
+</script>
+<script src="/theme/admin/js/jquery/jquery.js"></script>
+ <script>
+			 
+;(function($){
+//	$('#click_yzm').click();
+	//是否已登录
+	var is_login = '{:is_login()}';
+	
+	if(is_login != 0){
+		var conf = confirm('检测到您已登录,是否登录？');
+		if(conf){
+			window.location.href='{:U("member/mine")}';
+		}
+//		layer.confirm('检测到您已登录,是否登录？', {
+//			btn: ['是的','取消'] //按钮
+//		}, function(){
+//			window.location.href='{:U("member/mine")}';
+//		})
+	}
+	//是否带有推荐码
+//	var tjr_id = '{$tjr_id}';
+//	if (tjr_id !== '') { 
+//		layer.msg('您的推荐码为:'+tjr_id+'已自动为您填入',{icon:6,time:1000})
+//	}
+//	
+    //联动菜单
+    $.fn.cate_select = function(options) {
+        var settings = {
+            target_class:options.target_class?options.target_class:'J_cate_select',
+            field: 'J_cate_id',
+            top_option: lang.please_select,
+        };
+        if(options) {
+            $.extend(settings, options);
+        }
+
+        var self = $(this),
+            pid = self.attr('data-pid'),
+            uri = self.attr('data-uri'),
+            selected = self.attr('data-selected'),
+            selected_arr = [];
+        if(selected != undefined && selected != '0'){
+        	if(selected.indexOf('|')){
+        		selected_arr = selected.split('|');
+        	}else{
+        		selected_arr = [selected];
+        	}
+        }
+        //self.nextAll('.J_cate_select').remove();
+        self.nextAll('.'+settings.target_class).remove();
+        $('<option value="">--'+settings.top_option+'--</option>').appendTo(self);
+        $.getJSON(uri, {id:pid}, function(result){
+            if(result.status == '1'){
+                for(var i=0; i<result.data.length; i++){
+                $('<option value="'+result.data[i].id+'">'+result.data[i].name+'</option>').appendTo(self);
+                }
+            }
+            if(selected_arr.length > 0){
+            	//IE6 BUG
+            	setTimeout(function(){
+            		self.find('option[value="'+selected_arr[0]+'"]').attr("selected", true);
+	        		self.trigger('change');
+            	}, 1);
+            }
+        });
+
+        var j = 1;
+        $('.'+settings.target_class).die('change').live('change', function(){
+            var _this = $(this),
+            _pid = _this.val();
+            _this.nextAll('.'+settings.target_class).remove();
+            if(_pid != ''){
+                $.getJSON(uri, {id:_pid}, function(result){
+                    if(result.status == '1'){
+                        var _childs = $('<select class="'+settings.target_class+' mr10" data-pid="'+_pid+'"><option value="">--'+settings.top_option+'--</option></select>')
+                        for(var i=0; i<result.data.length; i++){
+                            $('<option value="'+result.data[i].id+'">'+result.data[i].name+'</option>').appendTo(_childs);
+                        }
+                        _childs.insertAfter(_this);
+                        if(selected_arr[j] != undefined){
+                        	//IE6 BUG
+                        	//setTimeout(function(){
+			            		_childs.find('option[value="'+selected_arr[j]+'"]').attr("selected", true);
+				        		_childs.trigger('change');
+			            	//}, 1);
+			            }
+                        j++;
+                    }
+                });
+                $('#'+settings.field).val(_pid);
+            }else{
+            	$('#'+settings.field).val(_this.attr('data-pid'));
+            }
+        });
+    }
+})(jQuery);
+//开启关闭
+		 $('.J_cate_place_select').cate_select({top_option:'-请选择-',field:'J_pid',target_class:'J_cate_place_select'}); //分类联动
+		 </script>
+	</block>

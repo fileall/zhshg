@@ -1,0 +1,55 @@
+<!--编辑角色-->
+<div class="dialog_content">
+	<form id="info_form" name="info_form" action="{:u('withdraw/edit')}" method="post">
+    <table width="100%" class="table_form">
+        <tr>
+            <th width="80">订单号 :</th>
+            <td><input type="text" name="order_id" id="order_id" class="input-text" value="{$info.order_id}"></td>
+        </tr>
+        <tr>
+            <th width="80">提现金额 :</th>
+            <td><input type="text" name="amount" id="amount" class="input-text" value="{$info.amount}"></td>
+        </tr>
+        <tr>
+            <th>提款方式 :</th>
+            <td>
+                <volist name="withdraw_type" id="val">
+                <input type="radio" name="withdraw_type" class="radio_style" value="{$key}" <if condition="$info.withdraw_type eq $key"> checked="checked"</if>> &nbsp;{$val}&nbsp;&nbsp;&nbsp;
+                </volist>
+            </td>
+        </tr>
+        <tr>
+            <th width="80">提现帐号 :</th>
+            <td><input type="text" class="input-text" value="<if condition="$info['withdraw_type'] eq 1">{$info.account}<else />{$info.card_number}</if>" readonly="true" size="40"></td>
+        </tr>
+
+        <tr>
+            <th>状态 :</th>
+            <td>
+                <volist name="withdrawal_status" id="val">
+                    <input type="radio" name="status" class="radio_style" value="{$key}" <if condition="$info.status eq $key"> checked="checked"</if>> &nbsp;{$val}&nbsp;&nbsp;&nbsp;
+                </volist>
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" name="id" id="id" value="{$info.id}" />
+    </form>
+</div>
+<script src="__PUBLIC_ADMIN__js/fileuploader.js"></script>
+<script>
+$(function(){
+    $.formValidator.initConfig({formid:"info_form",autotip:true});
+    $("#name").formValidator({ onshow:lang.please_input+lang.role_name, onfocus:lang.please_input+lang.role_name, oncorrect:lang.input_right}).inputValidator({ min:1, onerror:lang.please_input+lang.role_name}).defaultPassed();
+
+    $('#info_form').ajaxForm({success:complate,dataType:'json'});
+    function complate(result){
+        if(result.status == 1){
+            $.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'});
+        }
+    }
+})
+</script>

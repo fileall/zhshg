@@ -1,0 +1,51 @@
+
+<div class="dialog_content">
+	<form id="info_form" name="info_form" action="{:u('invest/edit')}" method="post">
+    <table width="100%" class="table_form">
+        <tr>
+            <th width="80">投资人 :</th>
+            <td><input type="text"  class="input-text" value="{$info.nickname}" disabled="disabled"></td>
+        </tr>
+        <tr>
+            <th width="80">投资项目 :</th>
+            <td><input type="text" class="input-text" value="{$info.title}" size="50" disabled="disabled"></td>
+        </tr>
+        <tr>
+            <th width="80">投资金额 :</th>
+            <td><input type="text" name="invest_amount" id="invest_amount" class="input-text" value="{$info.invest_amount}"></td>
+        </tr>
+        <tr>
+            <th>投资时间 :</th>
+            <td><input type="text" name="create_time" class="input-text" size="25" value="{:date('Y-m-d H:i:s',$info['create_time'])}" id="J_create_time"></td>
+        </tr>
+
+    </table>
+    <input type="hidden" name="id" id="id" value="{$info.id}" />
+    </form>
+</div>
+<script src="__PUBLIC_ADMIN__js/fileuploader.js"></script>
+<link rel="stylesheet" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script src="__STATIC__/js/calendar/calendar.js"></script>
+<script>
+    Calendar.setup({
+        inputField : "J_create_time",
+        ifFormat   : "%Y-%m-%d %H:%M:%S",
+        showsTime  : true,
+        timeFormat : "24"
+    });
+$(function(){
+    $.formValidator.initConfig({formid:"info_form",autotip:true});
+    $("#name").formValidator({ onshow:lang.please_input+lang.role_name, onfocus:lang.please_input+lang.role_name, oncorrect:lang.input_right}).inputValidator({ min:1, onerror:lang.please_input+lang.role_name}).defaultPassed();
+
+    $('#info_form').ajaxForm({success:complate,dataType:'json'});
+    function complate(result){
+        if(result.status == 1){
+            $.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'});
+        }
+    }
+})
+</script>

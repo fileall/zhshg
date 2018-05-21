@@ -1,0 +1,87 @@
+<include file="Public/top" />
+
+<!--关于我们-->
+<div class="bgf0f3f5">
+	<div class="about wrap clear">
+	    <div class="left-menu">
+	        <h3 class="left-menu-title">{$cate_info['name']}</h3>
+	        <ul class="list">
+	            <volist name="cate_list" id="val">
+	                <li class="<if condition="$er_info['id'] eq $val['id']">active</if>">
+	                    <a href="{:U('Index/about',array('id'=>$cate_info['id'],'cate_id'=>$val['id']))}">{$val['name']}</a>
+	                </li>
+	            </volist>
+				<li><a href="{:U('Index/service')}">售后服务</a></li>
+	        </ul>
+	    </div>
+	    <div class="right-con about-envir-con">
+	        <if condition="$san_list">
+	            <div class="title about-techers-tab">
+	                <volist name="san_list" id="val">
+	                    <a href="{:U('Index/about',array('cate_id'=>$er_info['id'],'san_id'=>$val['id']))}" class="hover-blue <if condition="$san_id eq $val['id']">active</if>">{$val['name']}</a>
+	                </volist>
+	                <!--<a href="javascript:;" class="hover-blue">家庭教育指导</a>-->
+	                
+	            </div>
+	            <div class="font">
+	                <div class="about-techers-box">
+	                    <ul class="about-techers-list clear">
+	                        <volist name="at_list" id="val">
+	                            <li class="item">
+	                                <a href="{:U('Index/news_details',array('id'=>$val['id'],'type'=>'about'))}">
+	                                    <div class="about-techers-img">
+	                                        <img src="{:attach($val['img'],'article')}" alt="" >
+	                                    </div>
+	                                    <p>{$val['title']}</p>
+	                                </a>
+	                            </li>
+	                        </volist>
+	                    </ul>
+	                    <!--分页-->
+	                    <div class="l-page">
+	                        {$page}
+	                    </div><!--分页-end-->
+	                </div>
+	                <!--<div class="about-techers-box hide">2</div>-->
+	            </div>
+	        <else />
+	            <h3 class="title">{$er_info['name']}</h3>
+	            <div class="font">
+	                <if condition="count($at_list) gt 1">
+	                    <!--办公环境列表-->
+	                    <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3  am-gallery-default" data-am-gallery="{ pureview: true }" >
+	                        <volist name="at_list" id="val">
+	                            <li>
+	                                <div class="am-gallery-item">
+	                                    <div class="about-envir-con-img">
+	                                        <img src="{:attach($val['img'],'article')}"  alt="{$val['title']}" title="点击查看大图"/>
+	                                    </div>
+	                                    <h3 class="am-gallery-title">{$val['title']}</h3>
+	                                </div>
+	                            </li>
+	                        </volist>
+	                    </ul>
+	
+	                    <!--分页-->
+	                    <div class="l-page">
+	                        {$page}
+	                    </div><!--分页-end-->
+	                <else />
+	                    {:code2html($at_list[0]['info'])}
+	                </if>
+	            </div>
+	        </if>
+	    </div>
+	</div>
+</div>	
+<!--关于我们-end-->
+<include file="Public/footer" />
+<!--公共底部-->
+
+<!--公共底部-end-->
+<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PC__js/l_main.js"></script>
+<script src="__PC__plugins/amaze/assets/js/amazeui.min.js" type="text/javascript" charset="utf-8"></script>
+
+</body>
+</html>

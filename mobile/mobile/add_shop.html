@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<title></title>
+		<script src="js/fontSize.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/custom.js"></script>
+	</head>
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">商品加入</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<ul class="add-shop-ul">
+				<li class="add-shop-li row-box">
+					<div class="add-shop-name">商铺名称</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;"><input type="text" placeholder="请输入商铺名称"></div>
+						</div>
+					</div>
+				</li>
+				
+				<li class="add-shop-li row-box">
+					<div class="add-shop-name">推荐人</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;"><input type="text" placeholder="请输入推荐人"></div>
+						</div>
+					</div>
+				</li>
+				
+				<li class="add-shop-li row-box">
+					<div class="add-shop-name">商铺类型</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;">
+								<select name="" id="">
+									<option value="">请选择</option>
+									<option value="">餐饮</option>
+									<option value="">服装</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</li>
+				
+				<li class="add-shop-li row-box">
+					<div class="add-shop-name">商品分类</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;">
+								<select name="" id="">
+									<option value="">请选择</option>
+									<option value="">餐饮</option>
+									<option value="">服装</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</li>
+				
+				<li class="add-shop-li row-box">
+					<div class="add-shop-name">营业时间</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;"><input class="time"U type="time" placeholder="请选择时间"></div>
+						</div>
+					</div>
+					
+					<div class="add-shop-time">至</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;"><input class="time" type="time" placeholder="请选择时间"></div>
+						</div>
+					</div>
+				</li>
+				
+				<li class="add-shop-li row-box">
+					<div class="add-shop-name">所在地区</div>
+					<div class="row-flex">
+						<div class="enter-form-input">
+							<div class="vertical-auto" style="width: 100%;">
+								<input class="form-input-celect" id="demo1" type="text" readonly="" placeholder="请选择所在地区！" value="">
+	            				<input id="value1" type="hidden" value="20,234,504">
+							</div>
+						</div>
+					</div>
+					
+				</li>
+				
+				<li class="add-shop-li row-box">
+					<div class="add-shop-name">详细地址</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;"><input type="text" placeholder="请输入详细地址"></div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		
+			<div class="add-shop-map">
+				<div class="map-box" id="map"></div>
+			</div>
+			
+			<div class="add-shop-message">
+				<div class="add-shop-message-name">商铺简介</div>
+				<div class="add-shop-message-txt">
+					主要经营茶水类，有红茶、绿茶、白茶、普洱茶、龙井、毛尖等多种商品。并提供卡座包间等多种服务。有经验丰富的茶艺师为你服务。
+				</div>
+				
+				<div class="add-shop-message-name">商铺简介<span>(最多上传8张)</span></div>
+				<div class="discuss-wrap">
+					<div class="evaluate-wrap-box">
+						<div class="evaluate-img-tier">
+							<input type="file">
+							<div class="add-img-icon"><i class="fa fa-camera"></i></div>
+						</div>
+						
+						<div class="evaluate-img-tier close-event vertical-center">
+							<div class="vertical-auto"><img src="images/img.jpg"></div>
+							<div class="close-evaluate"><i class="fa fa-close"></i></div>
+						</div>
+						
+						<div class="evaluate-img-tier close-event vertical-center">
+							<div class="vertical-auto"><img src="images/img.jpg"></div>
+							<div class="close-evaluate"><i class="fa fa-close"></i></div>
+						</div>
+						
+						<div class="evaluate-img-tier close-event vertical-center">
+							<div class="vertical-auto"><img src="images/img.jpg"></div>
+							<div class="close-evaluate"><i class="fa fa-close"></i></div>
+						</div>
+						
+						<div class="evaluate-img-tier close-event vertical-center">
+							<div class="vertical-auto"><img src="images/img.jpg"></div>
+							<div class="close-evaluate"><i class="fa fa-close"></i></div>
+						</div>
+						
+						<div class="evaluate-img-tier close-event vertical-center">
+							<div class="vertical-auto"><img src="images/img.jpg"></div>
+							<div class="close-evaluate"><i class="fa fa-close"></i></div>
+						</div>
+						
+						<div class="evaluate-img-tier close-event vertical-center">
+							<div class="vertical-auto"><img src="images/img.jpg"></div>
+							<div class="close-evaluate"><i class="fa fa-close"></i></div>
+						</div>
+						
+						<div class="evaluate-img-tier close-event vertical-center">
+							<div class="vertical-auto"><img src="images/img.jpg"></div>
+							<div class="close-evaluate"><i class="fa fa-close"></i></div>
+						</div>
+						
+						<div class="evaluate-img-tier close-event vertical-center">
+							<div class="vertical-auto"><img src="images/img.jpg"></div>
+							<div class="close-evaluate"><i class="fa fa-close"></i></div>
+						</div>
+						
+						<div class="clear-float"></div>
+					</div>
+				</div>
+				
+				<div class="add-shop-message-name">商铺简介<span>(营业执照正面一张)</span></div>
+				<div class="discuss-wrap">
+					<div class="evaluate-wrap-box">
+						<div class="evaluate-img-tier">
+							<input type="file">
+							<div class="add-img-icon"><i class="fa fa-camera"></i></div>
+						</div>
+						
+						<div class="evaluate-img-tier close-event vertical-center">
+							<div class="vertical-auto"><img src="images/img.jpg"></div>
+							<div class="close-evaluate"><i class="fa fa-close"></i></div>
+						</div>
+						
+						<div class="evaluate-img-tier close-event vertical-center">
+							<div class="vertical-auto"><img src="images/img.jpg"></div>
+							<div class="close-evaluate"><i class="fa fa-close"></i></div>
+						</div>
+						
+						<div class="clear-float"></div>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="submit-button"><a href="javascript:;">确定加入</a></div>
+			
+			
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+		<link rel="stylesheet" href="css/LArea.css">
+		<script src="js/LArea.js"></script>
+		<script src="js/LAreaData1.js"></script>
+		<script src="js/LAreaData2.js"></script>
+		<script>
+		//选择地区
+	    var area1 = new LArea();
+	    area1.init({
+	    	'trigger': '#demo1',
+	        'valueTo': '#value1',
+	        'keys': {
+	        	id: 'id',
+	            name: 'name'
+	        },
+	        'type': 1,
+	        'data': LAreaData
+	    });
+	    
+	    function map_load() {  
+                var load = document.createElement("script");  
+                load.src = "http://api.map.baidu.com/api?v=1.4&callback=map_init";  
+                document.body.appendChild(load);  
+            }  
+            window.onload = map_load; 
+            
+            function map_init() {  
+                    var map = new BMap.Map("map");
+                    var point = new BMap.Point(115.9433814,28.754932); 
+                    map.centerAndZoom(point, 13);
+                    map.enableScrollWheelZoom(true);
+                    //向地图中添加缩放控件  
+                    var ctrlNav = new window.BMap.NavigationControl({  
+                        anchor: BMAP_ANCHOR_TOP_LEFT,  
+                        type: BMAP_NAVIGATION_CONTROL_LARGE  
+                    });  
+                    map.addControl(ctrlNav);  
+  
+                    //向地图中添加缩略图控件  
+                    var ctrlOve = new window.BMap.OverviewMapControl({  
+                        anchor: BMAP_ANCHOR_BOTTOM_RIGHT,  
+                        isOpen: 1  
+                    });  
+                    map.addControl(ctrlOve);  
+  
+                    //向地图中添加比例尺控件  
+                    var ctrlSca = new window.BMap.ScaleControl({  
+                        anchor: BMAP_ANCHOR_BOTTOM_LEFT  
+                    });  
+                    map.addControl(ctrlSca); 
+
+                    var point = new Array(); //存放标注点经纬信息的数组  
+                    var marker = new Array(); //存放标注点对象的数组  
+                    var info = new Array(); //存放提示信息窗口对象的数组  
+                    for (var i = 0; i < markerArr.length; i++) {  
+                        var p0 = markerArr[i].point.split(",")[0]; //  
+                        var p1 = markerArr[i].point.split(",")[1]; //按照原数组的point格式将地图点坐标的经纬度分别提出来  
+                        point[i] = new window.BMap.Point(p0, p1); //循环生成新的地图点  
+                        marker[i] = new window.BMap.Marker(point[i]); //按照地图点坐标生成标记  
+                        map.addOverlay(marker[i]);  
+                        marker[i].setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画  
+                        var label = new window.BMap.Label(markerArr[i].title, { offset: new window.BMap.Size(20, -10) });  
+                        marker[i].setLabel(label);  
+                        info[i] = new window.BMap.InfoWindow("<p style=’font-size:12px;lineheight:1.8em;width:100px;’>" + markerArr[i].title + "</br>地址：" + markerArr[i].address + "</br> 电话：" + markerArr[i].tel + "</br></p>"); // 创建信息窗口对象  
+                    }  
+                    marker[0].addEventListener("mouseover", function () {  
+                        this.openInfoWindow(info[0]);  
+                    });  
+                    marker[1].addEventListener("mouseover", function () {  
+                        this.openInfoWindow(info[1]);  
+                    });  
+                    marker[2].addEventListener("mouseover", function () {  
+                        this.openInfoWindow(info[2]);  
+                    });  
+                } 
+	</script>
+	</body>
+</html>

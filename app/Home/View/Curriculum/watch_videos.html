@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>简单的html示例</title>
+</head>
+<body>
+<div id="playercontainer"></div>
+<script type="text/javascript" src="__PC__/Baidu-T5Player-SDK-Web-v2.3.0/player/cyberplayer.js"></script>
+<script type="text/javascript">
+    var player = cyberplayer("playercontainer").setup({
+        width : 580,
+        height : 433,
+        backcolor : "#FFFFFF",
+        stretching : "uniform",
+        file : "{$result['file']}",
+        ak : "{$ak}",
+        autoStart : true,
+        repeat : false,
+        volume : 100,
+        controls : "over"
+    });
+</script>
+</body>
+</html>

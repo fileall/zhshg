@@ -1,0 +1,98 @@
+<include file="Public:header" />
+<!--会员列表-->
+<div class="pad_10" >
+	<div class="off_on_box">
+		<h3 class="title fb">注册送积分</h3>
+		<p class="font">开启后，每一个新注册的商城会员都能获得相应的商城积分，可以用于兑换积分商品。</p>
+		<if condition="$info['status']">
+			<div class="off_on_btn on">
+				<span class="tip">已开启</span>
+				<i class="dot" style="left: 71px;"></i>
+			</div>
+		<else />
+			<div class="off_on_btn">
+				<span class="tip">已关闭</span>
+				<i class="dot"></i>
+			</div>
+		</if>
+	</div>
+	<div class="off_on_con hidden" <if condition="$info['status']">style="display: block;"</if>>
+		<form method="post">
+			<input name="id" id="rule_id" type="hidden" value="{$info['id']}">
+			<table>
+				<tbody>
+					<tr>
+						<td align="right">注册送积分：</td>
+						<td>
+							<input type="text" name="integral" value="{$info['integral']}" placeholder="请设置赠送的积分数量" /> 分
+						</td>
+					</tr>
+					<tr>
+						<td align="right">活动期限：</td>
+						<td>
+							<input type="text" name="start_time" value="{$info['start_time']|date="Y-m-d",###}" id="J_time_start" placeholder="时间开始" /> -
+							<input type="text" name="end_time" value="{$info['end_time']|date="Y-m-d",###}" id="J_time_end" placeholder="时间结束"/>
+							<p class="tip">在设置的活动期限时间内，每个新注册的会员都能获得相应的会员积分</p>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<input type="submit" class="btn w150" value="保存"/>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+</div>
+
+<include file="Public:footer" />
+
+</body>
+
+</html>
+
+<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+
+<script type="text/javascript" src="__STATIC__/js/calendar/calendar.js"></script>
+
+<script>  
+$(function(){
+    var rule_id = $('#rule_id').val();
+    var operation = function (status) {
+        $.get("{:U('Member/operation_integral_rule')}",{rule_id:rule_id,status:status},function (result) {
+			if(result[0] == 1){
+                $.pinphp.tip({content:result[1]});
+			}else{
+                $.pinphp.tip({content:result[1], icon:'alert'});
+			}
+        },'json')
+    }
+	//按钮开关
+	$('.off_on_btn').offOn({
+		onFun:function(){
+            //开启
+            operation(1);
+		},
+		offFun:function(){
+			//关闭 
+            operation(0);
+		}  
+	});
+	//日历
+	Calendar.setup({
+        inputField : "J_time_start",
+        ifFormat   : "%Y-%m-%d",
+        showsTime  : false,
+        timeFormat : "24"
+    });
+
+    Calendar.setup({
+        inputField : "J_time_end", 
+        ifFormat   : "%Y-%m-%d",
+        showsTime  : false,
+        timeFormat : "24"
+    });
+})
+</script>

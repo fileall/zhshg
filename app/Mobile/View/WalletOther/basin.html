@@ -1,0 +1,74 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+<body class="body-bgColor">
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">聚宝盆</div>
+        <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+        <div class="header-right y-header-right">
+            <a href="{:U('WalletOther/basin_account')}">寄存明细</a>
+        </div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="content">
+    <!--公告栏-->
+    <!--<div class="jus-bet y-proclaim y-basin-proclaim">
+        <div class="flex1 y-over-hide y-bg-img y-basin-proclaim-div">
+            <div>
+                <p class="y-proclaim-text">理财新选择！</p>
+            </div>
+        </div>
+        <span class="y-proclaim-close" id="y-close">X</span>
+    </div>-->
+    <!--公告栏-->
+    <div class="basin-top-col y-basin-top-col">
+        <a class="y-banner" href="{:U('WalletOther/basin_account')}">
+            <div class="y-banner-title y-bg-img">元宝寄存总数(个)</div>
+            <div class="y-banner-num">{$member['gold_acer_jc']}</div>
+        </a>
+    </div>
+    <div class="y-income y-width94 y-bg-white">
+        <p class="y-color-999 font-28">寄存7天/100元宝可收益银币(个)</p>
+        <p class="y-income-num"><?php echo 100*C('pin_jbp_bs')?></p>
+    </div>
+    <div class="employ-explain y-shaped-msg">
+        <div class="employ-explain-title y-mar-top20">活动规则：</div>
+        <ul class="font-28">
+            <li class="employ-explain-txt">1、每次寄存必须为100的倍数；</li>
+            <li class="employ-explain-txt">2、寄存后即可获得相应倍数的银币；</li>
+            <li class="employ-explain-txt">3、寄存满7天后即提取自由使用</li>
+            <li class="employ-explain-txt">3、可重复或者每天分次进行寄存，不限寄存次数</li>
+        </ul>
+    </div>
+</div>
+<!--content-->
+
+    <!--footer-->
+    <div class="footer-space"></div><!--间距-->
+    <div class="footer-wrap jus-bet">
+        <div class="footer-inner y-footer-inner inner-area w100">
+            <a href="{:U('WalletOther/basin_account',['status'=>2])}" class="check-link y-check-link y-bg-white y-color-red ">元宝提取</a>
+        </div>
+        <div class="footer-inner y-footer-inner inner-area w100">
+            <a href="{:U('WalletOther/basin_in')}" class="check-link y-check-link">元宝寄存</a>
+        </div>
+    </div>
+    <!--footer-->
+</body>
+
+</block>
+<block name="footer"></block>
+<block name="script">
+    <script>
+        $("#y-close").click(function(){
+            $(".y-proclaim").hide();
+        })
+    </script>
+</block>
+</html>

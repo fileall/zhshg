@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title></title>
+        <script src="__MB__js/fontSize.js"></script>
+        <link rel="stylesheet" href="__MB__css/index.css" />
+        <script src="__MB__js/jquery-1.11.2.min.js"></script>
+        <script src="__MB__js/custom.js"></script>
+    </head>
+
+    <body class="body-bgColor">
+        <!--header-->
+        <div class="header-wrap">
+            <div class="header-inner">
+                <div class="header-title">兑换记录</div>
+                <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+                <div class="header-right"></div>
+            </div>
+        </div>
+        <div class="header-space"></div>
+        <!--header-->
+
+        <!--content-->
+        <div class="content">
+            <!--为空显示的背景图-->
+            <div class="y-record-bg" style="display: none;">
+                <div class="y-record-bg-content"></div>
+                <p class="y-record-bg-text">这里空空如也~</p>
+            </div>
+            <div class="y-width100">
+                <!--商品列表-->
+                <div class="goods-tier-box y-goods-tier-box y-block">
+                    <!--1-->
+                    <volist name="list" id="night">
+                    <div class="y-mar-top20 y-bg-white">
+                        <div class="goods-state-col">
+                            <div class="goods-state-numbers y-color-333 font-28">兑换时间</div>
+                            <div class="goods-state-name y-color-999">{:date('Y-m-d H:i:s',$night['add_time'])}</div>
+                            <div class="clear-float"></div>
+                        </div>
+
+                        <a href="{:U('Goldfruitshop/gold_shop_detail',array('id'=>$night['attr_id'],'item_id'=>$night['item_id']))}">
+                            <div class="row-box goods-tier-inner y-border-none">
+                                <div class="goods-img-box">
+                                    <div class="level-img vertical-center y-goldShopRecord-img">
+                                        <div class="vertical-auto"><img src="{:attach($night['img'],item)}"></div>
+                                    </div>
+                                </div>
+                                <div class="jus-bet flex1 y-goldShopRecord-text font-24">
+                                    <div class="ellipsis2 flex1">{$night.title}</div>
+                                    <div class="y-mar-left20 y-text-right">
+                                        <div>{$night['oldprice']}个金果</div>
+                                        <div class="y-color-666">x{$night.num}</div>
+                                        <div class="y-color-666">
+                                            <switch name="night.status" >
+                                                <case value="1">待付款</case>
+                                                <case value="2">待发货</case>
+                                                <case value="3">待收货</case>
+                                                <case value="4">待评价</case>
+                                                <case value="5">已评价</case>
+                                                <case value="6">交易已取消</case>
+                                                <default />默认情况
+                                            </switch>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    </volist>
+                </div>
+                <!--商品订单-->
+            </div>
+        </div>
+        <!--content-->
+
+        <!--footer-->
+        <!--footer-->
+    </body>
+
+</html>

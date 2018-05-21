@@ -1,0 +1,124 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">寄存</div>
+				<a href="/index.php?s=/member/w_basin.html">
+					<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				</a>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<form action="" name="jc" method="post">
+				<div class="magnitude">可用金元宝({$member['gold_acer']})个</div>
+				<ul class="add-bank-ul">
+					<li class="add-bank-li">
+						<div class="merchant-form row-box" style="margin-top: 0;">
+							<div class="merchant-currency">寄存金元宝数：</div>
+							<div class="row-flex">
+								<div class="merchant-form-input vertical-center">
+									<div class="vertical-auto" style="width: 100%;"><input name="nums_jyb" type="number" placeholder="请输入金元宝数量"></div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				
+				<div class="magnitude">可用银元宝({$member['silver_acer']})个</div>
+				<ul class="add-bank-ul">
+					<li class="add-bank-li">
+						<div class="merchant-form row-box" style="margin-top: 0;">
+							<div class="merchant-currency">寄存银元宝数：</div>
+							<div class="row-flex">
+								<div class="merchant-form-input vertical-center">
+									<div class="vertical-auto" style="width: 100%;"><input name="nums_yyb" type="number" placeholder="请输入银元宝数量"></div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<div class="village-txt" id="coin_sy">预计收益0银币</div>
+				<div class="enter-form-btn">
+					<button type="submit">确定寄存</button>
+				</div>
+			</form>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>
+<block name="footer"></block>
+<block name="script">
+	<script>
+		$("input").keyup(function(){
+			
+			var nums_jyb =$('input[name="nums_jyb"]').val();
+			var nums_yyb = $('input[name="nums_yyb"]').val();
+			var nums = $(this).val();
+			jyb = parseInt(nums_jyb);
+			yyb = parseInt(nums_yyb);
+			
+			if(isNaN(jyb)|parseInt(nums) < 0 ){jyb=0;}
+			if(isNaN(yyb)|parseInt(nums) < 0 ){yyb=0;}
+			
+			var jbp_bs = '{:C("pin_jbp_bs")}';
+			coin_sy = (jyb+yyb)*jbp_bs;
+		  	$('#coin_sy').html('预计收益'+coin_sy+'银币');
+		});
+			
+	
+		$('form[name="jc"]').submit(function(){
+			var nums_jyb =$('input[name="nums_jyb"]').val();
+			var nums_yyb = $('input[name="nums_yyb"]').val();
+			
+			if(!nums_jyb && !nums_yyb){
+				layer.msg('请填写元宝数量！',{icon:0,time:2000})
+				return false;
+			}
+			if(parseInt(nums_jyb) < 0 | parseInt(nums_yyb) < 0 ){
+				layer.msg('请合理填写元宝数量！',{icon:0,time:1000})
+				return false;
+			}
+			
+			jyb = parseInt(nums_jyb);
+			yyb = parseInt(nums_yyb);
+//			var data = $(this).serialize(); 
+			//生成订单
+			$.post('{:U("member/w_village_ajax")}',{nums_jyb:nums_jyb,nums_yyb:nums_yyb},function(d){
+				if(d.status == 1) {
+					 layer.msg(d.msg,{icon:1,time: 20000,btn: ['好的!']},function(){
+					 	$.ajax({
+							type:"post",
+							url:"",
+							async:true,
+							data:{nums_jyb:nums_jyb,nums_yyb:nums_yyb},
+							dataType:'json',
+							success:function(res) {
+								if(res.status==1){window.location.href = res.url;}
+								else{
+									layer.msg(dd.msg,{icon:2,time:1000})
+								}
+							}
+						});
+					  });
+				}else{
+					layer.msg(d.msg,{icon:2,time:1000})
+				}
+			},"JSON")
+			return false;
+			
+		})
+	</script>	
+</block>		
+</html>

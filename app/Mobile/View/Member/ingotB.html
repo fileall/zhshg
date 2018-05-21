@@ -1,0 +1,68 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">我的银元宝</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<div class="purse-wrap">
+			<div class="purse-inner">
+				<div class="purse-left-box vertical-center">
+					<div class="vertical-auto">
+						<div class="purse-left-txt">可用银元宝</div>
+						<div class="purse-left-money">￥{$member.silver_acer}</div>
+					</div>
+				</div>
+		
+				<a class="extract-link" href="{:U('member/ingotA')}">购买元宝</a>
+				<div class="clear-float"></div>
+			</div>
+		</div>
+		<div style="width: 100%;height: 2rem;"></div>
+		
+		<!--content-->
+		<div class="content">
+			<div class="particulars-wrap">
+				<div class="particulars-title">
+					<div class="particulars-txt">时间</div>
+					<div class="particulars-txt">金额</div>
+					<div class="particulars-txt">方式</div>
+					<div class="clear-float"></div>
+				</div>
+				
+				
+				
+				<ul class="particulars-ul">
+					<volist name="ye" id="y">
+						<li class="particulars-li">	
+							<div class="particulars-txt">{:date('Y-m-d',$y['add_time'])}</div>
+							<if condition="$y['type'] == 1">
+								<div class="particulars-txt red">-{$y.totalprices}</div>
+							<else />
+								<div class="particulars-txt green">+{$y.totalprices}</div>
+							</if>
+							<div class="particulars-txt">{$y.memos}</div>
+							<div class="clear-float"></div>	
+						</li>
+					</volist>	
+				</ul>
+				
+				<div class="more-text">查看更多&gt;</div>
+			</div>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>	
+<block name="footer"></block>	
+</html>

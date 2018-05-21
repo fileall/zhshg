@@ -1,0 +1,57 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">我已推荐</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<ul class="">
+				<volist name="next_mem" id="mem">
+					<li class="popularize-li">
+						<div class="popularize-box row-box">
+							<div class="popularize-con">
+								<div class="popularize-photo vertical-center">
+									<div class="vertical-auto"><img src="{:attach($mem['avatar'],'avatar')}"></div>
+								</div>
+							</div>
+							
+							<div class="row-flex">
+								<div class="popularize-txt">会员名：{$mem.nickname}</div>
+								<div class="popularize-txt">会员级别:
+									<if condition="$mem['vips'] == 1">普通会员
+									<elseif condition="$mem['vips'] == 2" />vip会员
+									<elseif condition="$mem['vips'] == 3" />代理会员
+									</if>
+								</div>
+								<div class="popularize-txt">推荐奖励：1000银币</div>
+							</div>
+						</div>
+					</li>
+				</volist>
+			</ul>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>	
+<block name="footer"></block>
+<block name="script">
+<script>
+	
+</script>
+	
+</block>	
+</html>

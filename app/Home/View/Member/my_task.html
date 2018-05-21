@@ -1,0 +1,97 @@
+<include file="Public/member_top" />
+
+    <!--右测导航栏开始-->
+    <div class="x-right-colunm">
+        <div class="x-right-colunm-inner myCourse-right">
+
+            <div class="x-headline">我的作业</div><!--title name-->
+            <div class="x-order-content"><!--容器-->
+                <table class="myTask-list">
+                    <thead>
+                    <tr>
+                        <th width="60">序号</th>
+                        <th align="left">标题</th>
+                        <th width="100">发布人</th>
+                        <th width="130">时间</th>
+                        <th width="100">状态</th>
+                        <th width="130">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <volist name="list" id="val">
+                            <tr>
+                                <td>1</td>
+                                <td align="left" class="myTask-title">
+                                    <a href="javascript:;" class="hover-blue myTask-tosee" title="点击查看题目" data-task="{:code2html($val['task'])}">{$val['title']}</a>
+                                </td>
+                                <td>{$val['name']}</td>
+                                <td>{$val['add_time']|date="Y-m-d H:i",###}</td>
+                                <td>
+                                    <switch name="val.status">
+                                        <case value="1"><span class="colorred">答题中</span></case>
+                                        <case value="2"><span class="coloryellow">批改中</span></case>
+                                        <case value="3"><span class="colorgreen">已完成</span></case>
+                                    </switch>
+                                </td>
+                                <td>
+                                    <switch name="val.status">
+                                        <case value="1">
+                                            <a href="{:U('Member/todo_task',array('id'=>$val['id']))}" class="myTask-dati hover-blue">答题</a>
+                                        </case>
+                                        <case value="3">
+                                            <a href="{:U('Member/task_comment',array('id'=>$val['id']))}" class="hover-blue">查看批语</a>
+                                        </case>
+                                    </switch>
+                                </td>
+                            </tr>
+                        </volist>
+                    </tbody>
+                </table>
+
+                <!--分页-->
+                <div class="x-paging-box">
+                    {$page}
+                    <div style="clear: both;"></div><!--clearFloat-->
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+    </div><!--/x-right-colunm-->
+    <!--右测导航栏结束-->
+</div>
+<script src="__PC__plugins/layui-v1.0.9/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function(){
+        layui.use('layer', function(){
+            var layer = layui.layer;
+        });
+        //点击答题
+        $('.myTask-tosee').click(function(){
+            var ht = $(this).data('task');
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-demo', //样式类名
+                closeBtn: 1, //显示关闭按钮
+                area: ['1000px', '600px'],
+                anim: 2,
+                title:'老师作业',
+                shadeClose: true, //开启遮罩关闭
+                content: ht,
+                //btn: ['去答题'],
+                btn1: function(index, layero){
+                    //去答题按钮的回调，跳转答题页面
+                    location.href=""
+                },
+            });
+        });
+    })
+
+
+</script>
+</body>
+</html>

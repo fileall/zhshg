@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<title></title>
+		<script src="js/fontSize.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/custom.js"></script>
+	</head>
+	
+	<body>
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">绑定手机号</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="enter-form">
+				<ul class="enter-form-ul">
+					<li class="enter-form-li row-box">
+						<div class="enter-form-right row-flex">
+							<div class="enter-form-input vertical-center">
+								<div class="vertical-auto" style="width: 100%;"><input type="number" placeholder="请输入推荐码"></div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="enter-form-li row-box">
+						<div class="enter-form-right row-flex">
+							<div class="enter-form-input vertical-center">
+								<div class="vertical-auto flex" style="width: 100%;">
+								    <span class="y-hide y-color-red">*</span>
+								    <input class="phone" type="number" placeholder="请输入手机号"></div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="enter-form-li row-box">
+						<div class="enter-form-right row-flex">
+							<div class="enter-form-input vertical-center">
+								<div class="vertical-auto flex" style="width: 100%;">
+								    <span class="y-hide y-color-red">*</span>
+								    <input class="code" type="number" placeholder="请输入验证码"></div>
+							</div>
+						</div>
+						
+						<div class="enter-form-verify y-bg-red">
+							<div class="verification-input">
+								<input type="button" class="verification" value="获取验证码">
+							</div>
+						</div>
+					</li>
+					<li class="enter-form-li row-box">
+                        <div class="row-flex">
+                            <div class="enter-form-input">
+                                <div class="vertical-auto flex" style="width: 100%;">
+                                    <span class="y-hide y-color-red">*</span>
+                                    <input id="value1" type="hidden" value="">
+                                    <input class="form-input-celect" id="demo1" type="text"  placeholder="请选择所在地区" value="" readonly="readonly">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+				</ul>
+				<div class="enter-bottom-link y-width94">
+                    <div class="enroll-deal-switch">
+                        <label for="deal">
+                            <div class="enroll-deal-input active">
+                                <input type="checkbox" checked="checked" id="deal">
+                                <i class="fa fa-check-circle"></i>
+                            </div>
+                        </label>
+                        <div class="enroll-deal-ok active y-mar-top5">我已阅读并同意</div>
+                    </div>
+                    <a class="enter-bottom-pass active" href="protocol.html">《用户协议》</a>
+                    
+                    <div class="clear-float"></div>
+                </div>
+				<div class="enter-btn y-width94">
+					<button class="y-enroll-submit y-bg-red y-width100" type="button">提交</button>
+				</div>
+				
+				
+			</div>
+		</div>
+		<!--content-->
+        <!--消息弹窗-->
+        <div class="y-location-alertMsg"></div>
+		<!--消息弹窗-->
+		<!--注册成功弹窗-->
+        <div class="succeed-win">
+            <div class="succeed-inner-box vertical-center">
+                <div class="vertical-auto" style="width: 100%;">
+                    <div class="succeed-content">
+                        <div class="succeed-win-title">注册成功！</div>
+                        <div class="succeed-win-text">
+                            恭喜你注册成功，您可以立即登录或完善资料成为商家
+                        </div>
+                        <div class="succeed-win-a">
+                            <a class="succeed-win-link" href="enter.html">立即登录</a>
+                            <a class="succeed-win-link two" href="personage.html">完善资料</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--注册成功弹窗-->
+		<!--footer-->
+		
+		<!--footer-->
+	</body>
+	<link rel="stylesheet" href="css/LArea.css">
+    <script src="js/LArea.js"></script>
+    <script src="js/LAreaData1.js"></script>
+    <script src="js/LAreaData2.js"></script>
+	<script>
+	    var area1 = new LArea();
+        area1.init({
+            'trigger': '#demo1',
+            'valueTo': '#value1',
+            'keys': {
+                id: 'id',
+                name: 'name'
+            },
+            'type': 1,
+            'data': LAreaData
+        });
+        //显示消息弹出框 
+        function showMsg(txt){
+            $(".y-location-alertMsg").text(txt).fadeIn(500);
+            var timeset=setTimeout(function(){
+                $(".y-location-alertMsg").fadeOut(500);
+            },2000);
+        }
+        //判断是否为空
+        function yanzheng(myinput){
+            let prevStyle=myinput.prev();
+            if(myinput.val()){
+                prevStyle.hide();
+                return true;
+            }else{
+                prevStyle.show();
+                return false;
+            }
+        }
+        var myphone=false;
+        var mycode=false;
+        var mylocation=false;
+        $(".phone").blur(function(){
+            //手机号正则表达式
+            var tel=/^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/
+            console.log(!tel.test($(this).val()))
+            if (!tel.test($(this).val())) {
+                $(this).attr("placeholder","请输入正确的手机号格式").val('')
+            }
+            myphone=yanzheng($(this))?true:false;
+        })
+        $(".code").blur(function(){mycode=yanzheng($(this))?true:false;})
+        $(".y-enroll-submit").click(function(){
+            mylocation=$('#value1').val()?true:false;
+            var msg=[];
+            if (myphone&&mycode&&mylocation) {
+            	$(".succeed-win").addClass('active')
+            }else{
+               if(!myphone) {msg.push('手机号')}
+               if(!mycode) {msg.push('验证码')}
+               if(!mylocation) {msg.push('地区')}
+               showMsg(msg.join()+'不能为空');
+            }
+        })
+	</script>
+</html>

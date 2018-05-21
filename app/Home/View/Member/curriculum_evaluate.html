@@ -1,0 +1,71 @@
+<include file="Public/member_top" />
+
+    <!--右测导航栏开始-->
+    <div class="x-right-colunm pb30">
+        <div class="x-goods-inner">
+            <div class="x-goods-top l-clear">
+                <div class="x-goods-title">
+                    <a href="evaluate.html"><span class="active">老师课堂</span></a>
+                    <a href="evaluate2.html"><span>商品评价</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="x-right-colunm-inner mt20">
+            <div class="x-my-nav-box">
+                <!--<ul class="x-my-nav l-clear">&lt;!&ndash;my indent nav&ndash;&gt;
+                    <li class="x-evaluate-anv active">全部（1221）</li>
+                    <li class="x-evaluate-anv">好评（1220）</li>
+                    <li class="x-evaluate-anv">中评（1）</li>
+                    <li class="x-evaluate-anv">差评（0）</li>
+                </ul>-->
+
+                <div class="x-evaluate-content">
+                    <div class="x-evaluate-inner">
+                        <ul>
+                            <volist name="list" id="val">
+                                <li>
+                                    <div class="x-evaluate-date">{$val['add_time']|date="Y-m-d",###}<span>{$val['add_time']|date="H:i:s",###}</span></div>
+                                    <div class="x-evaluate-tier l-clear">
+                                        <div  class="x-evaluate-photo">
+                                            <div class="x-evaluate-mag">
+                                                <img src="<if condition="$val['avatar']">{$val['avatar']}<else />__PC__images/moren.png</if>">
+                                            </div>
+                                            <p>{:replace_mobile($val['mobile'])}</p>
+                                        </div>
+                                        <div class="x-review">
+                                            <div class="branch clear">
+                                                <span class="item mr">描述相符：{$val['describe']}</span>
+                                                <span class="item mr">教学态度：{$val['attitude']}</span>
+                                                <span class="item mr">课程质量：{$val['quality']}</span>
+                                                <span class="item mr">其他：{$val['other']}</span>
+                                            </div>
+                                            <p class="x-review-p x-review-p2">
+                                                {$val['content']}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div><!--/x-evaluate-inner-->
+                </div><!--x-evaluate-content-->
+                {$page}
+            </div>
+        </div><!--x-my-nav-box-->
+    </div><!--x-right-colunm-inner-->
+    <!--右测导航栏结束-->
+</div>
+<link rel="stylesheet" href="css/css-stars.css"><!--评分-->
+<script src="__PC__js/jquery.barrating.min.js" type="text/javascript" charset="utf-8"></script><!--评分-->
+<script>
+    $(function() {
+        //星级评分
+        $('.branch-star').barrating({
+            theme: 'css-stars',
+            readonly:true
+        });
+        $('.branch-star').barrating('set', 4);//修改评分的值（星星数）
+    });
+</script>
+</body>
+</html>

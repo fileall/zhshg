@@ -1,0 +1,42 @@
+<!--编辑角色-->
+<div class="dialog_content">
+	<form id="info_form" name="info_form" action="{:u('withdraw/pass')}" method="post">
+    <table width="100%" class="table_form">
+        <tr>
+            <th width="100">订单号 :</th>
+            <td><input type="text"  id="order_id" class="input-text" size="30" value="{$info.order_no}" readonly="true" ></td>
+        </tr>
+        
+        <tr> 
+            <th width="100">提现帐号 :</th>
+            <td><input type="text" class="input-text" value="{$info.branch_title}" size="30" readonly="true" ></td>
+        </tr>
+        
+        <tr>
+            <th width="100">提现金额 :</th>
+            <td><input type="text"  id="amount" class="input-text" size="30" value="{$info[amount]}"></td>
+        </tr>
+		        
+    </table>
+    <input type="hidden" name="id" id="id" value="{$info.id}" />
+    <input type="hidden" name="status"  value="2" />
+    </form>
+</div>
+<script src="__PUBLIC_ADMIN__js/fileuploader.js"></script>
+<script>
+$(function(){
+    $.formValidator.initConfig({formid:"info_form",autotip:true});
+    $("#name").formValidator({ onshow:lang.please_input+lang.role_name, onfocus:lang.please_input+lang.role_name, oncorrect:lang.input_right}).inputValidator({ min:1, onerror:lang.please_input+lang.role_name}).defaultPassed();
+
+    $('#info_form').ajaxForm({success:complate,dataType:'json'});
+    function complate(result){
+        if(result.status == 1){
+            $.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'});
+        }
+    }
+})
+</script>

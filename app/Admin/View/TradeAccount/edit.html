@@ -1,0 +1,51 @@
+<div class="dialog_content">
+	<form id="info_form" name="info_form" action="{:u('trade_account/edit')}" method="post">
+    <table width="100%" class="table_form">
+        <tr>
+            <th width="80">客户 :</th>
+            <td>
+                <select name="member_id">
+                    <option value="0">请选择</option>
+                    <volist name="member" id="val">
+                        <option value="{$val.id}" <if condition="$info['member_id'] eq $val['id']">selected="selected"</if>>{$val.nickname}|{$val.mobile}</option>
+                    </volist>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th width="80">帐号 :</th>
+            <td><input type="text" name="account" id="account" class="input-text" value="{$info['account']}"></td>
+        </tr>
+        <tr>
+            <th width="80">密码 :</th>
+            <td><input type="text" name="password" id="password" class="input-text" value="{$info['password']}"></td>
+        </tr>
+        <tr>
+            <th>{:L('enabled')} :</th>
+            <td>
+                <input type="radio" name="status" class="radio_style" value="1" checked="checked"> &nbsp;{:L('yes')}&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="status" class="radio_style" value="0"> &nbsp;{:L('no')}
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" name="id" id="id" value="{$info.id}" />
+    </form>
+</div>
+<script src="__PUBLIC_ADMIN__js/fileuploader.js"></script>
+<script>
+$(function(){
+    $.formValidator.initConfig({formid:"info_form",autotip:true});
+    $("#name").formValidator({ onshow:lang.please_input+lang.role_name, onfocus:lang.please_input+lang.role_name, oncorrect:lang.input_right}).inputValidator({ min:1, onerror:lang.please_input+lang.role_name}).defaultPassed();
+
+    $('#info_form').ajaxForm({success:complate,dataType:'json'});
+    function complate(result){
+        if(result.status == 1){
+            $.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'});
+        }
+    }
+})
+</script>

@@ -1,0 +1,35 @@
+<!--添加管理员-->
+<div class="dialog_content">
+	<form id="info_form" name="info_form" action="{:U('wealth_apply/reject')}" method="post">
+        <input type="hidden" name="id" value="{$info.id}">
+	<table width="100%" class="table_form">
+        <tr>
+            <th width="80">预存款 :</th>
+            <td>{$info.amount}</td>
+        </tr>
+		<tr> 
+	      <th width="80">自动退款 :</th>
+            <td>
+                <input type="radio" name="is_op" class="radio_style" value="1" checked> &nbsp;是&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="is_op" class="radio_style" value="0"> &nbsp;否 <span class="msg">选择否需要手动去退款</span>
+            </td>
+	    </tr>
+
+	</table>
+	</form>
+</div>
+<script>
+$(function(){
+
+	$('#info_form').ajaxForm({success:complate,dataType:'json'});
+    function complate(result){
+        if(result.status == 1){
+            $.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'});
+        }
+    }
+});
+</script>

@@ -1,0 +1,82 @@
+<include file="Public/top" />
+
+<!--面包屑导航-->
+<div class="ysw-crumbs bgfff">
+    <div class="wrap">
+        <a href="/" class="item hover-blue">首页</a>
+        <span class="item ico">&gt;</span>
+        <a href="{:U('Curriculum/homeEducation')}" class="item hover-blue">家庭教育指导</a>
+        <span class="item ico">&gt;</span>
+        <a href="{:U('Evaluation/evaluation')}" class="item hover-blue">免费测评</a>
+        <span class="item ico">&gt;</span>
+        <span class="item">{$result['info']['Subject']}</span>
+    </div>
+</div>
+<!--面包屑导航-end-->
+
+<!--填写信息-->
+<div class="wrap ceshi3">
+    <div class="ceshi3-title">{$result['info']['Subject']}</div>
+    <div class="ceshi3-percent" data-percent="50">
+        <div class="ceshi3-per">
+            <i></i>
+        </div>
+        <div class="ceshi3-finish">0/{:count($result['list'])}</div>
+    </div>
+    <form action="{:U('Evaluation/submit_evaluation')}" method="post">
+        <input name="examID" type="hidden" value="{$result['info']['examID']}" />
+        <input name="agesId" type="hidden" value="{$result['info']['agesId']}" />
+        <input name="ExamType" type="hidden" value="{$result['info']['ExamType']}" />
+        <ul class="ceshi3-list">
+            <volist name="result['list']" id="val">
+                <li class="item">
+                    <img src="__PC__images/ceshi3-ico_03.png" alt="" />
+                    <h3 class="item-title">{$val['subNum']}.{$val['Title']}</h3>
+                    <div class="item-question">
+                        <volist name="val['list']" id="va">
+                            <p class="item-answer">
+                                <input type="radio" name="Answer[{$va['subID']}]" value="{$va['optionsID']}" />
+                                <label>{$va['OptionName']}</label>
+                            </p>
+                        </volist>
+                    </div>
+                </li>
+            </volist>
+        </ul>
+        <div class="tc ceshi3-sub-box">
+            <!--<a href="ceshi4.html" class="btn blue " >提交</a>-->
+            <button type="submit" class="btn blue " >提交</button>
+        </div>
+    </form>
+</div>
+<!--填写信息-end-->
+
+<!--公共底部-->
+<include file="Public/footer" />
+<!--公共底部-end-->
+
+<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PC__js/l_main.js"></script>
+<script src="__PC__plugins/layui-v1.0.9/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function(){
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+        });
+        layui.use('layer', function(){
+            var layer = layui.layer;
+        });
+        //提交
+        $('.ceshi2-sub').click(function(){
+            var $birthday =$('.brithday');
+            if($birthday.val() == ''){
+                layer.msg('请选择孩子的出生日期',{icon:2,time:2000});
+                return false;
+            }
+        });
+
+
+    })
+</script>
+</body>
+</html>

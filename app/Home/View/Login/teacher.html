@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="__PC__css/index.css">
+    <script src="__PC__js/jquery-1.11.2.min.js"></script>
+    <script src="__PC__js/custom.js"></script>
+    <script src="__PC__js/region_select.js"></script>
+</head>
+
+<body>
+<div class="top-col">
+    <div class="enter-logo">
+        <a href="/">
+            <img src="__PC__images/logo.png">
+        </a>
+    </div>
+    <!--<div class="enter-title">欢迎入驻</div>-->
+    <div class="assist"><a title="帮助中心" href="">
+        <i class="fa fa-question-circle"></i><span>帮助中心</span>
+    </a></div>
+    <div class="return-home"><a title="返回首页" href="index.html">
+        <i class="fa fa-home"></i><span>返回首页</span>
+    </a></div>
+
+    <div class="clear-float"></div>
+</div>
+
+<div class="enter-bjimng">
+    <div class="enter-inner-box">
+        <div class="enter-right-inner">
+            <form action="" method="poat" name="">
+                <div class="register-wrap active">
+                    <ul class="register-ul">
+                        <li class="register-li"><a href="{:U('Login/register')}">家长/学生</a></li>
+                        <li class="register-li active"><a href="###">我是老师</a></li>
+                        <div class="clear-float"></div>
+                    </ul>
+
+                    <div class="tabs-form-box">
+
+                        <div class="tabs-tier">
+                            <ul>
+                                <li class="enter-input-li">
+                                    <div class="enter-form-box">
+                                        <input class="register-input" placeholder="请输入您的手机号" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                                    </div>
+                                </li>
+
+                                <li class="enter-input-li">
+                                    <div class="enter-form-box">
+                                        <input class="register-input" placeholder="请输入短信验证码" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                                        <input type="button" class="verification" value="获取验证码">
+                                    </div>
+                                </li>
+                                <li class="enter-input-li">
+                                    <div class="enter-form-box">
+                                        <select name="location_p" id="location_p" class="register-input"></select>
+                                    </div>
+                                    <div class="enter-form-box">
+                                        <select name="location_c" id="location_c" class="register-input"></select>
+                                    </div>
+                                    <div class="enter-form-box">
+                                        <select name="location_a" id="location_a"class="register-input"></select>
+                                    </div>
+                                </li>
+                                <li class="enter-input-li">
+                                    <div class="enter-form-box">
+                                        <select name="location_p"class="register-input">
+                                            <option value="">选择科目</option>
+                                            <option value="">语文</option>
+                                            <option value="">数学</option>
+                                            <option value="">英语</option>
+                                        </select>
+                                    </div>
+
+                                </li>
+                                <li class="enter-input-li">
+                                    <div class="enter-form-box">
+                                        <input class="register-input" type="password" placeholder="请输入密码">
+                                    </div>
+                                </li>
+
+                                <li class="enter-input-li">
+                                    <div class="enter-form-box">
+                                        <input class="register-input" type="password" placeholder="请再次输入密码">
+                                    </div>
+                                </li>
+
+                                <li class="enter-input-li">
+                                    <div class="enter-form-box">
+                                        <div class="enter-form-btn">
+                                            <button type="button">立即入驻</button>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="enter-input-li">
+                                    <div class="enter-bottom-link">
+                                        <div class="enter-checkbox"><input type="checkbox" checked="checked"></div>
+                                        <div class="enter-bottom-pass"><a href="">阅读并同意<span>《入驻教师合作协议》</span></a></div>
+                                        <div class="enter-bottom-pass active"><a href="enter.html">立即登录</a></div>
+                                        <div class="clear-float"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<!--footer-->
+<include file="Public/login_footer" />
+<!--footer-->
+
+<script type="text/javascript">
+    new PCAS('location_p', 'location_c', 'location_a', '锟姐东省', '', '');
+</script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+D:\ProgramFiles\upupw\PHP5X\PHP53\php.exe -q D:\work\ynfc.0791jr.com\app\Common\Common\yhqexecute.php

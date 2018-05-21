@@ -1,0 +1,104 @@
+<include file="Public/top" />
+
+<!--面包屑导航-->
+<div class="ysw-crumbs">
+    <div class="wrap">
+        <a href="" class="item hover-blue">语数外课堂</a>
+        <span class="item ico">&gt;</span>
+        <span class="item">搜索结果</span>
+    </div>
+</div>
+<!--面包屑导航-end-->
+
+<!--直播/回放列表-->
+<div class="liveList wrap clear ">
+    <div class="left">
+        <!--列表-->
+        <ul class="liveList-list bgfff">
+            <volist name="list" id="val">
+                <li class="item clear">
+                    <div class="left-img">
+                        <switch name="val.type">
+                            <case value="1"><a href="{:U('Curriculum/playbackDetail',array('id'=>$val['id']))}"></case>
+                            <case value="2"><a href="{:U('Curriculum/techerDetail',array('id'=>$val['id']))}"></case>
+                        </switch>
+                            <img src="{:attach($val['img'],'curriculum')}" alt="" />
+                        </a>
+                    </div>
+                    <div class="right-info">
+                        <switch name="val.type">
+                            <case value="1"><a href="{:U('Curriculum/playbackDetail',array('id'=>$val['id']))}" class="hover-blue"></case>
+                            <case value="2"><a href="{:U('Curriculum/techerDetail',array('id'=>$val['id']))}" class="hover-blue"></case>
+                        </switch>
+                            <h3 class="live-title">{$val['title']}</h3>
+                        </a>
+                        <p class="live-pro">
+                            {:code2html($val['info'])}
+                        </p>
+                        <div class="clear">
+                            <span class="fl newPrice">¥{$val['price']}</span>
+                            <s class="fl oldPrice">¥{$val['old_price']}</s>
+                            <span class="fr howMuch">{$val['people']}人预约</span>
+                        </div>
+                        <div class="clear live-yuyue">
+                            <span>课时数：{$val['nums']}节</span>
+                            <span>老师：{$val['name']}</span>
+                            <span>类别：{$val['cate_name']}</span>
+                            <switch name="val.type">
+                                <case value="1"><a href="{:U('Curriculum/playbackDetail',array('id'=>$val['id']))}" class="fr btn orange"></case>
+                                <case value="2"><a href="{:U('Curriculum/techerDetail',array('id'=>$val['id']))}" class="fr btn orange"></case>
+                            </switch>
+                                立即预约
+                            </a>
+                            <!--<a href="playbackDetail.html" class="fr btn green">看回放</a>-->
+                        </div>
+                    </div>
+                </li>
+            </volist>
+        </ul>
+        <div class="news-page">
+            <!--分页-->
+            {$page}
+            <!--分页-end-->
+        </div>
+        <!--列表-end-->
+    </div>
+    <div class="right">
+        <!--猜你喜欢-->
+        <div class="youMaybeLike bgfff">
+            <h3 class="title">猜你喜欢</h3>
+            <ul class="list">
+                <volist name="tj_list" id="val">
+                    <li class="item clear">
+                        <switch name="val.type">
+                            <case value="1"><a href="{:U('Curriculum/playbackDetail',array('id'=>$val['id']))}" class="hover-blue"></case>
+                            <case value="2"><a href="{:U('Curriculum/techerDetail',array('id'=>$val['id']))}" class="hover-blue"></case>
+                        </switch>
+                            <img src="{:attach($val['img'],'curriculum')}" alt="" class="left-img"/>
+                            <div class="right-info">
+                                <h3 class="name">{$val['title']}</h3>
+                                <p class="price">¥{$val['price']}</p>
+                            </div>
+                        </a>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+        <!--猜你喜欢-end-->
+        <!--广告-->
+        <div class="liveList-adver">
+            <a href=""><img src="__PC__images/live-adver_03.jpg" alt="" /></a>
+        </div>
+    </div>
+</div>
+<!--直播/回放列表-end-->
+
+<!--公共底部-->
+<include file="Public/footer" />
+<!--公共底部-end-->
+
+<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PC__js/l_main.js"></script>
+
+</body>
+</html>

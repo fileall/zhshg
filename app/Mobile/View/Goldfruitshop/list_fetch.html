@@ -1,0 +1,12 @@
+<volist name="item" id="v">
+    <div class="y-mar-top20 y-goldShop-item"><a href="{:U('Goldfruitshop/gold_shop_detail',array('item_id'=>$v['item_id'],'id'=>$v['id']))}">
+        <p class="font-26 ellipsis1">{$v.title}</p>
+        <p class="font-20 y-color-999">悦买宝新用户专享</p>
+        <p class="font-20 y-color-999"><span class="font-26 y-color-red">{$v.gold_fruit}个</span>&nbsp;金果</p>
+        <div class="y-goldShop-item-img y-over-hide">
+            <img src="{:attach($v['img'],item)}"/>
+        </div>
+        <!--<div class="y-goldShop-item-button y-bg-blue">立即兑换</div>-->
+    </a>
+    </div>
+</volist>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<title></title>
+		<script src="js/fontSize.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/custom.js"></script>
+		<script type="text/javascript" src="js/prefixfree.min.js" ></script>
+	</head>
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">聚宝盆</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right y-header-right">
+					<a href="y_basinDepositRecord.html">寄存明细</a>
+				</div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<!--公告栏-->
+			<!--<div class="jus-bet y-proclaim y-basin-proclaim">
+				<div class="flex1 y-over-hide y-bg-img y-basin-proclaim-div">
+					<div>
+						<p class="y-proclaim-text">理财新选择！</p>
+					</div>
+				</div>
+				<span class="y-proclaim-close" id="y-close">X</span>
+			</div>-->
+			<!--公告栏-->
+			<div class="basin-top-col y-basin-top-col">
+				<a class="y-banner" href="y_basinDepositRecord.html">
+					<div class="y-banner-title y-bg-img">元宝寄存总数(个)</div>
+					<div class="y-banner-num">3456,78.91</div>
+				</a>
+			</div>
+			<div class="y-income y-width94 y-bg-white">
+				<p class="y-color-999 font-28">寄存7天可收益银币(个)</p>
+				<p class="y-income-num">2,000,000</p>
+			</div>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<div class="footer-space"></div><!--间距-->
+		<div class="footer-wrap jus-bet">
+			<div class="footer-inner y-footer-inner inner-area w100">
+				<a href="y_basinExtract.html" class="check-link y-check-link y-bg-white y-color-red ">元宝提取</a>
+			</div>
+			<div class="footer-inner y-footer-inner inner-area w100">
+				<a href="y_basinDeposit.html" class="check-link y-check-link">元宝寄存</a>
+			</div>
+		</div>
+		<!--footer-->
+	</body>
+	<script>
+		$("#y-close").click(function(){
+			$(".y-proclaim").hide();
+		})
+	</script>
+</html>

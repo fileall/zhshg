@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<title></title>
+		<script src="js/fontSize.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/custom.js"></script>
+	</head>
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">筛选</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="screen-content">
+				<div class="serach-box vertical-center y-width94">
+					<div class="vertical-auto" style="width: 100%;"><input id="search" type="text"></div>
+					<div class="serach-tis"><i class="fa fa-search"></i>搜索商品</div>
+				</div>
+				
+				<!--选择地区-->
+				<div class="area-form">
+					<div class="area-form-title">选择区域</div>
+					<div class="area-form-input vertical-center">
+						<div class="vertical-auto" style="width: 100%;"><input id="area" type="text" readonly="readonly" placeholder="请选择区域"></div>
+					</div>
+				</div>
+				<!--选择地区-->
+				
+				<!--商品筛选-->
+				<div class="area-form">
+					<div class="area-form-title">支付类型</div>
+					<div class="">
+						<ul class="more-kind-ul y-screen-kind-ul">
+							<li class="more-kind-li active">全部</li>
+							<li class="more-kind-li">金元宝支付</li>
+							<li class="more-kind-li">银元宝支付</li>
+							<li class="more-kind-li">金果支付</li>
+							
+							<div class="clear-float"></div>
+						</ul>
+					</div>
+					
+					<div class="submit-button"><a class="sub-pass" href="y_ambitus.html">确定</a></div>
+				</div>
+				<!--商品筛选-->
+			</div>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+		
+		<link rel="stylesheet" href="css/LArea.css">
+		<script src="js/LArea.js"></script>
+		<script src="js/LAreaData1.js"></script>
+		<script src="js/LAreaData2.js"></script>
+		<script>
+		//选择地区
+	    var area1 = new LArea();
+	    area1.init({
+	    	'trigger': '#area',
+	        'valueTo': '#value1',
+	        'keys': {
+	        	id: 'id',
+	            name: 'name'
+	        },
+	        'type': 1,
+	        'data': LAreaData
+	    });
+	</script>
+	</body>
+</html>

@@ -1,0 +1,113 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+<body class="body-bgColor">
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">我的会员</div><a href="{:U('Wallet/wallet')}">
+        <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div></a>
+        <div class="header-right"></div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="content">
+    <div class="y-tab-title y-vipList-title">
+        <div class="y-tab-title-text flex1 y-tab-title-sed" id="demo1">推荐的商家</div>
+        <div class="y-tab-title-text flex1" id="demo2">推荐的会员</div>
+    </div>
+    <div>
+
+
+        <div class="y-tab-vipContent">
+            <div class="jus-bet y-width94 y-color-999">
+                <div class="y-tab-title-text">店铺图标</div>
+                <div class="y-tab-title-text y-width75">会员账号</div>
+                <div class="y-tab-title-text">注册时间</div>
+            </div>
+            <div class="y-bg-white y-vip-list y-width94" id="ul0">
+                <!--<volist name="recommend" id="val">-->
+                <!--<div class="y-tab-title y-couponRecord-item">-->
+                    <!--<div class="y-tab-title-text">-->
+                        <!--<div class="y-vip-icon">-->
+                            <!--<img src="{:attach($val['avatar'],'avatar')}"/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="y-tab-title-text y-width75">{$val['tel']}</div>-->
+                    <!--<div class="y-tab-title-text font-24">{:date('Y-m-d' ,$val['add_time'])}</div>-->
+                <!--</div>-->
+
+                <!--</volist>-->
+            </div>
+        </div>
+        <div class="y-tab-vipContent" style="display: none;">
+            <div class="y-tab-vipContent">
+                <div class="jus-bet y-width94 y-color-999">
+                    <div class="y-tab-title-text">会员头像</div>
+                    <div class="y-tab-title-text y-width75">会员账号</div>
+                    <div class="y-tab-title-text">注册时间</div>
+                </div>
+                <div class="y-bg-white y-vip-list y-width94" id="ul1">
+                    <!--<volist name="recommend1" id="val">-->
+                    <!--<div class="y-tab-title y-couponRecord-item">-->
+                        <!--<div class="y-tab-title-text">-->
+                            <!--<div class="y-vip-icon">-->
+                                <!--<img src="{:attach($val['avatar'],'avatar')}"/>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="y-tab-title-text y-width75">{$val['mobile']}</div>-->
+                        <!--<div class="y-tab-title-text font-24">{:date('Y-m-d' ,$val['reg_time'])}</div>-->
+                    <!--</div>-->
+                    <!--</volist>-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--content-->
+
+<!--footer-->
+<!--footer-->
+</body>
+</block>
+<block name="footer"></block>
+<block name="script">
+<script>
+    var type = '{$type}';//0商家1会员',
+    $(".y-vipList-title .y-tab-title-text").click(function(){
+        $(this).addClass("y-tab-title-sed").siblings().removeClass("y-tab-title-sed");
+        $(".y-tab-vipContent").eq($(this).index()).show().siblings().hide();
+        type = $(this).index();
+        //流加载
+        layui.use('flow', function(){
+            var flow = layui.flow;
+            var str = "";
+            if (type ==0) {
+                str = '#ul0';
+            }else if (type == 1){
+                str = '#ul1';
+            }
+            flow.load({
+                elem: str //指定列表容器
+                //		         ,scrollElem: '#'//滚动所在元素
+                ,done: function(page, next){ //到达临界点（默认滚动触发），触发下一页
+                    //		             var lis = [];
+                    $.get('{:U("wallet/vip_list")}',{"page":page,"type":type}, function(res){
+                        next(res[1], page < res[0]);
+                    }, 'json');
+                }
+            });
+        });
+    });
+    $(".y-vipList-title .y-tab-title-text").eq(0).trigger('click');
+
+
+
+
+</script>
+</block>
+</html>

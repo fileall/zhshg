@@ -1,0 +1,38 @@
+<include file="Public/member_top" />
+
+    <!--右测导航栏开始-->
+    <div class="x-right-colunm">
+
+        <div class="x-account"><!--账户安全-->
+            <div class="x-account-txt">账户安全</div>
+
+
+            <div class="x-email"><!--手机认证-->
+                <div class="x-email-icon"><img src="__PC__img/icon09.png"></div>
+                <div class="x-email-name">手机认证</div>
+                <div class="x-email-line"></div>
+                <div class="x-email-name active">{:replace_mobile($info['mobile'])}</div>
+                <div class="x-email-a"><a href="{:U('Member/edit_mobile')}">立即修改</a></div>
+                <div style="clear: both;"></div><!--clearFloat-->
+            </div>
+
+            <div class="x-email"><!--登入密码-->
+                <div class="x-email-icon"><img src="__PC__img/icon10.png"></div>
+                <div class="x-email-name">登入密码</div>
+                <div class="x-email-line"></div>
+                <div class="x-email-name active">已设置</div>
+                <div class="x-email-a"><a href="{:U('Member/edit_pwd')}">立即修改</a></div>
+                <div style="clear: both;"></div><!--clearFloat-->
+            </div>
+
+        </div>
+
+    </div>
+    <!--右测导航栏结束-->
+
+    <div style="clear: both;"></div><!--clearFloat-->
+</div>
+<!--公共底部-->
+<include file="Public/footer" />
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<title></title>
+		<script src="js/fontSize.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/custom.js"></script>
+	</head>
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">元宝购买</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<!--<div class="payment-wrap">
+				<div class="payment-logo"><span><img src="images/icon30.png"></span></div>
+				<div class="payment-name">向臻惠生活馆付款</div>
+				<div class="payment-money">￥100.00</div>
+			</div>-->
+			<div class="buy-wrap">
+				<div class="buy-title">购买数量</div>
+				<div class="buy-input vertical-center">
+					<div class="vertical-auto" style="width: 100%;"><input type="number" placeholder="请输入元宝个数"></div>
+				</div>
+				
+				
+					<ul class="buy-ul">
+						<li class="buy-li"><span>20个</span></li>
+						<li class="buy-li"><span>50个</span></li>
+						<li class="buy-li"><span>100个</span></li>
+						<li class="buy-li"><span>300个</span></li>
+						<li class="buy-li"><span>500个</span></li>
+						<li class="buy-li"><span>1000个</span></li>
+						
+						<div class="clear-float"></div>
+					</ul>
+					
+					<div class="sealing-title">
+					1RMB可以购买1个金元宝，同时可以赠送1000银币，产品解释权归臻慧生活馆所有。
+				</div>
+				
+			</div>
+			<!--支付选项-->
+			<div class="pay-wrap">
+				<ul>
+					
+					
+					<li class="pay-li active">
+						<label form="weixing">
+							<div class="row-box">
+								<div class="pay-icon">
+									<div class="pay-icon-img"><img src="images/icon17.png"></div>
+								</div>
+								
+								<div class="row-flex">
+									<div class="pay-name">微信支付</div>
+									<div class="pay-name-t"></div>
+									<div class="clear-float"></div>
+								</div>
+								
+								<div class="pay-input-box">
+									<div class="pay-input-inner active"><input name="pay-name" type="radio" id="weixing" checked="checked"></div>
+								</div>
+							</div>
+						</label>
+					</li>
+					
+					<li class="pay-li active">
+						<label form="yue">
+							<div class="row-box">
+								<div class="pay-icon">
+									<div class="pay-icon-img"><img src="images/icon64.png"></div>
+								</div>
+								
+								<div class="row-flex">
+									<div class="pay-name">余额支付</div>
+									<div class="pay-name-t"></div>
+									<div class="clear-float"></div>
+								</div>
+								
+								<div class="pay-input-box">
+									<div class="pay-input-inner"><input name="pay-name" type="radio" id="yue"></div>
+								</div>
+							</div>
+						</label>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="submit-button"><a href="javascript:;">立即购买</a></div>
+			<!--支付选项-->
+		</div>
+		<!--content-->
+		
+		<!--余额支付密码弹窗-->
+	<div class="payment-window">
+		<div class="payment-inner-win">
+			<div class="payment-form">
+				<!--密码区-->
+				<div class="pay-input-group row-box">
+					<div class="row-flex pass-input-wrap">
+						<div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+						<input type="password" readonly="readonly" value="">
+					</div>
+					<div class="row-flex pass-input-wrap">
+						<div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+						<input type="password" readonly="readonly" value="">
+					</div>
+					<div class="row-flex pass-input-wrap">
+						<div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+						<input type="password" readonly="readonly" value="">
+					</div>
+					<div class="row-flex pass-input-wrap">
+						<div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+						<input type="password" readonly="readonly" value="">
+					</div>
+					<div class="row-flex pass-input-wrap">
+						<div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+						<input type="password" readonly="readonly" value="">
+					</div>
+					<div class="row-flex pass-input-wrap">
+						<div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+						<input type="password" readonly="readonly" value="">
+					</div>
+				</div>
+				<!--密码区-->
+				
+				<!--按钮去-->
+				<div class="pay-btn-group">
+					<button class="pay-button figure" value="1" type="button">1</button>
+					<button class="pay-button figure" value="2" type="button">2</button>
+					<button class="pay-button figure" value="3" type="button">3</button>
+					<button class="pay-button figure" value="4" type="button">4</button>
+					<button class="pay-button figure" value="5" type="button">5</button>
+					<button class="pay-button figure" value="6" type="button">6</button>
+					<button class="pay-button figure" value="7" type="button">7</button>
+					<button class="pay-button figure" value="8" type="button">8</button>
+					<button class="pay-button figure" value="9" type="button">9</button>
+					<button class="pay-button cancel" type="button"><i class="fa fa-arrow-left"></i></button>
+					<button class="pay-button figure" value="0" type="button">0</button>
+					<button class="pay-button empty" type="button"><i class="fa fa-times"></i></button>
+					<div class="clear-float"></div>
+				</div>
+				<!--按钮去-->
+			</div>
+		</div>
+	</div>
+	<!--余额支付密码弹窗-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</html>

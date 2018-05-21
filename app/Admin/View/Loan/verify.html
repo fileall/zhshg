@@ -1,0 +1,38 @@
+<include file="Public:header" />
+
+<form name="info_form" id="info_form" action="{:u('loan/verify')}" method="post" enctype="multipart/form-data">
+    <div class="pad_lr_10">
+        <div class="col_tab">
+
+            <div class="J_panes">
+                <div class="content_list pad_10">
+                    <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+                        <tr>
+                            <th>标题 :</th>
+                            <td><span>{$info.title}</span></td>
+                        </tr>
+                        <tr>
+                            <th>收益方案 :</th>
+                            <td>{:sprintf("<em class='s4'>%s</em>%%年化收益+<em class='s4'>%s</em>%%股票分红",$info['interest_rate'],$info['share_rate'])}</td>
+                        </tr>
+                        <tr>
+                            <th>借款 :</th>
+                            <td><span>{$info.total}</span>万</td>
+                        </tr>
+                        <tr>
+                            <th>盈亏 :</th>
+                            <td><input type="text" name="earning" id="J_earning" class="input-text" size="30" value="{$info.earning}" />元</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="menuid"  value="{$menuid}"/>
+    <input type="hidden" name="id" value="{$info.id}" />
+    <input type="hidden" name="loan_id" value="{$info.loan_id}" />
+</form>
+<include file="Public:footer" />
+
+</body>
+</html>

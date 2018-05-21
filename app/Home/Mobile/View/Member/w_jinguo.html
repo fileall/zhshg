@@ -1,0 +1,67 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">我的金果</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="outstanding-box vertical-center">
+				<div class="vertical-auto" style="width: 100%;">
+					<div class="outstanding-title">我的金果</div>
+					<div class="outstanding-money">￥{$member.gold_fruit}</div>
+				</div>
+			</div>
+			<div class="outstanding-wrap">
+				<a class="outstanding-link active" href="javascript:;" id="zf">金果支付</a>
+				<!--<a class="outstanding-link active" href="{:U('member/w_jinguo_pay')}">金果支付</a>-->
+				<a class="outstanding-link" href="{:U('member/recycle')}">金果回购</a>
+				<a class="outstanding-link" href="{:U('member/w_golden_transfer')}">金果转好友</a>
+			</div>
+			
+			<div class="notecase-tis">金果明细</div>
+			<ul class="notecase-ul">
+				<volist name="ye" id="y">
+					<li class="notecase-li">
+						<div class="notecase-left">
+							<div class="notecase-type">{$y.memos}</div>
+							<div class="notecase-date">{:date('Y-m-d',$y['add_time'])}</div>
+						</div>
+						<if condition="$y['type'] == 1">
+							<div class="notecase-right active">-{$y.totalprices}</div>
+						<else />
+							<div class="notecase-right">+{$y.totalprices}</div>
+						</if>
+						<div class="clear-float"></div>
+					</li>
+				</volist>	
+			</ul>
+			<div class="more-text">查看更多></div>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+	</block>	
+<block name="footer"></block>
+<block name="script">
+<script type="text/javascript" src="__MB__js/jquery.cookie.js"></script> 	
+<script>
+	$("#zf").click(function(){
+		$.cookie('zftype',3);
+		var zftype = $.cookie('zftype');
+		location.href='{:U("member/w_shaped_pay",array("zftype"=>'+zftype+'))}';
+	})
+</script>
+</block>
+</html>

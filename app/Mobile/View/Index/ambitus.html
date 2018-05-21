@@ -1,0 +1,261 @@
+<extend name="Base/common"/> 
+
+<block name="header">
+
+		<!--header-->
+
+		<div class="header-wrap">
+
+			<div class="header-inner">
+
+				<div class="header-title">
+
+					<div class="orientation row-box">
+
+						<div class="row-flex">
+
+							<div class="orientation-icon"><img src="__MB__images/location1.png"></div>
+
+						</div>
+
+						<div class="orientation-name">解放西路 </div>
+						<div class="row-flex">
+
+							<div class="orientation-right"><!--<i class="fa fa-angle-right"></i>--></div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+
+				<!--<div class="header-right">
+
+					<a class="add-store" href="">+</a>
+
+				</div>-->
+
+			</div>	
+
+		</div>
+
+		<div class="header-space"></div>
+
+		<!--header-->
+
+		
+
+		<!--筛选-->
+
+		<div class="filtrate-wrap">
+
+			<div class="filtrate-inner row-box">
+
+				<div class="row-flex">
+
+					<div class="filtrate-name <eq name="cate" value="0">active</eq>">
+
+					<a href="###" onclick="test(0,'','');">
+
+					
+
+					推荐</a>
+
+					</div>
+
+					<volist name="cates" id="c" key="k">
+
+					<elt name="k" value="3">
+					<div class="filtrate-name <if condition="$cate eq $c['id']"> active</if>">
+
+					<a href="###" onclick="test({$c.id},'','');">
+
+					{$c.name}</a>
+
+					</div>
+
+					</elt>
+
+					 </volist>
+
+					<div class="clear-float"></div>
+
+				</div>
+
+				
+
+				<div class="filtrate-right">
+
+					<a href="{:U('Index/ambitus?search=1')}"><div class="filtrate-select">筛选</div></a>
+					<div class="filtrate-link"></div>
+					<div class="filtrate-more">更多<i class="fa fa-angle-down"></i></div>
+					<div class="clear-float"></div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="header-space"></div>
+		<!--筛选-->
+
+		</block>
+
+		
+
+		<block name="body">
+
+		<!--content-->
+
+		<div class="content">
+
+			<ul class="filtrate-list-ul" id="lists">
+
+			</ul>
+
+			<!--
+
+<empty name="lists">
+
+  <p style="margin:0 auto;padding:50px 0;color:#ccc;text-align: center;">  暂无数据</p>
+
+    </empty>-->
+
+		</div>
+
+		<!--content-->
+
+		
+
+		<!--更多分类-->
+
+		<div class="more-kind">
+
+			<div class="more-kind-inner">
+
+			<ul class="more-kind-ul">
+
+				<volist name="cates" id="c" key="k">
+
+					<gt name="k" value="3">
+
+					<li class="more-kind-li <if condition="$cate eq $c['id']"> active</if>">
+
+				<!--	<a href="{:U('Index/ambitus?cate='.$c['id'])}">
+
+					{$c.name}</a>-->
+
+					<a href="###" onclick="test({$c.id},'','');">{$c.name}</a>
+
+					</li>
+
+					</gt>
+
+				</volist>
+
+				<div class="clear-float"></div>
+
+			</ul>
+
+			</div>
+
+		</div>
+		<!--更多分类-->
+
+		
+
+	</block>
+
+<block name="script">
+
+<style>.layui-flow-more {
+
+	margin: 10px 0;
+
+	text-align: center;
+
+	color: #999;
+
+	font-size: 14px;padding:25px
+
+}</style>
+
+<script src="__MB__js/layui/layui.js" charset="utf-8"></script>
+
+
+
+<script>
+
+$(document).ready(function(){test({$cate},'{$address}','{$title}')});  
+
+function test(cate,address,title){
+
+$("#lists").html("");
+
+  //$(document).ready(function(){  
+
+        var limit = 10;  
+
+        layui.use('flow', function(){
+
+            var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。  
+
+            var flow = layui.flow;  
+
+            flow.load({ 
+
+                elem: '#lists' //指定列表容器  
+
+                ,done: function(page, next){ //到达临界点（默认滚动触发），触发下一页  
+
+                  //页数  
+
+                    //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）  
+
+                    $.get('mobile.php?m=Mobile&c=Index&a=ambitus&title='+title+'&address='+address+'&cate='+cate+'&p='+page, function(res){  
+
+                        if(res){ 
+
+                            var lis = [];  
+
+                            //假设你的列表返回在data集合中  
+
+                            layui.each(res, function(index, value){  
+
+                                lis.push('<li class="filtrate-list-li">'
+                                +'<a href="mobile.php?m=Mobile&c=Index&a=shop_details&id='+value.id+'">'
+                                +'<div class="filtrate-box row-box"><div class="filtrate-list-left">'
+                                +'<div class="filtrate-list-img vertical-center"><div class="vertical-auto">'
+                                +'<img src="'+value.img+'"></div></div></div><div class="row-flex">'
+                                +'<div class="store-name">'+value.title+'</div><div class="store-date">营业时间：'+value.shop_hours+'</div>'
+//                            	+'<div class="store-txt"><span class="zhi">支</span>支持 金元宝，银元宝，金果支付</div>'
+//                             	+'<div class="store-txt"><span class="bei">倍</span>赠送5倍银币</div>';
+                                +'<div class="store-txt">'+value.desc+'</div></div><div class="filtrate-list-right">0.5km</div></div></a></li>')';
+
+                            });  
+
+                            //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页  
+
+                            //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多  
+
+                            next(lis.join(''),page<4);  
+
+                        }  
+
+                    });  
+
+                }  
+
+            });  
+
+        });  
+
+  
+
+}
+
+  </script>
+</block>

@@ -1,0 +1,155 @@
+<include file="Public/top" />
+	
+	<!--面包屑导航-->
+	<div class="ysw-crumbs">
+		<div class="wrap">
+			<a href="{:U('Curriculum/classroom')}" class="item hover-blue">语数外课堂</a>
+			<span class="item ico">&gt;</span>
+			<span class="item">直播/回放</span>
+		</div>
+	</div>
+	<!--面包屑导航-end-->
+	
+	<!--直播/回放列表-->
+	<div class="bgf0f3f5">
+		<div class="liveList wrap clear ">
+			<div class="left">
+				
+				<!--下拉菜单-->
+				<ul class="liveList-tab clear bgfff">
+					<li class="item">
+						<a href="javascript:;"class="liveList-tabName">直播</a>
+						<dl class="liveList-downMenu hide">
+							<dd><a href="javascript:;">直播</a></dd>
+							<dd><a href="javascript:;">回放</a></dd>
+						</dl>
+					</li>
+					<li class="item">
+						<a href="javascript:;">{$cate_list[$stage_id]['name']?$cate_list[$stage_id]['name']:"阶段"}</a>
+						<dl class="liveList-downMenu hide">
+							<volist name="stage" id="val">
+								<dd>
+									<a href="{:U('Curriculum/liveList',array('stage_id'=>$val['id'],'seniority_id'=>$seniority_id))}">
+										{$val['name']}
+									</a>
+								</dd>
+							</volist>
+						</dl>
+					</li>
+					<li class="item">
+						<a href="javascript:;">{$cate_list[$grade_id]['name']?$cate_list[$grade_id]['name']:"年级"}</a>
+						<dl class="liveList-downMenu hide" style="display: none;">
+							<volist name="grade" id="val">
+								<dd>
+									<a href="{:U('Curriculum/liveList',array('stage_id'=>$stage_id,'grade_id'=>$val['id'],'seniority_id'=>$seniority_id))}">
+										{$val['name']}
+									</a>
+								</dd>
+							</volist>
+						</dl>
+					</li>
+					<li class="item">
+						<a href="javascript:;">{$cate_list[$subject_id]['name']?$cate_list[$subject_id]['name']:"科目"}</a>
+						<dl class="liveList-downMenu hide" style="display: none;">
+							<volist name="subject" id="val">
+								<dd>
+									<a href="{:U('Curriculum/liveList',array('stage_id'=>$stage_id,'grade_id'=>$grade_id,'subject_id'=>$val['id'],'seniority_id'=>$seniority_id))}">
+										{$val['name']}
+									</a>
+								</dd>
+							</volist>
+						</dl>
+					</li>
+				</ul><!--下拉菜单-end-->
+				<!--列表-->
+				<ul class="liveList-list bgfff">
+					<!--直播的样式-->
+					<!--<li class="item clear">
+						<div class="left-img">
+							<a href="courseDetails.html"><img src="__PC__images/classroom_05.jpg" alt="" /></a>
+						</div>
+						<div class="right-info">
+							<a href="courseDetails.html" class="hover-blue"><h3 class="live-title">高中英语提高冲刺班【暑期专享班】</h3></a>
+							<p class="live-pro"><span class="cor">【1929元显示秒杀，仅7月17日】</span>新版精讲课程，中外教授课，从零基础到流畅生活会话！新版精讲课程，中外教授课，从零基础到流畅生活会话！</p>
+							<div class="clear">
+								<span class="fl newPrice">¥1929</span>
+								<s class="fl oldPrice">¥2929</s>
+								<span class="fr howMuch">6000人预约</span>
+							</div>
+							<div class="clear live-yuyue">
+								<span>科目：英语</span>
+								<span>老师：刘晓丽</span>
+								<a href="courseDetails.html" class="fr btn orange">立即预约</a>
+							</div>
+						</div>
+					</li>-->
+					<!--看回放的样式-->
+					<volist name="list" id="val">
+						<li class="item clear">
+							<div class="left-img">
+								<a href="{:U('Curriculum/playbackDetail',array('id'=>$val['id']))}">
+									<img src="{:attach($val['img'],'curriculum')}" alt="" />
+								</a>
+							</div>
+							<div class="right-info">
+								<a href="{:U('Curriculum/playbackDetail',array('id'=>$val['id']))}" class="hover-blue">
+									<h3 class="live-title">{$val['title']}</h3>
+								</a>
+								<p class="live-pro">{:code2html($val['info'])}</p>
+								<div class="clear">
+									<span class="fl newPrice">¥{$val['price']}</span>
+									<s class="fl oldPrice">¥{$val['old_price']}</s>
+									<span class="fr howMuch">{$val['people']}人预约</span>
+								</div>
+								<div class="clear live-yuyue">
+									<span>科目：{$val['cate_name']}</span>
+									<span>老师：{$val['name']}</span>
+									<a href="{:U('Curriculum/playbackDetail',array('id'=>$val['id']))}" class="fr btn green">看回放</a>
+								</div>
+							</div>
+						</li>
+					</volist>
+				</ul>
+				<div class="news-page">
+					<!--分页-->
+					{$page}
+					<!--分页-end-->
+				</div>
+				<!--列表-end-->
+			</div>
+			<div class="right">
+				<!--猜你喜欢-->
+				<div class="youMaybeLike bgfff">
+					<h3 class="title">猜你喜欢</h3>
+					<ul class="list">
+						<volist name="tj_list" id="val">
+							<li class="item clear">
+								<a href="{:U('Curriculum/playbackDetail',array('id'=>$val['id']))}">
+									<img src="{:attach($val['img'],'curriculum')}" alt="" class="left-img"/>
+									<div class="right-info">
+										<h3 class="name">{$val['title']}</h3>
+										<p class="price">¥{$val['price']}</p>
+									</div>
+								</a>
+							</li>
+						</volist>
+					</ul>
+				</div>
+				<!--猜你喜欢-end-->
+				<!--广告-->
+				<div class="liveList-adver">
+					<a href=""><img src="__PC__images/live-adver_03.jpg" alt="" /></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--直播/回放列表-end-->
+	
+ 	<!--公共底部-->
+	<include file="Public/footer" />
+ 	<!--公共底部-end-->
+ 	<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+ 	<script src="__PC__js/l_main.js"></script>
+  
+</body>
+</html>

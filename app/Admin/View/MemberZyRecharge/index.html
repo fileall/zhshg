@@ -1,0 +1,149 @@
+<include file="Public:header" />
+<!--超级会员流水列表-->
+<div class="pad_10" >
+
+  <form name="searchform" method="get"  >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <input type="hidden" name="m" value="admin" />
+                    <input type="hidden" name="c" value="member_zy_recharge" />
+                    <input type="hidden" name="a" value="index" />
+                    <input type="hidden" name="menuid" value="{$menuid}" />
+                    <!--会员等级：
+                    <select name="vips">
+                    	<option value="">全部</option>
+                        <volist name="grade" id="val">
+                            <option value="{$key}" <if condition="$search['vips'] eq $key">selected</if> >{$val}</option>
+                        </volist>
+                    </select>-->
+                    <input type="hidden" name="cate_id" id="J_cate_id" value="{$search.cate_id}" />
+                    &nbsp;&nbsp;添加日期：<input type="text" name="time_start" id="J_time_start" class="date" value="{$search.time_start}" placeholder="时间开始">
+                    -
+                    <input type="text" name="time_end" id="J_time_end" class="date"  value="{$search.time_end}" placeholder="时间截止"> 
+                   
+                    <!--&nbsp;&nbsp;关键字 :
+                    <input name="keywords" type="text" class="input-text"  value="{$search.keywords}" placeholder="会员名/手机" />-->
+                    <input type="submit"  class="btn look_index" value="搜索" />
+                    <input type="button"  class="btn export" value="下载报表" />
+                </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+
+    <!--<div class="explain_col">
+        <form id="addform" action="{:U('MemberZyIncome/member_upload')}" method="post" enctype="multipart/form-data">
+            <input type="file" style=" width:65px;" name="excelData" value="" datatype="*4-50" nullmsg="" />
+            <input type="submit" class="btn btn-primary Sub" value="导入" />
+            <a href="/download/member_import.xls" class="btn btn-primary Sub" >下载导入模板</a>
+            <input type="button" class="btn" data-tdtype="batch_action" data-uri="{:U('MemberZyIncome/export')}" data-name="id" data-msg="确定导出已经选中的学生吗？" value="导出" />
+        </form>
+    </div>-->
+
+  <div class="J_tablelist table_list" data-acturi="{:U('member_zy_recharge/ajax_edit')}">
+        <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width="20"><input type="checkbox" id="checkall_t" class="J_checkall"></th>
+                <!--<th width="70"  align="left">序号</th>-->
+                <th width="70"  align="left">会员名</th>
+                <th width="84" align="left">手机</th>
+                <th width="90" align="left"><span data-tdtype="order_by" data-field="prices">币种</span></th>
+                <th width="90" align="left"><span data-tdtype="order_by" data-field="prices">数量</span></th>
+                <th width="90" align="left"><span data-tdtype="order_by" data-field="prices">备注</span></th>
+                <th width="90" align="left"><span data-tdtype="order_by" data-field="prices">收益情况</span></th>
+                <th width="100"><span data-tdtype="order_by" data-field="reg_time">添加日期</span></th>
+                <!--<th width="125">{:L('operations_manage')}</th>-->
+          </tr>
+        </thead>
+
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <!--<td align="center">{$val['id']}</td>-->
+                <td align="center">{$val['realname']}</td>
+                <td align="center">{$val.mobile}</td>
+                <td align="center">
+                	<switch name="val.item_type">
+								    <case value="1">金宝</case>
+								    <case value="2">银宝</case>
+								    <case value="3">金果</case>
+								    <case value="4">余额</case>
+								    <case value="5">金币</case>
+								    <case value="6">银币</case>
+								    <default />未知币种
+								  </switch>
+                </td>
+                <td align="center">{$val.totalprices}</td>
+                <td align="center">{$val.memos}</td>
+                
+                <td align="center">
+                	<switch name="val['type']">
+								    <case value="1">出</case>
+								    <case value="2">入</case>
+								    <default />数据录入异常
+								  </switch>
+                </td>
+                <td align="center">{$val['add_time']|date="Y-m-d",###}</td>
+               <!-- <td align="center">
+                    <a href="javascript:;" class="J_showdialog" data-uri="{:u('member/edit', array('id'=>$val['id'], 'menuid'=>$menuid))}" data-title="编辑-{$val.nickname}" data-id="edit" data-width="500" data-height="200">编辑</a> |
+                    <a href="javascript:void(0);" class="J_confirmurl" data-uri="{:u('member/delete', array('id'=>$val['id']))}" data-acttype="ajax" data-msg="{:sprintf(L('confirm_delete_one'),$val['nickname'])}">{:L('delete')}</a>
+                </td>-->
+            </tr>
+            </volist>
+    </table>
+  </div>
+ 
+   <div class="songkebor">
+
+        <label class="select_all"><input  style="display: none;" type="checkbox" name="checkall" class="J_checkall">分页&nbsp;&nbsp;&nbsp;总条数:{$count}条</label>
+        <!--{:L('select_all')}/{:L('cancel')}-->
+
+        <!--<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('member/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="批量删除" />-->
+        <div id="pages">{$page}</div>
+        
+        
+
+    </div>
+</div>
+
+<include file="Public:footer" />
+
+</body>
+
+</html>
+
+<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+
+<script type="text/javascript" src="__STATIC__/js/calendar/calendar.js"></script>
+
+<script>
+	Calendar.setup({
+        inputField : "J_time_start",
+        ifFormat   : "%Y-%m-%d",
+        showsTime  : false,
+        timeFormat : "24"
+    });
+
+    Calendar.setup({
+        inputField : "J_time_end",
+        ifFormat   : "%Y-%m-%d",
+        showsTime  : false,
+        timeFormat : "24"
+    });
+    
+	 $(".look_index").click(function(){
+    	$("input[name='a']").val("index");
+    	$("form").submit();
+    })
+	//下载表报
+	 $(".export").click(function(){
+	 	alert('error');return false;
+    	$("input[name='a']").val("export");
+    	$("form").submit();
+    })
+</script>

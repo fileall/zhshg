@@ -1,0 +1,56 @@
+<include file="Public/order_top" />
+	
+	<!--内容-->
+	<div class="shopCart3 wrap">
+		<!--信息-->
+		<div class="shopCart3-info">
+			<h3>订单提交成功</h3>
+			<p class="info-p"><strong>订单提交成功，请您尽快付款！订单号：{$info['order_sn']}</strong> </p>
+			<p class="info-p">请您在订单提交成功后尽快完成付款，兴智教育提供在线支付保障请您放心购买</p>
+		</div>
+		<!--支付方式-->
+		<ul class="shopCart3-type">
+			<li class="clear active">
+				<span class="fl type-radio"><input type="radio" name="type" checked="checked" value="1" /></span>
+				<span class="fl">微信支付</span>
+				<span class="fr type-cor" style="display: block;">￥{$info['price']}</span>
+			</li>
+			<li class="clear">
+				<span class="fl type-radio"><input type="radio" name="type" value="2" /></span>
+				<span class="fl">支付宝</span>
+				<span class="fr type-cor">￥{$info['price']}</span>
+			</li>
+		</ul>
+		<div class="shopCart3-btns">
+			<a href="javascript:;" class="btn blue">确认支付</a>
+		</div>
+	</div>
+	<!--内容-end-->
+	
+ 	<!--公共底部-->
+	<include file="Public/footer" />
+ 	<!--公共底部-end-->
+	<link rel="stylesheet" href="__PC__plugins/layui-v1.0.9/layui/css/modules/layer/default/layer.css">
+ 	<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__PC__plugins/layui-v1.0.9/layui/lay/modules/layer.js"></script>
+ 	<script src="__PC__js/l_main.js"></script>
+
+ 	<script type="text/javascript">
+ 		$(function(){
+			$('.btn').click(function () {
+			    var status = "{$info['status']}",
+					type = $('input[name=type]:checked').val();
+			    if(status && status == 2){
+                    layer.msg('该订单已支付');
+				}else{
+			        if(type == 1){
+						window.location.href="{:U('Order/wxPay')}"+"&id={$info['o_id']}";
+					}else{
+                        window.location.href="{:U('Order/alipay')}"+"&id={$info['o_id']}";
+					}
+				}
+            })
+   		})
+ 	</script>
+</body>
+</html>

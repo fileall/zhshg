@@ -1,0 +1,48 @@
+<extend name="Base/common"/> 
+<block name="header"></block>		
+<block name="body">
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">账户安全</div>
+				<a href="/index.php?s=/member/myset">
+					<div class="header-left"><i class="fa fa-angle-left"></i></div>
+				</a>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<ul class="set-con-ul">
+				<li class="set-con-li"><a href="{:U('member/set_pw_enter')}">
+					<div class="set-con-name">修改登录密码</div>
+					<div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+					<div class="clear-float"></div>
+				</a></li>
+				
+				<li class="set-con-li"><a href="{:U('member/set_pw_pay')}">
+					<div class="set-con-name">支付密码设置</div>
+					<div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+					<if condition="!$member['paypassword']">
+						<div class="set-con-state y-mar-top5">未设置</div>
+					</if>
+					<div class="clear-float"></div>
+				</a></li>
+			</ul>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+	</block>	
+<block name="footer"></block>	
+<block name="script">
+<script>	
+</script>
+</block>	
+</html>

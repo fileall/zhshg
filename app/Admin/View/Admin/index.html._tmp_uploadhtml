@@ -1,0 +1,69 @@
+<include file="Public:header" />
+
+<div class="explain_col">
+    <form id="addform" action="{:U('Admin/admin_upload')}" method="post" enctype="multipart/form-data">
+        <input type="file" style=" width:65px;" name="excelData" value="" datatype="*4-50" nullmsg="" />
+        <input type="submit" class="btn btn-primary Sub" value="导入" />
+        <a href="/download/admin_import.xls" class="btn btn-primary Sub" >下载导入模板</a>
+        <a href="{:U('Admin/export')}" class="btn btn-primary Sub" >导出</a>
+    </form>
+</div>
+
+<!--管理员管理-->
+<div class="pad_lr_10">
+    <div class="J_tablelist table_list" data-acturi="{:U('admin/ajax_edit')}">
+        <table width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th width="40"><input type="checkbox" name="checkall" class="J_checkall"></th>
+                <th>账号</th>
+                <th>姓名</th>
+                <th width="40">工号</th>
+                <th>手机</th>
+                <th>性别</th>
+                <th>生日</th>
+                <th>部门</th>
+                <th>职位</th>
+                <!--<th>{:L('lasttime')}</th>-->
+      			<!--<th>{:L('lastip')}</th>-->
+      			<th>创建时间</th>
+                <th>{:L('status')}</th>
+                <th width=100>{:L('operations_manage')}</th>
+            </tr>
+            </thead>
+    	    <tbody>
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <td align="center">{$val.username}</td>
+                <td align="center">{$val.name}</td>
+                <td align="center">{$val.id}</td>
+                <td align="center">{$val.mobile}</td>
+                <td align="center">{$val['sex']==1?"男":"女"}</td>
+                <td align="center">{$val['birthday']}</td>
+                <td align="center">{$d_list[$val['d_id']]}</td>
+                <td align="center">{$val.role.name}</td>
+                <!--<td align="center">{$val.last_time|date='Y-m-d H:i:s',###}</td>-->
+                <!--<td align="center">{$val.last_ip}</td>-->
+                <td align="center">{$val.add_time|date='Y-m-d H:i:s',###}</td>
+                <td align="center">
+                    <img data-tdtype="toggle" data-field="status" data-id="{$val.id}" data-value="{$val.status}" src="__PUBLIC_ADMIN__/images/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" />
+                </td>
+                <td align="center">
+                    <a href="{:U('admin/edit', array('id'=>$val['id'],'menuid'=>$menuid))}">{:L('edit')}</a> |
+                    <a href="javascript:;" class="J_confirmurl" data-uri="{:U('admin/delete', array('id'=>$val['id']))}" data-msg="{:sprintf(L('confirm_delete_one'),$val['username'])}">{:L('delete')}</a>
+                </td>
+            </tr>
+            </volist>
+    	   </tbody>
+        </table>
+    </div>
+    <div class="btn_wrap_fixed">
+		<label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+    	<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('admin/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
+		<div id="pages">{$page}</div>
+    </div>
+</div>
+<include file="Public:footer" />
+</body>
+</html>

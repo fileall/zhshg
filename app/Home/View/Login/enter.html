@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="__PC__plugins/layui-v1.0.9/layui/css/modules/layer/default/layer.css">
+    <link rel="stylesheet" href="__PC__css/index.css">
+    <script src="__PC__js/jquery-1.11.2.min.js"></script>
+    <!--<script src="__PC__js/custom.js"></script>-->
+</head>
+
+<body>
+<div class="top-col">
+    <div class="enter-logo">
+        <a href="/">
+            <img src="__PC__images/logo.png">
+        </a>
+    </div>
+    <!--<div class="enter-title">欢迎登录</div>-->
+
+    <div class="assist"><a title="帮助中心" href="">
+        <i class="fa fa-question-circle"></i><span>帮助中心</span>
+    </a></div>
+    <div class="return-home"><a title="返回首页" href="/">
+        <i class="fa fa-home"></i><span>返回首页</span>
+    </a></div>
+
+    <div class="clear-float"></div>
+</div>
+<form>
+<div class="enter-bjimng">
+    <div class="enter-inner-box">
+        <div class="enter-right-inner">
+            <form action="" method="poat" name="">
+                <ul class="enter-input-ul">
+                    <li class="enter-input-li">
+                        <div class="enter-input-logo"><img src="__PC__images/logo.png"></div>
+                    </li>
+                    <li class="enter-input-li">
+                        <div class="enter-form-box">
+                            <div class="enter-input-icon"><i class="fa fa-user"></i></div>
+                            <div class="enter-input"><input name="mobile" id="mobile" placeholder="请输入您的手机号" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"></div>
+                            <div class="clear-float"></div>
+                        </div>
+                    </li>
+
+                    <li class="enter-input-li">
+                        <div class="enter-form-box">
+                            <div class="enter-input-icon"><i class="fa fa-unlock-alt"></i></div>
+                            <div class="enter-input"><input name="password" type="password" placeholder="请输入密码"></div>
+                            <div class="clear-float"></div>
+                        </div>
+                    </li>
+
+                    <li class="enter-input-li">
+                        <div class="enter-form-box">
+                            <div class="enter-form-btn">
+                                <button type="button">登录</button>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="enter-input-li">
+                        <div class="enter-bottom-link">
+                            <div class="enter-bottom-pass"><a href="{:U('Login/forgot_pwd')}">忘记密码？</a></div>
+                            <div class="enter-bottom-pass active"><a href="{:U('Login/register')}">免费注册</a></div>
+                            <div class="clear-float"></div>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+</form>
+
+<!--footer-->
+<include file="Public/login_footer" />
+<!--footer-->
+
+<!--自定义滚动条-->
+<script src="__PC__plugins/layui-v1.0.9/layui/lay/modules/layer.js"></script>
+<script>
+    $(function () {
+        //监控回车键
+        window.onkeydown=function(){
+            if(13 == event.keyCode){
+                $('button').click();
+            }
+        }
+
+        //提交登录
+        $('button').click(function () {
+            var chekc = true,
+                data = $("form").serialize();
+
+            //验证必填项
+            $('input').each(function () {
+                var self = $(this),
+                    val = self.val(),
+                    str = self.attr('placeholder');
+
+                if(!val){
+                    layer.msg(str);
+                    return chekc = false;
+                }
+            })
+            if(chekc === false) return false;
+
+            //提交注册
+            $.ajax({
+                type: "post",
+                url: "{:U('Login/enter')}",
+                async:false,
+                data: data,
+                dataType: "json",
+                success: function(result){
+                    layer.msg(result[1]);
+                    if(result[0] == 1){
+                        setTimeout(function () {
+                            window.location.href="/";
+                        },2000)
+                    }
+                }
+            });
+        })
+    })
+</script>
+</body>
+</html>

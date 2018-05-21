@@ -1,0 +1,89 @@
+<include file="Public/member_top" />
+
+    <!--右测导航栏开始-->
+    <div class="x-right-colunm">
+        <div class="x-right-colunm-inner myCourse-right">
+            <div class="x-headline">请对商品进行评价</div><!--title name-->
+            <div class=" makeEvaluate"><!--容器-->
+            	<!--评价-->
+            	<div class="makeEvaluate-item">
+	            	<div class="makeEvaluate-info l-clear">
+	            		<img src="/data/attachment/curriculum/1708/599646dc07244.jpg" alt="" />
+	            		<p>商品信息商品信息商品信息商品信息商品信息商品信息商品信息商品信息商品信息商品信息商品信息商品信息</p>
+	            	</div>
+	                <ul class="makeEva-pj l-clear">
+	                    <li>
+	                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>好评
+	                    </li>
+	                    <li>
+	                        <i class="fa fa-hand-rock-o" aria-hidden="true"></i>中评
+	                    </li>
+	                    <li>
+	                        <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>差评
+	                    </li>
+	                </ul>
+	                <textarea name="" class="makeEvaluate-font" placeholder="说点什么吧！"></textarea>
+                </div>
+                <!--评价-->
+                <div class="makeEvaluate-item">
+	            	<div class="makeEvaluate-info l-clear">
+	            		<img src="/data/attachment/curriculum/1708/599646dc07244.jpg" alt="" />
+	            		<p>商品信息商品信息商品信息商品信息商品信息商品信息商品信息商品信息商品信息商品信息商品信息商品信息</p>
+	            	</div>
+	                <ul class="makeEva-pj l-clear">
+	                    <li>
+	                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>好评
+	                    </li>
+	                    <li>
+	                        <i class="fa fa-hand-rock-o" aria-hidden="true"></i>中评
+	                    </li>
+	                    <li>
+	                        <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>差评
+	                    </li>
+	                </ul>
+	                <textarea name="" class="makeEvaluate-font" placeholder="说点什么吧！"></textarea>
+	                
+                </div>
+                
+                <div class="makeEva-pj-btn">
+	                <input type="button" value="立即评价"/>
+	            </div>
+            </div>
+
+        </div>
+
+
+    </div><!--/x-right-colunm-->
+    <!--右测导航栏结束-->
+</div>
+<!--公共底部-->
+<include file="Public/footer" />
+<script src="__PC__plugins/layui-v1.0.9/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+    $(function(){
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            $('.makeEva-pj-btn').click(function(){
+            	var len = $('.makeEva-pj').length;
+                var num = 0;
+                $('.makeEva-pj li').each(function(i,e){
+                	if($(e).hasClass('active')){
+                		num++;
+                	}
+                })
+                if(num != len){
+                	layer.msg('请对商品作出评价',{icon:2});
+                	return false;
+                }else if(num == len){
+                	layer.msg('评论成功',{icon:1})
+                };
+            });
+        });
+
+    })
+
+
+</script>
+</body>
+</html>

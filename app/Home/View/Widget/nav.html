@@ -1,0 +1,6 @@
+	<a href="javascript:;" class="hover-blue top-menu">{$info['name']}</a>
+	<dl class="down-menu">
+		<volist name="info['self']" id="val">
+			<dd><a href="index.php?m=Home&c=Index&a={$info['url']}&id={$info['id']}&cate_id={$val['id']}" class="hover-blue">{$val['name']}</a></dd>
+		</volist>
+	</dl>

@@ -1,0 +1,147 @@
+<include file="Public:header" />
+<!--文章列表-->
+
+<div class="pad_lr_10" >
+    <form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+        <tr>
+            <td>
+            <div class="explain_col">
+                <input type="hidden" name="m" value="admin" />
+                <input type="hidden" name="c" value="Order" />
+                <input type="hidden" name="a" value="index" />
+                <input type="hidden" name="menuid" value="{$menuid}" />
+                下单时间：
+                <input type="text" name="time_start" id="time_start" class="date" size="12" value="{$search.time_start}" placeholder="开始时间">
+                -
+                <input type="text" name="time_end" id="time_end" class="date" size="12" value="{$search.time_end}" placeholder="结束时间">
+                &nbsp;&nbsp;{:L('status')}:
+                <select name="status">
+                <option value="">-{:L('all')}-</option>
+                <option value="1" <if condition="$search.status eq '1'">selected="selected"</if>>未支付</option>
+                <option value="2" <if condition="$search.status eq '2'">selected="selected"</if>>已支付</option>
+                <option value="3" <if condition="$search.status eq '3'">selected="selected"</if>>待收货</option>
+                <option value="4" <if condition="$search.status eq '4'">selected="selected"</if>>已收货</option>
+                <option value="5" <if condition="$search.status eq '5'">selected="selected"</if>>已完成</option>
+                <option value="6" <if condition="$search.status eq '6'">selected="selected"</if>>已取消</option>
+                </select>
+                &nbsp;&nbsp;{:L('keyword')} :
+                <input name="keyword" type="text" class="input-text" size="25" value="{$search.keyword}" placeholder="订单号/收货人/手机号" />
+                <input type="submit" name="search" class="btn" value="{:L('search')}" />
+            </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </form>
+
+    <div class="J_tablelist table_list" data-acturi="{:U('article/ajax_edit')}">
+    <table width="100%" cellspacing="0"  class="tc">
+        <thead>
+        	<if condition="$order_type eq 1">
+            <tr>
+                <th width="20"><input type="checkbox" id="checkall_t" class="J_checkall"></th>
+                <th>订单号</th>
+                <th>消费店铺</th>
+                <th>订单金额</th>
+                <th>收货人</th>
+                <th>电话</th>
+                <!--<th>地址</th>-->
+				<th>下单时间</th>
+                <th><span data-tdtype="order_by" data-field="status">状态</span></th>
+                <th width="120">{:L('operations_manage')}</th> 
+            </tr>
+            <elseif condition="$order_type eq 2" />
+            <tr>
+                <th width="20"><input type="checkbox" id="checkall_t" class="J_checkall"></th>
+                <th>订单号</th>
+                <th>消费店铺</th>
+                <th>消费金果</th>
+                <th>会员名</th>
+                <th>会员电话</th>
+				<th>下单时间</th>
+               <!-- <th><span data-tdtype="order_by" data-field="status">状态</span></th>-->
+                <th width="120">{:L('operations_manage')}</th> 
+            </tr>
+            </if>
+        </thead>
+        <tbody>
+            <volist name="list" id="val" >
+            <if condition="$order_type eq 1">
+            <tr>
+                <td><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <td>{$val['order_sn']}</td>
+				<td>{$student[$val['uid']]}</td>
+				<td>{$val['totalprices']}</td>
+				<td>{$val['shperson']}</td>
+				<td>{$val['mobile']}</td>
+				<!--<td>{$val['address']}</td>-->
+                <td>{$val.add_time|date='Y-m-d H:i:s',###}</td>
+                <td>
+                    <switch name="val.status">
+                        <case value="1"><span class="red">未支付</span></case>
+                        <case value="2"><span class="green">已支付</span></case>
+                        <case value="3"><span class="cor_b1">待收货 </span></case>
+                        <case value="4"><span class="cor_b2">已收货</span></case>
+                        <case value="5"><span class="cor_r1">已完成</span></case>
+                        <case value="6">已取消</case>
+                    </switch>
+                </td>
+                <td>
+                    <switch name="val.status">
+                        <case value="2">
+                            <a href="javascript:;" class="J_showdialog" data-uri="{:u('Order/deliver_goods', array('id'=>$val['id'], 'menuid'=>$menuid))}" data-title="发货" data-id="examine" data-width="500" data-height="100">发货</a> |
+                        </case>
+                    </switch>
+                    <a href="javascript:;" class="J_showdialog" data-uri="{:u('CurriculumOrder/detail', array('id'=>$val['id'], 'menuid'=>$menuid))}" data-title="详情" data-id="edit" data-width="500" data-height="200">详情</a>
+            </tr>
+            <else />
+            <tr>
+                <td><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <td>{$val['order_sn']}</td>
+				<td>{$student[$val['uid']]}</td>
+				<td>{$val['totalprices']}</td>
+				<td>{$val['shperson']}</td>
+				<td>{$val['mobile']}</td>
+                <td>{$val.add_time|date='Y-m-d H:i:s',###}</td>
+                <td>
+                    <switch name="val.status">
+                        <case value="2">
+                            <a href="javascript:;" class="J_showdialog" data-uri="{:u('Order/deliver_goods', array('id'=>$val['id'], 'menuid'=>$menuid))}" data-title="发货" data-id="examine" data-width="500" data-height="100">发货</a> |
+                        </case>
+                    </switch>
+                    <a href="javascript:;" class="J_showdialog" data-uri="{:u('CurriculumOrder/detail', array('id'=>$val['id'], 'menuid'=>$menuid))}" data-title="详情" data-id="edit" data-width="500" data-height="200">详情</a>
+            </tr>
+            </if>
+            </volist>
+        </tbody>
+    </table>
+
+    <div class="btn_wrap_fixed">
+        <label class="select_all"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+        <!--<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('article/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />-->
+        <div id="pages">{$page}</div>
+    </div>
+
+    </div>
+</div>
+<include file="Public:footer" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC_ADMIN__js/calendar/calendar-blue.css"/>
+<script src="__PUBLIC_ADMIN__js/calendar/calendar.js"></script>
+<script>
+Calendar.setup({
+    inputField : "time_start",
+    ifFormat   : "%Y-%m-%d",
+    showsTime  : false,
+    timeFormat : "24"
+});
+Calendar.setup({
+    inputField : "time_end",
+    ifFormat   : "%Y-%m-%d",
+    showsTime  : false,
+    timeFormat : "24"
+});
+</script>
+</body>
+</html>

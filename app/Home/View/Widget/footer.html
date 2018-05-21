@@ -1,0 +1,10 @@
+<volist name="list" id="val">
+	<dl>
+		<dt>{$val['name']}</dt>
+		<volist name="val['self']" id="va">
+			<dd><a href="index.php?m=Home&c=Index&a={$val['url']}&id={$val['id']}&cate_id={$va['id']}" class="hover-blue">{$va['name']}</a></dd>
+		</volist>
+	</dl>
+</volist>
+
+

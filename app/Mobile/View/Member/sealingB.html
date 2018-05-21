@@ -1,0 +1,72 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">元宝购买</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="sealing-wrap">	
+				<div class="merchant-money">购买金额</div>
+				<div class="merchant-form row-box">
+					<div class="row-flex">
+						<div class="merchant-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;"><input id="prices" type="number" placeholder="0.00"></div>
+						</div>
+					</div>
+					<div class="merchant-currency">元</div>
+				</div>
+			</div>
+			
+			<div class="sealing-title">
+				1RMB可以购买1个金元宝，同时可以赠送1000银币，产品解释权归臻慧生活馆所有。
+			</div>
+			
+			<form action="" method="post" name="chong"></form>
+			<div class="submit-button"><a id="gou" href="javascript:;">确认购买</a></div>
+			
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>
+<block name="footer"></block>
+
+<block name="script">	
+<script>
+//	$('#gou').click(function(){
+//		//生成订单
+//		 var prices = $('#prives').val();
+//		 var zftype = 4;//'支付方式  0.未选择 1=微信，2=支付宝  3金元宝 4银元宝'
+//		 var item_type = 2;//'sp类型  0.未选择 1=sp,2=充值元宝（余额充值，银元宝充值）,3=充值余额',	
+//		  $.post('{:U("member/order_make")}',{price:prices,zftype:zftype,item_type:item_type},function(d){
+//			 	if(d.status ==1){
+//					$('form[name="chong"]').attr('action','{:U("member/sealingB")}');
+//					var html ="<input type='hidden' name='str' value='"+d.dingdan+"}'>";
+//					$('form[name="chong"]').append(html);
+//					$('form[name="chong"]').submit();
+//					});
+//			 	}
+//			 	else{
+//			 		layer.msg(d.msg);
+//			 	}
+//			 
+//			 })
+//	})
+
+</script>
+		
+	
+</block>	
+</html>

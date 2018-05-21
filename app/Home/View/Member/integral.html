@@ -1,0 +1,60 @@
+<include file="Public/member_top" />
+			
+			<!--右测导航栏开始-->
+			<div class="x-right-colunm">
+				<div class="x-right-colunm-inner">
+					
+					<div class="x-headline">我的积分</div><!--title name-->
+					
+					<div class="x-at-integral">
+						<span class="x-at-icon"><i class="fa fa-diamond"></i></span>
+						<p>当前积分：<span class="x-at-number">{$info['integral']}</span>分</p>
+						<div style="clear: both;"></div><!--clearFloat-->
+					</div>
+					<div class="x-integral-title">积分明细</div>
+					<if condition="$list">
+						<!--有积分使用记录时-->
+						<div class="x-integral-detail">
+							<div class="x-table-title">
+								<p>时间</p>
+								<p>积分</p>
+								<p>详细</p>
+								<div style="clear: both;"></div><!--clearFloat-->
+							</div>
+
+							<ul class="x-table-ul">
+								<volist name="list" id="val">
+									<li class="">
+										<p>{$val['add_time']|date="Y-m-d",###}</p>
+										<if condition="$val['type'] eq 1">
+											<p style="color: green;">+{$val['integral']}</p>
+											<else />
+											<p>-{$val['integral']}</p>
+										</if>
+										<p>{$val['describe']}</p>
+										<div style="clear: both;"></div><!--clearFloat-->
+									</li>
+								</volist>
+							</ul>
+
+							<!--分页-->
+							{$page}
+						</div><!--/有积分使用记录时-->
+					<else />
+						<!--暂无积分，天假x-hide样式可隐藏-->
+						<div class="x-integral-no ">
+							<p class="x-integral-no-p1"></p>
+							<p class="x-integral-no-p2">暂无积分使用记录！</p>
+						</div>
+						<!--/暂无积分-->
+					</if>
+				</div>
+                
+			</div>
+			<!--右测导航栏结束-->
+			<div style="clear: both;"></div><!--clearFloat-->	
+		</div>
+		<!--公共底部-->
+		<include file="Public/footer" />
+	</body>
+</html>

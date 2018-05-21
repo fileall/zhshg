@@ -1,0 +1,108 @@
+<!--编辑角色-->
+<div class="dialog_content">
+	<form id="info_form" name="info_form" action="{:u('recharge/edit')}" method="post">
+        <input type="hidden" name="recharge_id" value="{$info.recharge_id}" />
+    <table width="100%" class="table_form">
+        <tr>
+            <th width="80">充值订单号 :</th>
+            <td>
+                <input type="text" name="order_id" id="order_id" class="input-text" value="{$info.order_id}">
+            </td>
+        </tr>
+        <tr>
+            <th width="80">充值方式 :</th>
+            <td>
+                <select name="type" id="type">
+                    <option value="0">请选择</option>
+                    <volist name="recharege_type" id="val">
+                    <option value="{$key}" <if condition="$key eq $info['type']">selected="selected"</if> >{$val}</option>
+                    </volist>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th width="80">会员 :</th>
+            <td>
+                <select id="member_id_choose">
+                    <option value="0">请选择</option>
+                    <volist name="member_list" id="val">
+                        <option value="{$val.id}" <if condition="$val['id'] eq $info['member_id']">selected="selected"</if> >{$val.nickname}|{$val.mobile}</option>
+                    </volist>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th width="80">会员ID :</th>
+            <td><input type="text" name="member_id" id="member_id" class="input-text" value="{$info.member_id}"></td>
+        </tr>
+        <tr>
+            <th width="80">金额 :</th>
+            <td><input type="text" name="fee" id="fee" class="input-text" value="{$info.fee}"></td>
+        </tr>
+        <tr>
+            <th width="80">收款行 :</th>
+            <td>
+                <select name="due_bank" id="due_bank">
+                    <option value="0">请选择</option>
+                    <volist name="due_bank" id="val">
+                        <option value="{$key}" <if condition="$key eq $info['due_bank']">selected="selected"</if> >{$val.bank_name}({$val.account})</option>
+                    </volist>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th width="80">支付银行 :</th>
+            <td><input name="pay_bank" value="{$info['pay_bank']}" class="input-text" /></td>
+        </tr>
+        <tr>
+            <th width="80">卡号 :</th>
+            <td><input name="card_num" value="{$info['card_num']}" class="input-text" /></td>
+        </tr>
+        <tr>
+            <th width="80">开户名 :</th>
+            <td><input name="card_username" value="{$info['card_username']}" class="input-text" /></td>
+        </tr>
+        <tr>
+            <th width="80">交易流水 :</th>
+            <td><input name="bank_order_id" value="{$info['bank_order_id']}" class="input-text" /></td>
+        </tr>
+        <tr>
+            <th width="80">支付宝账号 :</th>
+            <td><input name="alipay_account" value="{$info['alipay_account']}" class="input-text" /></td>
+        </tr>
+
+        <tr>
+            <th width="80">宝付流水号 :</th>
+            <td><input name="baofoo_pay_id" value="{$info['baofoo_pay_id']}" class="input-text" /></td>
+        </tr>
+<!--
+        <tr>
+            <th>状态 :</th>
+            <td>
+                <input type="radio" name="status" class="radio_style" value="1" <if condition="$info.status eq 1"> checked="checked"</if>> &nbsp;{:L('yes')}&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="status" class="radio_style" value="0" <if condition="$info.status eq 0"> checked="checked"</if>> &nbsp;{:L('no')}
+            </td>
+        </tr>
+-->
+    </table>
+    <input type="hidden" name="id" id="id" value="{$info.id}" />
+    </form>
+</div>
+<script src="__PUBLIC_ADMIN__js/fileuploader.js"></script>
+<script>
+$(function(){
+    $.formValidator.initConfig({formid:"info_form",autotip:true});
+    $("#name").formValidator({ onshow:lang.please_input+lang.role_name, onfocus:lang.please_input+lang.role_name, oncorrect:lang.input_right}).inputValidator({ min:1, onerror:lang.please_input+lang.role_name}).defaultPassed();
+
+    $('#info_form').ajaxForm({success:complate,dataType:'json'});
+    function complate(result){
+        if(result.status == 1){
+            $.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'});
+        }
+    }
+})
+</script>

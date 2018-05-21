@@ -1,0 +1,96 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+
+<body class="body-bgColor">
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">筛选</div>
+        <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+        <div class="header-right"></div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="content">
+    <form action="{:U('merchant/merchant_list')}" method="post">
+    <div class="screen-content">
+        <div class="serach-box vertical-center y-width94">
+            <div class="vertical-auto" style="width: 100%;"><input id="search" type="text" name="title" value="{$title}"></div>
+            <div class="serach-tis"><i class="fa fa-search"></i>搜索商品</div>
+        </div>
+
+        <!--选择地区-->
+        <div class="area-form">
+            <div class="area-form-title">选择区域<span id="clear_address">(清空)</span></div>
+            <div class="area-form-input vertical-center">
+                <div class="vertical-auto" style="width: 100%;"><input name="address" value="{$address}" id="area" type="text" readonly="readonly" placeholder="请选择区域"></div>
+            </div>
+        </div>
+        <!--选择地区-->
+
+        <!--商品筛选-->
+        <div class="area-form">
+            <div class="area-form-title">支付类型</div>
+            <div class="">
+                <ul class="more-kind-ul y-screen-kind-ul">
+                    <li class="more-kind-li <if condition='!$zftype'>active</if>" data-zftype="0">全部</li>
+                    <li class="more-kind-li <if condition='$zftype eq 1'>active</if>"  data-zftype="1">金元宝支付</li>
+                    <li class="more-kind-li <if condition='$zftype eq 3'>active</if>" data-zftype="3">金果支付</li>
+                    <div class="clear-float"></div>
+                </ul>
+            </div>
+            <input name="zftype" type="hidden"/>
+            <input name="cate_id" value="{$cate_id}" type="hidden"/>
+
+            <div class="submit-button"><a class="sub-pass" href="javaScript:;">确定</a></div>
+        <!--商品筛选-->
+         </div>
+    </div>
+    </form>
+</div>
+    <!--content-->
+
+<!--footer-->
+<!--footer-->
+</body>
+</block>
+<block name="footer"></block>
+<block name="script">
+
+<link rel="stylesheet" href="__MB__css/LArea.css">
+<script src="__MB__js/LArea.js"></script>
+<script src="__MB__js/LAreaData1.js"></script>
+<script src="__MB__js/LAreaData2.js"></script>
+<script>
+    //选择地区
+    var area1 = new LArea();
+    area1.init({
+        'trigger': '#area',
+        'valueTo': '#value1',
+        'keys': {
+            id: 'id',
+            name: 'name'
+        },
+        'type': 1,
+        'data': LAreaData
+    });
+    $('#clear_address').click(function(){
+        $('input[name="address"]').val('');
+
+    })
+
+    $('.more-kind-li').click(function(){
+        $('input[name="zftype"]').val($(this).data('zftype'));//支付方式
+    })
+
+    $('.submit-button').click(function(){
+        $('form').submit();
+    })
+</script>
+
+</block>
+</html>

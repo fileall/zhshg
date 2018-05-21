@@ -1,0 +1,48 @@
+<!--编辑会员-->
+<div class="dialog_content">
+    <form id="info_form" action="{:u('Salesman/edit')}" method="post">
+        <table width="100%" class="table_form">
+    		<if condition="$_SESSION['admin']['role_id'] eq 1">
+        	<tr>
+                <th>门店 :</th>
+                <td>
+                	<select name="store_id" >
+                		<volist name="store" id="val">
+	                		<option  value="{$val['id']}" <if condition="$info['store_id'] eq $val['id']">selected</if>>
+	                			{$val['username']}
+	                		</option> 
+	                	</volist>  
+                    </select>
+                </td>
+            </tr>
+            <elseif condition="$_SESSION['admin']['role_id'] eq 3" />
+            	<input type="hidden" name="store_id" value="{$_SESSION['admin']['id']}" >
+            </if>
+            <tr>
+                <th>姓名 :</th>
+                <td><input type="text" name="name" id="name" class="input-text fl mr10" value="{$info['name']}" size="30"></td>
+            </tr>
+       </table>
+       <input type="hidden" name="id" value="{$info['id']}" />    
+    </form>
+</div>
+<script src="__STATIC__/js/fileuploader.js"></script>
+<script>
+    $(function(){
+        $.formValidator.initConfig({formid:"info_form",autotip:true});
+        
+        $("#name").formValidator({onshow:'请填写业务员姓名',onfocus:'请填写业务员姓名'}).inputValidator({min:1,onerror:'请填写业务员姓名'});
+        
+        $('#info_form').ajaxForm({success:complate,dataType:'json'});
+        
+        function complate(result){
+            if(result.status == 1){
+                $.dialog.get(result.dialog).close();
+                $.pinphp.tip({content:result.msg});
+                window.location.reload();
+            } else {
+                $.pinphp.tip({content:result.msg, icon:'alert'});
+            }
+        }
+    });
+</script>

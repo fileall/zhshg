@@ -1,0 +1,153 @@
+<include file="Public:header" />
+<form id="info_form" action="{:u('report/edit')}" method="post" enctype="multipart/form-data">
+<div class="pad_lr_10">
+	<div class="col_tab">
+		<ul class="J_tabs tab_but cu_li">
+			<li class="current">{:L('article_basic')}</li>
+			<li>{:L('article_seo')}</li>
+		</ul>
+		<div class="J_panes">
+			<div class="content_list pad_10">
+				<table width="100%" cellspacing="0" class="table_form">
+					<tr>
+						<th width="120">{:L('article_cateid')} :</th>
+						<td><select class="J_cate_select mr10" data-pid="0" data-uri="{:U('trial_cate/ajax_getchilds')}" data-selected="{$selected_ids}"></select>
+                			<input type="hidden" name="cate_id" id="J_cate_id" value="{$info.cate_id}" /></td>
+					</tr>
+		            <tr>
+						<th>{:L('article_title')} :</th>
+						<td>
+		                    <input type="text" name="title" id="J_title" rel="title_color" class="input-text iColorPicker" size="60" value="{$info.title}" >
+		                </td>
+					</tr>
+                    <tr>
+                        <th>属性:</th>
+                        <td>
+                            <volist name="attrs" id="attr">
+                                <label><input type="checkbox" name="attr[]" value="{$attr.id}" <?php echo in_array($attr['id'],$attr_list)?'checked="checked"':''?>> {$attr.name}</label>&nbsp;&nbsp;
+                            </volist>
+                        </td>
+                    </tr>
+		            <tr>
+						<th>{:L('tag')} :</th>
+						<td>
+		                	<input type="text" name="tags" id="J_tags" class="input-text" size="50" value="{$info.tags}">
+		                    <input type="button" value="{:L('auto_get')}" id="J_gettags" name="tags_btn" class="btn">
+		                </td>
+					</tr>
+		            <tr>
+						<th>下单网址 :</th>
+						<td><input type="text" name="url" class="input-text" size="90" value="{$info.url}"></td>
+					</tr>
+		            <tr>
+						<th>{:L('article_img')} :</th>
+						<td>
+                        <notempty name="info['img']"><span class="attachment_icon J_attachment_icon" file-type="image" file-rel="{:attach($info["img"],'report')}"><img src="{:attach($info["img"],'report')}" width="100" height="100" /></span><br /></notempty>
+                        <input type="file" name="img" class="input-text"  style="width:200px;" />
+                        </td>
+		 			</tr>
+                    <tr>
+                        <th>一句话感受 :</th>
+                        <td><input type="text" name="simple_comment" class="input-text" size="30" value="{$info.simple_comment}"></td>
+                    </tr>
+                    <tr>
+                        <th>购买指数 :</th>
+                        <td><input type="text" name="buy_index" class="input-text" size="10" value="{$info.buy_index}"></td>
+                    </tr>
+
+					<tr>
+						<th>状态 :</th>
+		 				<td>
+		                	<select name="status">
+                                <volist name="report_status" id="val">
+                                    <if condition="$key gt 0"><option value="{$key}" <if condition="$key eq $info['status']">selected="selected"</if> >{$val}</option></if>
+                                </volist>
+                            </select>
+						</td>
+					</tr>
+		            <tr>
+		                <th>宝贝点评 :</th>
+						<td><textarea name="personal_thought" id="personal_thought" style="width:80%;height:400px;visibility:hidden;resize:none;">{$info.personal_thought}</textarea></td>
+					</tr>
+                    <tr>
+                        <th>试用过程和体验 :</th>
+                        <td><textarea name="experiences" id="experiences" style="width:80%;height:400px;visibility:hidden;resize:none;">{$info.experiences}</textarea></td>
+                    </tr>
+                    <tr>
+                        <th>细节展示 :</th>
+                        <td><textarea name="show_details" id="show_details" style="width:80%;height:400px;visibility:hidden;resize:none;">{$info.show_details}</textarea></td>
+                    </tr>
+				</table>
+			</div>
+			<div class="content_list pad_10 hidden">
+				<table width="100%" cellspacing="0" class="table_form">
+					<tr>
+						<th width="120">{:L('seo_title')} :</th>
+		 				<td><input type="text" name="seo_title" id="seo_title" class="input-text" size="60" value="{$info.seo_title}"></td>
+					</tr>
+					<tr>
+						<th>{:L('seo_keys')} :</th>
+						<td><input type="text" name="seo_keys" id="seo_keys" class="input-text" size="60" value="{$info.seo_keys}"></td>
+					</tr>
+					<tr>
+						<th>{:L('seo_desc')} :</th>
+						<td><textarea name="seo_desc" id="seo_desc" cols="80" rows="8">{$info.seo_desc}</textarea></td>
+					</tr>
+				</table>
+			</div>
+        </div>
+		<div class="mt10"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;"><br /><br /><br /></div>
+	</div>
+</div>
+<input type="hidden" name="menuid"  value="{$menuid}"/>
+<input type="hidden" name="id" id="id" value="{$info.id}" />
+</form>
+<include file="Public:footer" />
+<script src="__PUBLIC_ADMIN__js/kindeditor/kindeditor-min.js"></script>
+<script>
+$('.J_cate_select').cate_select('请选择');
+$(function() {
+    KindEditor.create('#personal_thought', {
+        resizeType : 1,
+        allowPreviewEmoticons : false,
+        allowImageUpload : false,
+        items : [
+            'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+            'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+            'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+    });
+
+    KindEditor.create('#show_details', {
+        uploadJson : '{:U("attachment/editer_upload")}',
+        fileManagerJson : '{:U("attachment/editer_manager")}',
+        allowFileManager: true
+    });
+
+
+    KindEditor.create('#experiences', {
+        uploadJson : '{:U("attachment/editer_upload")}',
+        fileManagerJson : '{:U("attachment/editer_manager")}',
+        allowFileManager: true
+    });
+
+	$('ul.J_tabs').tabs('div.J_panes > div');
+
+	//自动获取标签
+	$('#J_gettags').live('click', function() {
+		var title = $.trim($('#J_title').val());
+		if(title == ''){
+			$.pinphp.tip({content:lang.article_title_isempty, icon:'alert'});
+			return false;
+		}
+		$.getJSON('{:U("report/ajax_gettags")}', {title:title}, function(result){
+			if(result.status == 1){
+				$('#J_tags').val(result.data);
+			}else{
+				$.pinphp.tip({content:result.msg});
+			}
+		});
+	});
+});
+</script>
+</body>
+</html>

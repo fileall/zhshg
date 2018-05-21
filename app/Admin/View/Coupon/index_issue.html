@@ -1,0 +1,144 @@
+<include file="Public:header" />
+<!--文章列表-->
+
+<div class="pad_lr_10" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+        <tr>
+            <td>
+    <form name="searchform" method="get" >
+            <div class="explain_col">
+                <input type="hidden" name="m" value="admin" />
+                <input type="hidden" name="c" value="coupon" />
+                <input type="hidden" name="a" value="index" />
+                <input type="hidden" name="menuid" value="{$menuid}" />
+                &nbsp;&nbsp;名称 :
+                <input name="keyword" type="text" class="input-text" size="20" value="{$search.keyword}" />
+                                &nbsp;&nbsp;面值:
+                <input name="price" type="text" class="input-text" size="8" value="{$search.price}" />
+                                &nbsp;&nbsp;SN码 :
+                <input name="sncode" type="text" class="input-text" size="25" value="{$search.sncode}" />
+               有效时间： <input type="text" name="time_start" id="time_start" class="date" size="15" value="{$search.time_start}">
+                -
+                <input type="text" name="time_end" id="time_end" class="date" size="15" value="{$search.time_end}">
+                <!--&nbsp;&nbsp;{:L('article_cateid')}：
+                <select class="J_cate_select mr10" data-pid="0" data-uri="{:U('article_cate/ajax_getchilds')}" data-selected="{$search.selected_ids}"></select>
+                <input type="hidden" name="cate_id" id="J_cate_id" value="{$search.cate_id}" />-->
+                &nbsp;&nbsp;{:L('status')}:
+                <select name="status">
+                <option value="">-{:L('all')}-</option>
+                 <option value="2" <if condition="$search.status eq '2'">selected="selected"</if>>已过期</option>
+                <option value="1" <if condition="$search.status eq '1'">selected="selected"</if>>已使用</option>
+                <option value="0" <if condition="$search.status eq '0'">selected="selected"</if>>未使用</option>
+                </select>
+                <input type="submit" name="search" class="btn" value="{:L('search')}" />
+            </div>
+       </form>      
+       
+      <form name="searchform" method="post" action="{:U('Coupon/coupon',array(menuid=>$menuid,'act'=>'yhq'))}" > 
+         <div class="explain_col">
+                发放数量：<input type="text" name="snnum" id="snnum" class="input-text" size="6" value="">
+    &nbsp;&nbsp;  优惠券名称：	
+    <select name="cate_id" >
+    	<volist name="cate" id="val">
+    	<option value="{$val['id']}">{$val['title']}</option>
+    	</volist>
+    </select>
+    <!--<input type="text" name="title" id="title" class="input-text" size="30" value="">-->
+    &nbsp;&nbsp; 会员ID：<input type="text" name="uid" id="uid" class="input-text" size="8" value=""> 
+    &nbsp;&nbsp;        <input type="text" name="submit"  class="btn" value="优惠券发放" />
+		</div>
+    </form>
+            
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="J_tablelist table_list" data-acturi="{:U('coupon/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width=25><input type="checkbox" id="checkall_t" class="J_checkall"></th>
+                <th width="30">序号</th>
+                <th><span data-tdtype="order_by" data-field="id">ID</span></th>
+                <th align="left"><span data-tdtype="order_by" data-field="title">优惠券名称</span></th>
+                <th align="left"><span data-tdtype="order_by" data-field="sncode">SN码</span></th>
+                <th align="left"><span data-tdtype="order_by" data-field="price">面值</span></th>
+                <th align="left"><span data-tdtype="order_by" data-field="minprice">最低消费</span></th>
+                <th align="left"><span data-tdtype="order_by" data-field="apply">适用范围</span></th>
+                <th align="left"><span data-tdtype="order_by" data-field="introductions">说明</span></th>
+				<th width=150><span data-tdtype="order_by" data-field="endtime">到期时间</span></th>
+                <!--<th width=60><span data-tdtype="order_by" data-field="ordid">{:L('sort_order')}</span></th>-->
+                <th align="left"><span data-tdtype="order_by" data-field="uid">拥有者</span></th>
+                <th width="40"><span data-tdtype="order_by" data-field="status">{:L('status')}</span></th>
+                <th width="80">{:L('operations_manage')}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <td align="center">{$p*20-20+$i}</td>
+                <td align="center">{$val.id}</td>
+                <td align="left"><span data-tdtype="edit" data-field="title" data-id="{$val.id}" class="tdedit" style="color:{$val.colors};">{$val.title}</span><notempty name="val['img']"><span class="attachment_icon J_attachment_icon" file-type="image" file-rel="{:attach($val["img"],'coupon')}"><img src="__PUBLIC_ADMIN__images/filetype/image_s.gif" /></span></notempty></td>
+                <td align="center"><span data-tdtype="edit" data-field="sncode" data-id="{$val.id}" class="tdedit">{$val.sncode}</span></td>
+                <td align="center"><span data-tdtype="edit" data-field="price" data-id="{$val.id}" class="tdedit">{$val.price}</span></td>
+                <td align="center"><span data-tdtype="edit" data-field="minprice" data-id="{$val.id}" class="tdedit">{$val.minprice}</span></td>
+                <td align="center"><span data-tdtype="edit" data-field="apply" data-id="{$val.id}" class="tdedit">{$val.apply}</span></td>
+                <td align="center"><span data-tdtype="edit" data-field="introductions" data-id="{$val.id}" class="tdedit">{$val.introductions}</span></td>
+                <td align="center">{$val.endtime|date='y-m-d H:i',###}</td>
+                <!--<td align="center"><span data-tdtype="edit" data-field="ordid" data-id="{$val.id}" class="tdedit">{$val.ordid}</span></td>-->
+                <td align="center"><span data-tdtype="edit" data-field="uid" data-id="{$val.id}" class="tdedit">{$val.uid|default='暂无'}</span></td>
+                <td align="center"><?php echo yhqstatus($val['status']); ?></td>
+                <!--<td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{$val.status}" src="__PUBLIC_ADMIN__images/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>-->
+                <td align="center">
+                    <!--<a href="{:u('coupon/edit', array('id'=>$val['id'], 'menuid'=>$menuid))}">{:L('edit')}</a> |--> 
+                    <a href="javascript:void(0);" class="J_confirmurl" data-acttype="ajax" data-uri="{:u('coupon/delete', array('id'=>$val['id']))}" data-msg="{:sprintf(L('confirm_delete_one'),$val['title'])}">{:L('delete')}</a></td>
+            </tr>
+            </volist>
+        </tbody>
+    </table>
+    <div class="songkebor">
+        <label class="select_all"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('coupon/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
+        <div id="pages">{$page}</div>
+    </div>
+    </div>
+</div>
+<include file="Public:footer" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC_ADMIN__js/calendar/calendar-blue.css"/>
+<script src="__PUBLIC_ADMIN__js/calendar/calendar.js"></script>
+	<?php
+	function yhqstatus($id){
+	if($id==0){
+    	$str="未使用";
+    }elseif($id==1){
+    	$str="<font color='blue'>已使用</font>";
+    }elseif($id==2){
+    	$str="<font color='gray'>已过期</font>";
+	}
+    return $str;
+}
+?>
+<script>
+$('.J_cate_select').cate_select({top_option:lang.all});
+Calendar.setup({
+    inputField : "time_start",
+    ifFormat   : "%Y-%m-%d",
+    showsTime  : false,
+    timeFormat : "24"
+});
+
+Calendar.setup({
+    inputField : "time_end",
+    ifFormat   : "%Y-%m-%d",
+    showsTime  : false,
+    timeFormat : "24"
+});
+
+	
+</script>
+</body>
+</html>
+

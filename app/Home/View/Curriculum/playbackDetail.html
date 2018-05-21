@@ -1,0 +1,297 @@
+<include file="Public/top" />
+	
+	<!--面包屑导航-->
+	<div class="ysw-crumbs">
+		<div class="wrap">
+			<a href="{:U('Curriculum/classroom')}" class="item hover-blue">语数外课堂</a>
+			<span class="item ico">&gt;</span>
+			<a href="{:U('Curriculum/liveList')}" class="item hover-blue">直播回放列表</a>
+			<span class="item ico">&gt;</span>
+			<span class="item">直播回放课程详情</span>
+		</div>
+	</div>
+	<!--面包屑导航-end-->
+	
+	<!--课程-->
+	<div class="courseInfo clear wrap">
+		<div class="fl courseInfoL">
+			<div class="clear">
+				<img src="{:attach($info['img'],'curriculum')}" alt="" class="courseImg"/>
+			</div>
+		</div>
+		<div class="fl courseBox"> 
+			<div class="title">
+				<h3 class="">{$info['title']}</h3>
+			</div>
+			<p class="courseTecher clear">
+				<span>阶段：{$cate_info[1]}</span>
+				<span>年级：{$cate_info[2]}</span>
+				<span>科目：{$cate_info[3]}</span>
+				<span>老师：{$teacher['name']}</span>
+			</p>
+			<div class="clear priceBox">
+				<div class="fl left">
+					<p class="time">上课时间：{$info['class_time']}</p>
+					<p class="price">
+						<span>价格：<strong>¥ {$info['price']}</strong></span>
+						<s class="yuan">¥ {$info['old_price']}</s>
+						<span>预约人数{$info['people']}人</span>
+					</p>
+				</div>
+				<div class="fr right">
+					<a href="javascript:;" class="share">分享</a>
+					<if condition="$user[is_collect]">
+						<a href="javascript:;" class="collect active">已收藏</a>
+					<else />
+						<a href="javascript:;" class="collect">收藏</a>
+					</if>
+				</div>
+			</div>
+			<div class="clear btnBox">
+				<a href="javascript:;" class="seeOld">看回放</a>
+				<a href="" class="oldZixun">课程咨询</a>
+			</div>
+		</div>
+	</div>
+	<!--课程-end-->
+	<!--详情-->
+	<div class="wrap ysw-tabconBox">
+		<div class="courseDetail-tab clear">
+			<a href="javascript:;" class="item active">课程详情</a>
+			<a href="javascript:;" class="item ">相关评论</a>
+		</div>
+		<!--课程简介-->
+		<div class="ysw-tabcon">
+			<!--课程详情-->
+			<div class="courseDetail-pro">
+				{:code2html($info['info'])}
+			</div>
+		</div><!--课程简介-end-->
+		<!--相关评论-->
+		<div class="ysw-tabcon hide">
+			<div class="playBack-ly">
+				<textarea class="playBack-lyarea" placeholder="老师公开课赞不赞？"></textarea>
+				<div class="clear">
+					<input type="submit" data-avatar="__PC__images/moren.png" class="playBack-lysub" value="发表评论"/>
+				</div>
+			</div>
+			<div class="courseDetail-title ">
+				<h3>全部评论</h3>
+			</div>
+			<!--全部评论-->
+			<ul class="playBack-pl">
+				<volist name="evaluate_list" id="val">
+					<li class="clear">
+						<div class="playBack-pl-head"><img src="<if condition="$val['avatar']">{$val['avatar']}<else />__PC__images/moren.png</if>" alt="" /></div>
+						<div class="playBack-pl-font">{$val['content']}</div>
+						<div class="playBack-pl-time">{$val['add_time']|date="Y-m-d H:i",###}</div>
+					</li>
+				</volist>
+			</ul>
+			
+			<div class="yswtab-pingfen-page">
+				<!--分页-->
+				<div class="l-page">
+					<div class="box clear">
+						<a href="javascript:;" style="display: none;" class="prev">&lt;&lt;上一页</a>
+						<a href="javascript:;" class="active" id="page1">1</a>
+						<if condition="$evaluate_page gt 1">
+							<?php for($i=2;$i<=$evaluate_page;$i++){?>
+							<a href="javascript:;" class="item page-js" id="page<?php echo $i?>"><?php echo $i?></a>
+							<?php }?>
+						</if>
+						<a href="javascript:;" <if condition="$evaluate_page elt 1">style="display: none;"</if> class="next">下一页&gt;&gt;</a>
+					</div>
+				</div><!--分页-end-->
+			</div>	
+		</div><!--相关评论-end-->
+	</div>
+	<!--详情-end-->
+	
+	<!--猜你喜欢-->
+	<div class="wrap playBack-cnxhBox" style="border:1px solid #dcdcdc">
+		<div class="courseDetail-title ">
+			<h3>猜你喜欢</h3>
+		</div>
+		<!--轮播-->
+		<div class="course-autoBox">
+	 		<div class="swiper-container course-auto">
+			    <div class="swiper-wrapper">
+					<volist name="list" id="val">
+						<div class="swiper-slide">
+							<a href="{:U('Curriculum/playbackDetail',array('id'=>$val['id']))}">
+								<img src="{:attach($val['img'],'curriculum')}" alt="" class="course-auto-img"/>
+							</a>
+							<p class="pro">{$val['title']}</p>
+							<div class="clear">
+								<span class="fl price">¥{$val['price']}</span>
+								<a	href="{:U('Curriculum/playbackDetail',array('id'=>$val['id']))}" class="fr tosee">
+									查看详情
+								</a>
+							</div>
+						</div>
+					</volist>
+			    </div>
+
+			</div>
+			<!-- 如果需要导航按钮 -->
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+			<!--轮播-->
+		</div>
+	</div><!--猜你喜欢-end-->
+
+ 	<!--公共底部-->
+	<include file="Public/footer" />
+ 	<!--公共底部-end-->
+ 	<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+ 	<script src="__PC__js/l_main.js"></script>
+ 	<link rel="stylesheet" href="__PC__plugins/swiper3.14/css/swiper.min.css" /><!--轮播css-->
+ 	<script src="__PC__plugins/swiper3.14/js/swiper.min.js"></script><!--轮播js-->
+ 	<script src="__PC__plugins/layui-v1.0.9/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__PC__js/php.js" type="text/javascript" charset="utf-8"></script>
+	<script>        
+		$(function() {
+			var mySwiper = new Swiper ('.swiper-container', {
+				loop: true,
+				autoplay:3000,
+				simulateTouch : false,//只能点击切换
+				slidesPerView : 5,//一行五列
+				spaceBetween : 18,//间隙20px
+				// 如果需要前进后退按钮
+				nextButton: '.swiper-button-next',
+				prevButton: '.swiper-button-prev',
+				autoplayDisableOnInteraction : false//操作后继续自动轮播
+			})
+			//
+			layui.use('layer',function(){
+				var layer = layui.layer;
+			})
+			var uid = {$user['id']|default=0},
+				id = {$info['id']|default=0},
+				avatar = "{$user['avatar']}";
+
+			//收藏课程
+			$('.collect').click(function () {
+			    var self = $(this);
+                if(uid > 0){
+                    $.post("{:U('Curriculum/collect_curriculum')}",{id:id,uid:uid},function (result) {
+                        layer.msg(result[1]);
+                        if(result[0] == 1){
+                            self.addClass('active').text('已收藏');
+                        }else if(result[0] == 2){
+                            $.login_alert("{:U('Login/enter')}");
+                        }
+                    },'json')
+                }else{
+                    $.login_alert("{:U('Login/enter')}");
+                }
+            })
+
+			//提交评论
+			$('.playBack-lysub').click(function(){
+			    var img = avatar?avatar:$(this).data('avatar');
+			    if(uid > 0){
+					var content = $('.playBack-lyarea').val();
+					if(content == ""){
+                        layer.msg('亲，请输入评论内容！');
+					}else{
+						$.post("{:U('Curriculum/submit_evaluate')}",{id:id,uid:uid,content:content},function (result) {
+                            layer.msg(result[1]);
+                            if(result[0] == 1){
+                                var data = {avatar:img,content:content,add_time:$.myTime.UnixToDate($.myTime.CurTime(),true)};
+								$('.playBack-pl').prepend(mosaic_html(data));
+							}else if(result[0] == 2){
+                                $.login_alert("{:U('Login/enter')}");
+							}
+                        },'json')
+					}
+				}else{
+					$.login_alert("{:U('Login/enter')}");
+				}
+			});
+
+            //分页
+            $(document).on('click','.prev,.page-js,.next',function(){
+                var self = $(this),
+                    lei = self.attr('class'),
+                    page = parseInt(self.text()),
+                    current = $('.box').find('.active'),
+                    current_val = parseInt(current.text()),
+                    count = {$evaluate_page},
+                    id = {$info['id']};
+
+                if(lei=='prev'){
+                    if(current_val == 2){
+                        self.hide();
+                        $('.next').show();
+                    }
+                    current.attr('class','item page-js');
+                    $('#page'+(current_val-1)).attr('class','active');
+                    evaluate_list(current_val-1,id);
+                }else if(lei=='next'){
+                    if((count-current_val) == 1){
+                        self.hide();
+                        $('.prev').show();
+                    }
+                    current.attr('class','item page-js');
+                    $('#page'+(current_val+1)).attr('class','active');
+                    evaluate_list(current_val+1,id);
+                }else{
+                    if(page == 1){
+                        $('.prev').hide();
+                        $('.next').show();
+                    }else if(page == count){
+                        $('.prev').show();
+                        $('.next').hide();
+                    }else{
+                        $('.prev').show();
+                        $('.next').show();
+                    }
+                    current.attr('class','item page-js');
+                    $('#page'+page).attr('class','active');
+                    evaluate_list(page,id);
+                }
+            })
+
+            function evaluate_list(p,id) {
+                $.get("{:U('Curriculum/evaluate_list')}",{p:p,id:id},function (result) {
+                    var ht = "";
+                    $.each(result,function (k,v) {
+                        ht += mosaic_html(v);
+                    })
+                    $('.playBack-pl').html(ht);
+                },'json');
+            }
+
+			//评论列表
+			function mosaic_html(data) {
+				return   '<li class="clear"><div class="playBack-pl-head">'
+						+'<img src="'+data.avatar+'" alt="" /></div>'
+						+'<div class="playBack-pl-font">'+data.content+'</div>'
+						+'<div class="playBack-pl-time">'+data.add_time+'</div></li>';
+            }
+
+            //预约登录判断
+            $('.seeOld').click(function () {
+                if(uid > 0){
+                    $.post("{:U('Curriculum/check_vod')}",{id:id,uid:uid},function (result) {
+                        if(result[0] == 1){
+                            window.location.href="{:U('Curriculum/watch_videos',array('id'=>$info['id'],'ex_id'=>$vod['id']))}";
+                        }else if(result[0] == 2){
+                            $.login_alert("{:U('Login/enter')}");
+                        }else if(result[0] == 3){
+                            window.location.href="{:U('Order/courseBuy',array('id'=>$info['id']))}";
+                        }else{
+                            layer.msg(result[1]);
+						}
+                    },'json')
+                }else{
+                    $.login_alert("{:U('Login/enter')}");
+                }
+            })
+		});
+  </script>
+  
+</body>
+</html>

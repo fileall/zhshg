@@ -1,0 +1,88 @@
+<!--添加管理员-->
+<div class="dialog_content">
+    <if condition="$info['status'] eq 0"><form id="info_form" name="info_form" action="{:U('withdraw/approve')}" method="post"></if>
+        <input type="hidden" name="id" value="{$info.id}">
+	<table width="100%" class="table_form">
+        <tr>
+            <th width="80"><span style="color: red">本操作不可逆</span></th>
+            <td></td>
+        </tr>
+        <tr>
+            <th width="80">可提现金额 :</th>
+            <td>{$type_balance}</td>
+        </tr>
+        <tr>
+            <th width="80">提现金额 :</th>
+            <td>{$info.amount}</td>
+        </tr>
+        <tr>
+            <th width="80">提现后余额 :</th>
+            <td>{$type_balance - $info['amount']}</td>
+        </tr>
+        <tr>
+            <th width="80">提现帐号 :</th>
+            <td>{$info.bank_account}</td>
+        </tr>
+        <tr>
+            <th width="80">提现人 :</th>
+            <td>{$info.uname}({$info.apply_account})</td>
+        </tr>
+        <tr>
+            <th width="80">开户银行 :</th>
+            <td>{$info.bankname}</td>
+        </tr>
+        <tr>
+            <th width="80">开户城市 :</th>
+            <td>{$info.city}</td>
+        </tr>
+        <tr>
+            <th width="80">开户分行 :</th>
+            <td>{$info.branch}</td>
+        </tr>
+        <tr>
+            <th width="80">提现人 :</th>
+            <td>{$info.apply_account}</td>
+        </tr>
+        <if condition="$info['status'] gt 0">
+            <tr>
+                <th width="80">状态 :</th>
+                <td>{$withdraw_status[$info['status']]}</td>
+            </tr>
+            <tr>
+                <th width="80">备注 :</th>
+                <td>
+                    {$info.remark}
+                </td>
+            </tr>
+        <else />
+            <tr>
+                <th width="80">状态 :</th>
+                <td><label><input type="radio" name="status" class="radio_style" value="1" checked="checked"> 审核通过 </label>&nbsp;&nbsp;
+                    <label><input type="radio" name="status" class="radio_style" value="2" > 审核不通过</label></td>
+            </tr>
+            <tr>
+                <th width="80">备注 :</th>
+                <td>
+                    <textarea name="remark" cols="40">{$info.remark}</textarea>
+                </td>
+            </tr>
+        </if>
+
+	</table>
+    <if condition="$info['status'] eq 0"></form></if>
+</div>
+<script>
+$(function(){
+
+	$('#info_form').ajaxForm({success:complate,dataType:'json'});
+    function complate(result){
+        if(result.status == 1){
+            $.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'});
+        }
+    }
+});
+</script>

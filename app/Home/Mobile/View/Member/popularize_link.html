@@ -1,0 +1,54 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">我的专属二维码</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="erweima-wrap">
+			<div class="erweima-inner">
+				<div class="erweima-content">
+					<div class="erweima-img vertical-center">
+						<div class="vertical-auto"><img src="{:attach($ewm,'ewm')}"></div>
+					</div>
+					<div class="erweima-name">臻惠生活</div>
+				</div>
+				<div class="erweima-copy btn"  id="urls" data-clipboard-text="{$ewid}">复制分享</div>
+			</div>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+	
+</block>
+<block name="footer"></block>
+<block name="script"> 
+<script type="text/javascript" src="__MB__js/clipboard.min.js"></script> 
+ <script  type="text/javascript">  
+$(document).ready(function(){    
+   var clipboard = new Clipboard('#urls');   
+   clipboard.on('success', function(e) {  
+//     console.log(e);  
+		layer.msg("复制成功!您的二维码是"+'{$ewid}',{icon:1,time:2000})
+   });
+   clipboard.on('error', function(e) {  
+		layer.msg("复制失败！请手动复制",{icon:0,time:2000})
+    });  
+}) 
+
+</script>
+	
+</block>
+</html>

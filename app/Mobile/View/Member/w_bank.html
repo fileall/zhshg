@@ -1,0 +1,93 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+    <body class="body-bgColor">
+    <!--header-->
+    <div class="header-wrap">
+        <div class="header-inner">
+            <div class="header-title">银行卡</div>
+            <a href="/index.php?s=/wallet/wallet.html">
+                <div class="header-left"><i class="fa fa-angle-left"></i></div>
+            </a>
+            <div class="header-right">
+                <a href="{:U('Member/add_bank',['add_bank'=>1])}" class="add-bank"><i class="fa fa-plus"></i>添加</a>
+            </div>
+        </div>
+    </div>
+    <div class="header-space"></div>
+    <!--header-->
+
+    <!--content-->
+    <div class="content">
+        <div class="bank-wrap">
+            <ul class="bank-wrap-ul">
+                <volist name="b_card" id="card">
+                    <li class="bank-wrap-li">
+                        <div class="bank-kind vertical-center">
+                            <div class="vertical-auto" style="width: 100%;">
+                                <div class="bank-kind-message">
+                                    <div class="bank-kind-name">{$card.name}</div>
+                                    <div class="bank-kind-name right">{$card.title}</div>
+                                    <div class="clear-float"></div>
+                                </div>
+                                <div class="bank-numbers">
+                                    <div class="bank-numbers-sum">{$card.nums}</div>
+                                    <div class="bank-numbers-btn" data-id="{$card['id']}">解绑</div>
+                                    <div class="clear-float"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="add-bank-date">
+                            添加时间：{:date('Y-m-d H:m',$card['add_time'])}
+                        </div>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+
+        <div class="employ-explain">
+            <div class="employ-explain-title">提现银行卡使用说明：</div>
+            <ul>
+                <li class="employ-explain-txt">1、该页面银行卡仅为提现使用。</li>
+                <li class="employ-explain-txt">2、用户可以对页面银行进行删除操作。</li>
+                <li class="employ-explain-txt">3、如果银行卡信息不全可以补充。</li>
+                <li class="employ-explain-txt">4、有提现疑问，请致电：400-1089-805。</li>
+            </ul>
+        </div>
+    </div>
+    <!--content-->
+
+    <!--footer-->
+    <!--footer-->
+    </body>
+</block>
+<block name="footer"></block>
+<block name="script">
+    <script>
+        $('.bank-numbers-btn').click(function(){
+            var id = $(this).data('id');
+            var a =$(this);
+
+            layer.confirm('您确定要解绑银行卡吗？', {
+                btn: ['是的','取消'] //按钮
+            }, function(){
+                //开始后台验证
+                $.post('{:U("member/del_bank")}',{id:id},function(d){
+                    if(d.status==1){
+                        layer.msg(''+d.msg+'',{icon:1,time:2000},function(){
+                            a.parents(".bank-wrap-li").remove();
+                        })
+
+                    }else{
+                        layer.msg(''+d.msg+'',{icon:0,time:2000})
+                    }
+                },"JSON")
+                return false;
+            })
+        })
+    </script>
+
+
+</block>
+</html>

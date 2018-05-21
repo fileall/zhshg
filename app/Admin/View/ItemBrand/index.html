@@ -1,0 +1,65 @@
+<include file="Public:header" />
+<!--管理员管理-->
+<div class="pad_lr_10">
+	 <form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <input type="hidden" name="m" value="admin" />
+                    <input type="hidden" name="c" value="ItemBrand" />
+                    <input type="hidden" name="a" value="index" />
+                    <input type="hidden" name="menuid" value="{$menuid}" />
+					名称：
+                    <input name="name" type="text" class="input-text" size="25" value="{$search['name']}" />
+					<input type="submit" name="search" class="btn" value="搜索" />
+                </div>
+                </td>
+            </tr>
+    </table>
+    </form>
+	
+    <div class="J_tablelist table_list" data-acturi="{:U('item_brand/ajax_edit')}">
+        <table width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th width="40"><input type="checkbox" name="checkall" class="J_checkall"></th>
+                <th width="40">ID</th>
+                <th>名称</th>
+                <th>所属分类</th>
+                <!--<th>品牌图片</th>-->
+                <th>排序</th>
+                <th>{:L('status')}</th>
+                <th width=100>{:L('operations_manage')}</th>
+            </tr>
+            </thead>
+    	    <tbody>
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <td align="center">{$val.id}</td>
+                <td align="center"><span data-tdtype="edit" data-field="name" class="tdedit" data-id="{$val.id}">{$val.name}</span></td>
+                <td align="center">{$val['item_cate']['name']}</td>
+                <!--<td align="center"><if condition="$val['img']"><img src="{:attach($val['img'],'item_cate')}" style="width: 100px;"/></if></td>-->
+                <td align="center"><span data-tdtype="edit" data-field="ordid" class="tdedit" data-id="{$val.id}">{$val.ordid}</span></td>
+                <td align="center">
+                    <img data-tdtype="toggle" data-field="status" data-id="{$val.id}" data-value="{$val.status}" src="__PUBLIC_ADMIN__/images/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" />
+                </td>
+                <td align="center">
+                    <a href="javascript:;" class="J_showdialog" data-uri="{:U('item_brand/edit', array('id'=>$val['id']))}" data-title="{:L('edit')} - {$val.name}"  data-id="edit" data-width="600" data-height="100">编辑</a> |
+                    <a href="javascript:;" class="J_confirmurl" data-uri="{:U('item_brand/delete', array('id'=>$val['id']))}" data-msg="{:sprintf(L('confirm_delete_one'),$val['username'])}">{:L('delete')}</a>
+                </td>
+            </tr>
+            </volist>
+    	   </tbody>
+        </table>
+    </div>
+    <div class="btn_wrap_fixed">
+		<label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+    	<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('item_brand/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
+		<div id="pages">{$page}</div>
+    </div>
+</div>
+<include file="Public:footer" />
+</body>
+</html>

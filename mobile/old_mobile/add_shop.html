@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<title></title>
+		<script src="js/fontSize.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/custom.js"></script>
+	</head>
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">申请成为商家</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="tobeshop-title">基本资料</div>
+			<ul class="add-shop-ul">
+				<li class="add-shop-li row-box">
+					<div class="add-shop-name">商铺名称</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto w100" ><input type="text" placeholder="请输入商铺名称" class="tr"></div>
+						</div>
+					</div>
+				</li>
+				<li class="add-shop-li row-box flex"><a href="industry.html" class="row-box flex1">
+					<div class="add-shop-name">行业分类</div>
+					<div class="row-flex ali-cen jus-end">
+						<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+					</div>
+				</a></li>
+			</ul>	
+		</div>	
+		<div class="content">
+			<div class="tobeshop-title">资质信息</div>
+			<ul class="add-shop-ul">
+				<li class="add-shop-li row-box">
+					<div class="add-shop-name">注册号</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;"><input type="text" placeholder="请填写营业执照注册号"></div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		
+			<!--<div class="add-shop-map">
+				<div class="map-box" id="map"></div>
+			</div>-->
+			
+			<div class="add-shop-message">
+				<div class="message-title">企业法人身份证（正面）</div>
+				<div class="message-btn">
+					<img src="" alt="" />
+					<input type="file" class="file"/>
+				</div>
+				
+				<div class="message-title">营业执照（正面）</div>
+				<div class="message-btn">
+					<img src="" alt="" />
+					<input type="file" class="file"/>
+				</div>
+			</div>
+			
+		</div>
+		<div class="content">
+			<div class="tobeshop-title">地址信息</div>
+			<ul class="add-shop-ul">
+				<li class="add-shop-li row-box">
+					<div class="add-shop-name">省市区</div>
+					<div class="row-flex">
+						<div class="enter-form-input">
+							<div class="vertical-auto" style="width: 100%;">
+								<input class="form-input-celect" id="demo1" type="text" readonly="" placeholder="请选择所在地区！" value="">
+	            				<input id="value1" type="hidden" value="20,234,504">
+							</div>
+						</div>
+					</div>
+					
+				</li>
+				<li class="add-shop-li row-box flex"><a href="map_position.html" class="row-box flex1">
+					<div class="add-shop-name">地图定位</div>
+					<div class="row-flex ali-cen jus-end">
+						<div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+					</div>
+				</a></li>
+				<!--<li class="add-shop-li row-box">
+					<div class="add-shop-name">详细地址</div>
+					
+					<div class="row-flex">
+						<div class="enter-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;"><input type="text" placeholder="请输入详细地址"></div>
+						</div>
+					</div>
+				</li>-->
+				
+			</ul>	
+		</div>	
+		<div class="submit-button"><a href="javascript:;">确定加入</a></div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+		<link rel="stylesheet" href="css/LArea.css">
+		<script src="js/LArea.js"></script>
+		<script src="js/LAreaData1.js"></script>
+		<script src="js/LAreaData2.js"></script>
+		<script>
+		//选择地区
+	    var area1 = new LArea();
+	    area1.init({
+	    	'trigger': '#demo1',
+	        'valueTo': '#value1',
+	        'keys': {
+	        	id: 'id',
+	            name: 'name'
+	        },
+	        'type': 1,
+	        'data': LAreaData
+	    });
+	  
+	</script>
+	</body>
+</html>

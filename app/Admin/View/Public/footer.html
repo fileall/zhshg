@@ -1,0 +1,30 @@
+<script src="__PUBLIC_ADMIN__js/jquery/jquery.js"></script>
+<script src="__PUBLIC_ADMIN__js/jquery/plugins/jquery.tools.min.js"></script>
+<script src="__PUBLIC_ADMIN__js/jquery/plugins/formvalidator.js"></script>
+<script src="__PUBLIC_ADMIN__js/pinphp.js"></script>
+<script src="__PUBLIC_ADMIN__js/admin.js"></script>
+<!--预览图片插件-->
+<script type="text/javascript" src="__PUBLIC_ADMIN__js/example/js/jquery.mousewheel-3.0.2.pack.js"></script>
+<script type="text/javascript" src="__PUBLIC_ADMIN__js/example/js/jquery.fancybox-1.3.1.js"></script>
+<script type="text/javascript" src="__PUBLIC_ADMIN__js/example/js/pngobject.js"></script>
+<link rel="stylesheet" href="__PUBLIC_ADMIN__js/example/style/jquery.fancybox-1.3.1.css" type="text/css" />
+<!--时间-->
+<script src="__PUBLIC_ADMIN__js/laydate/laydate.js"></script>
+<script>
+//初始化弹窗
+(function (d) {
+    d['okValue'] = lang.dialog_ok;
+    d['cancelValue'] = lang.dialog_cancel;
+    d['title'] = lang.dialog_title;
+})($.dialog.defaults);
+</script>
+
+<present name="list_table">
+<script src="__PUBLIC_ADMIN__js/jquery/plugins/listTable.js"></script>
+<script>
+$(function(){
+	 
+	$('.J_tablelist').listTable();
+});
+</script>
+</present>

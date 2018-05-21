@@ -1,0 +1,158 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+
+<body class="body-bgColor">
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">寄存</div>
+        <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+        <div class="header-right"></div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="content y-mar-top20">
+    <form action="" name="" method="post">
+        <div class="merchant-form row-box y-bg-white">
+            <div class="merchant-currency font-28">寄存个数：</div>
+            <div class="row-flex">
+                <div class="merchant-form-input vertical-center">
+                    <div class="vertical-auto" style="width: 100%;"><input id="nums"  type="number" placeholder="可转元宝个数{$member['gold_acer']}"></div>
+                </div>
+            </div>
+            <p class="merchant-currency y-color-red font-24">全部</p>
+        </div>
+
+        <div class="village-txt y-village-txt" id="coin_sy">实际收益银币0个</div>
+        <div class="enter-form-btn">
+            <button type="button" id="jc">确定寄存</button>
+        </div>
+    </form>
+</div>
+<!--content-->
+<!--余额支付密码弹窗-->
+<div class="payment-window">
+    <div class="payment-inner-win">
+        <div class="payment-form">
+            <div class="y-color-999">
+                <div class="payment-left pay-close">x</div>
+                <div class="payment-title">输入支付密码</div>
+                <div class="payment-title y-border-top">支付金额0元</div>
+            </div>
+            <!--密码区-->
+            <div class="pay-input-group row-box">
+                <div class="row-flex pass-input-wrap">
+                    <div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+                    <input type="password" readonly="readonly" value="">
+                </div>
+                <div class="row-flex pass-input-wrap">
+                    <div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+                    <input type="password" readonly="readonly" value="">
+                </div>
+                <div class="row-flex pass-input-wrap">
+                    <div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+                    <input type="password" readonly="readonly" value="">
+                </div>
+                <div class="row-flex pass-input-wrap">
+                    <div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+                    <input type="password" readonly="readonly" value="">
+                </div>
+                <div class="row-flex pass-input-wrap">
+                    <div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+                    <input type="password" readonly="readonly" value="">
+                </div>
+                <div class="row-flex pass-input-wrap">
+                    <div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+                    <input type="password" readonly="readonly" value="">
+                </div>
+            </div>
+            <!--密码区-->
+            <div class="y-text-right y-width94 y-mar-top20">
+                <a class="y-color-red" href="{:U('member/set_pw_pay',['set_pw_pay'=>8])}">忘记密码？</a>
+            </div>
+            <!--按钮去-->
+            <div class="pay-btn-group">
+                <button class="pay-button figure" value="1" type="button">1</button>
+                <button class="pay-button figure" value="2" type="button">2</button>
+                <button class="pay-button figure" value="3" type="button">3</button>
+                <button class="pay-button figure" value="4" type="button">4</button>
+                <button class="pay-button figure" value="5" type="button">5</button>
+                <button class="pay-button figure" value="6" type="button">6</button>
+                <button class="pay-button figure" value="7" type="button">7</button>
+                <button class="pay-button figure" value="8" type="button">8</button>
+                <button class="pay-button figure" value="9" type="button">9</button>
+                <button class="pay-button pay-button2" type="button"></button>
+                <button class="pay-button figure" value="0" type="button">0</button>
+                <button class="pay-button empty pay-button2" type="button"><i class="fa fa-times"></i></button>
+                <div class="clear-float"></div>
+            </div>
+            <!--按钮去-->
+        </div>
+    </div>
+</div>
+<!--余额支付密码弹窗-->
+<input type="hidden" value="2" id="origin_type" />
+<input type="hidden" value="{:U('WalletOther/basin_in')}" id="sealing_ye" />
+
+</body>
+</block>
+<block name="footer"></block>
+<block name="script">
+<script>
+    var jbp_bs = '{:C("pin_jbp_bs")}';
+    $("input").keyup(function(){
+        var nums = $(this).val();
+        if(isNaN(nums)|parseInt(nums) < 0 ){$(this).val(0);}
+
+        var coin_sy = nums*jbp_bs;
+        if(isNaN(coin_sy)|parseInt(coin_sy) < 0 ){coin_sy=0;}
+
+        $('#coin_sy').html('实际收益银币'+coin_sy+'个');
+    });
+
+    //全部寄存
+    $('.merchant-currency.y-color-red').click(function(){
+       var all_acer="{$member['gold_acer']}";
+        var coin_sy = all_acer*jbp_bs;
+        if(isNaN(coin_sy)|parseInt(coin_sy) < 0 ){coin_sy=0;}
+        $('#coin_sy').html('实际收益银币'+coin_sy+'个');
+        $('#nums').val(all_acer);
+    })
+
+    $('#jc').click(function(){
+        var nums =parseInt($('#nums').val());
+        var re = /^[0-9]*[0-9]$/i;       //校验是否为数字
+        if(!(re.test(nums) && nums%100===0)) {
+            layer.msg('每次寄存必须为100的倍数！',{icon:0,time:1000})
+            return false;
+        }
+
+        // if(!nums){
+        //     layer.msg('请填写元宝数量！',{icon:0,time:1000})
+        //     return false;
+        // }
+        // if(parseInt(nums) < 0){
+        //     layer.msg('请合理填写元宝数量！',{icon:0,time:1000})
+        //     return false;
+        // }
+        $('.y-border-top').html('支付金额'+nums+'元');
+
+        $(".payment-window").addClass("active");
+        $(".payment-form").addClass("active");
+    })
+
+//    $(".enter-form-btn").click(function(){
+//        $(".payment-window").addClass("active");
+//        $(".payment-form").addClass("active");
+//    })
+    $(".pay-close").click(function(){
+        $(".payment-window").removeClass("active");
+        $(".payment-form").removeClass("active");
+    })
+</script>
+</block>
+</html>

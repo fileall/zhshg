@@ -1,0 +1,263 @@
+<include file="Public:header" />
+
+<!--编辑区代-->
+<form id="info_form" action="{:u('service/edit')}" method="post" enctype="multipart/form-data">
+	<div class="pad_lr_10">
+		<div class="col_tab">
+			<ul class="J_tabs tab_but cu_li">
+				<li class="current">基本信息</li>
+				<!--<li>展示图片</li>-->
+				<!-- <li>SEO设置</li> -->
+				<!--<li>商品规格</li>-->
+			</ul>
+
+			<div class="J_panes">
+				<div class="content_list pad_10">
+					<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+						<tr>
+							<th>昵称 :</th>
+							<td><input type="text" name="nickname" class="input-text" size="30" value="{$info.nickname}"></td>
+						</tr>
+						<tr>
+							<th>真实姓名 :</th>
+							<td>{$info.realname}
+								<empty name="info['realname']">未设置</empty>
+							</td>
+						</tr>
+
+						<tr>
+							<th>身份证号 :</th>
+							<td>
+
+								<empty name="info['id_nums']">未设置
+								<else/>
+									{$info.id_nums}
+								</empty>
+							</td>
+						</tr>
+
+						<tr>
+							<th>账号 :</th>
+							<td>
+								{$info.mobile}
+							</td>
+						</tr>
+						<tr>
+							<th>地址 :</th>
+							<td>
+								<select class="J_cate_select mr10" data-pid="0" data-uri="{:U('place/ajax_getchilds', array('type'=>0))}" data-selected="{$place_selected_ids}"></select>
+								<input type="hidden" name="province_id" id="aaaa" value="0" >
+								<input type="hidden" name="city_id" id="bbbb" value="0" >
+								<input type="hidden" name="district_id" id="cccc" value="0" >
+								<input type="hidden" name="cate_id" id="place_id" value="{$info['cate_id']}" />
+							</td>
+						</tr>
+						<tr>
+							<th>头像 :</th>
+							<td>
+								<notempty name="info['avatar']">
+									<a class="fancybox" rel="group" href="{:attach($info['avatar'],'avatar')}">
+										<img src="{:attach($info['avatar'], 'avatar')}" width="100" height="100"/></a>
+									<br />
+
+								</notempty>
+								<!--<notempty name="info['img']"><img src="{:attach(get_thumb($info['img'], '_m'), 'item')}" width="100" height="100"/><br /></notempty>-->
+								<input type="file" name="avatar" />
+							</td>
+						</tr>
+
+						<tr>
+							<th>身份证正面 :</th>
+							<td>
+								<notempty name="idcard_imgs[1]">
+									<a class="fancybox" rel="group" href="{:attach($idcard_imgs[1],'id_card')}">
+										<img src="{:attach($idcard_imgs[1],'id_card')}" width="100" height="100"/></a>
+									<br />
+
+								</notempty>
+								<input type="file" name="id_card1" />
+							</td>
+						</tr>
+						<tr>
+							<th>身份证反面 :</th>
+							<td>
+								<notempty name="idcard_imgs[2]">
+									<a class="fancybox" rel="group" href="{:attach($idcard_imgs[2],'id_card')}">
+										<img src="{:attach($idcard_imgs[2],'id_card')}" width="100" height="100"/></a>
+									<br />
+
+								</notempty>
+								<input type="file" name="id_card2" />
+							</td>
+						</tr>
+
+						<tr>
+							<th>二维码 :</th>
+							<td>
+								<a class="fancybox abc" rel="group" href="{:attach($info['ewm'],'ewm')}" id="aa">
+									<img id="bb" src="{:attach($info['ewm'],'ewm')}" width="100" height="100"/></a>
+								<br/>
+								<input type="button" value="点击生成新二维码" id="ewm" data-id="{$info['id']}"/>
+								<input type="hidden" value="{$info.ewm}" name="ewm" />
+							</td>
+						</tr>
+
+						<tr>
+
+							<th>性别 :</th>
+
+							<td>
+								<label><input name="sex" type="radio" value="1" <if condition="$info['sex'] eq '1'">checked="checked"</if>> 男</label>
+								<label><input name="sex" type="radio" value="2" <if condition="$info['sex'] eq '2'">checked="checked"</if>> 女</label>&nbsp;&nbsp;
+								<label><input name="sex" type="radio" value="0" <if condition="$info['sex'] eq '0'">checked="checked"</if>> 未设置</label>
+							</td>
+
+						</tr>
+						<tr>
+							<th width="120">工资 :</th>
+							<td>
+								<select name="prices_exp">
+									<option value="+">增加</option>
+									<option value="-">减少</option>
+								</select>
+								<!--<input type="text" name="prices" class="input-text" size="20" maxlength="15" <if condition="$_SESSION['admin']['role_id'] eq 17">disabled="disabled"</if>>-->
+								<input type="text" name="prices" class="input-text" size="20" maxlength="15" >
+								{$info['prices']}
+							</td>
+						</tr>
+
+						<tr>
+							<th width="120">元宝 :</th>
+							<td>
+								<select name="gold_acer_exp">
+									<option value="+">增加</option>
+									<option value="-">减少</option>
+								</select>
+								<input type="text" name="gold_acer" class="input-text" size="20" maxlength="15" >
+								{$info['gold_acer']}
+							</td>
+						</tr>
+
+						<tr>
+							<th width="120">金果 :</th>
+							<td>
+								<select name="gold_fruit_exp">
+									<option value="+">增加</option>
+									<option value="-">减少</option>
+								</select>
+								<input type="text" name="gold_fruit" class="input-text" size="20" maxlength="15" >
+								{$info['gold_fruit']}
+							</td>
+						</tr>
+
+						<tr>
+							<th width="120">银币 :</th>
+							<td>
+								<select name="silver_coin_exp">
+									<option value="+">增加</option>
+									<option value="-">减少</option>
+								</select>
+								<input type="text" name="silver_coin" class="input-text" size="20" maxlength="15" >
+								{$info['silver_coin']}
+							</td>
+						</tr>
+
+						<tr>
+							<th>寄存元宝 :</th>
+							<td>
+								{$info.gold_acer_jc}
+							</td>
+						</tr>
+
+						<tr>
+							<th>新密码 :</th>
+							<td><input type="password" name="password" id="J_password" class="input-text" size="30">
+								<!--<label class="gray">&nbsp;&nbsp;不修改则留空</label>-->
+							</td>
+						</tr>
+
+						<tr>
+							<th>支付密码 :</th>
+							<td><input type="password" name="paypassword" id="J_pay_pwd" class="input-text" size="30">
+								<!--<label class="gray">&nbsp;&nbsp;不修改则留空</label>-->
+							</td>
+						</tr>
+
+						<!--<tr>-->
+						<!--<th>地址 :</th>-->
+						<!--<td>-->
+						<!--<input type="text" name="address" class="input-text" size="30"-->
+						<!--<empty name="info['address']">placeholder="请填写地址"<else/>value="{$info.address}"</empty>>-->
+
+						<!--</td>-->
+						<!--</tr>-->
+
+					</table>
+				</div>
+
+			</div>
+			<div class="mt10"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;"></div>
+			<br/>
+			<br/>
+
+		</div>
+	</div>
+	<input type="hidden" name="menuid"  value="{$menuid}"/>
+	<input type="hidden" name="id" value="{$info.id}" />
+</form>
+
+<script src="__PUBLIC_ADMIN__js/kindeditor/kindeditor-min.js"></script>
+<include file="Public:footer" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $( ".fancybox").fancybox();
+    });
+
+    //二维码
+    $('#ewm').click(function(){
+        if(confirm("是否确定更换二维码?"))
+        {
+            var id=$(this).data('id');
+            $.get("{:U('member/ewm')}",{id:id},function(res){
+                if(res.status==1){
+                    $('input[name="ewm"]').val(res.url);
+                    $('#aa').attr('href','/data/attachment/ewm/'+res.url);
+                    $('#bb').attr('src','/data/attachment/ewm/'+res.url);
+                }else{
+                    $.pinphp.tip({content:'系统繁忙', icon:'alert'});
+                }
+            })
+        }
+
+    })
+</script>
+<script type="text/javascript">
+    //区域分类联动
+    $('.J_cate_select').cate_select({
+        top_option: lang.all,
+        field: 'place_id',
+        target_class: 'J_cate_select'
+    });
+
+    $('body').live('change','.J_cate_select.mr10',function(){
+        if($('#place_id').val()!=0){
+            var aa=$('.J_cate_select:eq(0)').val();
+            var bb=$('.J_cate_select:eq(1)').val();
+            var cc=$('.J_cate_select:eq(2)').val();
+            $('#aaaa').val(aa);
+            $('#bbbb').val(bb);
+            $('#cccc').val(cc);
+        }
+    })
+
+    //表单
+    $(function() {
+        $('ul.J_tabs').tabs('div.J_panes > div');
+
+        $.formValidator.initConfig({formid:"info_form",autotip:true});
+        // $("#J_password").formValidator({empty:true,onshow:lang.not_edit_password, onfocus:lang.password+lang.between_6_to_20}).inputValidator({ min:6, max:20, onerror:lang.password+lang.between_6_to_20});
+    });
+
+</script>
+</body>
+</html>

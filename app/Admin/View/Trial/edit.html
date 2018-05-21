@@ -1,0 +1,285 @@
+<include file="Public:header" />
+<!--编辑商品-->
+<form id="info_form" action="{:u('trial/edit')}" method="post" enctype="multipart/form-data">
+<div class="pad_lr_10">
+	<div class="col_tab">
+		<ul class="J_tabs tab_but cu_li">
+			<li class="current">基本信息</li>
+            <li>温馨提示</li>
+			<li>SEO设置</li>
+		</ul>
+		<div class="J_panes">
+        <div class="content_list pad_10">
+		<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+            <tr>
+                <th width="120">商品来源 :</th>
+                <td>
+                    <select name="trial_origin" id="orig_id">
+                        <option value="0">请选择</option>
+                        <volist name="trial_origin" id="val">
+                            <option value="{$key}" <if condition="$info['trial_origin'] eq $key">selected="selected"</if>>{$val}</option>
+                        </volist>
+                    </select>
+                    <span>活动类型 :</span>
+                    <select name="trial_type" id="trial_type">
+                        <option value="0">请选择</option>
+                        <volist name="trial_type" id="val">
+                            <option value="{$key}" <if condition="$info['trial_type'] eq $key">selected="selected"</if>>{$val}</option>
+                        </volist>
+                    </select>
+                    <span>报告类型 :</span>
+                    <select name="report_type" id="orig_id">
+                        <option value="0">请选择</option>
+                        <volist name="report_type" id="val">
+                            <option value="{$key}" <if condition="$info['report_type'] eq $key">selected="selected"</if>>{$val}</option>
+                        </volist>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>活动邮费 :</th>
+                <td><input name="post_pay" type="radio" id="rdFreePostPay" value="0" <if condition="$info['post_pay'] eq 0">checked="checked"</if>>
+                    免邮&nbsp;&nbsp;&nbsp;
+                    <input id="rdPostPay" name="post_pay" type="radio" value="1" <if condition="$info['post_pay'] eq 1">checked="checked"</if>>
+                    收邮&nbsp;&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr>
+                <th>活动时长 :</th>
+                <td><input type="text" name="deadline" class="input-text" value="{$info.deadline}"> 天</td>
+            </tr>
+            <tr>
+				<th width="120">所属分类 :</th>
+                <td><select class="J_cate_select mr10" data-pid="0" data-uri="{:U('trial_cate/ajax_getchilds', array('type'=>0))}" data-selected="{$selected_ids}"></select>
+                <input type="hidden" name="cate_id" id="J_cate_id" value="{$info.cate_id}" /></td>
+			</tr>
+            <tr>
+				<th>商品名称 :</th>
+				<td><input type="text" name="title" id="J_title" class="input-text" size="60" value="{$info.title}"></td>
+			</tr>
+            <tr>
+                <th>属性:</th>
+                <td>
+                    <volist name="attrs" id="attr">
+                        <label><input type="checkbox" name="attr[]" value="{$attr.id}" <?php echo in_array($attr['id'],$trial_attr_list)?'checked="checked"':''?>> {$attr.name}</label>&nbsp;&nbsp;
+                    </volist>
+                </td>
+            </tr>
+            <tr>
+				<th>商品图片 :</th>
+				<td>
+					<notempty name="info['img']"><img src="{:attach(get_thumb($info['img'], '_m'), 'item')}" width="100" height="100"/><br /></notempty>
+					<input type="file" name="img" />
+				</td>
+ 			</tr>
+            <tr>
+                <th>发放数量 :</th>
+                <td><input type="text" name="grant_num" class="input-text" size="50" value="{$info.grant_num}"></td>
+            </tr>
+			<tr>
+				<th>下单地址 :</th>
+				<td><input type="text" name="url" class="input-text" size="50" value="{$info.url}"></td>
+			</tr>
+            <tr>
+				<th>商品标签 :</th>
+				<td>
+                	<input type="text" name="tags" id="J_tags" class="input-text" size="50" value="{$info.tags}">
+                    <input type="button" value="{:L('auto_get')}" id="J_gettags" name="tags_btn" class="btn">
+                </td>
+			</tr>
+            <tr>
+				<th>商品价格 :</th>
+				<td><input type="text" name="price" size="10" class="input-text" value="{$info.price}"> 元</td>
+			</tr>
+			<tr>
+            	<th>发布人 :</th>
+                <td>{$info.nickname}</td>
+            </tr>
+            <tr>
+                <th>详细内容 :</th>
+                <td><textarea name="info" id="info" style="width:80%;height:400px;visibility:hidden;resize:none;">{$info.info}</textarea></td>
+            </tr>
+		</table>
+		</div>
+        <div class="content_list pad_10 hidden">
+            <ul class="seller-tip-bd" id="J-warm-tip">
+                <li>
+                    <input type="checkbox" id="creditCardL" name="warm[tips_no_credit_card]" value="1" <if condition="$info['tips_no_credit_card'] eq 1">checked="checked"</if>>
+                    <label for="creditCardL">请不要使用信用卡下单</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="hurryBackL" name="warm[tips_no_hurrying]" value="1" <if condition="$info['tips_no_hurrying'] eq 1">checked="checked"</if>>
+                    <label for="hurryBackL">请不要催促商家返款</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="expressDeliveryL" name="warm[tips_has_default_shipping]" value="1" <if condition="$info['tips_has_default_shipping'] eq 1">checked="checked"</if>>
+                    <label for="expressDeliveryL">默认快递：</label>
+                    <input type="text" class="w360 input-gray" id="warm[express_delivery]" placeholder="建议填写2-3个默认快递" name="warm[express_delivery]" value="{$info.express_delivery}">
+                    <span id="expressDeliveryTip"></span>
+                </li>
+                <li>
+                    <input type="checkbox" id="buyRequireL" name="warm[tips_has_model_limit]" value="1" <if condition="$info['tips_has_model_limit'] eq 1">checked="checked"</if>>
+                    <label for="buyRequireL">活动商品主要属性：</label>
+                    <input type="text" class="w360 input-gray" id="buyRequire" placeholder="请输入商品的主要属性，如净含量、规格、型号、款式、货号等" name="warm[tips_model_limit]" value="{$info.tips_model_limit}">
+                    <span id="buyRequireTip"></span>
+                </li>
+                <li>
+                    <p>
+                        <span class="seller-tip-explain">(当商家店铺产品设置了拍下立减、拍下改价或满就减等促销时需勾选并填写此项)</span>
+                    </p>
+                    <input type="checkbox" id="originalCostL" name="warm[tips_has_order_price]" value="1" <if condition="$info['tips_has_order_price'] eq 1">checked="checked"</if>>
+                    <label for="originalCostL">
+                        原价为
+                    </label>
+                    <input type="text" class="w50 input-gray" id="originalCost" name="warm[tips_before_order_price]" value="{$info.tips_before_order_price}">
+                    元
+                    <span id="originalCostTip"></span>
+                    ，拍下后价格为
+
+                    <input type="text" class="w50 input-gray" id="takePrice" name="warm[tips_after_order_price]" value="{$info.tips_after_order_price}">
+                    元
+                    <span id="takePriceTip"></span>
+                </li>
+                <li>
+                    <p><span class="seller-tip-explain">(商家店铺产品设置了VIP价格，并以VIP价格存担保金时需勾选并填写此项。)</span></p>
+                    <input type="checkbox" id="valorizeOrderL" name="warm[tips_has_vip_price]" value="1" <if condition="$info['tips_has_vip_price'] eq 1">checked="checked"</if>>
+                    <label for="valorizeOrderL">
+                        请用V1-V3价格
+                    </label>
+                    <input type="text" class="w50 input-gray" id="specify" name="warm[tips_vip_price]" value="{$info.tips_vip_price}">元下单
+                    <span id="specifyTip"></span>
+
+                </li>
+                <li>
+                    <p>
+                        <span class="seller-tip-explain">(需将邮费加存进担保金时勾选并填写此项)</span>
+                    </p>
+                    <input type="checkbox" id="inputPostageL" name="warm[tips_has_delivery_fee_limit]" value="1" <if condition="$info['tips_has_delivery_fee_limit'] eq 1">checked="checked"</if>>
+                    <label for="inputPostageL">
+                        已为每份试用品存入
+                    </label>
+                    <input type="text" class="w50 input-gray" id="inputPostage" name="warm[tips_delivery_fee_limit]" value="{$info.tips_delivery_fee_limit}">元邮费<span id="inputPostageTip"></span>，试客拍下的价格为【商品价+存入的邮费】，超出的差价由试客自行承担
+
+                </li>
+
+            </ul>
+        </div>
+		<div class="content_list pad_10 hidden">
+		<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+			<tr>
+				<th width="120">{:L('seo_title')} :</th>
+ 				<td><input type="text" name="seo_title" class="input-text" size="60" value="{$info.seo_title}"></td>
+			</tr>
+			<tr>
+				<th>{:L('seo_keys')} :</th>
+				<td><input type="text" name="seo_keys" class="input-text" size="60" value="{$info.seo_keys}"></td>
+			</tr>
+			<tr>
+				<th>{:L('seo_desc')} :</th>
+				<td><textarea name="seo_desc" cols="80" rows="8">{$info.seo_desc}</textarea></td>
+			</tr>
+		</table>
+		</div>
+
+        </div>
+		<div class="mt10"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;"></div>
+	</div>
+</div>
+<input type="hidden" name="menuid"  value="{$menuid}"/>
+<input type="hidden" name="id" value="{$info.id}" />
+</form>
+<include file="Public:footer" />
+<script src="__PUBLIC_ADMIN__js/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript">
+$('.J_cate_select').cate_select('请选择');
+$(function() {
+    KindEditor.create('#info', {
+        uploadJson : '{:U("attachment/editer_upload")}',
+        fileManagerJson : '{:U("attachment/editer_manager")}',
+        allowFileManager : true
+    });
+	$('ul.J_tabs').tabs('div.J_panes > div');
+	//自动获取标签
+	$('#J_gettags').live('click', function() {
+		var title = $.trim($('#J_title').val());
+		if(title == ''){
+			$.pinphp.tip({content:lang.article_title_isempty, icon:'alert'});
+			return false;
+		}
+		$.getJSON('{:U("item/ajax_gettags")}', {title:title}, function(result){
+			if(result.status == 1){
+				$('#J_tags').val(result.data);
+			}else{
+				$.pinphp.tip({content:result.msg});
+			}
+		});
+	});
+	$.formValidator.initConfig({formid:"info_form",autotip:true});
+	$("#J_title").formValidator({onshow:'请填写商品名称',onfocus:'请填写商品名称'}).inputValidator({min:1,onerror:'请填写商品名称'}).defaultPassed();
+});
+function get_child_cates(obj,to_id)
+{
+	var parent_id = $(obj).val();
+	if( parent_id ){
+		$.get('?m=item&a=get_child_cates&g=admin&parent_id='+parent_id,function(data){
+				var obj = eval("("+data+")");
+				$('#'+to_id).html( obj.content );
+	    });
+    }
+}
+
+function add_file()
+{
+    $("#next_upload_file .uplode_file").clone().insertAfter($("#first_upload_file .uplode_file:last"));
+}
+function del_file_box(obj)
+{
+	$(obj).parent().parent().remove();
+}
+function del_album(id)
+{
+	var url = "{:U('item/delete_album')}";
+    $.get(url+"&album_id="+id, function(data){
+		if(data==1){
+		    $('.album_'+id).remove();
+		};
+    });
+}
+function add_attr()
+{
+    $("#hidden_attr .add_item_attr").clone().insertAfter($("#item_attr .add_item_attr:last"));
+}
+function del_attrs(obj)
+{
+	$(obj).parent().parent().remove();
+}
+function del_attr(id,obj)
+{
+	var url = "{:U('item/delete_attr')}";
+    $.get(url+"&attr_id="+id, function(data){
+		if(data==1){
+		    $(obj).parent().parent().remove();
+		};
+    });
+}
+</script>
+<table id="next_upload_file" style="display:none;">
+<tbody class="uplode_file">
+   <tr>
+      <th width="100"><a href="javascript:void(0);" onclick="del_file_box(this);" class="blue"><img src="__STATIC__/css/bgimg/tv-collapsable.gif" /></a>上传文件 :</th>
+      <td><input type="file" name="imgs[]"></td>
+   </tr>
+</tbody>
+</table>
+<table id="hidden_attr" style="display:none;">
+<tbody class="add_item_attr">
+<tr>
+    <th width="200">
+    <a href="javascript:void(0);" class="blue" onclick="del_attrs(this);"><img src="__STATIC__/css/bgimg/tv-collapsable.gif" /></a>属性名 :<input type="text" name="attr[name][]" class="input-text" size="20">
+    </th>
+    <td>属性值 :<input type="text" name="attr[value][]" class="input-text" size="30"></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

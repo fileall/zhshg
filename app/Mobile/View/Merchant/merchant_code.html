@@ -1,0 +1,46 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+
+<body class="body-bgColor">
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">二维码收款</div>
+        <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="code-box vertical-box y-code-bg">
+    <div class="y-code">
+        <div class="ali-cen y-code-title">
+            <div class="y-code-title-icon y-over-hide">
+                <img src="__MB__images/y_icon47.png"/>
+            </div>
+            <div class="font-28">二维码收款</div>
+        </div>
+        <div class="y-code-content jus-cen ali-cen y-bg-white y-border-top">
+            <div class="font-26">无需加好友，扫二维码向我付钱</div>
+            <div class="y-code-content-img y-over-hide">
+                <img src="{:attach($merchant['ewm'],'ewm')}"/>
+            </div>
+            <div class="font-24 y-mar-top20 y-color-blue">保存收款码</div>
+        </div>
+    </div>
+</div>
+<!--content-->
+
+<!--footer-->
+
+<!--footer-->
+</body>
+</block>
+<block name="footer"></block>
+<block name="script">
+    <script>
+    </script>
+</block>
+</html>

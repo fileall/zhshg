@@ -1,0 +1,174 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">金果支付</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right">
+					<a class="transaction-link" href="{:U('member/w_particulars')}">交易记录</a>
+				</div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="row-box sweep-wrap"  id="scanQRCode">
+				<div class="sweep-left">
+					<div class="sweep-icon"><img src="__MB__images/icon01.png"></div>
+				</div>
+				<div class="row-flex">
+					<div class="sweep-name">扫一扫</div>
+				</div>
+				<div class="sweep-right">
+					<div class="sweep-right-icon"><i class="fa fa-angle-right"></i></div>
+				</div>
+			</div>
+			
+			<form action="" name="" method="post">
+				<ul class="">
+					<li class="enter-form-li row-box">
+						<div class="enter-form-txt">或输入交易账户</div>
+						<div class="row-flex">
+							<div class="enter-form-input">
+								<input type="number" name="oldpassword" placeholder="请输入电话号码">
+							</div>
+						</div>
+					</li>
+					
+					<li class="enter-form-li row-box">
+						<div class="enter-form-txt">输入金果数量</div>
+						<div class="row-flex">
+							<div class="enter-form-input">
+								<input type="number" name="newpassword" placeholder="0">
+							</div>
+						</div>
+					</li>
+				</ul>
+				
+				<div class="illustrate">金果将实时转入到对方账户，无法退回，单次交易扣除15%手续费</div>
+				
+				<div class="enter-form-btn">
+					<button type="button">立即支付</button>
+				</div>
+			</form>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+	</block>	
+<block name="footer"></block>
+<block name="script">
+	<link rel="stylesheet" href="__MB__css/swiper.css" />
+		<script src="__MB__js/swiper.min.js"></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script type="text/javascript" src="__MB__js/jquery.cookie.js"></script> 	
+	<script>
+	$('#jyb_pay').click(function(){
+		var prices = $('#prices').val();
+		var tel = $('#tel').val();	
+		var zftype=$.cookie('zftype');
+//		var is_index='{$zftype}';
+//		console.log(zftype);return false;
+		if(!$('#tel').val()){
+				layer.msg('请填写对方账户！',{icon:0,time:1000})
+				return false;
+		}
+		if(!$('#prices').val()){
+				layer.msg('请填写金额！',{icon:0,time:1000})
+				return false;
+		}
+		if($('#prices').val() < 0){
+			layer.msg('金额不能为负数！',{icon:0,time:1000})
+			return false;
+		}
+		
+		prices=parseFloat(prices);
+	 	$.post('',{zftype:zftype,prices:prices,tel:tel},function(d){
+		 	if(d.status ==1){
+		 		layer.msg(d.msg,{icon:1,time:1000},function(){
+		 			window.location.href='/index.php?s=/member/wallet.html';
+		 			
+		 		})
+		 	}
+		 	else{
+		 		layer.msg(d.msg,{icon:0,time:1000})
+		 	}
+		 },'JSON')
+		
+	});
+	
+	</script>
+	
+	<script>
+
+				//banner
+
+				var swiper = new Swiper('.swiper-container',
+
+				{
+
+					pagination: '.swiper-pagination',
+
+					paginationClickable: true,
+
+					autoplay:3000,
+
+					autoplayDisableOnInteraction:false,
+
+					loop:true
+
+				});
+
+
+
+                wx.config({
+
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+
+                    appId: "{$js['appId']}", // 必填，公众号的唯一标识
+
+                    timestamp: "{$js['timestamp']}", // 必填，生成签名的时间戳
+
+                    nonceStr: "{$js['nonceStr']}", // 必填，生成签名的随机串
+
+                    signature: "{$js['signature']}",// 必填，签名，见附录1
+
+                    jsApiList: [ 'scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+
+                }); 
+
+
+
+                wx.ready(function(){
+
+                    $("#scanQRCode").on("click",function(){
+
+                        wx.scanQRCode({
+
+                            needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+
+                            scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+
+                            success: function (res) {
+
+                                var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+
+                            }
+
+                        });
+
+                    })
+
+                });
+
+			</script>
+
+</block>
+</html>

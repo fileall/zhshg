@@ -1,0 +1,223 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+<body class="body-bgColor">
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">我的</div>
+        <a href="{:U('index/index')}">
+            <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+        </a>
+        <div class="header-right">
+            <a class="mine-set-link aaa" href="javascript:;"></a>
+        </div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+<!--弹出窗-->
+<div class="y-alert-bg y-recordAlert-bg y-hide">
+    <div class="y-minealert-div">
+        <div class="y-minealert-content">
+            <div class="font-30 y-minealert-content-top">
+                <p class="y-minealert-text y-bg-white">联系电话：18279145648</p>
+            </div>
+            <div class="font-24 y-color-999">需要退换货麻烦线下联系我们</div>
+        </div>
+        <p class="y-mine-alertButton y-bg-red">我知道了</p>
+    </div>
+</div>
+<!--弹出窗-->
+
+<!--content-->
+<div class="content">
+    <!--person-->
+    <div class="person-wrap y-person-wrap">
+        <div class="person-inner row-box">
+            <div class="row-flex"><a href="{:U('set_person')}">
+                <div class="person-photo vertical-center y-person-photo">
+                    <div class="vertical-auto"><img src="{:attach($member['avatar'],'avatar')}"></div>
+                </div>
+                <div class="person-message">
+                    <div class="person-name">{$member.nickname}</div>
+                    <div class="y-person-grade y-text-center">{$mem.vips}</div>
+                </div>
+            </a></div>
+
+
+            <div class="popularize vertical-center">
+                <div class="vertical-auto">
+                    <a href="{:U('member/popularize_link',array('what_ewm'=>1))}">
+                        <div class="popularize-img"><img src="{:attach($member['ewm'],'ewm')}"/></div>
+                        <div class="popularize-name">推广码</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--person-->
+
+
+
+    <!--order-->
+    <div class="order-wrap">
+        <div class="order-all"><a href="{:U('Orderlist/y_order',array('status'=>1))}">
+            <div class="order-all-title y-order-all-title">我的订单</div>
+            <div class="order-all-icon y-order-all-icon y-bg-img">全部订单</div>
+            <div class="clear-float"></div>
+        </a></div>
+        <ul class="order-ul">
+            <li class="order-li">
+                <a href="{:U('Orderlist/y_order',array('status'=>2))}">
+                    <empty name="count1">
+                        <else/>
+                        <span class="y-order-msg">{$count1}</span>
+                    </empty>
+                    <div class="order-icon"><img src="__MB__images/icon32.png"><div class="order-link-numbers"></div></div>
+                    <div class="order-name">待付款</div>
+                </a>
+            </li>
+
+            <li class="order-li">
+                <a href="{:U('Orderlist/y_order',array('status'=>3))}">
+                    <empty name="count2">
+                        <else/>
+                        <span class="y-order-msg">{$count2}</span>
+                    </empty>
+                    <div class="order-icon"><img src="__MB__images/icon33.png"><div class="order-link-numbers"></div></div>
+                    <div class="order-name">待发货</div>
+                </a>
+            </li>
+
+            <li class="order-li">
+                <a href="{:U('Orderlist/y_order',array('status'=>4))}">
+                    <empty name="count3">
+                        <else/>
+                        <span class="y-order-msg">{$count3}</span>
+                    </empty>
+                    <div class="order-icon"><img src="__MB__images/icon34.png"><div class="order-link-numbers"></div></div>
+                    <div class="order-name">待收货</div>
+                </a>
+            </li>
+
+            <li class="order-li">
+                <a href="{:U('Orderlist/y_order',array('status'=>5))}">
+                    <empty name="count4">
+                        <else/>
+                        <span class="y-order-msg">{$count4}</span>
+                    </empty>
+                    <div class="order-icon"><img src="__MB__images/icon35.png"><div class="order-link-numbers"></div></div>
+                    <div class="order-name">待评价</div>
+                </a>
+            </li>
+
+            <li id="y-refund" class="order-li">
+                <a href="javascript:;">
+                    <div class="order-icon"><img src="__MB__images/icon36.png"><div class="order-link-numbers"></div></div>
+                    <div class="order-name">退款/售后</div>
+                </a>
+            </li>
+            <div class="clear-float"></div>
+        </ul>
+
+        <div class="y-exponent-col">
+            <div class="exponent-inner y-exponent-inner row-box">
+                <div class="row-flex">
+                    <div class="exponent-txt y-color-red flex">
+                        <p>今日财富指数：{$selive_coin_day}</p>
+                        <div class="y-exponent-txt-icon">
+                            <img src="__MB__images/y_icon51.png"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="exponent-right">
+                    <div class="exponent-date y-color-red">{:date('Y-m-d')}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--order-->
+    <!--<a href="{:U('agent/agent')}">服务中心</a>-->
+    <!--money-->
+    <!--money-->
+
+    <!--功能列表-->
+    <div class="function-list">
+        <ul class="jus-bet flex-warp">
+
+            <li class="function-list-li y-function-list-li"><a href="{:U('Wallet/wallet')}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon1.png"></div>
+                <div class="function-list-name">我的钱包</div>
+            </a></li>
+
+            <li class="function-list-li y-function-list-li"><a href="{:U('merchant/merchant')}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon2.png"></div>
+                <div class="function-list-name">我是商家</div>
+            </a></li>
+            <li class="function-list-li y-function-list-li"><a href="{:U('index/exploit')}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon3.png"></div>
+                <div class="function-list-name">平台介绍</div>
+            </a></li>
+            <li class="function-list-li y-function-list-li"><a href="{:U('index/exploit')}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon4.png"></div>
+                <div class="function-list-name">我的收藏</div>
+            </a></li>
+            <li class="function-list-li y-function-list-li"><a href="{:U('Item/gwc')}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon5.png"></div>
+                <div class="function-list-name">购物车</div>
+            </a></li>
+            <li class="function-list-li y-function-list-li"><a href="{:U('index/exploit')}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon6.png"></div>
+                <div class="function-list-name">同城配送</div>
+            </a></li>
+            <li class="function-list-li y-function-list-li"><a href="{:U('index/exploit')}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon7.png"></div>
+                <div class="function-list-name">我要推荐</div>
+            </a></li>
+            <li class="function-list-li y-function-list-li"><a href="{:U('myset')}" class="mine-toset">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon8.png"></div>
+                <div class="function-list-name">设置</div>
+            </a></li>
+        </ul>
+    </div>
+    <!--功能列表-->
+</div>
+<!--content-->
+<!--footer-->
+<block name="footer"></block>
+<!--footer-->
+</body>
+</block>
+
+<block name="script">
+    <script type="text/javascript" src="__MB__js/jquery.cookie.js"></script>
+    <script>
+        $(function(){
+            //右上角设置
+            $(".aaa").click(function(){
+                $.cookie('is_mine',1);
+                var is_mine = $.cookie('is_mine');
+                location.href='{:U("member/myset",array("is_mine"=>'+is_mine+'))}';
+            })
+
+            $(".mine-toset").click(function(){
+                $.cookie('is_mine',2);
+                var is_mine = $.cookie('is_mine');
+                location.href='{:U("member/myset",array("is_mine"=>'+is_mine+'))}';
+            })
+
+        })
+    </script>
+    <script>
+        $("#y-refund").click(function(){
+            $(".y-alert-bg").fadeIn(300);
+            $(".y-minealert-div").addClass("active");
+        })
+        $(".y-mine-alertButton").click(function(){
+            $(".y-alert-bg").fadeOut(300);
+            $(".y-minealert-div").removeClass("active");
+        })
+    </script>
+</block>
+</html>

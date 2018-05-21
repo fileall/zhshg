@@ -1,0 +1,107 @@
+<!--编辑会员-->
+<div class="dialog_content">
+    <form id="info_form" action="{:u('MemberCard/add')}" method="post">
+        <table width="100%" class="table_form">
+        	<tr>
+			<th width="120">所属门店 :</th>
+            <td>
+            	<select name="store" id="store">
+            		<volist name="store" id="val">
+	            		<option value="{$val['id']}" <if condition="$info['store'] eq $val['id']">selected</if> >
+	            			{$val['username']}
+	            		</option>
+	            	</volist>  
+            	</select>
+            </td>
+		</tr>
+		<tr>
+			<th width="120">业务员 :</th>
+            <td>
+            	<select name="salesman" id="salesman_edit">
+        			<option value="">请选择</option>
+            		<volist name="salesman" id="val">
+	            		<option value="{$val['id']}" <if condition="$info['salesman'] eq $val['id']">selected</if> >
+	            			{$val['name']}
+	            		</option>
+	            	</volist>  
+            	</select>
+            </td>
+		</tr>
+        	<tr>
+                <th width="100">卡号 :</th>
+                <td><input type="text" name="card" id="card" class="input-text fl mr10" size="30" value=""></td>
+            </tr>
+            <tr>
+                <th width="100">面值 :</th>
+                <td><input type="text" name="price" id="price" class="input-text fl mr10" size="30" value=""></td>
+            </tr>
+             <tr>
+                <th>绑定用户ID :</th>
+                <td><input type="text" name="member_id" id="member_id" class="input-text fl mr10" value="" size="30">(如未绑定则不填)</td>
+            </tr>
+            <!--<tr>
+                <th>分类 :</th>
+                <td>
+                	<volist name="list" id="val">
+                		&nbsp;&nbsp;
+                		<input type="checkbox" name="cate[]" value="{$val['id']}"> {$val['name']}
+                		<if condition="($i%4) eq 0"></br></if>  
+                	</volist>  
+                </td>
+            </tr>  -->
+        </table>
+    </form>
+</div>
+<script src="__STATIC__/js/fileuploader.js"></script>
+<script>
+
+
+
+    $(function(){
+    	//选择门店事件
+
+	$("#store").change(function(){
+		salesman_edit($(this).val());
+	})
+
+
+
+
+var a=$("#store").val();
+salesman_edit(a);
+//获取门店下的业务员
+function salesman_edit(id){
+	$.ajax({
+		type:"POST",
+		url:"{:U('Salesman/ajax_salesman')}",
+		data:'id='+id,
+		async:true,
+		dataType:'json',
+		success:function(msg){			
+			var ht ='<option value="">请选择</option>';
+			$.each(msg, function(k,v) {
+				ht += '<option value="'+v.id+'">'+v.name+'</option>';
+			});
+			
+			$("#salesman_edit").html(ht);
+		}
+	});        
+}
+        $.formValidator.initConfig({formid:"info_form",autotip:true});
+        $("#price").formValidator({onshow:'请填写面值',onfocus:'请填写面值'}).inputValidator({min:1,onerror:'请填写面值'});
+        
+        $("#card").formValidator({onshow:'请填写卡号',onfocus:'请填写卡号'}).inputValidator({min:1,onerror:'请填写卡号'});
+        
+        $('#info_form').ajaxForm({success:complate,dataType:'json'});
+        
+        function complate(result){
+            if(result.status == 1){
+                $.dialog.get(result.dialog).close();
+                $.pinphp.tip({content:result.msg});
+                window.location.reload();
+            } else {
+                $.pinphp.tip({content:result.msg, icon:'alert'});
+            }
+        }
+    });
+</script>

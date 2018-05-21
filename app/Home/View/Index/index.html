@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>{:C('pin_site_title')}</title>
+	<meta name="keywords" content="{:C('pin_site_keyword')}" />
+	<meta name="description" content="{:C('pin_site_description')}" />
+	<link rel="shortcut icon" type="image/x-icon" href="__PC__images/">
+	<link rel="stylesheet" href="__PC__css/l_main.css" />
+	<link rel="stylesheet" href="__PC__css/animate.css" />
+	<script>
+        var search_curr = function () {
+            var keywords = document.getElementById("search-value").value;
+            if(keywords == ''){
+                alert('请输入关键字');
+            }else{
+                window.location.href="{:U('Curriculum/search')}"+'&keywords='+keywords;
+            }
+        }
+	</script>
+</head>
+<body>
+<!--head-->
+<div class="head">
+	<!--顶部-->
+	<div class="top">
+		<div class="wrap clear">
+			<div class="left fl">
+				<span class="fl">欢迎进入兴智教育官方网站</span>
+				{:W('Wg/login_status')}
+			</div>
+			<ul class="right fr">
+				<li class="top-menu-box"> 
+					{:W('Wg/nav')}
+				</li>
+				<li class="top-menu-box">
+					<a href="{:U('Member/index')}" class="hover-blue">个人中心</a>
+				</li>
+				<li class="top-menu-box saoyisao">
+					<a href="" class="hover-blue">扫一扫</a>
+					<div class="down-menu">
+						<img src="__PC__images/foot-code_13.jpg" alt="" />
+					</div>
+				</li>
+				<li class="qq">
+					<a href="tencent://message/?uin=1563940776&amp;Site=No&amp;Menu=yes" target="_blank" class="hover-blue">在线咨询</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!--搜索框-->
+	<div class="search wrap clear">
+		<div class="logo fl">
+			<a href="/"><img src="__PC__images/logo.png" alt="logo" /></a>
+		</div>
+		<div class="search-box fl">
+			<div class="clear">
+				<input type="text" class="fl text" id="search-value" placeholder="请输入要搜索的课程或老师"/>
+				<input type="submit" value="搜索" class="fl sub" onclick="search_curr();"/>
+			</div>
+			<!--<ul class="clear hot-key-words">
+				<volist name="keywords" id="val">
+					<li><a href="javascript:;" class="hover-blue keywords">{$val['keywords']}</a></li>
+				</volist>
+			</ul>-->
+		</div>
+		<div class="call fr">{:C('pin_tel')}</div>
+	</div>
+	<!--导航-->
+	<div class="nav">
+		<div class="wrap clear">
+			<div class="nav-allType fl">全部课程分类</div>
+			<div class="fl posRel">
+				<ul class="nav-list fl">
+					<li><a href="/" class="active">首页</a></li>
+					<li><a href="{:U('Curriculum/homeEducation')}">家庭教育指导</a></li>
+					<li><a href="{:U('Curriculum/classroom')}">语数外课堂</a></li>
+					<li><a href="{:U('Index/news')}">新闻动态</a></li>
+					<!--<li><a href="{:U('Mall/index')}">在线商城</a></li>-->
+					<li><a href="{:U('Index/service')}">售后服务</a></li> 
+					<li><a href="{:U('Index/about')}">关于我们</a></li>
+				</ul>
+				<span class="navUnderline"></span>
+			</div>
+		</div>
+	</div>
+</div><!--head-end-->
+
+<!--轮播-全部分类-->
+<div class="index-bannerBox">
+	<!--全部分类-->
+	<div class="wrap index-allTypeBox">
+		<div class="index-allType">
+			<!--一级菜单-->
+			<volist name="cate_list" id="val">
+				<div class="item">
+					<h3 class="index-allType-title">
+						<a href="{$val['url']}" class="hover-blue">{$val['name']}</a>
+					</h3>
+					<div class="index-allType-type">
+						<volist name="val['self']" id="va">
+							<a href="{$va['url']}" class="hover-blue">{$va['name']}</a>
+						</volist>
+					</div>
+					<!--二级菜单-->
+					<div class="item index-typeMent hide">
+						<ul>
+							<volist name="val['self']" id="va">
+								<li class="clear">
+									<div class="fl left"><a href="{$va['url']}">{$va['name']}</a></div>
+									<div class="fl clear right">
+										<volist name="va['self']" id="v">
+											<a href="{$v['url']}" class="hover-blue">{$v['name']}</a>
+										</volist>
+									</div>
+								</li>
+							</volist>
+						</ul>
+					</div>
+				</div><!--一级菜单-end-->
+			</volist>
+		</div>
+	</div>
+
+	<!--轮播-->
+	<div class="swiper-container index-banner">
+		<div class="swiper-wrapper">
+			<volist name="ad" id="val">
+				<div class="swiper-slide">
+					<a href="{$val['url']}" style="background:url('{:attach($val['content'],'advert')}') no-repeat center top;"></a>
+				</div>
+			</volist>
+		</div>
+		<!-- 如果需要分页器 -->
+		<div class="swiper-pagination"></div>
+		<!-- 如果需要导航按钮 -->
+		<div class="swiper-button-prev"></div>
+		<div class="swiper-button-next"></div>
+	</div>
+</div>
+
+<!--轮播-全部分类-end-->
+<!--定制方案-->
+<div class="padT35 wrap posRel">
+	<div class="index-title animated zoomIn">定制专属<strong>解决方案</strong>&nbsp;&nbsp;让<strong>父母</strong>教子无忧</div>
+	<div class="index-adva clear">
+		<div class="index-adva-tip">
+			<div class="item one hide">
+				<h3 class="title">全维度评估</h3>
+				<p>兴智教育会派专业的咨询老师为对家庭进行全维度评估，如家庭教养环境、孩子优缺点等，了解孩子和家长的问题和现状，找准问题，才能帮助孩子健康成长！</p>
+			</div>
+			<div class="item two hide">
+				<h3 class="title">私人订制</h3>
+				<p>兴智教育根据诊断结果，搭配不同的守护方案，并配备专业的家庭指导老师和教育督导，家庭教育顾问将陪伴跟踪家长的学习效果，教学督导将批阅家长的学习笔记。</p>
+			</div>
+			<div class="item three ">
+				<h3 class="title">优秀师资</h3>
+				<p>兴智教育邀请众多国内家庭教育的知名专家，他们从事家庭教育事业多年，积累了丰富的实践经验，曾帮助数万名家庭解决教育孩子的问题。</p>
+			</div>
+			<div class="item five hide">
+				<h3 class="title">专业指导</h3>
+				<p>兴智教育邀请知名教育界、心理学界专家为产品研发把关。这些人才深入了解孩子身心发展规律，能根据孩子成长规律以及家长教育规律，达到帮助家长轻松解决孩子问题的效果。</p>
+			</div>
+			<div class="item six hide">
+				<h3 class="title">结果导向</h3>
+				<p>全兴智教育为了帮助父母更快的成长，邀请业界知名青少年问题解决专家肖亦彤录制成长课程，帮助家长深入了解孩子成长发展规律，让家长成为一个“持证上岗”的优秀家长，让父母和孩子受益一生。</p>
+			</div>
+		</div>
+		<div class="index-adva-box">
+			<dl class="item one ">
+				<dt style="background-image: url('__PC__images/ico-zhidao.png');"></dt>
+				<dd>全维度评估</dd> 
+			</dl>
+			<dl class="item two">
+				<dt style="background-image: url('__PC__images/ico-shizi.png');"></dt>
+				<dd>私人订制</dd>
+			</dl>
+			<dl class="item three active">
+				<dt style="background-image: url('__PC__images/ico-pingtai.png');"></dt>
+				<dd>优秀师资</dd>
+			</dl>
+			<dl class="item four">
+				<dt style="background-image: url('__PC__images/ico-24.png');"></dt>
+				<dd>专业指导</dd>
+			</dl>
+			<dl class="item five">
+				<dt style="background-image: url('__PC__images/ico-quannian.png');"></dt>
+				<dd>结果导向</dd>
+			</dl>
+		</div>	
+	</div>
+</div>
+<!--定制方案-end-->
+<!--好教育没有好老师怎么行-->
+<div class="padT50 bgf0f3f5">
+	<div class="wrap">
+		<div class="index-title" id="goodsCjTitle">好教育没有<strong>好老师</strong>怎么行？</div>  
+		<div class="index-techTitle">
+			<volist name="teacher" id="val">
+				<a href="javascript:;" <if condition="$i eq 1">class="active"</if>>{$val['name']}</a>
+			</volist>
+		</div>
+		<div class="index-techCon">
+			<volist name="teacher" id="val" key="k">
+				<div class="list <if condition="$k neq 1">hide</if> anmateTech" >
+					<ul class="clear">
+						<volist name="val['at_list']" id="va">
+							<li class="item">
+								<a href="{:U('Index/news_details',array('id'=>$va['id'],'type'=>'about'))}">
+									<div class="headImg">
+										<img src="{:attach($va['img'],'article')}" alt="" />
+									</div>
+									<h3 class="name">{$va['title']}</h3>
+									<p class="time">{$va['intro']}</p>
+								</a>
+							</li>
+						</volist>
+					</ul>
+				</div>
+			</volist>
+		</div>
+	</div>
+</div>
+<!--好教育没有好老师怎么行-end-->
+<!--信誉代言-->
+<div class="index-yuyue">
+	<div class="wrap clear">
+		<div class="index-title" id="animateYYLeft">1000多个家长用<strong>信誉</strong>代言，我们用<strong>结果</strong>说话！</div>
+		<!--轮播-->
+		<div class="swiper-container jzdaiyan">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide" style="background: url('__PC__images/index-daiyan1.png') no-repeat center;"></div>
+				<div class="swiper-slide" style="background: url('__PC__images/index-daiyan2.png') no-repeat center;"></div>
+				<div class="swiper-slide" style="background: url('__PC__images/index-daiyan3.png') no-repeat center;"></div>
+			</div>
+			<!-- 如果需要分页器 -->
+			<div class="swiper-pagination"></div>
+			<!-- 如果需要导航按钮 -->
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+		</div>
+		
+	</div>
+</div>
+<!--信誉代言-end-->
+
+<!--免费测评-->
+<div class="index-ceping">
+	<div class="wrap clear">
+		<div class="index-ceping-left">
+			<img src="__PC__images/index-ceping_03.png" alt="" />
+		</div>
+		<div class="index-ceping-right">
+			<h3 class="index-ceping-title">想要了解孩子学习现状和<br />未来发展吗？-来免费测评！</h3>
+			<ul class="index-ceping-list">
+				<li><i class="dot"></i>孩子专注力测评</li>
+				<li><i class="dot"></i>孩子作业拖拉程度测评</li>
+				<li><i class="dot"></i>孩子天赋能力测评等等</li>
+			</ul>
+			<a href="{:U('Evaluation/evaluation')}" class="index-ceping-btn">免费测评</a>
+		</div>
+	</div>
+</div>
+<!--免费测评-end-->
+
+<!--新闻-->
+<div class="wrap index-news clear">
+	<volist name="news" id="val">
+		<div class="item {$val['class']}">
+			<img src="{:attach($val['img'],'article_cate')}" alt="" class="index-news-img"/>
+			<dl class="index-newslist">
+				<dt class="title clear">
+				<h3 class="fl">{$val['name']}</h3>
+				<a href="{:U('Index/news',array('cate_id'=>$val['id']))}" class="fr">更多>></a>
+				</dt>
+				<volist name="val['at_list']" id="va">
+					<dd class="clear">
+						<a href="{:U('Index/news_details',array('id'=>$va['id'],'type'=>'news'))}" class="clear">
+							<div class="newstitle">{$va['title']}</div>
+							<div class="newstime">{$va['add_time']|date="m-d",###}</div>
+						</a>
+					</dd>
+				</volist>
+			</dl>
+		</div>
+	</volist>
+</div>
+<!--新闻-end-->
+<!--几步轻松上课-->
+<div class="padT35 bgf0f3f5">
+	<div class="wrap">
+		<div class="index-title anmateQssk">只需几步<strong>轻松</strong>上课</div>
+		<div class="index-step clear">
+			<div class="item clear">
+				<div class="fl">
+					<img src="__PC__images/index-step_03.png" alt="" class="index-step-img"/>
+				</div>
+				<div class="fl info">
+					<h3>预约课程</h3>
+					<p>7*24小时辅导免费咨询<br>快捷下单，量身定制课程<br>随时随地预约上课</p>
+				</div>
+			</div>
+			<div class="item clear">
+				<div class="fl">
+					<img src="__PC__images/index-step_05.png" alt="" class="index-step-img"/>
+				</div>
+				<div class="fl info">
+					<h3>互动教学</h3>
+					<p>好学宝免费使用<br>智能硬件与软件完美结合<br>足不出户与名师1对1</p>
+				</div>
+			</div>
+			<div class="item clear">
+				<div class="fl">
+					<img src="__PC__images/index-step_07.png" alt="" class="index-step-img"/>
+				</div>
+				<div class="fl info">
+					<h3>课后评价</h3>
+					<p>教学监控、家长旁听<br>课后学生对老师进行评价<br>保障教学质量和效果</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--几步轻松上课-end-->
+
+<!--公共底部-->
+<include file="Public/footer" />
+<!--公共底部-end-->
+
+<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="__PC__plugins/swiper3.14/css/swiper.min.css" /><!--轮播css-->
+<script src="__PC__plugins/swiper3.14/js/swiper.min.js"></script><!--轮播js-->
+<script src="__PC__js/l_main.js"></script>
+<script>
+    $(function(){
+        var mySwiper = new Swiper ('.index-banner', {
+            loop: true,
+            // 如果需要分页器
+            pagination: '.index-banner .swiper-pagination',
+
+            // 如果需要前进后退按钮
+            nextButton: '.index-banner .swiper-button-next',
+            prevButton: '.index-banner .swiper-button-prev',
+            autoplayDisableOnInteraction : false,
+            paginationClickable :true
+        })
+		
+		var mySwiper2 = new Swiper ('.jzdaiyan', {
+            loop: true,
+            // 如果需要分页器
+            pagination: '.jzdaiyan .swiper-pagination',
+
+            // 如果需要前进后退按钮
+            nextButton: '.jzdaiyan .swiper-button-next',
+            prevButton: '.jzdaiyan .swiper-button-prev',
+            autoplayDisableOnInteraction : false,
+            paginationClickable :true,
+			
+			effect : 'fade'
+        })
+		
+        //滚动监听，添加animated动画
+        var WinH = $(window).height(),//窗口高度
+            goodsCjTitle = $('#goodsCjTitle').offset().top, //1.好成绩没有好老师怎么行 标题距页面顶部高度
+            animateYYLeft = $('#animateYYLeft').offset().top,//2.‘预约’距页面顶部高度
+            anmateTech = $('.anmateTech').offset().top,//3.首页老师列表距页面顶部高度
+            indexNews = $('.index-news').offset().top,//4.首页新闻列表距页面顶部高度
+            anmateQssk = $('.anmateQssk').offset().top;//5.首页轻松上课距页面顶部高度
+        $(window).scroll(function(event){
+            var winPos = $(window).scrollTop();//滚动的距离
+            if(winPos >= goodsCjTitle-WinH){$('#goodsCjTitle').addClass('animated swing')};//1
+            if(winPos >= (animateYYLeft-WinH)){ 
+                $('#animateYYLeft').addClass('animated bounce')
+            };
+            if(winPos >= anmateTech-WinH){$('.anmateTech').addClass('animated slideInUp')};//3
+            if(winPos >= indexNews-WinH){
+                $('.index-news .item').eq(0).addClass('animated fadeInLeft');//4做左
+                $('.index-news .item').eq(1).addClass('animated fadeInLeft');//4中 
+                 $('.index-news .item').eq(2).addClass('animated fadeInRight');//4中 
+                $('.index-news .item').eq(3).addClass('animated fadeInRight');//4右
+            };
+            if(winPos >= anmateQssk-WinH){$('.anmateQssk').addClass('animated jackInTheBox')};//5
+        })
+
+		//关键字搜索
+		$('.keywords').click(function () {
+            window.location.href="{:U('Curriculum/search')}"+'&keywords='+$(this).text();
+        })
+    })
+</script>
+
+</body>
+</html>

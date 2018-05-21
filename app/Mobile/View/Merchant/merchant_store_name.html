@@ -1,0 +1,67 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+
+    <body class="body-bgColor">
+    <!--header-->
+    <div class="header-wrap">
+        <div class="header-inner">
+            <div class="header-title">修改名称</div>
+            <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+            <div class="header-right"></div>
+        </div>
+    </div>
+    <div class="header-space"></div>
+    <!--header-->
+
+    <!--content-->
+    <div class="content">
+        <form action="" name="" method="post">
+            <ul class="y-mar-top20">
+                <li class="enter-form-li row-box">
+                    <div class="row-flex">
+                        <div class="enter-form-input y-width94">
+                            <input type="text" name="title" value="{$title['title']}" placeholder="请输入名称！">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="enter-form-btn"><a>
+                <button type="button">保存</button>
+            </a></div>
+        </form>
+    </div>
+    <!--content-->
+
+    <!--footer-->
+    <!--footer-->
+    </body>
+</block>
+    <block name="script">
+        <script>
+            $("button").click(function(){
+                //不能为空string.length == 0
+                var title = $('input[name="title"]').val();
+                if(!title || title.length==0){
+                    layer.msg('请输入店铺名！',{icon:0,time:1000})
+                    return false;
+                }
+//		var data = new FormData('form[name="title"]');//序列化
+//		data.append('is_title',1);
+                $.post('{:U("merchant/store_update")}',{title:title,is_title:1},function(d){
+                    if(d.status==1){
+                        layer.msg(d.msg,{icon:1,time:2000},function(){
+                            window.location.href=d.url;
+                        })
+                    }else{
+                        layer.msg(d.msg,{icon:0,time:2000})
+                    }
+                })
+                return false;
+
+            })
+
+        </script>
+    </block>
+    </html>

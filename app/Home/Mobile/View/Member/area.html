@@ -1,0 +1,83 @@
+<extend name="Base/common"/> 
+<block name="header"></block>		
+<block name="body">
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">区域</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<form action="" name="" method="post">
+				<ul class="">
+					<li class="enter-form-li row-box">
+						<div class="enter-form-icon"></div>
+						<div class="row-flex">
+							<div class="enter-form-input">
+								<input type="text" id="demo1" name="address" readonly="readonly" value="{$member['address']}" placeholder="请选择区域">
+							</div>
+						</div>
+					</li>
+				</ul>
+				
+				<div class="enter-form-btn"><a href="javascript:;">
+					<button type="submit">确定</button>
+				</a></div>
+			</form>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	<link rel="stylesheet" href="__MB__css/LArea.css">
+	<script src="__MB__js/LArea.js"></script>
+	<script src="__MB__js/LAreaData1.js"></script>
+	<script src="__MB__js/LAreaData2.js"></script>
+</body>
+</block>	
+<block name="script">
+<script>
+	$('form').submit(function(){
+		//不能为空string.length == 0
+		var address = $('input[name="address"]').val();
+		if(!address || address.length==0){
+			layer.msg('请输入地区！',{icon:0,time:1000})
+			return false;
+		}
+		$.post('{:U("member/set_person")}',{address:address,is_address:1},function(d){
+			if(d.status==1){
+				layer.msg(d.msg,{icon:1,time:2000},function(){
+					window.location.href=d.url;
+				})
+			}else{
+				layer.msg(d.msg,{icon:0,time:2000})
+			}
+		})
+		return false;
+		
+	})
+	
+	
+	
+//选择地区
+var area1 = new LArea();
+area1.init({
+	'trigger': '#demo1',
+    'valueTo': '#value1',
+    'keys': {
+    	id: 'id',
+        name: 'name'
+    },
+    'type': 1,
+    'data': LAreaData
+});
+</script>
+</block>	
+</html>

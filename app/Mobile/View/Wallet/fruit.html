@@ -1,0 +1,116 @@
+<extend name="Base/common"/>
+
+<block name="header"></block>
+
+<block name="body">
+
+    <body class="body-bgColor">
+
+    <!--header-->
+
+    <div class="header-wrap">
+
+        <div class="header-inner">
+
+            <div class="header-title">我的金果</div>
+            <a href="{:U('wallet/wallet')}">
+                <div class="header-left"><i class="fa fa-angle-left"></i></div>
+            </a>
+            <div class="header-right"></div>
+
+        </div>
+
+    </div>
+
+    <div class="header-space"></div>
+
+    <!--header-->
+
+
+
+    <!--content-->
+
+    <div class="content">
+
+        <div class="outstanding-box vertical-center">
+
+            <div class="vertical-auto" style="width: 100%;">
+
+                <div class="outstanding-title">我的金果</div>
+
+                <div class="outstanding-money">￥{$member.gold_fruit}</div>
+            </div>
+
+        </div>
+
+        <div class="outstanding-wrap">
+
+            <a class="outstanding-link active" href="{:U('wallet/pay_to_merchant',array('transfer_type'=>2))}" id="zf">金果支付</a>
+
+            <a class="outstanding-link" href="{:U('wallet/fruit_recycle')}">金果回购</a>
+
+            <a class="outstanding-link" href="{:U('wallet/transfer_to_friend',['transfer_type'=>2])}">金果转好友</a>
+            
+            <a class="outstanding-link" href="{:U('fruit_cdkey')}">金果券</a>
+
+        </div>
+
+
+
+        <div class="notecase-tis">金果明细</div>
+
+        <ul class="notecase-ul" id="ul">
+        </ul>
+        <!--<div class="more-text">查看更多></div>-->
+
+    </div>
+
+    </body>
+
+</block>
+
+<block name="footer"></block>
+
+<block name="script">
+
+    <script type="text/javascript" src="__MB__js/jquery.cookie.js"></script>
+
+    <script>
+
+//        $("#zf").click(function(){
+//
+//            $.cookie('zftype',3);
+//
+//            var zftype = $.cookie('zftype');
+//
+//            location.href='{:U("wallet/w_shaped_pay",array("zftype"=>'+zftype+'))}';
+//
+//        })
+
+    </script>
+    <script>
+
+        //流加载
+        layui.use('flow', function(){
+            var flow = layui.flow;
+            var type = '{$type}';//币种1工资2金元宝3金果',
+            flow.load({
+                elem: '#ul' //指定列表容器
+//		         ,scrollElem: '#'//滚动所在元素
+                ,done: function(page, next){ //到达临界点（默认滚动触发），触发下一页
+//		             var lis = [];
+                    $.get('{:U("wallet/ajax_bz_liu")}',{page:page,type:type}, function(res){
+                        next(res[1], page < res[0]);
+                    }, 'json');
+                }
+
+            });
+
+        });
+
+    </script>
+
+</block>
+
+</html>
+

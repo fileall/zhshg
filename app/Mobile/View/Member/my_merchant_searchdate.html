@@ -1,0 +1,63 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">明细查询</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+				<form action="{:U('my_merchant')}" method="post">
+		<div class="content">
+			<div class="search-date-box row-box">
+
+				<div class="row-flex">
+					<div class="search-date vertical-center">
+						<div class="vertical-auto" style="width: 100%;"><input name="time_start" type="date" placeholder="请选择时间"></div>
+					</div>
+				</div>
+				<div class="search-space">至</div>
+				<div class="row-flex">
+					<div class="search-date vertical-center">
+						<div class="vertical-auto" style="width: 100%;"><input name="time_end" type="date" placeholder="请选择时间"></div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="container-btn">
+				<a href="javascript:;" id="searchdate">确定</a>
+				
+			</div>
+		</div>
+			<input name="type" type="hidden" value="{$type}"/>
+			</form>
+		
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>	
+<block name="footer"></block>
+<block name="script">
+<script>
+	$('#searchdate').click(function(){
+		var data=$('form').serialize();
+		var type=$('input[name="type"]').val();
+		var time_start=$('input[name="time_start"]').val();
+		var time_end=$('input[name="time_end"]').val();
+//		$.post('{:U("my_merchant")}',$data,function(){
+			location="/index.php?m=mobile&c=member&a=my_merchant&type="+type+"&time_start="+time_start+"&time_end="+time_end;
+//		})
+
+	})
+</script>	
+</block>
+</html>

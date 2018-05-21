@@ -1,0 +1,228 @@
+<include file="Public:header" />
+<!--商家列表-->
+<div class="pad_10" >
+
+  <form name="searchform" method="get"  >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <input type="hidden" name="m" value="admin" />
+                    <input type="hidden" name="c" value="Merchant" />
+                    <input type="hidden" name="a" value="index" />
+                    <input type="hidden" name="menuid" value="{$menuid}" />
+                    <!--地区：<select class="J_cate_select mr10" data-pid="0" data-uri="{:U('place/ajax_getchilds')}" data-selected="{$search.selected_ids}"></select>-->
+                   <!--<input type="hidden" name="cate_id" id="J_cate_id" value="{$search.cate_id}" />-->
+                    &nbsp;&nbsp;添加日期：<input type="text" name="time_start" id="J_time_start" class="date" value="{$search.time_start}" placeholder="时间开始">
+                    -
+                    <input type="text" name="time_end" id="J_time_end" class="date"  value="{$search.time_end}" placeholder="时间截止">
+
+                    &nbsp;&nbsp;分类：<select class="J_cate_select mr10" data-pid="0" data-uri="{:U('MerchantCate/ajax_getchilds')}" data-selected="{$search.selected_ids}"></select>
+                    <input type="hidden" name="cate_id" id="J_cate_id" value="{$search.cate_id}" />
+                   
+                    
+                     &nbsp;&nbsp;收银类型：<select name="zftype" >
+                     	<option value="0">请选择</option>
+                     	<option value="1" <if condition="$search['zftype']==1">selected</if>>金宝</option>
+
+                     	<!--<option value="2" <if condition="$search['zftype']==2">selected</if>>银宝</option>-->
+
+                     	<option value="3" <if condition="$search['zftype']==3">selected</if>>金果</option>
+
+                     </select>
+                  
+
+                    &nbsp;&nbsp;关键字 :
+                    <input name="keywords" type="text" class="input-text"  value="{$search.keywords}" placeholder="店名/电话/会员名" size="10"/>
+                    <input type="submit"  class="btn look_index" value="搜索" /> 
+                    <input type="button"  class="btn export" value="下载报表" />
+                </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+
+    <!--<div class="explain_col">
+        <form id="addform" action="{:U('Member/member_upload')}" method="post" enctype="multipart/form-data">
+            <input type="file" style=" width:65px;" name="excelData" value="" datatype="*4-50" nullmsg="" />
+            <input type="submit" class="btn btn-primary Sub" value="导入" />
+            <a href="/download/member_import.xls" class="btn btn-primary Sub" >下载导入模板</a>
+            <input type="button" class="btn" data-tdtype="batch_action" data-uri="{:U('Member/export')}" data-name="id" data-msg="确定导出已经选中的学生吗？" value="导出" />
+        </form>
+    </div>-->
+
+  <div class="J_tablelist table_list" data-acturi="{:U('Merchant/ajax_status_edit')}">
+        <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width="20"><input type="checkbox" id="checkall_t" class="J_checkall"></th>
+                <th width="70"  align="left"><span data-tdtype="order_by" data-field="id">id</span></th>
+                <th width="90" align="left">头像</th>
+                <th width="70"  align="left"><span data-tdtype="order_by" data-field="title">店名</span></th>
+                <!--<th width="70"  align="left">会员名</th>-->
+                <th width="70"  align="left">会员电话</th>
+                <th width="84" align="left">电话</th>
+                <th width="125" align="left">地址</th>
+                <th width="84" align="left"><span data-tdtype="order_by" data-field="cate_id">分类</span></th>
+                <if condition="$search['type']">
+                <else />
+                    <th width="90" align="left">元宝</th>
+                    <th width="90" align="left">金果</th>
+                    <th width="90" align="left"><span data-tdtype="order_by" data-field="rangli">让利</span></th>
+                <th width="90" align="left"><span data-tdtype="order_by" data-field="set_coin">返银倍数</span></th>
+
+              <th width="90" align="left"><span data-tdtype="order_by" data-field="cashier_type">收银类型</th>
+              </if>
+				 <th width="90" align="left"><span data-tdtype="order_by" data-field="tuijian">推荐人</span></th>
+                <th width="100"><span data-tdtype="order_by" data-field="add_time">添加日期</span></th>
+                <th width="50"><span data-tdtype="order_by" data-field="status">{:L('status')}</span></th>
+                <th width="50">{:L('operations_manage')}</th>
+          </tr>
+        </thead>
+
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <td align="center">{$val['id']}</td>
+                <!--<td style="text-align:center; " class="check-image">-->
+                    <!--<img style="width:60px;height:60px;" src="{:attach($val['yy_img'],'merchant')}" />-->
+                <!--</td>-->
+                <td style="text-align:center; padding:5px;">
+                    <empty name="val['img']">未设置<else />
+                        <img src="{:attach($val['img'], 'avatar')}" width="32" class="J_preview" data-bimg="{:attach($val['img'], 'avatar')}">
+                    </empty>
+                </td>
+                <td align="center">{$val['title']}</td>
+                <!--<td align="center">{$member[$val['uid']]['realname']}</td>-->
+                <td align="center">{$member[$val['uid']]['mobile']}</td>
+
+                <td align="center">{$val.tel}</td>
+                <td align="center">{$val.address}</td>
+                <!--<td align="center">{$merchant_cate[$val['cate_id']]}</td>-->
+                <!--<td align="center">{$cate_list[$val['cate_id']]}</td>-->
+                <td align="center">
+                    <b><notempty name="big_cate3[$val['cate_id']]">{$big_cate3[$val['cate_id']]}|</notempty>
+                        <notempty name="big_cate2[$val['cate_id']]">{$big_cate2[$val['cate_id']]}|</notempty>
+                        <notempty name="cate_list[$val['cate_id']]">{$cate_list[$val['cate_id']]}</notempty>
+                    </b>
+                </td>
+                <if condition="$search['type']">
+                <else />
+                    <td align="center">
+                        <a class="blue" href="{:U('AccountShop/index',array('uid'=>$val['id'],'type'=>2))}">{$val.gold_acer}</a>
+                    </td>
+                    <td align="center">
+                        <a class="blue" href="{:U('AccountShop/index',array('uid'=>$val['id'],'type'=>3))}">{$val.gold_fruit}</a>
+                    </td>
+                    <td align="center">{$val.rangli}%</td>
+                    <td align="center">{$val.set_coin}</td>
+
+                    <td align="center">
+                        <?php $aa = explode(',', $val['zftype']);?>
+                        <volist name="aa" id="vv">
+                            <if condition="$vv == 1">金宝</if>
+                            <!--<if condition="$vv == 2">银宝</if>-->
+                            <if condition="$vv == 3">金果</if>
+                        </volist>
+                    </td>
+                </if>
+                <td align="center">
+                  {$member[$val['relation_id']]['mobile']}
+                </td>
+				 <td align="center">{$val['add_time']|date="Y-m-d",###}</td>
+				
+                <td align="center">
+                <if condition="$search['type']">
+                    <switch name="val['status']">
+                    <case value="0">未审核</case>
+                    <case value="1">已驳回</case>
+                    </switch>
+                <else />
+                     <img data-tdtype="toggle" data-id="{$val.id}" data-field="is_act" data-value="<if condition="$val['is_act'] eq '1' ">1<else/>0</if>" src="__PUBLIC_ADMIN__/images/toggle_<if condition="$val['is_act'] eq '1' ">enabled<else/>disabled</if>.gif" />
+                </if>
+                </td>
+                <td align="center">
+				<if condition="$type eq 1">
+                    <switch name="val['status']">
+                        <case value="0">
+                             <a href="javascript:;" class="J_showdialog" data-uri="{:u('merchant/pass', array('id'=>$val['id'], 'menuid'=>$menuid))}" data-title="通过-{$val.title}" data-id="pass" data-width="500" data-height="20">通过</a>|
+                             <a href="{:U('merchant/refuse',array('id'=>$val['id']))}" data-msg="确定驳回吗">驳回</a>
+                        </case>
+                        <case value="1">
+                            已审核
+                              <!--<a href="javascript:;" class="J_showdialog" data-uri="{:u('merchant/pass', array('id'=>$val['id'], 'menuid'=>$menuid))}" data-title="通过-{$val.title}" data-id="pass" data-width="500" data-height="20">通过</a>-->
+                        </case>
+
+                     </switch>
+                <else />
+                       <a href="{:u('merchant/edit', array('id'=>$val['id'], 'menuid'=>$menuid))}" >编辑</a>
+               </if>
+               </td>
+            </tr>
+            </volist>
+
+    </table>
+  </div>
+    <div class="songkebor">
+
+        <label class="select_all"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+        <!--<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('Merchant/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="批量删除" />-->
+        <div id="pages">{$page}</div>
+
+    </div>
+</div>
+
+	<!--查看大图-->
+	<div class="popup-win">
+		<div class="popup-inner">
+			<div class="vertical-auto popup-image"><img src=""></div>
+			<div class="close-popup">×</div>
+		</div>
+	</div>
+	<!--查看大图-->
+<include file="Public:footer" />
+
+</body>
+</html>
+
+<!--<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+
+<script type="text/javascript" src="__STATIC__/js/calendar/calendar.js"></script>-->
+<script>
+    //查看大图
+    // $(".check-image").click(function(){
+    //     $(".popup-win").show();
+    //     var img_src = $(this).find("img").attr("src");
+    //     $(".vertical-auto img").attr("src",img_src);
+    // });
+    $('.J_preview').preview(); //查看大图
+
+    $('.J_cate_select').cate_select({top_option:lang.all}); //分类联动
+
+    laydate.render({
+        elem: '#J_time_start'
+    });
+
+    laydate.render({
+        elem: '#J_time_end'
+    });
+
+	
+	$(".close-popup").click(function(){
+		$(".popup-win").hide();
+	});
+	 $(".look_index").click(function(){
+    	$("input[name='a']").val("index");
+    	$("form").submit();
+    })
+	//下载表报
+	 $(".export").click(function(){
+    	$("input[name='a']").val("export");
+    	$("form").submit();
+    })
+    
+
+
+</script>

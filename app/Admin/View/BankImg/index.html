@@ -1,0 +1,39 @@
+<include file="Public:header" />
+<!--角色管理-->
+<div class="pad_lr_10">
+    <div class="J_tablelist table_list" data-acturi="{:U('BankImg/ajax_edit')}">
+        <table width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th width="40"><input type="checkbox" name="checkall" class="J_checkall"></th>
+                <th width="60">ID</th>
+                <th align="left" width="200">银行名称</th>
+                <th width="180">头像</th>
+                <th width="200">{:L('operations_manage')}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr>
+                    <td align='center'><input type='checkbox' value='{$vo.id}' class='J_checkitem'></td>
+                    <td align='center'>{$vo.id}</td>
+                    <td align='center'>{$vo.name}</td>
+                    <td align='center'><img src="{:attach($vo['img'],'bank_img')}" width="100" height="100"/></td>
+                    <td align="center">
+                        <a href="javascript:;" class="J_showdialog" data-uri="{:U('BankImg/edit', array('id'=>$vo['id']))}" data-title="{:L('edit')} - {$vo.name}"  data-id="edit" data-width="550" data-height="90">{:L('edit')}</a> |
+                        <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="{:U('BankImg/delete', array('id'=>$vo['id']))}" data-msg="{:sprintf(L('confirm_delete_one'),$vo['name'])}">{:L('delete')}</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn_wrap_fixed">
+        <label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('bank/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
+        <div id="pages">{$page}</div>
+    </div>
+</div>
+<include file="Public:footer" />
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<title></title>
+		<script src="js/fontSize.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/custom.js"></script>
+	</head>
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">商品订单</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right">
+					<a class="mine-set-link order" href="mine.html"></a>
+				</div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<div class="state-wrap-box">
+			<div class="state-nav row-box">
+				<div class="row-flex state-nav-name">
+					<a href="order_commodity.html">全部</a>
+				</div>
+				
+				<div class="row-flex state-nav-name">
+					<a href="order_commodity2.html">待付款</a>
+				</div>
+				
+				<div class="row-flex state-nav-name">
+					<a href="order_commodity3.html">待发货</a>
+				</div>
+				
+				<div class="row-flex state-nav-name">
+					<a href="order_commodity4.html">待收货</a>
+				</div>
+				
+				<div class="row-flex state-nav-name active">
+					<a href="order_commodity5.html">待评价</a>
+				</div>
+				
+				<div class="row-flex state-nav-name">
+					<a href="order_commodity6.html">售后</a>
+				</div>
+			</div>
+		</div>
+		<div style="width: 100%; height: 0.8rem;"></div>
+		
+		<!--content-->
+		<div class="content">
+			<!--空购物车-->
+			<div class="null-wrap vertical-center" style="display: none;">
+				<div class="vertical-auto">
+					<div class="null-page">
+						<div class="null-page-icon"><img src="images/icon60.png"></div>
+						<div class="null-page-txt">您的还没有订单！</div>
+						<div class="null-page-link"><a href="index.html">去逛一逛</a></div>
+					</div>
+				</div>
+			</div>
+			<!--空购物车-->
+			
+			<div class="goods-wrap">
+				<!--商品订单-->
+				<div class="goods-tier-box">
+					<div class="goods-state-col">
+						<div class="goods-state-numbers">订单编号：123456</div>
+						<div class="goods-state-name">已完成</div>
+						<div class="clear-float"></div>
+					</div>
+					
+					<a href="details.html">
+						<div class="row-box goods-tier-inner">
+							<div class="goods-img-box">
+								<div class="level-img vertical-center">
+									<div class="vertical-auto"><img src="images/img.jpg"></div>
+								</div>
+							</div>
+							<div class="row-flex">
+								<div class="flavour-title">它和榴莲并称“夫妻果”</div>
+								<div class="goods-img-standard">规格：500kg <span>x2</span></div>
+								<div class="goods-img-money">￥120.00 <span>￥140.00</span></div>
+							</div>
+						</div>
+					</a>
+					
+					<div class="statistics">
+						<div class="statistics-inner">共2件商品 合计：<span>¥285</span></div>
+					</div>
+					
+					<div class="goods-state-link-box">
+						<a class="goods-state-link one" href="estimate.html">去评价</a>
+						<a class="goods-state-link two" href="examine_order.html">查看订单</a>
+						<a class="goods-state-link three delete" href="javascript:;">删除订单</a>
+						<div class="clear-float"></div>
+					</div>
+				</div>
+				<!--商品订单-->
+				
+			</div>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</html>

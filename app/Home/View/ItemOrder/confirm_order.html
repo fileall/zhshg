@@ -1,0 +1,127 @@
+<include file="Public/order_top" />
+
+<!--内容-->
+<div class="wrap marT20 shopCart2 bgfff">
+    <!--收货地址-->
+    <div class="shopCart-Adress">
+        <h3 class="shortCart-BoxTitle">收货地址</h3>
+        <ul class="Adress-list clear">
+
+            <a href="{:U('Member/shipping_address',array('type'=>2))}">
+                <li class="addNewAdress">
+                    <p>新增地址</p>
+                </li>
+            </a>
+        </ul>
+    </div>
+
+    <!--已买商品列表-->
+    <div class="shopCart mar0">
+        <!--商品信息-->
+        <h3 class="shortCart-BoxTitle">商品信息</h3>
+        <div class="hasGoods">
+            <div class="titleList clear">
+                <div class="fr w125 tc">小计</div>
+                <div class="fr w139 tc">数量</div>
+                <div class="fr w123 tc" >单价</div>
+            </div>
+            <ul class="shopCartList">
+                <?php
+                    $nums = $prices = 0;
+                ?>
+                <volist name="list" id="val">
+                    <?php
+                        $nums += $val['nums'];
+                        $prices += $val['price']*$val['nums'];
+                    ?>
+                    <li class="item clear">
+                        <div class="goodsInfo fl clear w612">
+                            <img src="{:attach($val['img'],'item')}" alt="" />
+                            <p><a href="{:U('Mall/goodsDetail',array('id'=>$val['item_id']))}" class="hover-blue">{$val['title']}</a></p>
+                        </div>
+                        <div class="price fl w123 tc">¥{$val['price']}</div>
+                        <div class="numBox fl w139 tc">{$val['nums']}</div>
+                        <div class="total fl w125 tc">¥ {:sprintf('%.2f',$val['price']*$val['nums'])}</div>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+    </div><!--已买商品列表-end-->
+    <!--买家留言-->
+    <div class="shopCart2-liuyan">
+        <h3 class="shortCart-BoxTitle">买家留言</h3>
+        <textarea id="memos" placeholder="说点什么"></textarea>
+    </div>
+    <!--买家留言-end-->
+    <!--统计-->
+    <div class="clear shopCart2-tj">
+        <ul class="fr">
+            <li class="clear">
+                <span class="fl l">商品总额：</span>
+                <span class="fl r">￥{:sprintf('%.2f',$prices)}</span>
+            </li>
+            <li class="clear">
+                <span class="fl l">商品总数：</span>
+                <span class="fl r">x {$nums}</span>
+            </li>
+            <li class="clear">
+                <span class="fl l">配送费用：</span>
+                <span class="fl r">0</span>
+            </li>
+        </ul>
+    </div>
+    <div class="clear padTB marB20">
+        <div class="fr shopCart2-btn">
+            <h3>应付总额：<strong>¥{:sprintf('%.2f',$prices)}</strong></h3>
+            <a href="javascript:;" class="btn orange">确认购买</a>
+        </div>
+    </div>
+    <!--统计-end-->
+</div>
+<!--内容-end-->
+
+<!--公共底部-->
+<include file="Public/footer" />
+<!--公共底部-end-->
+
+<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PC__js/l_main.js"></script>
+<script src="__PC__plugins/layui-v1.0.9/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+    $(function(){
+        layui.use('layer', function(){
+            var layer = layui.layer;
+        });
+
+        //获取地址列表
+        $.post("{:U('ItemOrder/get_address')}",function (ht) {
+            $('.Adress-list').prepend(ht);
+        })
+
+        //提交订单
+        $('.orange').click(function () {
+            var aid = $('.adress.active').data('id'),
+                memos = $('#memos').val();
+            //验证
+            if(!aid || aid === undefined){
+                layer.msg('请选择收货地址',{icon:5,time:2000});
+                return false;
+            }
+            $.post("{:U('ItemOrder/place_order')}",{aid:aid,memos:memos},function (result) {
+                if(result[0] === 1){
+                    window.location.href="{:U('ItemOrder/shopCart')}"+"&id="+result[1];
+                }else if(result[0] === 2){
+                    layer.msg(result[1],{icon:5,time:2000});
+                    setTimeout(function () {
+                        window.location.href="{:U('ItemOrder/cart')}";
+                    },2000)
+                }else{
+                    layer.msg(result[1],{icon:2,time:2000});
+                }
+            },'json')
+        })
+    })
+</script>
+</body>
+</html>

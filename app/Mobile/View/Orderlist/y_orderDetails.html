@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title></title>
+        <script src="__MB__js/fontSize.js"></script>
+        <link rel="stylesheet" href="__MB__css/index.css" />
+        <script src="__MB__js/jquery-1.11.2.min.js"></script>
+        <script src="__MB__js/custom.js"></script>
+        <script src="__MB__js/layer/layer.js"></script>
+        <script src="__MB__js/layui/layui.js"></script>
+        <link rel="stylesheet" href="__MB__js/layui/css/layui.css">
+    </head>
+
+    <body class="body-bgColor">
+        <!--header-->
+        <div class="header-wrap">
+            <div class="header-inner">
+                <div class="header-title">订单详情</div>
+                <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+                <div class="header-right"></div>
+            </div>
+        </div>
+        <div class="header-space"></div>
+        <!--header-->
+
+        <!--content-->
+        <div class="content">
+            <div class="y-orderDetais-top flex y-bg-white y-width94 font-28">
+                <p>订单状态：</p>
+                <p class="y-color-red">
+                    <switch name="list.status" >
+                        <case value="1">待付款</case>
+                        <case value="2">待发货</case>
+                        <case value="3">待收货</case>
+                        <case value="4">待评价</case>
+                        <case value="5">已评价</case>
+                        <case value="6">交易已取消</case>
+                        <default />默认情况
+                    </switch>
+                </p>
+            </div>
+            <div class="y-orderDetais-address jus-ali y-bg-white y-mar-top20">
+                <div class="function-list-left">
+                    <div class="function-list-icon"><img src="__MB__images/location1.png"></div>
+                </div>
+                <div class="flex1">
+                    <div class="jus-bet font-28 y-orderDetais-name">
+                        <p>{$list.sh_person}</p>
+                        <p>{$list.sh_mobile}</p>
+                    </div>
+                    <div class="font-26 y-color-999">{$list.sh_address}</div>
+                </div>
+            </div>
+
+            <div class="y-mar-top20 y-bg-white">
+
+                <!--<a href="y_orderDetails.html">-->
+                    <!--<div class="row-box goods-tier-inner y-border-none">-->
+                        <!--<div class="goods-img-box">-->
+                            <!--<div class="level-img vertical-center">-->
+                                <!--<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="flex y-order-text">-->
+                            <!--<div class="flavour-title ellipsis2">它和榴莲并称“夫妻果”它和榴莲并称“夫妻果”它和榴莲并称“夫妻果”它和榴莲并称“夫妻果”</div>-->
+                            <!--<div class="jus-bet ali-cen">-->
+                                <!--<div class="y-color-red font-28">&yen;120.00</div>-->
+                                <!--<div class="y-color-999">x1</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</a>-->
+                <volist name="goods" id="good">
+                    <a href="{:U('index/detail',array('id'=>$good['item_id']))}">
+                        <div class="row-box goods-tier-inner y-border-none">
+                            <div class="goods-img-box">
+                                <div class="level-img vertical-center">
+                                    <div class="vertical-auto"><img src="{:attach($good['img'],item)}"></div>
+                                </div>
+                            </div>
+                            <div class="flex y-order-text">
+                                <div class="flavour-title ellipsis2">{$good.title}</div>
+                                <div class="jus-bet ali-cen">
+                                    <if condition="$type eq 1">
+                                        <div class="y-color-red font-28">&yen;{$good.price}</div>
+                                        <else />
+                                        <div class="y-color-red font-28">金果{$good.price}</div>
+                                    </if>
+                                    <div class="y-color-999">x{$good.num}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </volist>
+
+                <if condition="$list['zftype'] eq 3">
+                    <div class="statistics">
+                    <div class="y-width94 y-text-right">银币抵扣：
+                    <span class="font-28 y-color-red">
+                         ¥{$list['coin_price_dk']}
+                    </span></div>
+                    </div>
+                </if>
+                <div class="statistics">
+                    <div class="y-width94 y-text-right">共{$list.count}件商品 合计：
+                        <if condition="$type eq 1">
+                        <span class="font-28 y-color-red">¥{$list.total_amount}</span>
+                            <else />
+                            <span class="font-28 y-color-red">金果{$list.fruit_price}</span>
+                        </if>
+                    </div>
+                </div>
+            </div>
+            <div class="y-orderDetais-bottom y-bg-white y-width94 y-mar-top20 font-28">
+                <notempty name="list['express_num'] ">
+                    <p>物流号： {$list['express_num']}</p>
+                </notempty>
+                <p>订单编号：{$list.dingdan}</p>
+                <p>下单时间：{:date('Y-m-d H:i:s',$list['add_time'])}</p>
+            </div>
+        </div>
+        <!--content-->
+
+        <!--footer-->
+        <div class="footer-space orderDetais-footer-space"></div>
+        <!--间距-->
+        <div class="footer-wrap y-bg-white">
+            <div class="goods-state-link-box">
+                <if condition="$list['status'] eq 1">
+                    <if condition="$list['type'] eq 1">
+                        <a href="{:U('order/order_pay',array('oid'=>$list['id'],'zftype'=>$list['type']))}" class="goods-state-link one" >立即付款</a>
+                    <elseif condition="$list['type'] eq 2"/>
+                        <a href="{:U('Goldfruitshop/y_pay',array('oid'=>$list['id'],'zftype'=>$list['type']))}" class="goods-state-link one" >立即付款</a>
+                    </if>
+
+                    <a class="goods-state-link one" id="de" value="{$list['id']}" onclick="delete1()">取消订单</a></if>
+                <if condition="$list['status'] eq 3">
+                    <a class="goods-state-link one" id="shou" value="{$list['id']}" onclick="shouhuo()">确认收货</a></if>
+                <div class="clear-float"></div>
+            </div>
+        </div>
+        <!--footer-->
+    </body>
+<script>
+
+    function delete1(){
+        var id = $('#de').attr("value");
+        $.ajax({
+            type:'post',
+            url:'{:U("Orderlist/y_order")}',
+            data:{type1:1,oid:id},
+            dataType:'json',
+            success:function(msg){
+                if(msg.status == 1){
+                    layer.msg(msg['msg'],{time:1000},function () {
+                        location.href = "{:U('Orderlist/y_order',array('status'=>$list['status']))}";
+                    });
+                }else{
+                    layer.msg(msg['msg'],{time:1000});
+                }
+            }
+        })
+    }
+    function shouhuo(){
+        var id = $('#shou').attr("value");
+        $.ajax({
+            type:'post',
+            url:'{:U("Orderlist/y_order")}',
+            data:{type1:2,oid:id},
+            dataType:'json',
+            success:function(msg){
+                if(msg.status == 1){
+                    layer.msg(msg['msg'],{time:1000},function(){
+                        location.href = "{:U('Orderlist/y_order',array('status'=>$list['status']))}";
+                    });
+                }else{
+                    layer.msg(msg['msg'],{time:1000});
+                }
+            }
+        })
+    }
+</script>
+
+</html>

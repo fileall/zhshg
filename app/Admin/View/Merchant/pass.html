@@ -1,0 +1,74 @@
+<!--添加栏目-->
+<div class="dialog_content">
+	<form id="info_form" action="{:U('merchant/pass')}" method="post">
+	<table width="100%" class="table_form">
+		<tr class="check-image">
+			<th>营业执照 :</th>
+			<td ><img src="{:attach($info['yy_img'],'merchant_yyimg')}" width="70" height="70"/></td>
+		</tr>
+		<tr>
+			<th>商铺图 :</th>
+			<td>
+            <volist name="imgs" id="val">
+			<a style="javascript:;" class="check-image">
+           	 <img src="{:attach($val,'merchant_img')}" width="70" height="70"/>
+			</a>
+            </volist>
+			</td>
+		</tr>
+		<tr>
+			<th>支付类型 :</th>
+			<td>
+				<input type="checkbox"name="zftype[]" value="1" class="input-text pay_type" size="30" <if condition="in_array('1',explode(',',$info['zftype']))">checked</if> >金元宝&nbsp;
+                <!--<input type="checkbox" <if condition="in_array('2',explode(',',$info['zftype']))">checked</if> name="zftype[]" value="2" class="input-text pay_type" size="30">银元宝&nbsp;-->
+                 <input type="checkbox" name="zftype[]" value="3" class="input-text pay_type" size="30" <if condition="in_array('3',explode(',',$info['zftype']))">checked</if> >金果&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<th width="120">让利 :</th>
+			<td>
+            <select name="rangli">
+	            <for start="0" end="55" step="5">
+	            	<option value="{$i}" <if condition="$i eq $info['rangli']">selected="selected"</if>>{$i}%</option>
+	            </for> 
+            </select>
+			</td>
+		</tr>
+		<tr>
+			<th>返银倍数 :</th>
+			<td>
+       	    <input type="number"  min="0.0" step="0.1" name="set_coin" value="{$info['set_coin']}" />倍
+			</td>
+		</tr>
+	</table>
+    <input type="hidden" name="status" value="2">
+	<input type="hidden" name="id" value="{$info['id']}">
+	</form>
+</div>
+<script>
+$(function(){
+	$.formValidator.initConfig({formid:"info_form",autotip:true});
+	$("#rangli").formValidator({onshow:lang.please_input+'让利值',onfocus:lang.please_input+'让利值'}).inputValidator({min:1,onerror:lang.please_input+'让利值'}).defaultPassed();
+	$('#info_form').ajaxForm({success:complate, dataType:'json'});
+	function complate(result){
+		if(result.status == 1){
+			$.dialog.get(result.dialog).close();
+			$.pinphp.tip({content:result.msg});
+			window.location.reload();
+		} else {
+			$.pinphp.tip({content:result.msg, icon:'alert'});
+		}
+	}
+
+	//查看大图
+	$(".check-image").click(function(){
+		$(".popup-win").show();
+		var img_src = $(this).find("img").attr("src");
+		$(".vertical-auto img").attr("src",img_src);
+	});
+	
+	$(".close-popup").click(function(){
+		$(".popup-win").hide();
+	});
+});
+</script>

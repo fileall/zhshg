@@ -1,0 +1,32 @@
+<div class="dialog_content">
+    <table width="100%" cellspacing="0" class="table_form">
+        <tr>
+            <th width="120">身份证正面 :</th>
+            <td>
+                <empty name="list[1]">无
+                    <else />
+                    <a class="fancybox" rel="group" href="{:attach($list[1],'id_card')}">
+                        <img src="{:attach($list[1],'id_card')}" height="74" width="74"></a>
+                </empty>
+
+            </td>
+        </tr>
+        <tr>
+        <tr>
+            <th width="120">身份证反面 :</th>
+            <td>
+                <empty name="list[2]">无
+                    <else />
+                    <a class="fancybox" rel="group" href="{:attach($list[2],'id_card')}">
+                        <img src="{:attach($list[2],'id_card')}" height="74" width="74"></a>
+                </empty>
+
+            </td>
+        </tr>
+    </table>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $( ".fancybox").fancybox();
+    });
+</script>

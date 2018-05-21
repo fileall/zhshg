@@ -1,0 +1,54 @@
+<include file="Public:header" />
+<!--角色管理-->
+<div class="pad_lr_10">
+    <div class="J_tablelist table_list" data-acturi="{:U('recharge/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width="40"><input type="checkbox" name="checkall" class="J_checkall"></th>
+                <th>ID</th>
+                <th>用户名</th>
+      			<th>订单号</th>
+                <th align="left">金额</th>
+                <th align="left">支付方式</th>
+                <th align="left">创建时间</th>
+                <th align="left">IP</th>
+                <th align="left">更新时间</th>
+                <th>{:L('status')}</th>
+                <th width="150">{:L('operations_manage')}</th>
+            </tr>
+        </thead>
+    	<tbody>
+        	<volist name="list" id="val">
+        	<tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <td align="center">{$val.id}</td>
+                <td align="center">{$val.nickname}</td>
+                <td align="center">{$val.order_id}</td>
+                <td>{$val.fee}</td>
+                <td>{$recharege_type[$val['type']]}</td>
+                <td>{:date('Y-m-d H:i' ,$val['create_time'])}</td>
+                <td>{$val.create_ip}</td>
+                <td>{:date('Y-m-d H:i' ,$val['update_time'])}</td>
+                <td align="center">
+                    <img  data-field="status" data-id="{$val.id}" data-value="{$val.status}" src="__PUBLIC_ADMIN__/images/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" />
+                </td>
+                <td align="center">
+                    <a href="javascript:;" class="J_showdialog" data-uri="{:U('recharge/show', array('id'=>$val['id']))}" data-title="查看 - {$val.order_id}"  data-id="show" data-width="450" data-height="190">详情</a> |
+                    <a href="javascript:;" class="J_showdialog" data-uri="{:U('recharge/edit', array('id'=>$val['id']))}" data-title="{:L('edit')} - {$val.name}"  data-id="edit" data-width="450" data-height="190">{:L('edit')}</a> |
+                    <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="{:U('recharge/delete', array('id'=>$val['id']))}" data-msg="{:sprintf(L('confirm_delete_one'),$val['name'])}">{:L('delete')}</a>
+                </td>
+            </tr>
+            </volist>
+    	</tbody>
+    </table>
+    </div>
+    <div class="btn_wrap_fixed">
+        <label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('recharge/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
+        <div id="pages">{$page}</div>
+    </div>
+</div>
+<include file="Public:footer" />
+</body>
+</html>

@@ -1,0 +1,216 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">支付</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="merchant-wrap">
+				<div class="merchant-img"><img src="{:attach($shop['img'],'merchant')}"></div>
+				<div class="merchant-name">{$shop.title}</div>
+				<div class="merchant-money">金额</div>
+				<div class="merchant-form row-box">
+					<div class="row-flex">
+						<div class="merchant-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;"><input id='prices' type="number" placeholder="请输入支付金额"></div>
+						</div>
+					</div>
+					<div class="merchant-currency">元宝/元</div>
+				</div>
+			</div>
+			
+			<!--支付选项-->
+			<div class="pay-wrap">
+				<ul>
+					<li class="pay-li active">
+						<label form="yuanbao">
+							<div class="row-box">
+								<div class="pay-icon">
+									<div class="pay-icon-img"><img src="__MB__images/icon28.png"></div>
+								</div>
+								
+								<div class="row-flex">
+									<div class="pay-name">元宝支付</div>
+									<div class="clear-float"></div>
+								</div>
+								
+								<div class="pay-input-box">
+									<div class="pay-input-inner active" data-zftype="1"><input name="pay-name" type="radio" checked="checked" id="yuanbao"></div>
+								</div>
+							</div>
+						</label>
+					</li>
+					
+					<li class="pay-li active">
+						<label form="yyb">
+							<div class="row-box">
+								<div class="pay-icon">
+									<div class="pay-icon-img"><img src="__MB__images/icon16.png"></div>
+								</div>
+								
+								<div class="row-flex">
+									<div class="pay-name">银元宝支付</div>
+									<div class="clear-float"></div>
+								</div>
+								
+								<div class="pay-input-box">
+									<div class="pay-input-inner" data-zftype="2"><input name="pay-name" type="radio" id="yyb"></div>
+								</div>
+							</div>
+						</label>
+					</li>
+					
+					<li class="pay-li active">
+						<label form="jinguo">
+							<div class="row-box">
+								<div class="pay-icon">
+									<div class="pay-icon-img"><img src="__MB__images/icon29.png"></div>
+								</div>
+								
+								<div class="row-flex">
+									<div class="pay-name">金果支付</div>
+									<!--<div class="pay-name-t">金果支付满100减10</div>-->
+									<div class="clear-float"></div>
+								</div>
+								
+								<div class="pay-input-box">
+									<div class="pay-input-inner" data-zftype="3"><input name="pay-name" type="radio" id="jinguo"></div>
+								</div>
+							</div>
+						</label>
+					</li>
+					
+					<!--<li class="pay-li active">
+						<label form="weixing">
+							<div class="row-box">
+								<div class="pay-icon">
+									<div class="pay-icon-img"><img src="__MB__images/icon17.png"></div>
+								</div>
+								
+								<div class="row-flex">
+									<div class="pay-name">微信支付</div>
+									<div class="pay-name-t"></div>
+									<div class="clear-float"></div>
+								</div>
+								
+								<div class="pay-input-box">
+									<div class="pay-input-inner"><input name="pay-name" type="radio" id="weixing"></div>
+								</div>
+							</div>
+						</label>
+					</li>-->
+					
+				</ul>
+			</div>
+			<!--支付选项-->
+			
+			<div class="submit-button"><button type="button" class="extract-btn">确认买单</button></div>
+			
+			<div class="code-bottom-col row-box">
+				<div class="code-left">
+					<div class="code-logo"><img src="__MB__images/icon15.png"></div>
+				</div>
+				
+				<div class="code-line">
+					<span></span>
+				</div>
+				
+				<div class="row-flex">
+					<div class="code-t-box vertical-center">
+						<div class="code-t-inner">
+							<div class="code-txt">越消费越赚钱</div>
+							<div class="code-txt active">消费<span>=</span>存钱</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<!--content-->
+		
+		<!--元宝支付密码-->
+		<div class="shoe-shaped vertical-center" >
+			<div class="shoe-shaped-inner vertical-auto">
+				<div class="shoe-shaped-title">支付密码<div class="close-shoe-shaped"></div></div>
+				<div class="shoe-shaped-name">元宝支付</div>
+				<div class="shoe-shaped-money"><span><img src="__MB__images/icon19.png"></span><span id="look_prices"></span></div>
+				<div class="shoe-shaped-input vertical-center">
+					<div class="vertical-auto" style="width: 100%;"><input id="pw" type="password" placeholder="请输入您的支付密码"/></div>
+				</div>
+				<div class="shoe-shaped-btn"><button type="button" id="sure_tx">确认</button></div>
+			</div>
+		</div>
+		<!--元宝支付密码-->
+		
+		<!--footer-->
+		<!--footer-->
+	</block>	
+<block name="footer"></block>	
+<block name="script">
+	<script>
+	$('.extract-btn').click(function(){
+		var prices = $('#prices').val();
+//		var card_nums = $('ul').find('.pay-li').length;
+//		if(card_nums/2 < 1){
+//			layer.confirm('请选择支付方式！', {icon:0,time:1000})
+//			return false;
+//		}
+		
+		if(!prices){
+			layer.msg('请输入金额！',{icon:0,time:1000})
+			return false;
+		}
+		
+		if(parseFloat(prices) < 0 | parseFloat(prices) == 0){
+			layer.msg('请确认您输入的数字是否正确！',{icon:0,time:1000})
+			return false;
+		}
+		 
+		$('#look_prices').html(prices);
+		$(".shoe-shaped").addClass("active");
+		$(".shoe-shaped-money span img").attr("src","__MB__images/icon31.png");
+		 return false;
+	});
+	
+	$('#sure_tx').click(function(){
+		var pw =$('#pw').val();
+		var prices = $('#prices').val();
+		prices=parseFloat(prices);
+		var tel='{$tel}';
+		if(pw.length == 6){
+			 //输入密码后提交订单
+			 var zftype= $('.pay-input-inner.active').data('zftype');
+			 $.post('{:U("member/check_pay_order")}',{prices:prices,zftype:zftype,pw:pw,tel:tel},function(d){
+			 	if(d.status ==1){
+					 $.post('{:U("member/check_pay")}',{dingdan:d.dingdan,prices:prices,zftype:zftype,tel:tel},function(mess){
+		 				layer.msg(mess.msg,{icon:1,time:1000})
+			 			if(mess.status ==1){
+			 				window.location.href='/index.php?m=Mobile&c=member&a=pay_succeed&tel='+tel+'&liu_id='+d.liu_id;
+			 			}
+					 },'JSON')
+			 	}
+			 	else{
+			 		layer.msg(d.msg,{icon:0,time:1000})
+			 	}
+			 },'JSON');
+		}else{
+			layer.msg('请输入6位数的支付密码！',{icon:0,time:1000})
+		}
+		 
+		
+		
+	});
+	
+	</script>
+	
+</block>	
+</html>

@@ -1,0 +1,91 @@
+<?php
+	$time1=time();
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link type="text/css" rel="stylesheet" href="__STATIC__assets/css/xlw.css">
+</head>
+<script src="__STATIC__assets/js/jquery-1.11.1.min.js"></script>
+<script src="__STATIC__assets/js/jQuery.js"></script>
+<script>
+//$(function($){
+//	$("#changezt").click(function(){
+//		alert($("#changezt").val());
+//		$.ajax({
+//			type: "get",
+//			url: "/index.php?m=Home&c=zhuanti&a=updatezt",
+//			data:{changezt:$("#changezt").val()},
+//			dataType: "json",
+//			success: function(data){
+//				if(data>0){
+//					showmsg("修改成功");
+//				}else{
+//					showmsg("修改失败");
+//				}
+//			}
+//		});
+//	})
+//});
+
+function g(id){
+	return document.getElementById(id);
+}
+function ajaxGet(url,func){
+	var XMLHttp=null
+	if(window.XMLHttpRequest){
+	  	XMLHttp=new XMLHttpRequest()
+	}
+	else if (window.ActiveXObject){
+	  	XMLHttp=new ActiveXObject("Microsoft.XMLHTTP")
+	}
+	if(!XMLHttp){    
+        return alert('create failed');    
+    } 
+	XMLHttp.onreadystatechange=function(){
+		if(XMLHttp.readyState==4){//服务器响应
+		  	if(XMLHttp.status==200){//数据正确
+			    var resultStr = XMLHttp.responseText;
+			    func(resultStr);
+	       	}
+	    }
+	}
+	XMLHttp.open("GET",url,true);//true 同步
+	XMLHttp.send();
+}
+
+//栏目首页模版风格
+function moban(file){
+	alert("111");
+	var toPath = "/index.php?m=Home&c=zhuanti&a=updatezt&file="+file+"";
+	alert(toPath);
+	ajaxGet(toPath,function(data){
+		var value = eval("("+data+")");
+		if(value.info==1){
+			alert("模版修改成功！");
+		}else if(value.info==2){
+			alert("模版添加成功！");
+		}
+		//window.location.href='/wapbg/template?pid='+pid+'&file='+file+'&tempaction';
+	}); 
+}
+</script>
+<body>
+<table width="100%">
+<tr align="center">
+<volist name="rest" id="vo">
+<td>
+<img src="__STATIC__assets/{$vo['url']}" width="200" height="300" /><br />
+{$vo['title']}<input type="radio" name="changezt" id="changezt" value="{$vo['url']}" onclick="moban(this.value)"/>
+</td>
+</volist>
+</table>
+</body>
+</html>
+<?php
+	$time2=time();
+    $time=$time2-$time1;
+    echo $time;
+?>

@@ -1,0 +1,87 @@
+<extend name="Base/common"/> 
+<block name="header"></block>		
+<block name="body">
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">设置性别</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<form action="" name="" method="post">
+				<ul class="">
+					<li class="enter-form-li row-box">
+						<div class="row-flex">
+							
+							<div class="gender-tier <if condition="$member['sex']==1">active</if>" data-sex="1">
+								<label for="man">
+									<div class="gender-input">
+										<if condition="$member['sex']==1">
+											<i class="fa fa-check-circle"></i>
+										<else />
+											<i class="fa fa-circle-thin"></i>
+										</if>
+										<input type="radio" name="gender" value="1" id="man" checked="checked">
+									</div>
+									<div class="gender-txt">男</div>
+								</label>
+							</div>
+							  
+							<div class="gender-tier <if condition="$member['sex']==2">active</if>" data-sex="2">
+								<label for="woman">  
+									<div class="gender-input">
+										<if condition="$member['sex']==2">
+											<i class="fa fa-check-circle"></i>
+										<else />
+											<i class="fa fa-circle-thin"></i>
+										</if>
+										<input type="radio" name="gender" value="2" id="woman">
+									</div>  
+									<div class="gender-txt">女</div>
+								</label>
+							</div>
+							
+							<div class="clear-float"></div>
+						</div>	
+					</li>
+				</ul>
+				
+				<div class="enter-form-btn"><a href="javascript:;">
+					<button type="submit">确定</button>
+				</a></div>
+			</form>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>	
+<block name="footer"></block>
+<block name="script">
+<script>	
+	$('form').submit(function(){
+		var sex = $('.gender-tier.active').data('sex');
+		
+		$.post('{:U("member/set_person")}',{sex:sex,is_sex:1},function(d){
+			if(d.status==1){
+				layer.msg(d.msg,{icon:1,time:2000},function(){
+					window.location.href=d.url;
+				})
+			}else{
+				layer.msg(d.msg,{icon:0,time:2000})
+			}
+		})
+		return false;
+		
+	})
+</script>
+</block>		
+</html>

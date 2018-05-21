@@ -1,0 +1,149 @@
+<include file="Public:header" />
+<form id="info_form" action="{:u('loan/edit')}" method="post" enctype="multipart/form-data">
+<div class="pad_lr_10">
+	<div class="col_tab">
+		<ul class="J_tabs tab_but cu_li">
+			<li class="current">{:L('article_basic')}</li>
+			<li>借款人信息</li>
+		</ul>
+		<div class="J_panes">
+			<div class="content_list pad_10">
+				<table width="100%" cellspacing="0" class="table_form">
+		            <tr>
+						<th>标题 :</th>
+						<td>
+		                    <input type="text" name="title" id="J_title" class="input-text" size="60" value="{$info.title}" />
+		                </td>
+					</tr>
+                    <tr>
+                        <th>借款金额:</th>
+                        <td>
+                            <input type="text" name="total" id="J_total" class="input-text" size="10" value="{$info.total}" /><span class="st-tips">万</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>配资比例:</th>
+                        <td>
+                            <select name="provide_rate">
+                                <volist name="loan_config['provide_rate']" id="val">
+                                    <option value="{$key}" <if condition="$key eq $info['provide_rate']">selected</if>>{$val}</option>
+                                </volist>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>配资期限:</th>
+                        <td>
+                            <select name="deadline">
+                                <volist name="loan_config['deadline']" id="val">
+                                    <option value="{$key}" <if condition="$key eq $info['deadline']">selected</if>>{$val}</option>
+                                </volist>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>收益方案:</th>
+                        <td>
+                            <select name="income_plan">
+                                <volist name="loan_config['income_plan']" id="val">
+                                    <option value="{$key}" <if condition="$key eq $info['income_plan']">selected</if>>{$val}</option>
+                                </volist>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>年化利率:</th>
+                        <td>
+                            <input type="text" name="interest_rate" id="J_interest_rate" class="input-text" size="10" value="{$info.interest_rate}" /><span class="st-tips">%</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>股票分红:</th>
+                        <td>
+                            <input type="text" name="share_rate" id="J_share_rate" class="input-text" size="10" value="{$info.share_rate}" /><span class="st-tips">%</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>分配操盘手:</th>
+                        <td>
+                            <select name="trader_id">
+                                <option value="0">请选择</option>
+                                <volist name="trader" id="val">
+                                    <option value="{$val.id}" <if condition="$val['id'] eq $info['trader_id']">selected="selected"</if> >{$val.username}</option>
+                                </volist>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>开始时间 :</th>
+                        <td><input type="text" name="start_time" class="input-text" size="50" value="{:date('Y-m-d H:i:s',$info['start_time'])}" id="J_time_start"></td>
+                    </tr>
+                    <tr>
+                        <th>结束时间 :</th>
+                        <td><input type="text" name="end_time" class="input-text" size="50" value="{:date('Y-m-d H:i:s',$info['end_time'])}" id="J_time_end"></td>
+                    </tr>
+                    <tr>
+                        <th>投资最低额:</th>
+                        <td>
+                            <input name="minimum" value="0" class="input-text"><span>不限额度请填0</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>状态:</th>
+                        <td>
+                        <volist name="loan_config['loan_status']" id="val">
+                            <input type="radio" name="status" class="radio_style" value="{$key}" <if condition="$info.status eq $key"> checked="checked"</if>> &nbsp;{$val}&nbsp;&nbsp;&nbsp;
+                        </volist>
+                        </td>
+                    </tr>
+				</table>
+			</div>
+			<div class="content_list pad_10 hidden">
+				<table width="100%" cellspacing="0" class="table_form">
+					<tr>
+						<th width="120">姓名 :</th>
+		 				<td>{$user.nickname}</td>
+					</tr>
+                    <tr>
+                        <th width="120">电话 :</th>
+                        <td>{$user.mobile}</td>
+                    </tr>
+                    <tr>
+                        <th width="120">邮箱 :</th>
+                        <td>{$user.email}</td>
+                    </tr>
+                    <tr>
+                        <th width="120">是否实名认证 :</th>
+                        <td><if condition="user.is_identity eq 1">已认证<else /><span style="color: #ff0000">未认证</span></if></td>
+                    </tr>
+				</table>
+			</div>
+        </div>
+		<div class="mt10"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;"><br /><br /><br /></div>
+	</div>
+</div>
+<input type="hidden" name="menuid"  value="{$menuid}"/>
+<input type="hidden" name="id" id="id" value="{$info.id}" />
+</form>
+<include file="Public:footer" />
+<link rel="stylesheet" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script src="__STATIC__/js/calendar/calendar.js"></script>
+<script>
+$(function() {
+	$('ul.J_tabs').tabs('div.J_panes > div');
+    Calendar.setup({
+        inputField : "J_time_start",
+        ifFormat   : "%Y-%m-%d %H:%M:%S",
+        showsTime  : true,
+        timeFormat : "24"
+    });
+    Calendar.setup({
+        inputField : "J_time_end",
+        ifFormat   : "%Y-%m-%d %H:%M:%S",
+        showsTime  : true,
+        timeFormat : "24"
+    });
+});
+</script>
+</body>
+</html>

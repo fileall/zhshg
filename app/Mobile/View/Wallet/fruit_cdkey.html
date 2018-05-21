@@ -1,0 +1,58 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+<body class="body-bgColor">
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">金果券</div>
+        <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+        <div class="header-right"></div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="content">
+    <form action="{:U('fruit_cdkey')}" name="" method="post">
+        <ul class="y-mar-top20">
+            <li class="enter-form-li row-box">
+                <div class="enter-form-icon"></div>
+                <div class="row-flex">
+                    <div class="enter-form-input">
+                        <input type="text"  name="code"  placeholder="请输入兑换码！">
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <div class="enter-form-btn">
+            <button type="button">确定</button>
+        </div>
+    </form>
+</div>
+<!--content-->
+
+<!--footer-->
+<!--footer-->
+</body>
+</block>
+<block name="footer"></block>
+<block name="script">
+    <script>
+        $("button").on("click",function(){
+            var data=$("form").serialize();
+            $.post('',data,function(res){
+                if(res.status==1){
+                    layer.msg(res.msg,{icon:1,time:1000},function(){
+                        location.href=res.url;
+                    })
+                }else{
+                    layer.msg(res.msg,{icon:0,time:1000})
+                }
+            })
+        });
+    </script>
+</block>
+</html>

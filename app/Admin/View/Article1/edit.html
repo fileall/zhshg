@@ -1,0 +1,410 @@
+<include file="Public:header" />
+<form id="info_form" action="{:u('article/edit')}" method="post" enctype="multipart/form-data">
+<div class="pad_lr_10">
+	<div class="col_tab">
+		<ul class="J_tabs tab_but cu_li">
+			<li class="current">{:L('article_basic')}</li>
+			<li>{:L('article_seo')}</li>
+            <li>图集</li>
+            <li>扩展内容</li>
+		</ul>
+		<div class="J_panes">
+			<div class="content_list pad_10">
+				<table width="100%" cellspacing="0" class="table_form">
+					<tr>
+						<th width="120">{:L('article_cateid')} :</th>
+						<td><select class="J_cate_select mr10" data-pid="0" data-uri="{:U('article_cate/ajax_getchilds')}" data-selected="{$selected_ids}"></select>
+                			<input type="hidden" name="cate_id" id="J_cate_id" value="{$info.cate_id}" /></td>
+					</tr>
+		            <tr>
+						<th>{:L('article_title')} :</th>
+						<td>
+		                    <input type="text" name="title" id="J_title" rel="title_color" class="input-text iColorPicker" size="60" value="{$info.title}" style="color:{$info.colors}">
+		                    <input type="hidden" value="{$info.colors}" name="colors" id="title_color">
+					        <a href="javascript:;" class="color_picker_btn"><img class="J_color_picker" data-it="J_title" data-ic="J_color" src="__PUBLIC_ADMIN__images/color.png"></a>
+		                </td>
+					</tr>
+					<!--<tr>
+						<th>跳转链接 :</th>
+						<td>
+							<input type="text" name="url" id="J_url" class="input-text" size="60" value="{$info.url}">
+		                </td>
+					</tr>
+					<tr>
+						<th>短标题 :</th>
+						<td><input type="text" name="short_title" id="alias" class="input-text" size="60" value="{$info.short_title}"></td>
+					</tr>-->
+					<tr>
+						<th>授课风格:</th>
+						<td><input type="text" name="alias" class="input-text" size="30" value="{$info.alias}"></td>
+					</tr>
+                    <!--<tr>
+                        <th>属性:</th>
+                        <td>
+                            <volist name="attrs" id="attr">
+                                <label><input type="checkbox" name="attr[]" value="{$attr.id}" <?php echo in_array($attr['id'],$attr_list)?'checked="checked"':''?>> {$attr.name}</label>&nbsp;&nbsp;
+                            </volist>
+                        </td>
+                    </tr>
+		            <tr>
+						<th>{:L('tag')} :</th>
+						<td>
+		                	<input type="text" name="tags" id="J_tags" class="input-text" size="50" value="{$info.tags}">
+		                    <input type="button" value="{:L('auto_get')}" id="J_gettags" name="tags_btn" class="btn">
+		                </td>
+					</tr>-->
+					<tr>
+						<th>来源 :</th>
+						<td><input type="text" name="origin" class="input-text" size="30" value="{$info.origin}"></td>
+					</tr>
+		            <tr>
+						<th>{:L('author')} :</th>
+						<td><input type="text" name="author" class="input-text" size="30" value="{$info.author}"></td>
+					</tr>
+		            <tr>
+						<th>{:L('article_img')} :</th>
+						<td>
+                        <notempty name="info['img']"><span class="attachment_icon J_attachment_icon" file-type="image" file-rel="{:attach($info["img"],'article')}"><img src="{:attach($info["img"],'article')}" width="100" height="100" /></span><br /></notempty>
+                        <input type="file" name="img" class="input-text"  style="width:200px;" />
+						<label><input type="radio" name="is_thumd" class="radio_style" value="1" >缩略图</label>&nbsp;&nbsp;
+						<label><input type="radio" name="is_thumd" class="radio_style" value="0" checked="checked"> 原图</label>
+                        </td>
+		 			</tr>
+					<tr>
+						<th>{:L('publish')} :</th>
+		 				<td>
+		                	<label><input type="radio" name="status" class="radio_style" value="1" <if condition="$info.status eq '1'">checked="checked"</if>> {:L('yes')}</label>&nbsp;&nbsp;
+							<label><input type="radio" name="status" class="radio_style" value="0" <if condition="$info.status eq '0'">checked="checked"</if>> {:L('no')}</label>
+						</td>
+					</tr>
+                    <tr>
+						<th width="120">{:L('article_abst')} / 简介:</th>
+						<td><textarea name="intro" id="abst" style="width:68%;height:50px;resize:none;">{$info.intro}</textarea></td>
+					</tr>
+		            <tr>
+		                <th>详细内容 :</th>
+						<td><textarea name="info" class="info" style="width:80%;height:400px;visibility:hidden;resize:none;">{$info.info}</textarea></td>
+					</tr>
+					 <!--<tr>
+		                <th>产品参数 :</th>
+						<td><textarea name="parameter" class="info" style="width:80%;height:200px;visibility:hidden;resize:none;">{$info.parameter}</textarea></td>
+					</tr>
+					 <tr>
+		                <th>产品描述 :</th>
+						<td><textarea name="describe" class="info" style="width:80%;height:200px;visibility:hidden;resize:none;">{$info.describe}</textarea></td>
+					</tr>-->
+					
+                    <tr>
+                        <th>自定义模板 :</th>
+                        <td><input type="text" name="templet" id="templet" class="input-text" size="30" value="{$info.templet}"><span class="gray ml10">如果非开发人员请略过，千万别填内容</span></td>
+                    </tr>
+				</table>
+			</div>
+			<div class="content_list pad_10 hidden">
+				<table width="100%" cellspacing="0" class="table_form">
+					<tr>
+						<th width="120">{:L('seo_title')} :</th>
+		 				<td><input type="text" name="seo_title" id="seo_title" class="input-text" size="60" value="{$info.seo_title}"></td>
+					</tr>
+					<tr>
+						<th>{:L('seo_keys')} :</th>
+						<td><input type="text" name="seo_keys" id="seo_keys" class="input-text" size="60" value="{$info.seo_keys}"></td>
+					</tr>
+					<tr>
+						<th>{:L('seo_desc')} :</th>
+						<td><textarea name="seo_desc" id="seo_desc" cols="80" rows="8">{$info.seo_desc}</textarea></td>
+					</tr>
+				</table>
+			</div>
+
+            <!--<div class="content_list pad_10 hidden">
+                <style>
+                    .addpic {}
+                    .addpic li { float:left; text-align:center; margin:0 0 10px 20px;}
+                    .addpic a { display:block;}
+                </style>
+                <ul class="addpic">
+                    <volist name="img_list" id="val">
+                        <li class="album_{$val['id']}">
+                            <a href="javascript:void(0)" onclick="del_album({$val['id']});"><img src="__STATIC__/css/bgimg/tv-collapsable.gif" /></a>
+                            <a><img src="{:attach($val['url'], 'article')}" style="width:80px;height:60px; border:solid 1px #000; "/></a>
+                        </li>
+                    </volist>
+                </ul>
+                <div class="cb"></div>
+                <table width="100%" cellpadding="2" cellspacing="1" class="table_form" id="first_upload_file">
+                    <tbody class="uplode_file">
+                    <tr>
+                        <th width="100" align="left"><a href="javascript:void(0);" class="blue" onclick="add_file();"><img src="__STATIC__/css/bgimg/tv-expandable.gif" /></a>上传文件 :</th>
+                        <td><input type="file" name="imgs[]"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>-->
+			<!--商品附图-->
+			<div class="content_list pad_10 "><!--hidden-->
+				<table width="100%" cellpadding="2" cellspacing="1" class="table_form" id="first_upload_file">
+					<tbody class="uplode_file">
+					<tr>
+						<th class="td_left" style="text-align: left;">
+							<a class="btn" id="logo_upload_btn" href="javascript:;" style=" width: 80px; margin:10px 0;">上传商品副图</a>
+						</th>
+					</tr>
+					<tr>
+						<td>
+							<div id="logo_upload_area" style='width:80%'>
+								<div id='photos_area' class="photos_area clearfix">
+									<volist name="img_list" id="val" >
+										<div class='item'>
+											<img src="{:attach($val['url'],'article')}"  width='100px' height='100px'/>
+											<div class='operate'><i class='toleft'>左移</i><i class='toright'>右移</i><i class='del' data-id="{$val['id']}">删除</i></div>
+										</div>
+									</volist>
+								</div>
+							</div>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+
+            <div class="content_list pad_10 hidden">
+                <table width="100%" cellpadding="2" cellspacing="1" class="table_form" id="item_attr">
+                    <volist name="ext_list" id="val">
+                        <tr>
+                            <td width="200">
+                                <a href="javascript:void(0);" class="blue" onclick="del_attr({$val.id},this);"><img src="__STATIC__/css/bgimg/tv-collapsable.gif" /></a>名称 :{$val.ext_name}
+                            </td>
+                            <td width="">值 :{$val.ext_value}</td>
+                        </tr>
+                    </volist>
+
+                    <tbody class="add_item_attr">
+                    <tr>
+                        <th width="200">
+                            <a href="javascript:void(0);" class="blue" onclick="add_attr();"><img src="__STATIC__/css/bgimg/tv-expandable.gif" /></a>名称 :<input type="text" name="ext[name][]" class="input-text" size="20">
+                        </th>
+                        <td>值 :<input type="text" name="ext[value][]" class="input-text" size="30"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+		<div class="mt10"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;"><br /><br /><br /></div>
+	</div>
+</div>
+<input type="hidden" name="menuid"  value="{$menuid}"/>
+<input type="hidden" name="id" id="id" value="{$info.id}" />
+</form>
+<include file="Public:footer" />
+<!--上传图片css-->
+<style type="text/css">
+	.progress{position:relative;padding: 1px; border-radius:3px; margin:30px 0 0 0;}
+	.bar{background-color: green; display:block; width:0%; height:20px; border-radius:3px;}
+	.percent{position:absolute; height:20px; display:inline-block;top:3px; left:2%; color:#fff}
+	.progress{
+		height: 100px;
+		padding: 30px 0 0;
+		width:100px;
+		border-radius: 0;
+	}
+
+	.photos_area .item {
+		float: left;
+		margin: 0 10px 10px 0;
+		position: relative;
+	}
+	.photos_area .item{position: relative;float:left;margin:0 10px 10px 0;}
+	.photos_area .item img{border: 1px solid #cdcdcd;}
+	.photos_area .operate{background: rgba(33, 33, 33, 0.7) none repeat scroll 0 0; bottom: 0; padding:5px 0; left: 0; position: absolute; width: 102px; z-index: 5; line-height: 21px; text-align: center;}
+	.photos_area .operate i{cursor: pointer; display: inline-block; font-size: 0; height: 12px; line-height: 0; margin: 0 5px; overflow: hidden; width: 12px; background: url("Plugins/plupload/icon_sucaihuo.png") no-repeat scroll 0 0;}
+	.photos_area .operate .toright{background-position: -13px -13px; position: relative;top:1px;}
+	.photos_area .operate .toleft{background-position: 0 -13px; position: relative;top:1px;}
+	.photos_area .operate .del{background-position: -13px 0; position: relative;top:0px;}
+	.photos_area .preview{background-color: #fff; font-family: arial; line-height: 90px; text-align: center; z-index: 4; left: 0; position: absolute; top: 0; height: 90px; overflow: hidden; width: 90px;}
+
+	.vad { margin: 120px 0 5px; font-family: Consolas,arial,宋体,sans-serif; text-align:center;}
+	.vad a { display: inline-block; height: 36px; line-height: 36px; margin: 0 5px; padding: 0 50px; font-size: 14px; text-align:center; color:#eee; text-decoration: none; background-color: #222;}
+	.vad a:hover { color: #fff; background-color: #000;}
+	.thead { width: 728px; height: 90px; margin: 0 auto; border-bottom: 40px solid #fff;}
+</style>
+
+<script src="__PUBLIC_ADMIN__js/jquery/plugins/iColorPicker.js"></script>
+<script src="__PUBLIC_ADMIN__js/jquery/plugins/colorpicker.js"></script>
+<script src="__PUBLIC_ADMIN__js/kindeditor/kindeditor-min.js"></script>
+<script src="/Plugins/plupload/plupload.full.min.js"></script><!--上传图片插件-->
+<script>
+    function add_file()
+    {
+        $("#next_upload_file .uplode_file").clone().insertAfter($("#first_upload_file .uplode_file:last"));
+    }
+    function del_file_box(obj)
+    {
+        $(obj).parent().parent().remove();
+    }
+    function del_album(id)
+    {
+        var url = "{:U('article/delete_album')}";
+        $.get(url+"&album_id="+id, function(data){
+            if(data==1){
+                $('.album_'+id).remove();
+            };
+        });
+    }
+    function add_attr()
+    {
+        $("#hidden_attr .add_item_attr").clone().insertAfter($("#item_attr .add_item_attr:last"));
+    }
+    function del_attrs(obj)
+    {
+        $(obj).parent().parent().remove();
+    }
+    function del_attr(id,obj)
+    {
+        var url = "{:U('article/delete_ext')}";
+        $.get(url+"&ext_id="+id, function(data){
+            if(data==1){
+                $(obj).parent().parent().remove();
+            };
+        });
+    }
+$('.J_cate_select').cate_select('请选择');
+$(function() {
+    //上传图片
+    var uploader = new plupload.Uploader({
+        runtimes: 'gears,html5,html4,silverlight,flash',
+        browse_button: 'logo_upload_btn',
+        url: "{:U('Article/ajax_upload_img')}",
+        flash_swf_url: 'plupload/Moxie.swf',
+        silverlight_xap_url: 'plupload/Moxie.xap',
+        filters: {
+            max_file_size: '25mb',
+            mime_types: [
+                {title: "files", extensions: "jpg,png,gif,jpeg"}
+            ]
+        },
+        multi_selection: true,
+        init: {
+            FilesAdded: function(up, files) {
+                $("#btn_submit").attr("disabled", "disabled").addClass("disabled").val("正在上传...");
+                var item = '';
+                plupload.each(files, function(file) { //遍历文件
+                    item += "<div class='item' id='" + file['id'] + "'><div class='progress'><span class='bar'></span><span class='percent'>0%</span></div></div>";
+                });
+                $("#photos_area").append(item);
+                uploader.start();
+            },
+            UploadProgress: function(up, file) { //上传中，显示进度条
+                var percent = file.percent;
+                $("#" + file.id).find('.bar').css({"width": percent + "%"});
+                $("#" + file.id).find(".percent").text(percent + "%");
+            },
+            FileUploaded: function(up, file, info) {
+                var data = eval("(" + info.response + ")");
+                var datasrc=data.src;
+                data.src='data/attachment/article/'+datasrc;
+
+                $("#" + file.id).html("<input type=hidden name='imgs[]' value='"+datasrc+"'><img src='"+data.src+"' alt='"+data.name+"' width='100px' height='100px'>\n\
+	<div class='operate'><i class='toleft'>左移</i><i class='toright'>右移</i><i class='del'>删除</i></div>")
+
+                $("#btn_submit").removeAttr("disabled").removeClass("disabled").val("提 交");
+                if (data.error != 0) {
+                    alert(data.error);
+                }
+            },
+            Error: function(up, err) {
+                if (err.code == -601) {
+                    alert("请上传jpg,png,gif,jpeg,zip或rar！");
+                    $("#btn_submit").removeAttr("disabled").removeClass("disabled").val("提 交");
+                }
+            }
+        }
+    });
+    uploader.init();
+    //左右切换和删除图片
+    $(document).delegate(".toleft","click", function() {
+        var item = $(this).parent().parent(".item");
+        var item_left = item.prev(".item");
+        if ($("#photos_area").children(".item").length >= 2) {
+            if (item_left.length == 0) {
+                item.insertAfter($("#photos_area").children(".item:last"));
+            } else {
+                item.insertBefore(item_left);
+            }
+        }
+    })
+
+    $(document).delegate(".toright","click", function() {
+        var item = $(this).parent().parent(".item");
+        var item_right = item.next(".item");
+        if ($("#photos_area").children(".item").length >= 2) {
+            if (item_right.length == 0) {
+                item.insertBefore($("#photos_area").children(".item:first"));
+            } else {
+                item.insertAfter(item_right);
+            }
+        }
+    })
+
+    $(document).delegate(".del","click", function() {
+        var self = $(this),
+        	id = self.data('id');
+        if(id){
+			$.get("{:U('Article/del_imgs')}",{id:id},function (result) {
+				if(result == 1){
+                    self.parent().parent(".item").remove();
+				}else{
+				    alert('操作失败，请重试');
+				}
+            })
+		}else{
+            self.parent().parent(".item").remove();
+		}
+    })
+
+	KindEditor.create('.info', {
+		uploadJson : '{:U("attachment/editer_upload")}',
+		fileManagerJson : '{:U("attachment/editer_manager")}',
+		allowFileManager : true
+	});
+	$('ul.J_tabs').tabs('div.J_panes > div');
+	
+	//颜色选择器
+	$('.J_color_picker').colorpicker();
+	//自动获取标签
+	$('#J_gettags').live('click', function() {
+		var title = $.trim($('#J_title').val());
+		if(title == ''){
+			$.pinphp.tip({content:lang.article_title_isempty, icon:'alert'});
+			return false;
+		}
+		$.getJSON('{:U("article/ajax_gettags")}', {title:title}, function(result){
+			if(result.status == 1){
+				$('#J_tags').val(result.data);
+			}else{
+				$.pinphp.tip({content:result.msg});
+			}
+		});
+	});
+});
+</script>
+<table id="next_upload_file" style="display:none;">
+    <tbody class="uplode_file">
+    <tr>
+        <th width="100"><a href="javascript:void(0);" onclick="del_file_box(this);" class="blue"><img src="__STATIC__/css/bgimg/tv-collapsable.gif" /></a>上传文件 :</th>
+        <td><input type="file" name="imgs[]"></td>
+    </tr>
+    </tbody>
+</table>
+<table id="hidden_attr" style="display:none;">
+    <tbody class="add_item_attr">
+    <tr>
+        <th width="200">
+            <a href="javascript:void(0);" class="blue" onclick="del_attrs(this);"><img src="__STATIC__/css/bgimg/tv-collapsable.gif" /></a>属性名 :<input type="text" name="ext[name][]" class="input-text" size="20">
+        </th>
+        <td>属性值 :<input type="text" name="ext[value][]" class="input-text" size="30"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

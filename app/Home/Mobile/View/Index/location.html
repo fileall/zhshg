@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html> 
+<!--head-->
+<include file="Public/head" />
+    <link href="__STATIC__layui/css/layui.mobile.css" type="text/css" rel="stylesheet" />
+
+<script src="__MB__js/layui/layui.js" charset="utf-8"></script>
+<body id="pos-area">
+  	
+    <!--content-->
+	<div class="head_content">
+    </div>
+    <!-- content-->
+    
+   
+</body>
+    <script type="text/javascript" src="__STATIC__js/geolocation.min.js"></script>
+    <script type="text/JavaScript">
+        //读取cookies
+        function getCookie(name)
+        {
+            var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+            if(arr=document.cookie.match(reg))
+                return unescape(arr[2]);
+            else
+                return null;
+        }
+
+        //设置cookie
+        function setCookie(name, value, seconds) {
+            seconds = seconds || 0;   //seconds有值就直接赋值，没有为0，这个根php不一样。
+            var expires = "";
+            if (seconds != 0 ) {      //设置cookie生存时间
+                var date = new Date();
+                date.setTime(date.getTime()+(seconds*1000));  //date.getTime()函数用于使用当地时间返回当前Date对象中的时间值。该时间值表示从1970年1月1日午夜开始，到当前Date对象时，所经过的毫秒数，以格林威治时间为准。
+                expires = "; expires="+date.toGMTString();
+            }
+            document.cookie = name+"="+value+expires+"; path=/";   //转码并赋值
+        }
+        //清除cookie  
+		function clearCookie(name) {  
+		 setCookie(name, "", -1);  
+		} 
+		
+        var store_id = getCookie('store_id');
+        var data_log = "";
+		//var address_info = getCookie('store_info');
+       // if(store_id){
+//            store_info(address_info,store_id);
+//        }else{
+            //页面初始加载时选择最近门店
+            var geolocation = new qq.maps.Geolocation("RN5BZ-JAZ2U-FKBVV-4ZPMC-QWM5V-CNBPZ", "myapp");
+            //document.getElementById("pos-area").style.height = (document.body.clientHeight - 110) + 'px';
+            var info =new Object();
+            var positionNum = 0;
+            var options = {timeout: 10000};
+            geolocation.getLocation(showPosition, showErr, options);
+             
+			 function showPosition(position) {
+                data_log = position;
+                store_info(position,store_id);
+            };
+            // alert(info.lat)
+            function showErr() {
+                document.getElementById("demo").innerHTML += "序号：" + positionNum;
+            };
+	
+	
+        //选择门店及门店信息
+        function store_info(data,store_id){
+            $.get("{:U('Index/ambitus_head')}",{info:data,store_id:store_id},function(msg){
+                $(".head_content").html(msg);
+            })
+        }
+		//重新定位
+		function repeat_location(){
+			clearCookie('store_id');
+			window.location.reload();
+		}
+    </script>
+</html>

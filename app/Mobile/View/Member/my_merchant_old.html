@@ -1,0 +1,132 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">我是商家</div>
+				<a href="/index.php?s=/Member/mine.html">
+					<div class="header-left"><i class="fa fa-angle-left"></i></div>
+				</a>
+			<div class="header-right"></div>
+			</div>
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		
+		
+		
+		<!--content-->
+		<div class="content">
+			<!--person-->
+			<div class="person-wrap">
+				<div class="person-inner row-box">
+					<div class="row-flex">
+						<div class="person-photo vertical-center">
+							<div class="vertical-auto">
+									<img src="{:attach($merchant["img"],'merchant')}"></div>
+						</div>
+						<div class="person-message">
+							<!--<div class="person-name">{$merchant.title}</div>-->
+							<if condition="!$merchant or ($merchant['status'] == 1)">
+								<div class="person-name">您还没有店铺</div>
+							<elseif condition="$merchant['status'] == 0" />
+								<div class="person-name">您的店铺正在审核中..</div>
+							<elseif condition="$merchant['status'] == 2" />
+								<div class="person-name">{$merchant.title}</div>
+							</if>
+							
+							<!--<div class="person-grade">会员等级：{$mem.vips}</div>-->
+						</div>
+					</div>
+				
+				
+					<div class="popularize vertical-center">
+						<div class="vertical-auto">
+							<if condition="!$no_sj"><!--是商家才展示2维码-->
+									<a href="{:U('member/popularize_link',array('what_ewm'=>2))}">
+										<div class="popularize-img"><img src="{:attach($merchant['ewm'],'ewm')}"></div>
+										<div class="popularize-name">商家收款码</div>
+									</a>
+							</if>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--person-->
+			
+			
+			<!--还未成为商家时显示的内容-->
+		<if condition="$no_sj ==1">
+			<div class="content not-business">
+				<div class="null-wrap vertical-center">
+					<div class="vertical-auto">
+						<div class="null-page">
+							<div class="null-page-icon"><img src="__MB__images/l-isnot-business_03.png"></div>
+							<div class="null-page-txt">您还不是商家哦~</div>
+							<if condition="!$merchant or ($merchant['status'] == 1)">
+								<div class="null-page-link"><a href="{:U('Merchant/add_shop')}">去申请</a></div>
+							</if>
+							<!--<div class="null-page-link"><a href="reply_business.html">去申请</a></div>-->
+						</div>
+					</div>
+				</div>
+			</div>
+		<else />	
+		<!--收支明细-->
+			<div class="earnings row-box">
+				<div class="earnings-border row-flex">
+					<div class="earnings-tier">
+						<div class="earnings-number">{$prices_today}</div>
+						<div class="earnings-txt">今日收益</div>
+					</div>
+				</div>
+				
+				<div class="row-flex">
+					<div class="earnings-tier">
+						<div class="earnings-number">{$merchant.shouyi}</div>
+						<div class="earnings-txt">累计收益</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="notecase-tis"><a href="{:U('my_merchant',array('type'=>1))}">收益明细</a>
+				<br/>
+				<a href="{:U('my_merchant',array('type'=>2))}">银币明细</a></div>
+			<ul class="notecase-ul">
+				<volist name="ye" id="y">
+					<li class="notecase-li">
+						<div class="notecase-left">
+							<div class="notecase-type">{$y.memos}</div>
+							<div class="notecase-date">{:date('Y-m-d',$y['add_time'])}</div>
+						</div>
+						<if condition="$y['type'] == 1">
+							<div class="notecase-right active">-{$y.totalprices}</div>
+						<else />
+							<div class="notecase-right">+{$y.totalprices}</div>
+						</if>
+						<div class="clear-float"></div>
+					</li>
+				</volist>	
+			</ul>
+			<!--收支明细-->
+		</if>
+			
+			
+			
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+		
+	</body>
+</block>	
+<block name="footer"></block>
+<block name="script">
+<script>
+</script>	
+</block>
+</html>

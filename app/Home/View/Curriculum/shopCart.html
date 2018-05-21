@@ -1,0 +1,89 @@
+<include file="Public/order_top" />
+	
+	<!--内容-->
+	<div class="shopCart3 wrap">
+		<!--信息-->
+		<div class="shopCart3-info">
+			<h3>订单提交成功</h3>
+			<p class="info-p"><strong>订单支付成功，请您尽快付款！订单号：1569682962544</strong> </p>
+			<p class="info-p">请您在订单提交成功后尽快完成付款，兴智教育提供在线支付保障请您放心购买</p>
+		</div>
+		<!--支付方式-->
+		<ul class="shopCart3-type">
+			<li class="clear active">
+				<span class="fl type-radio"><input type="radio" name="type" checked="checked"/></span>
+				<span class="fl">微信支付</span>
+				<span class="fr type-cor">￥1600.00</span>
+			</li>
+			<li class="clear">
+				<span class="fl type-radio"><input type="radio" name="type"/></span>
+				<span class="fl">支付宝</span>
+				<span class="fr type-cor">￥1500.00</span>
+			</li>
+		</ul>
+		<div class="shopCart3-btns">
+			<a href="shopCart4.html" class="btn blue">确认支付</a>
+		</div>
+	</div>
+	<!--内容-end-->
+	
+ 	<!--公共底部-->
+	<include file="Public/footer" />
+ 	<!--公共底部-end-->
+
+ 	<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+ 	<script src="__PC__js/l_main.js"></script>
+ 	<script src="__PC__plugins/layui-v1.0.9/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+
+ 	<script type="text/javascript">
+ 		$(function(){
+ 			layui.use('layer', function(){
+			  var layer = layui.layer;
+			});
+			//单个商品删除
+			$('.cartGoodsDelete').click(function(){
+				var layerconfirm = layer.confirm('确定删除该商品？', {
+				  	btn: ['取消','确定'] //按钮
+				}, function(){
+					//取消，关闭弹层
+				 	layer.close(layerconfirm);
+				}, function(){
+				  	//执行删除操作
+				  	
+				});
+			});
+			//新建地址验证
+			var regPhone = /^(13|15|18)\d{9}$/;
+			$('.addNewAdrBox-sub').click(function(){
+				//姓名
+				if($('.addNewAdrTxt-name').val() == ''){
+					$('.tip.one').text('请填写收货人姓名');
+					return false;
+				}else{
+					$('.tip.one').text('')
+				}
+				//手机
+				if($('.addNewAdrTxt-phone').val() == ''){
+					$('.tip.two').text('请填写收货人手机号');
+					return false;
+				}else if(!regPhone.test($('.addNewAdrTxt-phone').val())){
+					$('.tip.two').text('手机号格式不正确');
+					return false;
+				}else{
+					$('.tip.two').text('');
+				}
+				//详细地址
+				if($('.addNewAdrTxt-xxdz').val() == ''){
+					$('.tip.four').text('请填写详细收货地址');
+					return false;
+				}else{
+					$('.tip.four').text('')
+				}
+				//验证正确关闭弹层
+				$('.techBigImg').animate({"top":"110%"},300);
+			});
+		
+   		})
+ 	</script>
+</body>
+</html>

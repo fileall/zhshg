@@ -1,0 +1,92 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+
+<body class="body-bgColor">
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">寄存明细</div>
+        <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+        <div class="header-right"></div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="content y-bg-white">
+    <!--为空时显示的背景图-->
+    <div class="y-record-bg y-hide">
+        <div class="y-record-bg-content"></div>
+        <p class="y-record-bg-text">这里空空如也~</p>
+    </div>
+    <!--弹出窗-->
+    <!--<div class="y-alert-bg y-recordAlert-bg y-hide">-->
+        <!--<div class="y-recordAlert y-alert-div">-->
+            <!--<div class="y-alert-content y-recordAlert-content">确定提取到我的钱包？</div>-->
+            <!--<div class="jus-bet y-alert-Button y-recordAlert-Button y-text-center">-->
+                <!--<p class="y-alert-bankButton y-color-999">取消</p>-->
+                <!--<p><a href="javascript:;" class="y-color-red y-block">确定</a></p>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--弹出窗-->
+    <ul>
+        <volist name="jbp" id="j">
+            <li class="y-bg-white y-declare-li">
+                <div class="declare-tier-top jus-bet font-32">
+                    <div>本次寄存</div>
+                    <div>{$j['totalprices']}</div>
+                </div>
+                <!--status支出状态 1寄存中2待提取3已提取 -->
+                <div class="declare-tier-bottom jus-bet ali-cen font-24">
+                    <div class="y-color-999">{:date('Y-m-d H:i:s',$j['add_time'])}</div>
+                    <switch name="j['status']" >
+                        <case value="1"><div class="y-color-666">剩余{$j['other_days']}天</div></case>
+                        <case value="2"><div class="y-bg-red y-record-button" data-id="{$j['id']}">提取</div></case>
+                        <case value="3"><div class="y-color-666">已提取</div></case>
+                        <default />
+                    </switch>
+                </div>
+
+            </li>
+        </volist>
+    </ul>
+</div>
+<!--content-->
+<!--footer-->
+<!--footer-->
+</body>
+</block>
+<block name="footer"></block>
+<block name="script">
+    <script>
+        $('.y-bg-red').click(function(){
+            var id=$(this).data('id');
+            layer.confirm('确定提取吗？', {btn: ['是的','取消']}, function(){
+                $.ajax({type:'post',url:'{:U(\'WalletOther/basin_out\')}',async:true,
+                    data:{id:id},dataType:'json',success:function(d) {
+                        if(d.status==1){
+                            layer.msg(d.msg,{icon:1,time:1000},function(){
+                                window.location.href = d.url;
+                            })
+                        }else{
+                            layer.msg(d.msg,{icon:2,time:1000})
+                        }
+                    }
+                })
+            })
+
+        })
+    </script>
+    <script>
+        $(".y-record-button").click(function(){
+            $(".y-recordAlert-bg").show();
+        })
+        $(".y-alert-bankButton").click(function(){
+            $(".y-recordAlert-bg").hide();
+        })
+    </script>
+</block>
+</html>

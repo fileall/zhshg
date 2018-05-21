@@ -1,0 +1,31 @@
+<!--添加管理员-->
+<div class="dialog_content">
+	<form id="info_form" name="info_form" action="{:u('Department/add')}" method="post">
+	<table width="100%" class="table_form">
+		<tr> 
+	      <th width="80">部门名称 :</th>
+	      <td><input type="text" name="name" id="J_name" class="input-text" value="{$info['name']}"></td>
+	    </tr>
+	    <tr> 
+	      <th>描述 :</th>
+	      <td><textarea name="describe" id="describe" cols="40" rows="3">{$info['describe']}</textarea></td>
+	    </tr>
+	</table>
+	</form>
+</div>
+<script>
+$(function(){
+	$.formValidator.initConfig({formid:"info_form",autotip:true});
+	
+	$("#J_name").formValidator({ onshow:'请输入部门名称', onfocus:'请输入部门名称'}).inputValidator({ min:1, onerror:'请输入部门名称'});
+	$('#info_form').ajaxForm({success:complate,dataType:'json'});
+    function complate(result){
+        if(result.status == 1){
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'});
+        }
+    }
+});
+</script>

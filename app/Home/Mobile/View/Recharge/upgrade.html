@@ -1,0 +1,423 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">会员升级</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="container">
+				<div id="slide" class="slide" class="index-slide" alt="star">
+					<div class="img"><img src="__MB__images/img5.png"/></div>
+					<div class="img"><img src="__MB__images/img6.png"/></div>
+					<div class="img"><img src="__MB__images/img7.png"/></div>
+					<div class="slide-bt"></div>
+				</div>	
+			</div>
+			
+			<div class="tab-title">
+				<div class="tab-title-name">类型</div>
+				<div class="tab-title-name">福利</div>
+				<div class="tab-title-name">方式</div> 
+				<div class="clear-float"></div>
+			</div>
+			
+			<div class="card-box">
+				<div class="container-tier" data-vips = "3"><!--3-->
+					<ul class="container-ul">
+						<li class="container-li">
+							<div class="tab-title-name">升级赠送</div>
+							<div class="tab-title-name">{$grade_rule[2]['upgrade_silver']}银币</div>
+							<div class="tab-title-name">一次</div>
+						</li>
+						
+						<li class="container-li">
+							<div class="tab-title-name">推荐注册</div>
+							<div class="tab-title-name">{$grade_rule[2]['tj_silver']}银币</div>
+							<div class="tab-title-name">每人</div>
+						</li>
+						
+						<li class="container-li">
+							<div class="tab-title-name">购买元宝</div>
+							<div class="tab-title-name">购买金额*{$grade_rule[2]['reward_silver_multiple']}银币</div>
+							<div class="tab-title-name">每次</div>
+						</li>
+						
+						<li class="container-li">
+							<div class="tab-title-name">推荐人升级VIP</div>
+							<div class="tab-title-name">奖励{$grade_rule[2]['upgrade_one_price']}元</div>
+							<div class="tab-title-name">每人</div>
+						</li>
+						
+						<li class="container-li">
+							<div class="tab-title-name">推荐人升级代理</div>
+							<div class="tab-title-name">奖励{$grade_rule[2]['upgrade_two_price']}元</div>
+							<div class="tab-title-name">每人</div>
+						</li>
+						
+						<li class="container-li">
+							<div class="tab-title-name">银币成长值</div>
+							<div class="tab-title-name">万分之<?php echo(C('pin_silver_coin')*10000) ?></div>
+							<div class="tab-title-name">每日</div>
+						</li>
+						
+						<li class="container-li">
+							<div class="tab-title-name">被推荐人购买元宝</div>
+							<div class="tab-title-name">购买金额*{$grade_rule[2]['tj_acer_silver']}银币</div>
+							<div class="tab-title-name">每次</div>
+						</li>
+						
+						<li class="container-li">
+							<div class="tab-title-name">被推荐人消费元宝</div>
+							<div class="tab-title-name">元宝数量*10银币</div><!--000-->
+							<div class="tab-title-name">每次</div>
+						</li>
+					</ul>
+					
+					<div class="container-btn">
+							<a href="javascript:;" data-vs="3" class="sj">升级为代理会员  ¥1000/年</a>
+					</div>
+				</div>
+				
+				<div class="container-tier active" data-vips = "2"> <!--2-->
+					<ul class="container-ul">
+						<li class="container-li">
+							<div class="tab-title-name">推荐注册</div>
+							<div class="tab-title-name">{$grade_rule[1]['tj_silver']}银币</div>
+							<div class="tab-title-name">每人</div>
+						</li>
+						
+						<li class="container-li">
+							<div class="tab-title-name">购买元宝</div>
+							<div class="tab-title-name">购买金额*{$grade_rule[1]['reward_silver_multiple']}银币</div>
+							<div class="tab-title-name">每次</div>
+						</li>
+						
+						<li class="container-li">
+							<div class="tab-title-name">升级赠送</div>
+							<div class="tab-title-name">{$grade_rule[1]['upgrade_silver']}银币</div>
+							<div class="tab-title-name">2次</div>
+						</li>
+						
+						<li class="container-li">
+							<div class="tab-title-name">元宝消费</div>
+							<div class="tab-title-name">消费按相应比例</div>
+							<div class="tab-title-name">每次</div>
+						</li>
+						
+						<li class="container-li">
+							<div class="tab-title-name">银币成长值</div>
+							<div class="tab-title-name">万分之<?php echo(C('pin_silver_coin')*10000) ?></div>
+							<div class="tab-title-name">每次</div>
+						</li>
+					</ul>
+					
+					<div class="container-btn">
+							<a href="javascript:;" data-vs="2" class="sj">升级为VIP会员  ¥300/年</a>
+					</div>
+				</div>
+				 
+				<div class="container-tier" data-vips = "1"><!--1-->
+					<ul class="container-ul">
+						<li class="container-li">
+							<div class="tab-title-name">注册</div>
+							<div class="tab-title-name">{$grade_rule[0]['reg_silver']}银币</div>
+							<div class="tab-title-name">一次</div>
+						</li>
+						
+						<li class="container-li">
+							<div class="tab-title-name">推荐注册</div>
+							<div class="tab-title-name">{$grade_rule[0]['tj_silver']}银币</div>
+							<div class="tab-title-name">每人</div>
+						</li>
+						
+						<li class="container-li">
+							<div class="tab-title-name">购买元宝</div>
+							<div class="tab-title-name">购买金额*{$grade_rule[0]['reward_silver_multiple']}银币</div>
+							<div class="tab-title-name">每次</div>
+						</li>
+						
+						<li class="container-li">
+							<div class="tab-title-name">银币成长值</div>
+							<div class="tab-title-name">万分之<?php echo(C('pin_silver_coin')*10000) ?></div>
+							<div class="tab-title-name">每天</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>
+<block name="footer"></block>
+
+<block name="script">	
+	<script>
+		//提示等级
+//		$('.no_sj').click(function(){
+//			layer.msg('请注意您的等级,您只能选择下一级的vip进行升级！',{icon:0,time:2000});
+//		})
+		//点击购买
+		$('.sj').click(function(){
+			var sj = $(this);
+			//生成订单
+			 var zftype = 1;//'支付方式  0.未选择 1=微信，2=支付宝',
+			 var vips = sj.data('vs');//确定vips
+			 if('{$member["vips"]}' >= vips){
+			 	layer.msg('请注意您的等级！',{icon:0,time:2000});
+			 	return false;
+			 }
+			 
+			 var item_type = 2;//1元宝 2会员
+			 var vip = $(".card-box > .active").data("vips");
+			 console.log(vip);
+			 $.post('{:U("Recharge/recharge_make")}',{vips:vip,zftype:zftype,item_type:item_type},function(d){
+			 	if(d.status ==1){
+					$.ajax({
+						type:"post",
+						url:"",
+						async:true,
+						data:{'price':0.01,'dingdan':d.dingdan,'item_type':item_type,'vips':vip}, 
+						dataType:'json',
+						success:function(res) { 
+//							alert(res.err_code);
+							chooseWXPay(res.err_msg);    
+						}
+					});
+			 	}
+			 	else{
+			 		layer.msg(d.msg);
+			 	}
+			 
+			 }, 'json')
+			
+		})
+		
+		function chooseWXPay(sting){ 
+			var config = JSON.parse(sting)
+		   WeixinJSBridge.invoke(
+		       'getBrandWCPayRequest', {
+		           "appId":config.appId,     //公众号名称，由商户传入     
+		           "timeStamp":config.timeStamp,         //时间戳，自1970年以来的秒数      
+		           "nonceStr":config.nonceStr, //随机串     
+		           "package":config.package,   
+		           "signType":"MD5",         //微信签名方式：     
+		           "paySign":config.paySign //微信签名 
+		       },
+		       function(res){     
+		           if(res.err_msg == "get_brand_wcpay_request:ok" ) {   
+		                // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+		                layer.msg('充值成功',{icon:1,time:1000},function(){
+		              	  location.href = "/index.php"; 
+		                });
+//		                $.post('/index.php?m=Home&c=Order&a=wxpayok', {'err_msg':res.err_msg}, function(data){
+//		                	location.href = "/index.php?m=Home&c=Order&a=payRight"; 
+//		               },'json')  
+		           }
+		       }
+		   ); 
+		}
+		</script>
+	
+	
+	<script>
+	var autoLb = false;            //autoLb=true为开启自动轮播
+	var autoLbtime = 1;           //autoLbtime为轮播间隔时间（单位秒）
+	var touch = true;            //touch=true为开启触摸滑动
+	var slideBt = true;         //slideBt=true为开启滚动按钮
+	var slideNub;              //轮播图片数量
+	var indexNum = 0;		  //index值						
+	
+	//窗口大小改变时改变轮播图宽高
+	$(window).resize(function(){
+		$(".slide").height($(".slide").width()*0.56);
+	});
+	
+	
+	function getClassOn(){
+		$(".slide-bt span").each(function(){
+			if($(this).hasClass("on")){
+				indexNum = $(this).index();
+				$(".container-tier").eq(indexNum).addClass("active").siblings().removeClass("active");
+			}
+		});
+	}
+	
+	$(function(){
+		$(".slide").height($(".slide").width()*0.56);
+		slideNub = $(".slide .img").size();             //获取轮播图片数量
+		for(i=0;i<slideNub;i++){
+			$(".slide .img:eq("+i+")").attr("data-slide-imgId",i);
+		}
+	
+		//根据轮播图片数量设定图片位置对应的class
+		if(slideNub==1){
+			for(i=0;i<slideNub;i++){
+				$(".slide .img:eq("+i+")").addClass("img3");
+			}
+		}
+		if(slideNub==2){
+			for(i=0;i<slideNub;i++){
+				$(".slide .img:eq("+i+")").addClass("img"+(i+3));
+			}
+		}
+		if(slideNub==3){
+			for(i=0;i<slideNub;i++){
+				$(".slide .img:eq("+i+")").addClass("img"+(i+2));
+			}
+		}
+		if(slideNub>3&&slideNub<6){
+			for(i=0;i<slideNub;i++){
+				$(".slide .img:eq("+i+")").addClass("img"+(i+1));
+			}
+		}
+		if(slideNub>=6){
+			for(i=0;i<slideNub;i++){
+				if(i<5){
+				   $(".slide .img:eq("+i+")").addClass("img"+(i+1)); 
+				}else{
+					$(".slide .img:eq("+i+")").addClass("img5"); 
+				}
+			}
+		}
+	
+		//根据轮播图片数量设定轮播图按钮数量
+		if(slideBt){
+			for(i=1;i<=slideNub;i++){
+				$(".slide-bt").append("<span data-slide-bt='"+i+"' onclick='tz("+i+")'></span>");
+			}
+			$(".slide-bt").width(slideNub*34);
+			$(".slide-bt").css("margin-left","-"+slideNub*17+"px");
+		}
+	
+		//自动轮播
+		if(autoLb){
+			setInterval(function(){
+				right();
+			}, autoLbtime*1000);
+		}
+	
+		if(touch){
+			k_touch();
+		}
+		slideLi();
+		imgClickFy();
+	})
+	
+	//右滑动
+	function right(){
+		var fy = new Array();
+		for(i=0;i<slideNub;i++){
+			fy[i]=$(".slide .img[data-slide-imgId="+i+"]").attr("class");
+		}
+		for(i=0;i<slideNub;i++){
+			if(i==0){
+				$(".slide .img[data-slide-imgId="+i+"]").attr("class",fy[slideNub-1]);
+			}else{
+			   $(".slide .img[data-slide-imgId="+i+"]").attr("class",fy[i-1]); 
+			}
+		}
+		imgClickFy();
+		slideLi();
+		getClassOn();
+	}
+	
+	//左滑动
+	function left(){
+		var fy = new Array();
+		for(i=0;i<slideNub;i++){
+			fy[i]=$(".slide .img[data-slide-imgId="+i+"]").attr("class");
+		}
+		for(i=0;i<slideNub;i++){
+			if(i==(slideNub-1)){
+				$(".slide .img[data-slide-imgId="+i+"]").attr("class",fy[0]);
+			}else{
+			   $(".slide .img[data-slide-imgId="+i+"]").attr("class",fy[i+1]); 
+			}
+		}
+		imgClickFy();
+		slideLi();
+		getClassOn();
+	}
+	
+	//轮播图片左右图片点击翻页
+	function imgClickFy(){
+		$(".slide .img").removeAttr("onclick");
+		$(".slide .img2").attr("onclick","left()");
+		$(".slide .img4").attr("onclick","right()");
+		getClassOn();
+	}
+	
+	//修改当前最中间图片对应按钮选中状态
+	function slideLi(){
+		var slideList = parseInt($(".slide .img3").attr("data-slide-imgId")) + 1;
+		$(".slide-bt span").removeClass("on");
+		$(".slide-bt span[data-slide-bt="+slideList+"]").addClass("on");
+	}
+	
+	//轮播按钮点击翻页
+	function tz(id){
+		var tzcs = id - (parseInt($(".slide .img3").attr("data-slide-imgId")) + 1);
+		if(tzcs>0){
+			for(i=0;i<tzcs;i++){
+				setTimeout(function(){
+				  right();  
+				},1);
+			}
+		}
+		if(tzcs<0){
+			tzcs=(-tzcs);
+			for(i=0;i<tzcs;i++){
+				setTimeout(function(){
+				  left();  
+				},1);
+			}
+		}
+		slideLi();
+		getClassOn();
+	}
+	
+	
+	//触摸滑动模块
+	function k_touch() {
+		var _start = 0, _end = 0, _content = document.getElementById("slide");
+		_content.addEventListener("touchstart", touchStart, false);
+		_content.addEventListener("touchmove", touchMove, false);
+		_content.addEventListener("touchend", touchEnd, false);
+	
+		function touchStart(event) {
+			var touch = event.targetTouches[0];
+			_start = touch.pageX;
+		}
+	
+		function touchMove(event) {
+			var touch = event.targetTouches[0];
+			_end = (_start - touch.pageX);
+		}
+	
+		function touchEnd(event) {
+			if (_end < -100) {
+				left();
+				_end=0;
+			}else if(_end > 100){
+				right();
+				_end=0;
+			}
+		}
+	}
+	</script>
+</block>
+
+</html>

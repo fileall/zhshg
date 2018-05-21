@@ -1,0 +1,84 @@
+<include file="Public/member_top" />
+
+    <!--右测导航栏开始-->
+    <div class="x-right-colunm">
+        <div class="x-right-colunm-inner">
+
+            <div class="x-headline">订单信息</div><!--title name-->
+
+            <!--收货人信息-->
+            <div class="x-par-box l-clear">
+                <div class="x-par-location active">
+                    <h4>收货人信息</h4>
+                    <p>收货人信息： {$info['shperson']} {:replace_mobile($info['mobile'])}</p>
+                    <p>收货人地址：{$info['address']}</p>
+                </div>
+
+                <div class="x-par-location">
+                    <h4>留言:</h4>
+                    <div class="x-par-text" >{$info['memos']}</div>
+                </div>
+            </div>
+            <!--收货人信息-->
+
+            <!--订单信息-->
+            <div class=""><!--订单容器-->
+
+                <div class="x-monad"><!--订单层-->
+                    <div class="x-monad-title l-clear">
+                        <p class="x-monad-num1">订单编号：{$info['order_sn']}</p>
+                        <p class="x-monad-num2">下单时间：{$info['add_time']|date="Y-m-d H:i",###}</p>
+                    </div>
+
+                    <div class="x-monad-hed">
+                        <ul class="l-clear">
+                            <li class="x-monad-nav1">商品名称/规格</li>
+                            <li class="x-monad-nav2">状态</li>
+                            <li class="x-monad-nav2">价格</li>
+                            <li class="x-monad-nav2">数量</li>
+                            <li class="x-monad-nav2">商品总价</li>
+
+                        </ul>
+                    </div>
+
+
+                    <div class="x-monad-content">
+                        <volist name="info['list']" id="va">
+                            <div class="x-monad-tier l-clear"><!--单子层-->
+                                <div class="x-monad-name l-clear">
+                                    <a href="{:U('Mall/goodsDetail',array('id'=>$va['item_id']))}">
+                                        <div class="x-monad-img"><img src="{:attach($va['img'],'item')}"></div>
+                                        <div class="x-monad-txt">
+                                            <p class="x-monad-p1">
+                                                {$va['title']}
+                                            </p>
+                                            <!--<p class="x-monad-p2">250ml×12盒</p>-->
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="x-monad-state">未付款</div>
+                                <div class="x-monad-state active">￥{$va['price']}</div>
+                                <div class="x-monad-state">{$va['nums']}</div>
+                                <div class="x-monad-state active">￥{:sprintf('%.2f',$va['nums']*$va['price'])}</div>
+                            </div>
+                        </volist>
+                    </div>
+                </div>
+
+            </div>
+            <!--订单信息-->
+
+            <div class="x-erturn-page l-clear">
+                <a href="javascript :;" onClick="javascript :history.back(-1);"><span>返回</span></a>
+                <p class="x-erturn-p">订单总金额：<i>￥{$info['totalprices']}</i></p>
+            </div>
+
+        </div>
+
+    </div>
+    <!--右测导航栏结束-->
+
+    <div style="clear: both;"></div><!--clearFloat-->
+</div>
+</body>
+</html>

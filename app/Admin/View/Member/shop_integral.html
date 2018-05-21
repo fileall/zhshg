@@ -1,0 +1,83 @@
+<include file="Public:header" />
+<!--会员列表-->
+<div class="pad_10" >
+	<div class="off_on_box">
+		<h3 class="title fb">购物送积分</h3>
+		<p class="font">开启后，根据购物的情况赠送相应的积分，可以用于兑换积分商品。</p>
+		<if condition="$one['status']">
+			<div class="off_on_btn on">
+				<span class="tip">已开启</span>
+				<i class="dot" style="left: 71px;"></i>
+			</div>
+		<else />
+			<div class="off_on_btn">
+				<span class="tip">已关闭</span>
+				<i class="dot"></i>
+			</div>
+		</if>
+	</div>
+	<div class="off_on_con hidden" <if condition="$one['status']">style="display: block;"</if>>
+		<input id="rule_id" type="hidden" value="{$one['id']}">
+		<form method="post">
+			<table>
+				<tbody>
+					<tr>
+						<td align="right"><span class="corF00">*</span>每成功购物&nbsp;</td>
+						<td>
+							<input name="one[id]" type="hidden" value="{$one['id']}">
+							<input name="one[condition]" type="text" value="{$one['condition']}" />元，奖励
+							<input name="one[integral]" type="text" value="{$one['integral']}" />积分（不包运费）
+						</td>
+					</tr>
+					<tr>
+						<td align="right">
+							<input type="checkbox" name="two[status]" <if condition="$two['status']">checked</if> value=1 />单笔订单满&nbsp;
+						</td>
+						<td>
+							<input name="two[id]" type="hidden" value="{$two['id']}">
+							<input name="two[condition]" type="text" value="{$two['condition']}" />元，奖励
+							<input name="two[integral]" type="text" value="{$two['integral']}" />积分
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<input type="submit" class="btn w150" value="保存"/>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+</div>
+
+<include file="Public:footer" />
+
+</body>
+
+</html>
+<script>  
+$(function(){
+    var rule_id = $('#rule_id').val();
+    var operation = function (status) {
+        $.get("{:U('Member/operation_integral_rule')}",{rule_id:rule_id,status:status},function (result) {
+            if(result[0] == 1){
+                $.pinphp.tip({content:result[1]});
+            }else{
+                $.pinphp.tip({content:result[1], icon:'alert'});
+            }
+        },'json')
+    }
+    //按钮开关
+    $('.off_on_btn').offOn({
+        onFun:function(){
+            //开启
+            operation(1);
+        },
+        offFun:function(){
+            //关闭
+            operation(0);
+        }
+    });
+})
+</script>

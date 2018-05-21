@@ -1,0 +1,95 @@
+<include file="Public:header" />
+<!--文章列表-->
+
+<div class="pad_lr_10" >
+    <form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+        <tr>
+            <td>
+            <div class="explain_col">
+                <input type="hidden" name="m" value="admin" />
+                <input type="hidden" name="c" value="fund" />
+                <input type="hidden" name="a" value="finance" />
+                <input type="hidden" name="menuid" value="{$menuid}" />
+                创建时间：
+                <input type="text" name="time_start" id="time_start" class="date" size="12" value="{$search.time_start}">
+                -
+                <input type="text" name="time_end" id="time_end" class="date" size="12" value="{$search.time_end}">
+
+                &nbsp;&nbsp;类型:
+                <select name="type">
+                <option value="">-{:L('all')}-</option>
+                    <volist name="finance_type" id="val">
+                        <option value="{$key}" <if condition="$search.type eq $key">selected="selected"</if>>{$val}</option>
+                    </volist>
+                </select>
+                &nbsp;&nbsp;{:L('keyword')} :
+                <input name="keyword" type="text" class="input-text" size="25" value="{$search.keyword}" />
+                <input type="submit" name="search" class="btn" value="{:L('search')}" />
+            </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </form>
+
+    <div class="J_tablelist table_list" data-acturi="{:U('article/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width=25><input type="checkbox" id="checkall_t" class="J_checkall"></th>
+                <th><span data-tdtype="order_by" data-field="id">ID</span></th>
+                <th width=150><span data-tdtype="order_by" data-field="member_id">申请人</span></th>
+                <th><span data-tdtype="order_by" data-field="ex_total">交易前金额</span></th>
+                <th><span data-tdtype="order_by" data-field="change">变化金额</span></th>
+                <th><span data-tdtype="order_by" data-field="type">交易类型</span></th>
+				<th width=150><span data-tdtype="order_by" data-field="add_time">时间</span></th>
+                <th>备注</th>
+            </tr>
+        </thead>
+        <tbody>
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <td align="center">{$val.id}</td>
+                <td align="center">{$val.nickname}</td>
+                <td align="center">{$val['ex_total']}</b></td>
+                <td align="center">{$val.change}</td>
+                <td align="center">{$finance_type[$val['type']]}</td>
+                <td align="center">{$val.create_time|date='Y-m-d H:i:s',###}</td>
+                <td align="center">{$val.remark}</td>
+            </tr>
+            </volist>
+        </tbody>
+    </table>
+
+    <div class="btn_wrap_fixed">
+        <label class="select_all"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('article/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
+        <div id="pages">{$page}</div>
+    </div>
+
+    </div>
+</div>
+<include file="Public:footer" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC_ADMIN__js/calendar/calendar-blue.css"/>
+<script src="__PUBLIC_ADMIN__js/calendar/calendar.js"></script>
+<script>
+
+Calendar.setup({
+    inputField : "time_start",
+    ifFormat   : "%Y-%m-%d",
+    showsTime  : false,
+    timeFormat : "24"
+});
+Calendar.setup({
+    inputField : "time_end",
+    ifFormat   : "%Y-%m-%d",
+    showsTime  : false,
+    timeFormat : "24"
+});
+
+</script>
+</body>
+</html>

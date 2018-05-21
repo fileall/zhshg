@@ -1,0 +1,117 @@
+<include file="Public:header" />
+<!--角色管理-->
+<div class="pad_lr_10">
+	 <form name="searchform" method="get"  >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <input type="hidden" name="m" value="admin" />
+                    <input type="hidden" name="c" value="WithdrawMerchant" />
+                    <input type="hidden" name="a" value="index" /> 
+                    &nbsp;&nbsp;申请日期：<input type="text" name="time_start" id="J_time_start" class="date" value="{$search.time_start}" placeholder="开始时间">
+                    - 
+                    <input type="text" name="time_end" id="J_time_end" class="date"  value="{$search.time_end}" placeholder="截止时间"> 
+                    &nbsp;&nbsp;关键字 :
+                    <input name="keywords" type="text" class="input-text"  value="{$search.keywords}" placeholder="会员名/手机" />
+
+                    <input type="hidden"  name="type" value="{$search.type}" />
+                    <input type="submit"  class="btn look_index" value="搜索" />
+                    <input type="button"  class="btn export" value="下载报表" />
+                </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+    <div class="J_tablelist table_list" data-acturi="{:U('WithdrawMerchant/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <!--<th width="40"><input type="checkbox" name="checkall" class="J_checkall"></th>-->
+                <th>会员名</th>
+                <th>手机号</th>
+                <th>开户名</th>
+                <!--<th>开户省份</th>-->
+                <!--<th>开户市</th>-->
+                <!--<th>开户区</th>-->
+                <th>开户行</th>
+      			<th>卡号</th>
+                <if condition="$search.type eq 1">
+                    <th align="left">提现金额</th>
+                <else/>
+                    <th align="left">提现金果</th>
+                    <th align="left">金果价(元)</th>
+                </if>
+
+                <th align="left">申请时间</th>
+                <th width="60">{:L('operations_manage')}</th>
+            </tr>
+        </thead>
+    	<tbody>
+        	<volist name="list" id="val">
+        	<tr>
+                <!--<td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>-->
+                <td align="center">{$member[$val['uid']]['realname']}</td>
+                <td align="center">{$member[$val['uid']]['mobile']}</td>
+                <td align="center">{$val.member_name}</td>
+                 <!--<td align="center">{$val.province}</td>-->
+                 <!--<td align="center">{$val.city}</td>-->
+                <!--<td align="center">{$val.district}</td>-->
+
+                <td align="center">{$val.province}&nbsp;{$val.city}&nbsp;{$val.district}{$val.title}</td>
+                <td align="center">{$val.name}-{$val.nums}</td>
+                <td align="center">{$val.totalprices}</td>
+                <if condition="$search.type eq 1">
+                    <!--<td align="center">{$val.service_charge}</td>-->
+                <else/>
+                    <td align="center">{$val.fruit_price}</td>
+                </if>
+                <td align="center">{:date('Y-m-d H:i' ,$val['add_time'])}</td>
+                <td align="center">
+                <if condition="$val['status'] eq 1">
+                    	 <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="{:U('WithdrawMerchant/sh', array('id'=>$val['id'],'status'=>1))}" data-msg="确认通过吗?" style="color:#F76741;">通过</a>
+                         |<a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="{:U('WithdrawMerchant/sh', array('id'=>$val['id'],'status'=>2))}" data-msg="确认驳回吗?" style="color:#F76741;">驳回</a>
+                <elseif  condition="$val['status'] eq 2"/>
+                    已通过
+                 <elseif  condition="$val['status'] eq 3"/>
+                    已驳回
+                </if>
+                </td>
+            </tr>
+            </volist>
+    	</tbody>
+    </table>
+    </div>
+    <div class="btn_wrap_fixed">
+        <!--<label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>-->
+        <!--<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('WithdrawMember/sh',array('status'=>1))}" data-name="id" data-msg="确认通过?" value="通过" />-->
+        <!--<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('WithdrawMember/sh',array('status'=>2))}" data-name="id" data-msg="确认驳回?" value="驳回" />-->
+        <div id="pages">{$page}</div>
+    </div>
+</div>
+<include file="Public:footer" />
+</body>
+<script>
+    laydate.render({
+        elem: '#J_time_start'
+    });
+
+    laydate.render({
+        elem: '#J_time_end'
+    });
+    
+    $(".export").click(function(){
+    	$("input[name='a']").val("export");
+    	$("form").submit()
+    })
+     $(".look_index").click(function(){
+    	$("input[name='a']").val("index");
+    	$("form").submit()
+    })
+    
+</script>
+
+
+</html>

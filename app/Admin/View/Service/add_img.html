@@ -1,0 +1,128 @@
+<include file="Public:header" />
+<form id="info_form" action="{:u('item/add_img')}" method="post" enctype="multipart/form-data">
+<div class="pad_lr_10">
+	<div class="col_tab">
+		<ul class="J_tabs tab_but cu_li">
+		</ul>
+		<div class="J_panes">
+        <div class="content_list pad_10">
+		<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+			<tr>
+		          <th>详细内容 :</th>
+						<td><textarea name="info" class="info" style="width:80%;height:400px;visibility:hidden;resize:none;">{$info.info}</textarea></td>
+			</tr>
+		</table>
+		</div>
+
+      
+
+        </div>
+
+
+	</div>
+
+</div>
+
+<input type="hidden" name="menuid"  value="{$menuid}"/>
+
+</form>
+
+<script src="__PUBLIC_ADMIN__js/kindeditor/kindeditor-min.js"></script>
+
+<include file="Public:footer" />
+
+<script type="text/javascript">
+
+$('.J_cate_select').cate_select('请选择');
+
+$(function() { 		
+
+	
+
+	KindEditor.create('.info', {
+
+		uploadJson : '{:U("attachment1/editer_upload")}',
+
+		fileManagerJson : '{:U("attachment1/editer_manager")}',
+
+		allowFileManager : true
+
+	});
+
+});
+
+
+
+function add_file()
+
+{
+
+    $("#next_upload_file .uplode_file").clone().insertAfter($("#first_upload_file .uplode_file:last"));
+
+}
+
+function del_file_box(obj)
+
+{
+
+	$(obj).parent().parent().remove();
+
+}
+
+function add_attr()
+
+{
+
+    $("#hidden_attr .add_item_attr").clone().insertAfter($("#item_attr .add_item_attr:last"));
+
+}
+
+function del_attr(obj)
+
+{
+
+	$(obj).parent().parent().remove();
+
+}
+
+</script>
+
+<table id="next_upload_file" style="display:none;">
+
+<tbody class="uplode_file">
+
+   <tr>
+
+      <th width="100"><a href="javascript:void(0);" onclick="del_file_box(this);" class="blue"><img src="__STATIC__/css/bgimg/tv-collapsable.gif" /></a>上传文件 :</th>
+
+      <td><input type="file" name="imgs[]"></td>
+
+   </tr>
+
+</tbody>
+
+</table>
+
+<table id="hidden_attr" style="display:none;">
+
+<tbody class="add_item_attr">
+
+<tr>
+
+    <th width="200">
+
+    <a href="javascript:void(0);" class="blue" onclick="del_attr(this);"><img src="__STATIC__/css/bgimg/tv-collapsable.gif" /></a>属性名 :<input type="text" name="attr[name][]" class="input-text" size="20">
+
+    </th>
+
+    <td>属性值 :<input type="text" name="attr[value][]" class="input-text" size="30"></td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</body>
+
+</html>

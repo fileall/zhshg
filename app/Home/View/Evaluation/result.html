@@ -1,0 +1,126 @@
+<include file="Public/top" />
+
+	<div class="wrap">
+		<!--面包屑导航-->
+		<div class="ysw-crumbs">
+		    <div class="wrap">
+		        <a href="/" class="item hover-blue">首页</a>
+		        <span class="item ico">&gt;</span>
+		        <a href="{:U('Curriculum/homeEducation')}" class="item hover-blue">家庭教育指导</a>
+		        <span class="item ico">&gt;</span>
+		        <a href="{:U('Evaluation/evaluation')}" class="item hover-blue">免费测评</a>
+		        <span class="item ico">&gt;</span>
+		        <span class="item">测评结果</span>
+		    </div>
+		</div>
+		<!--面包屑导航-end-->	
+		
+		<div class="ceshi3-title">{$info['examSubject']}</div>
+		
+		<div class="ceshi-scole">您的得分<em class="{$level[$info['appraiseName']]}">{$info['score']}分</em><span>（满分{$info['maxScore']}分）</span></div>
+		<ul class="ceshi-scole-list clear">
+			<volist name="info['appraiseList']" id="val">
+				<li><strong>{$val['name']}:</strong> {$val['scoreDown']}-{$val['scoreUp']}分</li>
+			</volist>
+		</ul>
+		<div id="container" style="height:500px;background: #eee;"></div>
+		
+		<div class="ceshi-scole-title">报告综合分析</div>
+		<div class="ceshi-scole-fx">
+			<!--{$info['appraiseName']}：红牌警告！<br>-->
+			{$info['appraiseMemo']}
+		</div>
+		<div class="ceshi-scole-title">教育指标解读</div>
+		<div class="ceshi-scole-jd">
+			<?php
+				$name_all = array();
+				$score_all = array();
+			?>
+			<ul>
+				<volist name="info['scoreList']" id="val">
+					<?php
+						$name_all[] = "'".$val['name']."'";
+						$score_all[] = $val['score'];
+					?>
+					<li class="clear">
+						<div class="left">
+							<h3>{$val['name']}</h3>
+							<p>{$val['score']}分</p>
+						</div>
+						<div class="right">
+							<em class="{$level[$val['areaName']]}">{$val['areaName']},</em>
+							<span>
+								{$val['areaMemo']}
+							</span>
+						</div>
+					</li>
+				</volist>
+			</ul>
+		</div>
+		
+		<div class="ceshi-scole-buy">
+			<a href="{:U('Curriculum/homeEducation')}" class="btn blue">购买一对一预约</a>
+		</div>
+	</div>
+
+
+<!--公共底部-->
+<include file="Public/footer" />
+<!--公共底部-end-->
+
+<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PC__js/l_main.js"></script>
+<script src="__PC__js/highcharts.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(function () {
+	    $('#container').highcharts({
+	        chart: {
+	            type: 'column'
+	        },
+	        title: {
+	            text: ''
+	        },
+	        subtitle: {
+	            text: ''
+	        },
+	        xAxis: {
+	            categories: [
+					{:implode(",",$name_all)}
+	            ],
+	            crosshair: true
+	        },
+	        yAxis: {
+	            min: 0,
+	            title: {
+	                text: '得分'
+	            }
+	        },
+	        tooltip: {
+	            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+	            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+	            '<td style="padding:0"><b>{point.y:.1f} 分</b></td></tr>',
+	            footerFormat: '</table>',
+	            shared: true,
+	            useHTML: true
+	        },
+	        plotOptions: {
+	            column: {
+	                pointPadding: 0.2,
+	                borderWidth: 0
+	            }
+	        },
+	        series: [{
+	            name: '得分',
+	            data: [{:implode(",",$score_all)}]
+	        }],
+			"legend": {
+			    "enabled": false
+			} ,
+  "credits": {
+    "enabled": false
+  }
+	    });
+	});    
+</script>
+</body>
+</html>

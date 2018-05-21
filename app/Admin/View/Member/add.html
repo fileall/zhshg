@@ -1,0 +1,75 @@
+<!--添加会员-->
+<div class="dialog_content">
+	<form id="info_form" action="{:u('member/add')}" method="post">
+	<table width="100%" class="table_form">
+		<tr>
+			<th width="100" class="vertop">会员级别 :</th>
+			<td class="add-member-edit-liandong">
+				<select name="vips">
+					<volist name="grade" id="val">
+						<option val="{$val['id']}">{$val['name']}</option>
+					</volist>
+				</select>
+			</td>
+		</tr>
+				<tr> 
+			<th width="120">会员所在地区 :</th>
+			<td>
+				<select class="J_cate_place_select mr10" data-pid="0" data-uri="{:U('place/ajax_getchilds')}" data-selected="{$spid}"></select>
+				<input type="hidden" name="place" id="J_pid" />
+			</td>
+		</tr>
+		<!--	<tr>
+			<th width="100" class="vertop">会员所在地区 :</th>
+			<td class="add-member-edit-liandong">
+				<select name="area">
+					<volist name="area" id="val">
+						<option val="{$val['id']}">{$val['title']}{$val['name']}</option>
+					</volist>
+				</select>
+			</td>
+		</tr>-->
+		<tr>
+			<th>推荐人编号 :</th>
+			<td><input type="text" name="relation_id" id="relation_id" class="input-text" value="{$info.relation_id}" size="30"></td>
+		</tr>
+        <tr>
+            <th>姓名 :</th>
+            <td><input type="text" name="realname" id="realname" class="input-text" value="{$info.realname}" size="30"></td>
+        </tr>
+		<tr>
+            <th>手机号码 :</th>
+            <td><input type="text" name="mobile" id="mobile" class="input-text" value="{$info.mobile}" size="30"></td>
+        </tr>
+        <tr>
+			<th>密码 :</th>
+			<td><input type="password" name="password" id="pwd" class="input-text" size="30"></td>
+		</tr>
+        <tr>
+			<th>确认密码 :</th>
+			<td><input type="password" name="confirm_password" id="conf_pwd" class="input-text" size="30"></td>
+		</tr>
+        </table>
+    </form>
+</div>
+<script src="__STATIC__/js/fileuploader.js"></script>
+<script>
+    $(function(){
+        $.formValidator.initConfig({formid:"info_form",autotip:true});
+        $("#relation_id").formValidator({onshow:'请填写推荐人编号',onfocus:'请填写推荐人编号'}).inputValidator({min:1,onerror:'请填写推荐人编号'});
+        $("#realname").formValidator({onshow:'请填写姓名',onfocus:'请填写姓名'}).inputValidator({min:1,onerror:'请填写姓名'});
+        $("#mobile").formValidator({onshow:'请填写手机号码',onfocus:'请填写手机号码'}).inputValidator({min:1,onerror:'请填写手机号码'});
+        $("#pwd").formValidator({onshow:'请填写密码',onfocus:'请填写密码'}).inputValidator({min:1,onerror:'请填写密码'});
+        $("#conf_pwd").formValidator({onshow:'请填写确认密码',onfocus:'请填写确认密码'}).inputValidator({min:1,onerror:'请填写确认密码'});
+        $('#info_form').ajaxForm({success:complate,dataType:'json'});
+        function complate(result){
+            if(result.status == 1){
+                $.pinphp.tip({content:result.msg});
+                window.location.reload();
+            } else {
+                $.pinphp.tip({content:result.msg, icon:'alert'});
+            }
+        }
+  $('.J_cate_place_select').cate_select({top_option:lang.all,field:'J_pid',target_class:'J_cate_place_select'}); //分类联动
+    });
+</script>

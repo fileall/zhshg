@@ -1,0 +1,95 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+    <link rel="stylesheet" href="__MB__js/LCalendar-master/src/css/LCalendar.css" />
+    <script src="__MB__js/LCalendar-master/src/js/LCalendar.js" type="text/javascript" charset="utf-8"></script>
+    <body class="body-bgColor">
+    <!--header-->
+    <div class="header-wrap">
+        <div class="header-inner">
+            <div class="header-title">我的金元宝</div>
+            <a href="{:U('wallet/wallet')}">
+                <div class="header-left"><i class="fa fa-angle-left"></i></div>
+            </a>
+            <div class="header-right"></div>
+        </div>
+    </div>
+    <div class="header-space"></div>
+    <!--header-->
+
+    <!--content-->
+    <div class="content">
+        <div class="outstanding-box vertical-center">
+            <div class="vertical-auto" style="width: 100%;">
+                <div class="outstanding-title">我的金元宝</div>
+                <div class="outstanding-money">￥{$member['gold_acer']}</div>
+            </div>
+        </div>
+        <div class="outstanding-wrap">
+            <a class="outstanding-link active" href="{:U('wallet/pay_to_merchant',['transfer_type'=>1])}" id="zf">元宝支付</a>
+            <a class="outstanding-link" href="{:U('wallet/acer_buy')}">元宝购买</a>
+            <a class="outstanding-link" href="{:U('wallet/transfer_to_friend',['transfer_type'=>1])}">元宝转好友</a>
+        </div>
+
+        <div class="notecase-tis">金元宝明细</div>
+        <ul class="notecase-ul" id="ul">
+            <!--<volist name="ye" id="y">
+                <li class="notecase-li">
+                    <div class="notecase-left">
+                        <div class="notecase-type">{$y.memos}</div>
+                        <div class="notecase-date">{:date('Y-m-d',$y['add_time'])}</div>
+                    </div>
+                    <if condition="$y['type'] == 1">
+                        <div class="notecase-right active">-{$y.totalprices}</div>
+                    <else />
+                        <div class="notecase-right">+{$y.totalprices}</div>
+                    </if>
+                    <div class="clear-float"></div>
+                </li>
+            </volist>	-->
+        </ul>
+        <!--<div class="more-text">查看更多></div>-->
+    </div>
+    <!--content-->
+
+    <!--footer-->
+    <!--footer-->
+    </body>
+</block>
+<block name="footer"></block>
+<block name="script">
+    <script type="text/javascript" src="__MB__js/jquery.cookie.js"></script>
+    <script>
+//        $("#zf").click(function(){
+//            $.cookie('zftype',1);
+//            var zftype = $.cookie('zftype');
+//            location.href='{:U("wallet/pay_to_merchant",array("zftype"=>'+zftype+'))}';
+//        })
+
+    </script>
+    <script>
+
+        //流加载
+
+        layui.use('flow', function(){
+
+            var flow = layui.flow;
+            var type = '{$type}';//币种1工资2金元宝3金果4银币'
+            flow.load({
+                elem: '#ul' //指定列表容器
+//		    ,scrollElem: '#'//滚动所在元素
+                ,done: function(page, next){ //到达临界点（默认滚动触发），触发下一页
+                    //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
+                    $.get('{:U("wallet/ajax_bz_liu")}',{page:page,type:type}, function(res){
+                        next(res[1], page < res[0]);
+                    }, 'json');
+                }
+
+            });
+
+        });
+
+    </script>
+
+</block>
+</html>

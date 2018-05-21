@@ -1,0 +1,161 @@
+<include file="Public/member_top" />
+<style>
+    #clipArea { height: 300px;}
+    #file,#clipBtn { padding:0; margin: 20px;width: 200px;height: 40px;}
+    #qx{display:block;margin: 0px auto;width: 200px;height: 40px;}
+    #view {margin: 0 auto;width: 200px;height: 200px;}
+</style>
+    <!--右测导航栏开始-->
+    <div class="x-right-colunm">
+
+        <div class="x-account">
+            <div class="x-account-txt">个人资料</div>
+
+            <div class="x-parson-datum l-clear">
+                <div class="x-parson-box">
+                    <div class="x-parson-image">
+                        <img id="set-avatar" src="<if condition="$info['avatar']">{$info['avatar']}<else />__PC__images/moren.png</if>">
+                    </div>
+                    <div class="x-parson-file">
+                        <a href="javascript:;" class="hover-blue"><input type="file" id="avatar" />更换头像</a>
+                    </div>
+                </div>  
+ 
+
+                <div class="x-information">
+                    <form>
+                    <ul>
+                        <li class="l-clear">
+                            <div class="x-information-name"><span>*</span>手机号：</div>
+                            <div class="x-information-txt">
+                                {:replace_mobile($info['mobile'])}
+                                <span class="x-attestation">
+											<i class="fa fa-check-circle"></i>已认证
+										</span>
+                                <span class="x-no-attestation active">未认证</span>
+                                <!--未认证和已认证不显示谁就给谁加active-->
+                            </div>
+                        </li>
+                        <li class="l-clear">
+                            <div class="x-information-name"><span>*</span>姓名：</div>
+                            <div class="x-information-txt">
+                                <input class="x-informatio-input" type="text" name="realname" value="{$info['realname']}" placeholder="您的姓名"/>
+                            </div>
+                        </li>
+                        <li class="l-clear">
+                            <div class="x-information-name"><span>*</span>分类：</div>
+                            <div class="x-information-txt">
+                                <select class="x-information-sel" data-pid="0" data-uri="{:U('Login/ajax_getchilds')}" data-selected="{$selected_ids}"></select>
+                                <input type="hidden" name="cate_id" id="J_cate_id" value="{$info['cate_id']}" />
+                            </div>
+                        </li>
+
+                        <li class="l-clear">
+                            <div class="x-information-name">详细地址：</div>
+                            <div class="x-information-txt">
+                                <input type="text" class="xiangxidizhi" name="address" placeholder="您的详细地址" value="{$info['address']}"/>
+                                <div class="x-location-sunbmit">
+                                    <button type="button" id="self_button">保存信息</button>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--右测导航栏结束-->
+</div>
+
+<!--上传头像-->
+<div id='layer'>
+	<div class="layerBox">
+		<div class="layerBox-btnBox">
+	        <a href="javascript:;" class="photoClip-close"></a>
+	    </div>
+	    <div id="clipArea"></div> 
+	    <a href="javascript:;" id="clipBtn" class="btn blue">截取</a>
+	</div>
+    
+</div>
+<!--上传头像-->
+<!--公共底部-->
+<include file="Public/footer" /> 
+<link rel="stylesheet" href="__PC__plugins/layui-v1.0.9/layui/css/modules/layer/default/layer.css">
+<script src="__PC__js/linkage.js"></script>
+<script src="__PC__plugins/layui-v1.0.9/layui/lay/modules/layer.js"></script>
+<script type="text/javascript" src="__PC__js/imgUpload/hammer.js"></script>
+<script type="text/javascript" src="__PC__js/imgUpload/iscroll-zoom.js"></script>
+<script type="text/javascript" src="__PC__js/imgUpload/jquery.photoClip.js"></script>
+<script>
+    $(function () {
+        $('.x-information-sel').cate_select({top_option:'请选择',target_class:'x-information-sel'}); //分类联动
+
+        //提交注册
+        $('#self_button').click(function () {
+            var cate_id = $('#J_cate_id').val(),
+                realname = $('input[name=realname]').val(),
+                data = $("form").serialize();
+
+            if(!realname){
+                layer.msg('请输入您的姓名');
+                return false;
+            }
+            if(cate_id == 0){
+                layer.msg('请选择分类');
+                return false;
+            }
+
+            //提交注册
+            $.ajax({
+                type: "post",
+                url: "{:U('Member/self')}",
+                async:false,
+                data: data,
+                dataType: "json",
+                success: function(result){
+                    layer.msg(result[1]);
+                }
+            });
+        })
+
+        //选择图片后
+        $('#avatar').change(function(){
+            $('#layer').show();
+        })
+        //关闭截图
+        $("#layer .photoClip-close").click(function(){
+            $('#layer').hide();
+        })
+        //上传头像
+        $("#clipArea").photoClip({
+            width: 200,
+            height: 200,
+            file: "#avatar",
+            //view: "#view",
+            ok: "#clipBtn",
+            strictSize:true,
+            loadStart: function() {
+                console.log("照片读取中");
+            },
+            loadComplete: function() {
+                console.log("照片读取完成");
+            },
+            clipFinish: function(dataURL) {
+                $.post("{:U('Member/upload_avatar')}",{str:dataURL},function (result) {
+                    if(result[0] == 1){
+                        $('#layer').hide();
+                        $('#set-avatar').attr('src',result[1]);
+                    }else{
+                        layer.msg(result[1]);
+                    }
+                },'json');
+            }
+        });
+    })
+</script>
+</body>
+</html>

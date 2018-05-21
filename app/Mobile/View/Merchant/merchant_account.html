@@ -1,0 +1,65 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+
+    <body class="body-bgColor">
+    <!--header-->
+    <div class="header-wrap">
+        <div class="header-inner">
+            <div class="header-title">{$field}明细</div>
+            <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+            <div class="header-right"></div>
+        </div>
+    </div>
+    <div class="header-space"></div>
+    <!--header-->
+
+    <!--content-->
+    <div class="content">
+        <!--为空显示的背景图-->
+        <div <if condition="$is_kk eq 1">class="y-record-bg" <else/>class="y-record-bg  y-hide" </if>>
+        <div class="y-record-bg-content"></div>
+        <p class="y-record-bg-text">这里空空如也~</p>
+    </div>
+
+    <ul class="notecase-ul y-mar-top20" id="ul">
+
+        <!--<li class="notecase-li y-shapedRecord-item"><a href="javascript:;">&lt;!&ndash;明细详情&ndash;&gt;-->
+        <!--<div class="notecase-left">-->
+        <!--<div class="notecase-type">购买</div>-->
+        <!--<div class="notecase-date">2017-10-10</div>-->
+        <!--</div>-->
+        <!--<div class="notecase-right">+500</div>-->
+        <!--<div class="clear-float"></div>-->
+        <!--</a></li>-->
+
+    </ul>
+    </div>
+    <!--content-->
+    </body>
+</block>
+<block name="footer"></block>
+<block name="script">
+    <script>
+
+        //流加载
+        layui.use('flow', function(){
+            var flow = layui.flow;
+            var type = '{$type}';//币种1工资2金元宝3金果',
+            flow.load({
+                elem: '#ul' //指定列表容器
+                //		         ,scrollElem: '#'//滚动所在元素
+                ,done: function(page, next){ //到达临界点（默认滚动触发），触发下一页
+                    //		             var lis = [];
+                    $.get('{:U("merchant_account")}',{page:page,type:type}, function(res){
+                        next(res[1], page < res[0]);
+                    }, 'json');
+                }
+
+            });
+
+        });
+
+    </script>
+</block>
+</html>

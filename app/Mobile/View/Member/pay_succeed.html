@@ -1,0 +1,43 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">支付信息</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="succeed-wrap">
+			<div class="succeed-inner">
+				<div class="succeed-icon"><img src="__MB__images/icon21.png"></div>
+				<div class="succeed-text">支付成功</div>
+				<div class="succeed-merchant">
+					<div class="succeed-title">收款商家</div>
+					<div class="succeed-box">
+						<div class="succeed-name">{$shop.title}</div>
+						<div class="succeed-img"><img src="{:attach($shop['img'],'merchant')}"></div>
+					</div>
+					<div class="clear-float"></div>
+				</div>
+				
+				<div class="succeed-link">
+					<a href="{:U('index/index')}">返回首页</a>
+				</div>
+			</div>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>
+<block name="footer"></block>
+<block name="script"></block>
+</html>

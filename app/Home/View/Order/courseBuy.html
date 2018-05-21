@@ -1,0 +1,87 @@
+<include file="Public/order_top" />
+	
+	<!--内容-->
+	<div class="wrap marT20 shopCart2 bgfff">
+		<div class="shopCart mar0">
+			<!--课程信息-->
+			<h3 class="courseBuyBoxTitle">核对课程信息</h3>
+			<table class="courseBuyInfo">
+				<thead>
+					<tr>
+						<th class="name">课程名称</th>
+						<th>上课老师</th>
+						<th>课时数</th>
+						<th>阶段</th>
+						<th>年级</th>
+						<th>科目</th>
+						<th>价格</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="name">{$info['title']}</td>
+						<td>{$info['name']}</td>
+						<td>{$info['type'] == 1?1:$info['nums']}</td>
+						<td>{$info['cate'][0]}</td>
+						<td>{$info['cate'][1]}</td>
+						<td>{$info['cate'][2]}</td>
+						<td>￥{$info['price']}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div><!--课程信息-end-->
+		<!--学员信息-->
+		<div class="shopCart2-liuyan">
+			<h3 class="courseBuyBoxTitle">学员信息</h3>
+			<div class="courseBuy-phone">
+				<p class="studentName">
+					<span class="">学员姓名：</span>
+					<span class="">{$user_info['realname']}</span>
+				</p>
+				<p>
+					<span class="">手机号码：</span>
+					<span class="">{$user_info['mobile']}</span>
+				</p>
+			</div>
+			
+		</div>
+		<!--学员信息-end-->
+		
+		<!--统计-->
+			<div class="clear padTB marB20">
+				<div class="fr shopCart2-btn">
+					<h3>应付总额：<strong>¥{$info['price']}</strong></h3>
+					<a href="javascript:;" class="btn blue">确认购买</a>
+				</div>
+			</div>
+		<!--统计-end-->
+	</div>
+	<!--内容-end-->
+	
+ 	<!--公共底部-->
+	<include file="Public/footer" />
+ 	<!--公共底部-end-->
+
+ 	<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+ 	<script src="__PC__js/l_main.js"></script>
+	<script src="__PC__plugins/layui-v1.0.9/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+        layui.use('layer',function(){
+            var layer = layui.layer;
+        });
+
+        //会员资料完善判断
+		$('.blue').click(function () {
+		    var name = "{$user_info['realname']}";
+		    if(!name){
+                layer.msg('亲，请先完善个人信息！', {icon: 5});
+                setTimeout(function () {
+                    window.location.href="{:U('Member/index')}";
+                },2000)
+			}else{
+		        window.location.href="{:U('Order/shopCart')}";
+			}
+        })
+	</script>
+</body>
+</html>

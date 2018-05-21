@@ -1,0 +1,136 @@
+<include file="Public:header" />
+<!--会员列表-->
+<div class="pad_10" >
+
+  <form name="searchform" method="get"  >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <input type="hidden" name="m" value="admin" />
+                    <input type="hidden" name="c" value="Merchant" />
+                    <input type="hidden" name="a" value="update_info" />
+                    <input type="hidden" name="menuid" value="{$menuid}" />
+                    地区：<select class="J_cate_select mr10" data-pid="0" data-uri="{:U('place/ajax_getchilds')}" data-selected="{$search.selected_ids}"></select>
+                    <input type="hidden" name="cate_id" id="J_cate_id" value="{$search.cate_id}" />	
+                     &nbsp;&nbsp;收银类型：
+                     <select name="" ><option>请选择</option></select>
+                   <!-- &nbsp;&nbsp;分类：<select class="J_cate_select mr10" data-pid="0" data-uri="{:U('MemberCate/ajax_getchilds')}" data-selected="{$search.selected_ids}"></select>
+                    <input type="hidden" name="cate_id" id="J_cate_id" value="{$search.cate_id}" />-->
+                    &nbsp;&nbsp;申请日期：<input type="text" name="time_start" id="J_time_start" class="date" value="{$search.time_start}" placeholder="开始时间">
+                    -
+                    <input type="text" name="time_end" id="J_time_end" class="date"  value="{$search.time_end}" placeholder="结束时间"> 
+                    &nbsp;&nbsp;关键字 :
+                    <input name="keyword" type="text" class="input-text"  value="{$search.keyword}" placeholder="店名/会员名/手机" size="10"/>
+                    <input type="submit"  class="btn" value="搜索" />
+                </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+
+    <!--<div class="explain_col">
+        <form id="addform" action="{:U('Member/member_upload')}" method="post" enctype="multipart/form-data">
+            <input type="file" style=" width:65px;" name="excelData" value="" datatype="*4-50" nullmsg="" />
+            <input type="submit" class="btn btn-primary Sub" value="导入" />
+            <a href="/download/member_import.xls" class="btn btn-primary Sub" >下载导入模板</a>
+            <input type="button" class="btn" data-tdtype="batch_action" data-uri="{:U('Member/export')}" data-name="id" data-msg="确定导出已经选中的学生吗？" value="导出" />
+        </form>
+    </div>-->
+
+  <div class="J_tablelist table_list" data-acturi="{:U('Merchant/ajax_edit')}">
+        <table width="100%" cellspacing="0">
+        <thead>
+             <tr>
+                <th width="20"><input type="checkbox" id="checkall_t" class="J_checkall"></th>
+                <th width="70"  align="left"><span data-tdtype="order_by" data-field="id">序号</span></th>
+                <th width="70"  align="left"><span data-tdtype="order_by" data-field="title">店名</span></th>
+                <th width="70"  align="left">会员名</th>
+                <th width="84" align="left">手机</th>
+                <th width="125" align="left">地区</th>
+                <th width="84" align="left"><span data-tdtype="order_by" data-field="cate_id">分类</span></th>
+                <th width="90" align="left"><span data-tdtype="order_by" data-field="shouyi">收益</span></th>
+                <th width="90" align="left"><span data-tdtype="order_by" data-field="rangli">让利</span></th>
+              <th width="90" align="left"><span data-tdtype="order_by" data-field="cashier_type">收银类型</th>
+                <!--  <th width="90" align="left"><span data-tdtype="order_by" data-field="silver_coin">银币</span></th>
+                <th width="90" align="left"><span data-tdtype="order_by" data-field="gold_coin">金币</span></th>
+                <th width="90" align="left"><span data-tdtype="order_by" data-field="gold_fruit">金果</span></th>
+				-->
+				 <th width="90" align="left"><span data-tdtype="order_by" data-field="tuijian">推荐</span></th>
+                <th width="100"><span data-tdtype="order_by" data-field="add_time">添加日期</span></th>
+                <th width="50"><span data-tdtype="order_by" data-field="status">{:L('status')}</span></th>
+                <th width="50">{:L('operations_manage')}</th>
+          </tr>
+        </thead>
+
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <td align="center">{$val['id']}</td>
+                <td align="center">{$val['title']}</td>
+                <td align="center">小小</td>
+                <td align="center">{$val.tel}</td>
+                <td align="center">江西|南昌市|青山湖区</td>
+                <td align="center">{$cate_list[$val['cate_id']]['cate_name']}</td>
+                <td align="center">{$val.shouyi}</td>
+                <td align="center">{$val.rangli}</td>
+               <td align="center">线下</td>
+                 <!--<td align="center">{$val.silver_coin}</td>
+                <td align="center">{$val.gold_coin}</td>
+                <td align="center">{$val.gold_fruit}</td>-->
+               
+				
+				    <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="tuijian" data-value="{$val.tuijian}" src="__STATIC__/images/toggle_<if condition="$val.tuijian eq 0">disabled<else/>enabled</if>.gif" /></td>
+				 <td align="center">{$val['add_time']|date="Y-m-d",###}</td>
+				
+                <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{$val.status}" src="__STATIC__/images/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
+                <td align="center">
+				<if condition="$type eq 1">
+                 <a href="{:u('', array('id'=>$val['id'], 'menuid'=>$menuid))}" >审核</a>|
+                 <a href="{:u('', array('id'=>$val['id'], 'menuid'=>$menuid))}" >驳回</a>
+                <else />
+               <a href="{:u('merchant/edit', array('id'=>$val['id'], 'menuid'=>$menuid))}" >编辑</a>
+               </if>
+               </td>
+            </tr>
+            </volist>
+    </table>
+  </div>
+    <!--<div class="songkebor">
+
+        <label class="select_all"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('Merchant/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="批量删除" />
+        <div id="pages">{$page}</div>
+
+    </div>-->
+</div>
+
+<include file="Public:footer" />
+
+</body>
+
+</html>
+
+<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+
+<script type="text/javascript" src="__STATIC__/js/calendar/calendar.js"></script>
+
+<script>
+    $('.J_cate_select').cate_select({top_option:lang.all}); //分类联动
+
+	Calendar.setup({
+        inputField : "J_time_start",
+        ifFormat   : "%Y-%m-%d",
+        showsTime  : false,
+        timeFormat : "24"
+    });
+
+    Calendar.setup({
+        inputField : "J_time_end",
+        ifFormat   : "%Y-%m-%d",
+        showsTime  : false,
+        timeFormat : "24"
+    });
+</script>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<title></title>
+		<script src="js/fontSize.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/custom.js"></script>
+	</head>
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">余额提现</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="sealing-wrap">
+				<div class="merchant-money">提现金额</div>
+				<div class="merchant-form row-box">
+					<div class="row-flex">
+						<div class="merchant-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;"><input type="number" placeholder="0.00"></div>
+						</div>
+					</div>
+					<div class="merchant-currency">元</div>
+				</div>
+			</div>
+			
+			<div class="extract-title">提现银行卡</div>
+			
+			<!--支付选项-->
+			<div class="pay-wrap">
+				<ul>	
+				<!--勾选，当有银行卡的时候跳转到银行卡页面bank.html进行选择/在bank.html页面点击银行卡返回到当前页面，调取银行卡信息-->
+				<!--勾选，当没有银行卡的时候调转到添加银行卡页面-->
+					<li class="pay-li active">
+						<label form="bank">
+							<div class="row-box">
+								<div class="pay-icon">
+									<div class="pay-icon-img"><img src="images/icon18.png"></div>
+								</div>
+								
+								<div class="row-flex">
+									<div class="pay-name">银行卡</div>
+									<div class="pay-name-t"></div>
+									<div class="clear-float"></div>
+								</div>
+								
+								<div class="pay-input-box">
+									<div class="pay-input-inner"><input name="pay-name" type="radio" id="bank"></div>
+								</div>
+							</div>
+						</label>
+					</li>
+					
+					<li class="pay-li"><a href="select_bank.html">
+						<div class="row-box">
+							<div class="pay-icon">
+								<div class="pay-icon-img"></div>
+							</div>
+								
+							<div class="row-flex">
+								<div class="bank-link">人民银行(1300)</div>
+							</div>
+								
+							<div class="pay-input-box">
+								<div class="pay-right-icon"><i class="fa fa-angle-right"></i></div>
+							</div>
+						</div>
+					</a></li>
+				</ul>
+			</div>
+			<!--支付选项-->
+			
+			<div class="submit-button"><a class="extract-btn" href="javascript:;">确认提现</a></div>
+		</div>
+		<!--content-->
+		
+		<!--元宝支付密码-->
+		<div class="shoe-shaped vertical-center">
+			<div class="shoe-shaped-inner vertical-auto">
+				<div class="shoe-shaped-title">支付密码<div class="close-shoe-shaped"></div></div>
+				<div class="shoe-shaped-name">提现银行卡</div>
+				<div class="shoe-shaped-money"><span><img src="images/icon19.png"></span>10</div>
+				<div class="shoe-shaped-input vertical-center">
+					<div class="vertical-auto" style="width: 100%;"><input type="password" placeholder="请输入您的支付密码"/></div>
+				</div>
+				<a href="pay_succeed.html">
+				<div class="shoe-shaped-btn"><button type="button">确认</button></div>
+				</a>
+			</div>
+		</div>
+		<!--元宝支付密码-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</html>

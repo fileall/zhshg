@@ -1,0 +1,27 @@
+    <volist name="a" id="y">
+
+        <li class="notecase-li">
+
+            <div class="notecase-left">
+
+                <div class="notecase-type">{$y.memos}</div>
+
+                <div class="notecase-date">{:date('Y-m-d',$y['add_time'])}</div>
+
+            </div>
+
+            <if condition="$y['type'] == 1">
+
+                <div class="notecase-right active">-{$y.totalprices}</div>
+
+                <else />
+
+                <div class="notecase-right">+{$y.totalprices}</div>
+
+            </if>
+
+            <div class="clear-float"></div>
+
+        </li>
+
+    </volist>

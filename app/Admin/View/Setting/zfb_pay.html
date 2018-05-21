@@ -1,0 +1,62 @@
+<include file="Public:header" />
+<!--会员列表-->
+<div class="pad_10" >
+	<div class="off_on_box">
+		<h3 class="title fb">支付宝收款设置</h3>
+		<p class="font">还没有开通支付宝支付？<a href="" class="hover-blue"><strong>立即免费申请开通支付宝支付接口</strong></a></p>
+		<div class="off_on_btn">
+			<span class="tip">已关闭</span>
+			<i class="dot"></i>
+		</div>
+	</div>
+	<div class="off_on_con hidden">
+		<table>
+			<tbody>
+				<tr>
+					<td align="right">支付宝账号：</td>
+					<td>
+						<input type="text"  placeholder="请填写支付宝账号" size="60">
+					</td>
+				</tr>
+				<tr>
+					<td align="right">支付宝账号姓名：</td>
+					<td>
+						<input type="text"  placeholder="请填写支付宝账号姓名" size="60">
+					</td>
+				</tr>
+				<tr>
+					<td align="right">合作者身份(PID)：</td>
+					<td>
+						<input type="text"  placeholder="请填写合作者身份(PID)" size="60">
+						<p class="tip">成功申请支付宝接口后获取到的PID</p>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">安全校验码(Key)：</td>
+					<td>
+						<input type="text"  placeholder="请填写安全校验码(Key)" size="60">
+						<p class="tip">成功申请支付宝接口后获取到的Key</p>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="button" class="btn w150" value="保存">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<include file="Public:footer" />
+
+</body>
+
+</html>
+<script>  
+$(function(){
+	//按钮开关
+	$('.off_on_btn').offOn();
+})
+</script>

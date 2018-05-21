@@ -1,0 +1,76 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">金元宝转余额</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="transform-box">
+				<div class="transform-title">转余额数量</div>
+				<div class="merchant-form row-box">
+					<div class="row-flex">
+						<div class="merchant-form-input vertical-center">
+							<div class="vertical-auto" style="width: 100%;"><input id="prices" type="number" placeholder="0"></div>
+						</div>
+					</div>
+					<div class="merchant-currency">个</div>
+				</div>
+			</div>
+			<div class="illustrate color">需收取10%的服务费 20%转化为金果 70%转化余额</div>
+			
+			<div class="enter-form-btn">
+					<button type="button" id="zhuan">确认转入</button>
+			</div> 
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>	
+<block name="footer"></block>
+<block name="script">
+<script>
+	$('#zhuan').click(function(){
+		var prices = $('#prices').val();
+		if(!$('#prices').val()){
+				layer.msg('请填写金额！',{icon:0,time:1000})
+				return false;
+		}
+		if($('#prices').val() < 0 || (prices==0)){
+			layer.msg('金额不能输入有误！',{icon:0,time:1000})
+			return false;
+		}
+		
+		if('{$member["gold_acer"]}' < $('#prices').val()){
+			layer.msg('您的余额不足！',{icon:0,time:1000})
+			return false;
+		}
+		
+	 	$.post('',{prices:prices},function(d){
+		 	if(d.status ==1){
+		 		layer.msg(d.msg,{icon:1,time:1000},function(){
+		 			window.location.href='/index.php?s=/member/w_ingotA.html';
+		 			
+		 		})
+		 	}
+		 	else{
+		 		layer.msg(d.msg,{icon:0,time:1000})
+		 	}
+		 })
+		
+	});
+	
+</script>
+</block>
+</html>

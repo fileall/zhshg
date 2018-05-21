@@ -1,0 +1,71 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+<body class="body-bgColor">
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">银币</div>
+        <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+        <div class="header-right"></div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="content">
+    <div class="outstanding-box y-goldIngot-bg vertical-center">
+        <div class="vertical-auto" style="width: 100%;">
+            <div class="outstanding-title font-28">当前银币（个）</div>
+            <div class="outstanding-money">{$member.silver_coin}</div>
+        </div>
+    </div>
+
+    <ul class="y-mar-top20 y-bg-white">
+        <li class="function-list-li y-shaped-item">
+            <a href="{:U('wallet/account',['type'=>4])}">
+                <div class="ali-cen">
+                    <div class="function-list-left">
+                        <div class="function-list-icon"><img src="__MB__images/y_icon37.png"></div>
+                    </div>
+                    <div class="jus-bet flex1 y-shaped-item-text">
+                        <div class="row-flex flex1">
+                            <div class="function-list-name">银币明细</div>
+                        </div>
+
+                        <div class="function-list-right">
+                            <div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </li>
+    </ul>
+    <div class="employ-explain y-shaped-msg">
+        <div class="employ-explain-title">活动规则：</div>
+        <ul>
+            <li class="employ-explain-txt">一、银币来源：</li>
+            <li class="employ-explain-txt">1、每日购买元宝券赠送银币</li>
+            <!--<li class="employ-explain-txt">2、线上使用元宝券购物赠送银币</li>-->
+            <li class="employ-explain-txt">2、线下使用元宝券消费赠送银币</li>
+            <!--<li class="employ-explain-txt">4、线下使用金果券消费赠送银币</li>-->
+            <li class="employ-explain-txt">3、金果券线上兑换商品赠送银币</li>
+            <li class="employ-explain-txt">4、银楼可使用元宝置换银币</li>
+            <li class="employ-explain-txt">5、聚宝盆寄存元宝赠送银币</li>
+            <li class="employ-explain-txt">6、推荐好友注册购物获银币奖励</li>
+            <li class="employ-explain-txt">7、推荐商家赚银币</li>
+            <li class="employ-explain-txt">二、银币用途：</li>
+            <li class="employ-explain-txt">1、可充当现金券在商城进行购物</li>
+            <li class="employ-explain-txt">2、可作成长为工资和金果</li>
+
+        </ul>
+    </div>
+</div>
+<!--content-->
+</body>
+    </body>
+</block>
+<block name="footer"></block>
+<block name="script"></block>
+</html>

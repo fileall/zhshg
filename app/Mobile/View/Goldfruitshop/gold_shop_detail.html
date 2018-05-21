@@ -1,0 +1,87 @@
+<extend name="Base/common"/>
+<block name="header">
+
+    <!--header-->
+    <div class="header-wrap">
+        <div class="header-inner">
+            <div class="header-title">商品详情</div>
+            <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+        </div>
+    </div>
+    <div class="header-space"></div>
+    <!--header-->
+
+    <!--content-->
+    <div class="content">
+
+        <!--banner-->
+        <div class="y-width94">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <volist name="url" id="v">
+                        <div class="swiper-slide"><a href="javascreipt:;">
+                            <div class="banner-image vertical-center">
+                                <div class="all-auto"><img src="{:attach($v['url'],item)}"></div>
+                            </div>
+                        </a>
+                        </div>
+                    </volist>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        <!--banner-->
+        <div class="y-width94">
+            <div class="font-24 ellipsis2">
+                {$item_info['title']}
+            </div>
+            <div class="jus-bet ali-cen y-mar-top20">
+                <p class="font-28 y-color-red">所需金果：<span class="font-36">{$item_info['gold_fruit']}个</span></p>
+                <p class="font-24 y-color-999">剩余库存：<span class="y-color-red">{$item_info['attr_value']}件</span></p>
+            </div>
+            <div class="y-mar-top60 y-color-999">
+                <p class="font-28 y-color-333">规则说明：</p>
+                <p class="y-mar-top20">1.兑换成功后，不能取消订单；</p>
+                <p class="y-mar-top10">2.所有商品正品保障，但不支持退货；</p>
+                <p class="y-mar-top10">3.所有商品正品保障，但不支持退货；</p>
+            </div>
+            <if condition="($uid neq 0) AND ($item_info['attr_value'] neq 0)">
+                <a href="{:U('Goldfruitshop/y_goldShopOrder',array('id'=>$item_info['id'],'item_id'=>$item_id))}">
+                    <else />
+                    <if condition="$item_info['attr_value'] neq 0"><a href="{:U('Login/enter')}"><else /></if>
+                    </if>
+            <if condition="$item_info['attr_value'] eq 0">
+                <div class="y-goldShopDetails-button font-30" style="background: grey">立即兑换</div></a>
+                <else />
+                <div class="y-goldShopDetails-button y-bg-red font-30" >立即兑换</div></a>
+            </if>
+
+        </div>
+    </div>
+    <!--content-->
+
+    <!--footer-->
+    <!--footer-->
+    </body>
+    <link rel="stylesheet" href="__MB__css/swiper.css" />
+    <script src="__MB__js/swiper.min.js"></script>
+    <script>
+        //banner
+        var swiper = new Swiper('.swiper-container',
+            {
+                pagination: '.swiper-pagination',
+                paginationType:'fraction',
+                loop:true,
+                paginationFractionRender:function(swiper,currentClassName,totalClassName) {
+                    return  '<div class="y-text-right">'+
+                        '<div class="y-pagination-bg">'+
+                        '<span class="' + currentClassName + ' font-32"></span>' +
+                        '/' +
+                        '<span class="' + totalClassName + '"></span>'+
+                        '</div>'+
+                        '</div>';
+                }
+            });
+    </script>
+</block>
+</html>

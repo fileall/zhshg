@@ -1,0 +1,127 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+<body class="body-bgColor">
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">我的钱包</div>
+        <a href="{:U('Member/mine')}">
+            <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+        </a>
+        <div class="header-right"></div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+<!--content-->
+<div class="content">
+    <!--我的钱包-->
+    <div class="burse-wrap row-box">
+        <div class="row-flex">
+            <a class="burse-link one" href="{:U('member/set_pw_pay')}">支付密码</a>
+        </div>
+        <div class="row-flex">
+            <a class="burse-link two" href="{:U('wallet/w_ingotA')}">元宝</br>{$member['gold_acer']}</a>
+        </div>
+        <div class="row-flex">
+            <a class="burse-link three" href="{:U('member/w_bank')}">银行卡</a>
+        </div>
+    </div>
+    <!--我的钱包-->
+
+
+    <!---币种-->
+    <div class="y-moneyType function-list">
+        <ul class="jus-bet flex-warp">
+            <li class="function-list-li y-function-list-li"><a href="{:U('wallet/coin')}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon42.png"></div>
+                <div class="function-list-name">银币</div>
+            </a></li>
+
+            <li class="function-list-li y-function-list-li"><a href="{:U('wallet/balance')}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon13.png"></div>
+                <div class="function-list-name">悦买工资</div>
+            </a></li>
+            <li class="function-list-li y-function-list-li"><a href="{:U('wallet/fruit')}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon14.png"></div>
+                <div class="function-list-name">金果</div>
+            </a></li>
+            <li class="function-list-li y-function-list-li"><a href="{:U('WalletOther/basin')}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon15.png"></div>
+                <div class="function-list-name">聚宝盆</div>
+            </a></li>
+            <li class="function-list-li y-function-list-li"><a href="{:U('WalletOther/silver_store')}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon16.png"></div>
+                <div class="function-list-name">银楼</div>
+            </a></li>
+            <li class="function-list-li y-function-list-li"><a href="{:U('index/exploit')}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon17.png"></div>
+                <div class="function-list-name">实体众筹</div>
+            </a></li>
+            <li class="function-list-li y-function-list-li"><a href="{:U('upgrade/upgrade')}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon18.png"></div>
+                <div class="function-list-name">我要升级</div>
+            </a></li>
+            <li class="function-list-li y-function-list-li"><a href="{:U('Wallet/vip_list',array('type'=>0))}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon19.png"></div>
+                <div class="function-list-name">我的会员</div>
+            </a></li>
+            <li class="function-list-li y-function-list-li"><a href="{:U('index/exploit')}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon20.png"></div>
+                <div class="function-list-name">优惠券</div>
+            </a></li>
+            <li class="function-list-li y-function-list-li"><a href="{:U('index/exploit')}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon21.png"></div>
+                <div class="function-list-name">悦买信用</div>
+            </a></li>
+            <li class="function-list-li y-function-list-li"><a href="{:U('index/exploit')}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon22.png"></div>
+                <div class="function-list-name">我要赊账</div>
+            </a></li>
+            <li class="function-list-li y-function-list-li"><a href="{:U('index/exploit')}">
+                <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon23.png"></div>
+                <div class="function-list-name">悦买借支</div>
+            </a></li>
+        </ul>
+    </div>
+    <!---币种-->
+    <!--服务-->
+    <div class="y-bg-white">
+        <div class="y-service">
+            <p class="y-service-title font-28">钱包服务</p>
+            <ul class="jus-bet y-border-top">
+                <li class="function-list-li y-function-list-li y-function-list-li-first"><a href="{:U('index/exploit')}">
+                    <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon24.png"></div>
+                    <div class="function-list-name">悦买账单</div>
+                </a></li>
+
+                <li class="function-list-li y-function-list-li"><a href="{:U('index/exploit')}">
+                    <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon25.png"></div>
+                    <div class="function-list-name">悦买分</div>
+                </a></li>
+                <li class="function-list-li y-function-list-li"><a href="{:U('index/exploit')}">
+                    <div class="function-list-icon y-function-list-icon"><img src="__MB__images/y_icon26.png"></div>
+                    <div class="function-list-name">悦买保险</div>
+                </a></li>
+            </ul>
+        </div>
+    </div>
+    <!--服务-->
+</div>
+<!--content-->
+
+    <!--footer-->
+    <block name="footer"></block>
+    <!--footer-->
+</body>
+</block>
+
+<block name="script">
+    <script>
+        $("#y-close").click(function(){
+            $(".y-proclaim").hide();
+        });
+    </script>
+</block>
+</html>

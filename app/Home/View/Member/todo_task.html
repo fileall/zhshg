@@ -1,0 +1,64 @@
+<include file="Public/member_top" />
+
+    <!--右测导航栏开始-->
+    <div class="x-right-colunm">
+        <div class="x-right-colunm-inner myCourse-right">
+
+            <div class="x-headline">答题</div><!--title name-->
+            <div class="l-clear todoMyTask"><!--容器-->
+                <div class="todoMyTask-left">
+                    <h3 class="todoMyTask-title">老师作业</h3>
+                    <div class="todoMyTask-con">
+                        <h3 class="title">{$info['title']}</h3>
+                        <div>
+                            {:code2html($info['task'])}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="todoMyTask-right">
+                    <h3 class="todoMyTask-title">我的答题区</h3>
+                    <form action="">
+                        <div class="todoMyTask-con">
+                            <textarea placeholder="请在此处答题" class="todoMyTask-area"></textarea>
+                            <input type="button" name="" value="提交作业" class="todoMyTask-sub x-notarize"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div><!--/x-right-colunm-->
+    <!--右测导航栏结束-->
+</div>
+<script src="__PC__plugins/layui-v1.0.9/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function(){
+        layui.use('layer', function(){
+            var layer = layui.layer;
+        });
+        //点击答题
+        $('.todoMyTask-sub').click(function(){
+            var answer = $('.todoMyTask-area').val(),
+                id = {$info['id']};
+            if(answer == "" ){
+                layer.msg('请答题后再提交', {icon: 2});//成功提示
+                return false;
+            }
+            $.post("{:U('Member/todo_task')}",{id:id,answer:answer},function (result) {
+                layer.msg(result[1]);
+                if(result[0] == 1){
+                    setTimeout(function () {
+                        self.location=document.referrer;
+                    },2000)
+                }
+            },'json');
+        });
+    })
+
+
+</script>
+</body>
+</html>

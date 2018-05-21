@@ -1,0 +1,299 @@
+<include file="Public/order_top" />
+
+<!--购物车-->
+<div class="wrap">
+    <div class="shopCart bgfff ">
+        <if condition="$list">
+            <!--购物车有商品-->
+            <div class="hasGoods">
+                <div class="titleList clear">
+                    <div class="selectBox fl w78">
+                        <span class="checkBox checkBoxAll"><input type="checkbox" /></span>
+                        <span>全选</span>
+                    </div>
+                    <div class="fl w612">商品信息</div>
+                    <div class="fl w123 tc" >单价</div>
+                    <div class="fl w139 tc">数量</div>
+                    <div class="fl w125 tc">小计</div>
+                    <div class="fl w123 tc">操作</div>
+                </div>
+                <ul class="shopCartList">
+                    <volist name="list" id="val">
+                        <li class="item clear">
+                            <div class="selectBox fl w78">
+                                <span class="checkBox checksin"><input type="checkbox" class="one-box" value="{$val['id']}" /></span>
+                            </div>
+                            <div class="goodsInfo fl clear w612">
+                                <img src="{:attach($val['img'],'item')}" alt="" />
+                                <p><a href="{:U('Mall/goodsDetail',array('id'=>$val['item_id']))}" class="hover-blue">{$val['title']}</a></p>
+                            </div>
+                            <div class="price fl w123 tc">¥{$val['price']}</div>
+                            <div class="numBox fl w139 tc">
+                                <div class="select-quantity fl clear">
+                                    <a href="javascript:void(0);" class="numdown" <if condition="$val['nums'] gt 1">style="background-color: rgb(255, 255, 255); cursor: pointer;"</if> ></a>
+                                    <input type="text" class="num" data-id="{$val['item_id']}" data-price="{$val['price']}" readonly value="{$val['nums']}">
+                                    <a href="javascript:void(0);" class="numup"></a>
+                                </div>
+                            </div>
+                            <div class="total fl w125 tc">¥ {:sprintf('%.2f',$val['price']*$val['nums'])}</div>
+                            <div class="caozuo fl w123 tc">
+                                <a href="javascript:;" class="hover-blue cartGoodsDelete" data-id="{$val['id']}">删除</a>
+                            </div>
+                        </li>
+                    </volist>
+                </ul>
+                <div class="clear">
+                    <div class=" shopCart-allCz  clear fl">
+                        <div class="selectBox  fl">
+                            <span class="checkBox checkBoxAll"><input type="checkbox" /></span>
+                            <span>全选</span>
+                        </div>
+                        <a href="javascript:void(0)" class="deleteAllCheck hover-blue">删除所选</a>
+                        <a href="javascript:void(0)" class="removeShopCart hover-blue">清空购物车</a>
+                    </div>
+                    <div class="fr shopCart-btns clear">
+                        <p class="fl">
+                            <span>已选择 <i class="cor1">0</i> 件商品</span>
+                            <span class="money">应付总额：<i class="cor2">¥0.00</i></span>
+                        </p>
+                        <a href="{:U('Mall/index')}" class="btn blue fl"/>继续购物</a>
+                        <a href="javascript:;" class="btn orange fl"/>提交订单</a>
+                    </div>
+                </div>
+            </div><!--购物车有商品-end-->
+        </if>
+        <!--购物车没有商品-->
+        <div class="noGoods" <if condition="count($list) gt 0">style="display:none;"</if> >
+            <div class="noGoodsBox">
+                <p>购物车空空的</p>
+                <a href="{:U('Mall/index')}">随便逛逛 &gt;</a>
+            </div>
+        </div><!--购物车没有商品-end-->
+    </div>
+
+    <!--猜你喜欢-->
+    <div class="goodsMayLike">
+        <div class="boxTitle clear">
+            <h3 class="fl">猜你喜欢</h3>
+            <a href="javascript:void(0);" class="fr" title="换一换">换一换</a>
+        </div>
+        <div class="mall-box">
+            <ul class="mall-goodsList one clear">
+                <volist name="tj" id="val">
+                    <li class="item">
+                        <a href="{:U('Mall/goodsDetail',array('id'=>$val['id']))}">
+                            <div class="mall-goodsImg">
+                                <img src="{:attach($val['img'],'item')}" alt="" />
+                            </div>
+                        </a>
+                        <p class="mall-goodsPrice">¥ {$val['price']}</p>
+                        <a href="{:U('Mall/goodsDetail',array('id'=>$val['item_id']))}">
+                            <h3 class="mall-goodsName">{$val['title']}</h3>
+                        </a>
+                        <!--<div class="clear mall-goodsBtns">
+                            <a href="" class="collect">收藏</a>
+                            <a href="" class="joinCar">加入购物车</a>
+                        </div>-->
+                    </li>
+                </volist>
+            </ul>
+        </div>
+    </div><!--猜你喜欢-end-->
+
+</div>
+<!--购物车-end-->
+
+<!--公共底部-->
+<include file="Public/footer" />
+<!--公共底部-end-->
+
+<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PC__js/l_main.js"></script>
+<script src="__PC__plugins/layui-v1.0.9/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function(){
+        layui.use('layer', function(){
+            var layer = layui.layer;
+        });
+        //商品数量加减
+        $('.select-quantity .numdown').click(function(){
+            var self = $(this),
+                ht = self.parent().find('.num'),
+                txtVal = ht.val(),
+                id = ht.data('id'),
+                price = ht.data('price');
+            if(txtVal <= 1){
+                self.css({
+                    'background-color':'#eee',
+                    'cursor':'no-drop'
+                })
+            }else{
+                $.post("{:U('Mall/join_cart')}",{id:id,nums:-1},function (result) {
+                    if(result[0] == 1){
+                        txtVal--;
+                        if(txtVal === 1){
+                            self.css({
+                                'background-color':'#eee',
+                                'cursor':'no-drop'
+                            })
+                        }
+                        self.parents('.item').find('.total').text("¥ "+(txtVal*price).toFixed(2));
+                        ht.val(txtVal);
+                        count_cart();
+                    }else{
+                        layer.msg(result[1],{icon:2,time:2000});
+                    }
+                },'json')
+            }
+        });
+        $('.select-quantity .numup').click(function(){
+            var self = $(this),
+                ht = self.parent().find('.num'),
+                txtVal = ht.val(),
+                id = ht.data('id'),
+                price = ht.data('price');
+
+            $.post("{:U('Mall/join_cart')}",{id:id,nums:1},function (result) {
+                if(result[0] == 1){
+                    txtVal++;
+                    if( txtVal > 1){
+                        self.parent().find('.numdown').css({
+                            'background-color':'#fff',
+                            'cursor':'pointer'
+                        })
+                    }
+                    self.parents('.item').find('.total').text("¥ "+(txtVal*price).toFixed(2));
+                    ht.val(txtVal);
+                    count_cart();
+                }else{
+                    layer.msg(result[1],{icon:2,time:2000});
+                }
+            },'json')
+        });
+        //删除商品监听是否全部删除
+        var del_all_check = function () {
+            var li_list = $('.shopCartList li').length;
+            if(li_list === 0){
+                $('.hasGoods').hide();
+                $('.noGoods').show();
+            }
+        };
+        //单个商品删除
+        $('.cartGoodsDelete').click(function(){
+            var self = $(this),
+                id = self.data('id');
+            var layerconfirm = layer.confirm('确定删除该商品？', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                $.post("{:U('ItemOrder/del_cart_item')}",{id:id},function (result) {
+                    if(result === 1){
+                        //关闭弹层
+                        layer.close(layerconfirm);
+                        //移除元素
+                        self.parents('li').remove();
+                        del_all_check();
+                        count_cart();
+                    }else{
+                        layer.msg('操作失败，请重试',{icon:2,time:2000});
+                    }
+                },'json')
+            }, function(){
+                //取消
+            });
+        });
+        //批量删除
+        $('.deleteAllCheck').click(function(){
+            var box = $('.one-box:checked'),
+                num = box.length,
+                id_all = "",//商品ID集合
+                ht_all = [];//元素集合
+            //验证
+            if(num === 0){
+                layer.msg('请选择要删除的商品',{icon:5,time:2000});
+                return false;
+            }
+            //收货ID及元素
+            box.each(function () {
+                id_all += $(this).val()+',';
+                ht_all.push($(this).parents('li'));
+            })
+            var layerconfirms = layer.confirm('确定删除选中的商品？', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                $.post("{:U('ItemOrder/del_cart_item')}",{id:id_all},function (result) {
+                    if(result === 1){
+                        //关闭弹层
+                        layer.close(layerconfirms);
+                        //循环移除元素
+                        $.each(ht_all,function (k,v) {
+                            v.remove();
+                        })
+                        del_all_check();
+                        count_cart();
+                    }else{
+                        layer.msg('操作失败，请重试',{icon:2,time:2000});
+                    }
+                },'json')
+            }, function(){
+                //取消
+            });
+        })
+        //清空购物车
+        $('.removeShopCart').click(function(){
+            var box = $('.one-box'),
+                id_all = "",//商品ID集合
+                ht_all = [];//元素集合
+
+            //收货ID及元素
+            box.each(function () {
+                id_all += $(this).val()+',';
+                ht_all.push($(this).parents('li'));
+            })
+
+            var layerconfirms = layer.confirm('确定清空购物车？', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                $.post("{:U('ItemOrder/del_cart_item')}",{id:id_all},function (result) {
+                    if(result === 1){
+                        //关闭弹层
+                        layer.close(layerconfirms);
+                        //循环移除元素
+                        $.each(ht_all,function (k,v) {
+                            v.remove();
+                        })
+                        del_all_check();
+                    }else{
+                        layer.msg('操作失败，请重试',{icon:2,time:2000});
+                    }
+                },'json')
+            }, function(){
+                //取消
+            });
+        });
+
+        //提交订单
+        $('.orange').click(function () {
+            var box = $('.one-box:checked'),
+                num = box.length,
+                id_all = "";
+            //验证
+            if(num === 0){
+                layer.msg('请选择要购买的商品',{icon:5,time:2000});
+                return false;
+            }
+            //收货ID及元素
+            box.each(function () {
+                id_all += $(this).val()+',';
+            })
+            $.post("{:U('ItemOrder/confirm_order')}",{id:id_all},function (result) {
+                if(result === 1){
+                    window.location.href="{:U('ItemOrder/confirm_order')}";
+                }else{
+                    layer.msg('操作失败，请重试',{icon:2,time:2000});
+                }
+            },'json')
+        })
+    })
+</script>
+</body>
+</html>

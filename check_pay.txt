@@ -1,0 +1,7 @@
+array (
+  'transfer_type' => '2',
+  'nums' => '1.6',
+  'mobile' => '130',
+  'memos' => '',
+  'pas' => '123456',
+)

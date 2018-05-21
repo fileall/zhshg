@@ -1,0 +1,6 @@
+<volist name="list" id="val">
+    <li class="adress <if condition="$i eq 1">active</if>" data-id="{$val['id']}">
+        <h3 class="name">{$val['shperson']}  {:replace_mobile($val['mobile'])}</h3>
+        <p class="where">{$val['province']}{$val['city']}{$val['county']}{$val['address']}</p>
+    </li>
+</volist>

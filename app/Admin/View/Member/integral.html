@@ -1,0 +1,23 @@
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>时间</td>
+				<td class="shoptit">收入/支出</td>
+				<td class="shoptit">类别</td>
+				<td class="shoptit">数量</td>
+				<td >详细说明</td>
+			</tr>
+		<volist name="integral" id="val" >
+			<tr>
+				<td class="shopcon">{:date('Y-m-d H:i',$val['add_time'])}</td>
+				<td class="shopcon">{$val['changeintegral']}</td>
+				<td class="shopcon"><?php if($val['types']==1){echo '奖品';}else{echo '优惠券';} ?> </td>
+				<td class="shopcon">{$val['nums']}</td>
+				<td class="shopcon">{$val['title']}</td>
+			</tr>
+		</volist>	
+		</table>
+		<style>
+			.d-content tr{ text-align: center; border-bottom: 1px solid #ddd;}
+			.d-content td{ height: 30px; line-height: 30px; border-left: 1px solid #ddd;}
+			
+		</style>

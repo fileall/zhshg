@@ -1,0 +1,79 @@
+<include file="Public/top" />
+	<!--banner-->
+	<div class="banner" style="background:url('{:attach($cate_info['img'],'article_cate')}') no-repeat center top;"></div>
+	<!--内容-->
+	<div class="homeEduDetail" >
+		<!--详情-->
+		<div class="homeEduDet-con">
+			<div class="wrap">
+				<div class="homeEduDet-box">
+					<!--基本概要-->
+					<div class="homeEDBox">
+						<div class="title">基本概要</div>
+						<div class="homeEDBox-font">
+							{:code2html($info['info'])}
+						</div>
+					</div>
+					<!--课程大纲-->
+					<div class="homeEDBox">
+						<div class="title">守护计划（学习版）课程大纲</div>
+						{:code2html($info['outline'])}
+					</div>
+					
+					<!--加入-->
+					<div class="homeEduJoin">
+						<a href="javascript:;" class="join-shjh btn orange">
+							￥{$info['price']} {$info['title']}
+						</a>
+					</div>
+					
+					<div style="height:70px;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--内容-end-->
+	
+ 	<!--公共底部-->
+	<include file="Public/footer" />
+ 	<!--公共底部-end-->
+	<link rel="stylesheet" href="__PC__plugins/layui-v1.0.9/layui/css/modules/layer/default/layer.css">
+ 	<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__PC__plugins/layui-v1.0.9/layui/lay/modules/layer.js"></script>
+ 	<script src="__PC__js/l_main.js"></script>
+	<script src="__PC__js/php.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		$(function () {
+            var uid = {$uid|default=0},
+                id = {$info['id']|default=0};
+
+            //预约登录判断
+            $('.orange').click(function () {
+                if(uid > 0){
+                    $.post("{:U('Curriculum/check_home_edu')}",{id:id,uid:uid},function (result) {
+                        if(result[0] == 1){
+                            layer.msg('您已经购买了该课程，请前往个人中心我的课程学习！', {icon: 1});
+                            setTimeout(function () {
+                                window.location.href="{:U('Member/my_curriculum')}";
+                            },2000)
+                        }else if(result[0] == 2){
+                            $.login_alert("{:U('Login/enter')}");
+                        }else if(result[0] == 3){
+                            window.location.href="{:U('Order/homeCourseBuy',array('id'=>$info['id']))}";
+                        }else{
+                            layer.msg(result[1]);
+                        }
+                    },'json')
+                }else{
+                    $.login_alert("{:U('Login/enter')}");
+                }
+            })
+
+            //预约登录判断
+            /*$('.orange').click(function () {
+                $.pc_is_login("{:U('Order/homeCourseBuy',array('id'=>$info['id']))}","{:U('Login/pc_is_login')}","{:U('Login/enter')}");
+            })*/
+        })
+	</script>
+</body>
+</html>

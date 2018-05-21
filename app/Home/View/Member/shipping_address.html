@@ -1,0 +1,236 @@
+<include file="Public/member_top" />
+			
+			<!--右测导航栏开始-->
+			<div class="x-right-colunm">
+				<div class="x-right-colunm-inner">
+					<div class="x-headline">收货地址</div><!--title name-->					
+					<div class="">
+						您已经创建了{:count($list)}个收货地址，最多可创建10个。
+					</div>
+			
+					<div class="x-site-box"><!--收货地址容器-->
+						<!--收货地址-->
+						<volist name="list" id="val">
+							<div class="x-site-tier <if condition="$val['is_default']">active</if>">
+								<div class="x-ip-message">
+									<div class="x-nickname">
+										<span><i class="fa fa-user"></i></span>
+										<div class="x-nickname-name">{$val['shperson']}</div>
+										<div class="x-default <if condition="$val['is_default']">active</if>" data-id="{$val['id']}">
+											<if condition="$val['is_default']">默认地址<else />设为默认地址</if>
+										</div>
+										<div style="clear: both;"></div><!--clearFloat-->
+									</div>
+									<div class="x-nickname">
+										<span><i class="fa fa-send-o"></i></span>
+										<div class="x-nickname-name active">
+											{$val['province']} {$val['city']} {$val['county']} {$val['address']}
+										</div>
+										<div style="clear: both;"></div><!--clearFloat-->
+									</div>
+									<div class="x-nickname">
+										<span><i class="fa fa-tablet"></i></span>
+										<div class="x-nickname-name">{:replace_mobile($val['mobile'])}</div>
+										<div class="x-nickname-delete" data-id="{$val['id']}">删除</div>
+										<div class="x-nickname-amend" data-id="{$val['id']}">
+											<a href="javascript:;">修改</a>
+										</div>
+										<div style="clear: both;"></div><!--clearFloat-->
+									</div>
+								</div>
+							</div>
+						</volist>
+
+						<!--新增收货地址按钮-->
+						<div class="x-site-tier"><!--层-->
+							<div class="x-site-add">
+								<p class="x-site-add-p1"><i class="fa fa-plus"></i></p>
+								<p class="x-site-add-p2">新增收货地址</p>
+							</div>
+						</div>
+						<div style="clear: both;"></div><!--clearFloat-->
+					</div>
+					
+					<!--新增收货地址区块-->
+					<div class="l-addNewsAdress">
+						<div class="x-location-box"><!--添加地址表单-->
+							<a href="javascript:;" class="x-location-close" ><i class="fa fa-2x fa-times-circle" aria-hidden="true"></i></a>
+							<div class="x-location-title">添加收货地址</div>
+							<form id="sub-form">
+								<input type="hidden" name="id" id="save-id">
+								<div class="x-ip-tier l-clear">
+									<p class="x-ip-tier-p"><span>*</span>收货人：</p>
+									<div class="x-ip-tier-input">
+										<input class="x-informatio-input one active" type="text" name="shperson" placeholder="请输入收货人姓名！">
+										<span class="tip tip1"></span>	
+									</div>
+								</div>
+								<div class="x-ip-tier l-clear">
+									<p class="x-ip-tier-p"><span>*</span>手机号：</p>
+									<div class="x-ip-tier-input">
+										<input class="x-informatio-input two active" type="text" name="mobile" placeholder="请输入手机号！">
+										<span class="tip tip2"></span>
+									</div>
+								</div>
+								<div class="x-ip-tier l-clear">
+									<p class="x-ip-tier-p"><span>*</span>省市区：</p>
+									<div class="x-ip-tier-input">
+										<div class="x-ip-tier-select">
+											<select name="province"></select>
+											<select name="city"></select>
+											<select name="county"></select>
+											<span class="tip tip3"></span>
+										</div>
+									</div>
+								</div>
+								<div class="x-ip-tier l-clear">
+									<p class="x-ip-tier-p"><span>*</span>详细地址：</p>
+									<div class="x-ip-tier-input">
+										<input class="x-informatio-input four active" type="text" name="address" placeholder="请输入详细地址/街道/门牌号！">
+										<span class="tip tip4"></span>
+									</div>
+								</div>
+								<div class="x-ip-tier l-clear">
+									<p class="x-ip-tier-p x-ip-hidden"><span>*</span>占位符：</p>
+									<div class="x-ip-tier-input">
+										<button type="button" class="l-addNewsAdress-sub">保存收货地址</button>
+										
+									</div>
+								</div>
+								
+							</form>
+						</div>
+					</div><!--/l-addNewsAdress-->
+					
+					
+				</div>
+                
+			</div>
+			<!--右测导航栏结束-->
+			
+			<div style="clear: both;"></div><!--clearFloat-->	
+		</div>
+		<!--公共底部-->
+		<include file="Public/footer" />
+		<script src="__PC__js/region_select.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PC__plugins/layui-v1.0.9/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				//初始化
+				layui.use('layer',function(){
+					var layer = layui.layer;
+				})
+				//地址列表
+				var list = {:json_encode($list)},
+					type = "{$Think.get.type}";
+				if(type){
+                    //从订单列表跳过来直接打开添加地址弹窗
+                    $('.l-addNewsAdress').show();
+				}
+				//省市区初始化
+				new PCAS('province', 'city', 'county', '', '', '');
+				//新建地址验证
+				$('.l-addNewsAdress-sub').click(function(){
+					var regPhone = /^(13|15|17|18)\d{9}$/;
+					//收货人
+					if($('.x-informatio-input.one').val() == ''){
+						$('.tip1').text('*收货人不能为空');
+						return false;
+					}else{
+						$('.tip1').text('');
+					}
+					//手机
+					if($('.x-informatio-input.two').val() == ''){
+						$('.tip2').text('*手机号不能为空');
+						return false;
+					}else if(!regPhone.test($('.x-informatio-input.two').val())){
+						$('.tip2').text('*手机号格式不正确');
+					}else{
+						$('.tip2').text('');
+					}
+					//详细地址
+					if($('.x-informatio-input.four').val() == ''){
+						$('.tip4').text('*请填写详细地址');
+						return false;
+					}else{
+						$('.tip4').text('');
+					}
+					var data = $('form').serialize();
+					$.post("{:U('Member/add_address')}",data,function (result) {
+						if(result[0] == 1){
+                            $('.l-addNewsAdress').hide();
+                            if(type){
+                                //从订单列表跳过来
+                                setTimeout(function () {
+                                    history.go(-1);
+                                },1000)
+                            }else{
+                                setTimeout(function () {
+                                    location.reload();
+                                },2000)
+							}
+						}
+                        layer.msg(result[1]);
+                    },'json');
+				});
+                //新增收货地址显示隐藏
+                $('.x-location-close ').click(function(){
+                    $('input[name=shperson]').val('');
+                    $('input[name=mobile]').val('');
+                    $('input[name=address]').val('');
+                    $('#save-id').val('');
+                    $('.l-addNewsAdress').hide();
+                });
+                $('.x-site-add').click(function(){
+                    $('.l-addNewsAdress').show();
+                });
+                //修改收货地址
+                $('.x-nickname-amend').click(function(){
+                    var id = $(this).data('id'),
+                    	info = list[id];
+                    $('input[name=shperson]').val(info.shperson);
+                    $('input[name=mobile]').val(info.mobile);
+                    $('input[name=address]').val(info.address);
+                    $('select[name=province]').find('option[value='+info.province+']').prop('selected',true).change();
+                    $('select[name=city]').find('option[value='+info.city+']').prop('selected',true).change();
+                    $('select[name=county]').find('option[value='+info.county+']').prop('selected',true);
+                    $('#save-id').val(info.id);
+                    $('.l-addNewsAdress').show();
+                });
+                //设置默认收货地址
+                $('.x-site-tier .x-default').click(function(){
+                    var id = $(this).data('id');
+                    $.post("{:U('Member/set_default')}",{id:id},function (result) {
+                        layer.msg(result[1]);
+                        if(result[0] == 1){
+                            setTimeout(function () {
+                                location.reload();
+                            },2000)
+                        }
+                    },'json');
+                });
+				//删除收货地址
+				$('.x-nickname-delete').click(function(){
+                    var id = $(this).data('id');
+					var layer1=layer.confirm('确定删除该收货地址？', {
+					  	btn: ['确定','取消'] //按钮
+					}, function(){
+                        layer.close(layer1);
+                        $.post("{:U('Member/del_address')}",{id:id},function (result) {
+                            layer.msg(result[1]);
+                            if(result[0] == 1){
+                                setTimeout(function () {
+                                    location.reload();
+                                },2000)
+                            }
+                        },'json');
+					}, function(){
+					  	//执行删除操作
+					});
+				})
+			})
+			
+		
+		</script>
+	</body>
+</html>

@@ -1,0 +1,103 @@
+<include file="Public/top" />
+<!--售后服务-->
+<div class="bgf0f3f5">
+	<div class="about wrap clear">
+		<div class="left-menu">
+			<h3 class="left-menu-title">关于我们</h3>
+			<ul class="list">
+				<volist name="cate_list" id="val">
+					<li><a href="{:U('Index/about',array('id'=>$cate_info['id'],'cate_id'=>$val['id']))}">{$val['name']}</a></li>
+				</volist>
+				<li class="active"><a href="{:U('Index/service')}">售后服务</a></li>
+			</ul>
+		</div>
+		<div class="right-con">
+			<h3 class="title">售后服务</h3>
+			<div class="shouhou-tip">*亲爱的家长和孩子，感谢您选择兴智教育，如果您有任何不满和建议，可以留言告诉我们，我们一定会及时更正解决。</div>
+			<div class="font service-form">
+				<form action="">
+					<ul>
+						<li class="clear">
+							<div class="fl item-left">家长姓名：</div>
+							<div class="fl item-right">
+								<input type="text" name="username" class="item-text item-name" placeholder="请填写家长姓名"/>
+							</div>
+						</li>
+						<li class="clear">
+							<div class="fl item-left">联系电话：</div>
+							<div class="fl item-right">
+								<input type="text" name="mobile" class="item-text item-call" placeholder="请填写联系电话"/>
+							</div>
+						</li>
+						<li class="clear">
+							<div class="fl item-left">投诉问题：</div>
+							<div class="fl item-right">
+								<textarea name="content"  class="item-area item-question" placeholder="请填写您要反映的问题"></textarea>
+							</div> 
+						</li> 
+						<li class="clear">
+							<div class="fl item-left"></div>
+							<div class="fl item-right">
+								<input type="button"  id="service-sub" value="立即提交" class="btn blue"/>
+							</div>  
+						</li> 
+					</ul>
+				</form>
+			</div>
+		</div>
+	</div>	
+	<!--售后服务-end-->
+</div>
+
+
+<!--公共底部-->
+<include file="Public/footer" />
+<!--公共底部-end-->
+
+<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PC__js/l_main.js"></script>
+<script src="__PC__/plugins/layui-v1.0.9/layui/layui.js"></script>
+<script type="text/javascript">
+	$(function(){
+		layui.use('layer',function(){
+			var layer= layui.layer;
+		})
+		$('#service-sub').click(function(){
+			var nameVal=$('.item-name').val(),
+				callVal=$('.item-call').val(),
+				quesVal=$('.item-question').val(),
+				reg = /^(13|15|17|18)\d{9}$/;
+			if(nameVal == ''){
+				layer.msg('请输入家长姓名',{icon:2});
+				return false;
+			}
+			if(callVal == ''){
+				layer.msg('请输入家长联系电话',{icon:2});
+				return false;
+			}
+			if(!reg.test(callVal)){
+				layer.msg('手机号格式不正确',{icon:2});
+				return false;
+			}
+			if(quesVal==''){
+				layer.msg('请输入您要反应的问题',{icon:2});
+				return false;
+			}
+
+			var data = $('form').serialize();
+			$.post("{:U('Index/service')}",data,function (result) {
+				if(result[0] === 1){
+                    layer.msg(result[1],{icon:1});
+                    setTimeout(function () {
+                        location.reload();
+                    },2000)
+				}else{
+                    layer.msg(result[1],{icon:2});
+				}
+            },'json');
+		});
+	})
+</script>
+
+</body>
+</html>

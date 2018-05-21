@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="__PC__plugins/layui-v1.0.9/layui/css/modules/layer/default/layer.css">
+    <link rel="stylesheet" href="__PC__css/index.css">
+    <script src="__PC__js/jquery-1.11.2.min.js"></script>
+    <!--<script src="__PC__js/custom.js"></script>-->
+</head>
+
+<body>
+<div class="top-col">
+    <div class="enter-logo">
+        <a href="/">
+            <img src="__PC__images/logo.png">
+        </a>
+    </div>
+    <!--<div class="enter-title">欢迎注册</div>-->
+    <div class="assist"><a title="帮助中心" href="">
+        <i class="fa fa-question-circle"></i><span>帮助中心</span>
+    </a></div>
+    <div class="return-home"><a title="返回首页" href="/">
+        <i class="fa fa-home"></i><span>返回首页</span>
+    </a></div>
+
+    <div class="clear-float"></div>
+</div>
+<form>
+{__TOKEN__}
+<div class="enter-bjimng">
+    <div class="enter-inner-box">
+        <div class="enter-right-inner">
+            <form action="" method="poat" name="">
+                <div class="register-wrap">
+                    <ul class="register-ul">
+                        <li class="register-li active"><a href="###">家长/学生</a></li>
+                        <li class="register-li"><a href="{:U('Login/teacher')}">我是老师</a></li>
+                        <div class="clear-float"></div>
+                    </ul>
+
+                    <div class="tabs-form-box">
+                        <div class="tabs-tier">
+                            <ul>
+                            	<li class="enter-input-li">
+                                    <div class="enter-form-box">
+                                        <input class="register-input" name="realname" placeholder="请输入您的姓名" >
+                                    </div>
+                                </li>
+                                <li class="enter-input-li">
+                                    <div class="enter-form-box">
+                                        <input class="register-input" name="mobile" id="mobile" placeholder="请输入您的手机号" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                                    </div>
+                                </li>
+
+                                <li class="enter-input-li">
+                                    <div class="enter-form-box">
+                                        <input class="register-input" name="code" placeholder="请输入短信验证码" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                                        <input type="button" class="verification" value="获取验证码">
+                                    </div>
+                                </li>
+
+                                <li class="enter-input-li">
+                                    <div class="select-wrap select-wrap2">
+                                        <select class="select-inner-box" data-pid="0" data-uri="{:U('Login/ajax_getchilds')}" data-selected=""></select>
+                                        <input type="hidden" name="cate_id" id="J_cate_id"  />
+                                        <!--<div class="select-inner-box active">
+                                            <select class="cate1" data-index="1">
+                                                <option value="">选择类别</option>
+                                                <volist name="cate" id="val">
+                                                    <option value="{$val['id']}">{$val['name']}</option>
+                                                </volist>
+                                            </select>
+                                        </div>
+                                        <div class="select-inner-box ">
+                                            <select class="cate2" data-index="2">
+                                                <option value="">选择阶段</option>
+                                            </select>
+                                        </div>-->
+                                        <div class="clear-float"></div>
+                                    </div>
+                                </li>
+                                <!--<li class="enter-input-li">
+                                    <div class="select-wrap">
+                                        <div class="select-inner-box active">
+                                            <select class="cate3" data-index="3">
+                                                <option value="">选择年级</option>
+                                            </select>
+                                        </div>
+                                        <div class="select-inner-box">
+                                            <select name="cate_id" class="cate4" data-index="4">
+                                                <option value="">选择科目</option>
+                                            </select>
+                                        </div>
+                                        <div class="clear-float"></div>
+                                    </div>
+                                </li>-->
+                                <li class="enter-input-li">
+                                    <div class="enter-form-box">
+                                        <input class="register-input" name="password" type="password" placeholder="请输入密码">
+                                    </div>
+                                </li>
+
+                                <li class="enter-input-li">
+                                    <div class="enter-form-box">
+                                        <input class="register-input" name="confirm_password" type="password" placeholder="请再次输入密码">
+                                    </div>
+                                </li>
+
+                                <!--<li class="enter-input-li">
+                                    <div class="enter-form-box">
+                                        <input class="register-input" type="text" placeholder="请输入推荐码（选填）">
+                                    </div>
+                                </li>-->
+
+                                <li class="enter-input-li">
+                                    <div class="enter-form-box">
+                                        <div class="enter-form-btn">
+                                            <button type="button">立即注册</button>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="enter-input-li">
+                                    <div class="enter-bottom-link">
+                                        <div class="enter-checkbox"><input name="protocol" type="checkbox" checked="checked"></div>
+                                        <div class="enter-bottom-pass"><a href="">阅读并同意<span>《兴智教育服务条款》</span></a></div>
+                                        <div class="enter-bottom-pass active"><a href="{:U('Login/enter')}">立即登录</a></div>
+                                        <div class="clear-float"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</form>
+<!--footer-->
+<include file="Public/login_footer" />
+<!--footer-->
+
+<!--自定义滚动条-->
+<script src="__PC__js/jquery.nicescroll.min.js"></script>
+<script src="__PC__js/linkage.js"></script>
+<script src="__PC__plugins/layui-v1.0.9/layui/lay/modules/layer.js"></script>
+<script>
+    $(function () {
+        $('.select-inner-box').cate_select({top_option:'请选择',target_class:'select-inner-box'}); //分类联动
+        $(".select-ul").niceScroll({cursorcolor:"#3EB134"});
+
+        //获取验证码倒计时
+        var COUNTDOWN = 60;
+        function settime(obj){
+            if(COUNTDOWN == 0){
+                obj.value = "获取验证码";
+                COUNTDOWN = 60;
+                return;
+            }else{
+                obj.value = COUNTDOWN + "秒";
+                COUNTDOWN--;
+            }
+            setTimeout(function(){settime(obj)},1000);
+        }
+
+        //发送短信验证码
+        $(".verification").click(function(){
+            if($(this).val() != "获取验证码"){
+                return false;
+            }else{
+                settime(this);
+                $.ajax({
+                    type: "post",
+                    url: "{:U('Login/reg_send_sms')}",
+                    async:false,
+                    data: {mobile:$("#mobile").val()},
+                    dataType: "json",
+                    success: function(result){
+                        layer.msg(result[1]);
+                    }
+                });
+            }
+        });
+
+        //选择类别年级
+        /*$('select').change(function () {
+            var self = $(this),
+                index = parseInt(self.data('index')),
+                id = self.val(),
+                set = new Array("选择阶段","选择年级","选择科目"),
+                ht = '';
+
+            //联动分类
+            $.get("{:U('Login/get_curriculum')}",{id:id},function (result) {
+                if(result[0] == 1){
+                    //下级分类数据
+                    ht += '<option value="">'+set[index-1]+'</option>';
+                    $.each(result[1],function (k,v) {
+                        ht += '<option value="'+v.id+'">'+v.name+'</option>';
+                    })
+                    $('.cate'+(index+1)).html(ht);
+
+                    //清空后面剩余级别数据
+                    for (var i=(index+2);i<=4;i++){
+                        $('.cate'+i).html('<option value="">'+set[i-2]+'</option>');
+                    }
+                }else{
+                    //若下级无数据则清空后面所有级别数据
+                    for (var i=(index+1);i<=4;i++){
+                        $('.cate'+i).html('<option value="">'+set[i-2]+'</option>');
+                    }
+                }
+            },'json')
+        })*/
+
+        //提交注册
+        $('button').click(function () {
+            var chekc = true,
+                cate_id = $('#J_cate_id').val(),
+                box = $('input[type=checkbox]').prop('checked'),
+                data = $("form").serialize();
+
+            //验证必填项
+            $('.register-input').each(function () {
+                var self = $(this),
+                    val = self.val(),
+                    str = self.attr('placeholder');
+
+                if(!val){
+                    layer.msg(str);
+                    return chekc = false;
+                }
+            })
+            if(chekc === false) return false;
+            if(!cate_id){
+                layer.msg('请选择科目');
+                return false;
+            }
+            if(box === false){
+                layer.msg('请阅读并同意兴智教育服务条款');
+                return false;
+            }
+
+            //提交注册
+            $.ajax({
+                type: "post",
+                url: "{:U('Login/register')}",
+                async:false,
+                data: data,
+                dataType: "json",
+                success: function(result){
+                    layer.msg(result[1]);
+                    if(result[0] == 1){
+                        setTimeout(function () {
+                            window.location.href="{:U('Login/enter')}";
+                        },2000)
+                    }
+                }
+            });
+        })
+    })
+</script>
+</body>
+</html>

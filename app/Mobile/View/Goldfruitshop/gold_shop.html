@@ -1,0 +1,58 @@
+<extend name="Base/common"/>
+<block name="header">
+
+<body class="body-bgColor">
+
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">金果商城</div>
+        <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="content">
+    <!--banner-->
+    <div class="y-goldShop-banner y-over-hide">
+        <img src="__MB__images/y_img2.png"/>
+    </div>
+    <!--banner-->
+    <!--兑换记录-->
+    <if condition="$uid neq 0">
+    <div class="y-goldShop-record jus-ali y-bg-white y-width94">
+        <div class="flex1">
+            <p>我的金果总额&nbsp;<span class="y-color-red font-28">{$gold['gold_fruit']}个</span></p>
+            <p class="font-22 y-mar-top10"><a class="y-color-999" href="{:U('wallet/account',['type'=>3])}">查看金果明细&nbsp;&gt;</a></p>
+        </div>
+        <a href="{:U('y_goldShopRecord')}"><div class="y-goldShop-record-right y-border y-color-666">兑换记录</div></a>
+    </div>
+    </if>
+    <!--商品列表-->
+    <div id="LAY_demo1" class="y-goldShop-list jus-bet flex-warp">
+    </div>
+</div>
+<!--content-->
+
+<!--footer-->
+<!--footer-->
+</body>
+<script>
+    $(".y-goldShop-item:even").addClass("y-border-right")
+    layui.use('flow', function(){
+        var flow = layui.flow;
+        flow.load({
+            elem: '#LAY_demo1' //流加载容器
+            ,done: function(page, next){ //执行下一页的回调
+              $.get("__SELF__",{p:page},function (res) {
+                  next(res.list, page < res.length); //假设总页数为 10
+              });
+            }
+        });
+    });
+
+</script>
+</block>
+</html>

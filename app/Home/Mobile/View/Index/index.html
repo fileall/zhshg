@@ -1,0 +1,876 @@
+<extend name="Base/common"/> 
+
+
+
+<block name="header">
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="home-header padd row-box">
+					<div class="home-left">
+						<a href="">
+							<div class="logo-img"><img src="__MB__images//logo.png"></div>
+						</a>
+					</div>
+					<div class="row-flex">
+						<a class="search-link" href="javascript:;">搜索商品</a>
+						<!--search.html-->
+					</div>
+					<div class="home-right">
+						<a href="javascript:;"><!--javascript:;-->
+							<div class="message-img"><img src="__MB__images//icon05.png"></div>
+						</a>
+						<div class="message-tis"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		<block name="body">
+		<!--content-->
+		<div class="content">
+			
+			<div class="carbolon">
+				<ul class="carbolon-ul">
+
+					<li class="carbolon-li" id="scanQRCode" >
+
+						<a href="javascript:;">
+
+							<div class="carbolon-icon"><img src="__MB__images//icon01.png"></div>
+
+							<div class="carbolon-name">扫一扫</div>
+
+						</a>
+
+					</li>
+
+					
+
+					<li class="carbolon-li"><a href="{:U('member/wallet')}">
+
+						<div class="carbolon-icon"><img src="__MB__images//icon02.png"></div>
+
+						<div class="carbolon-name">钱包</div>
+
+					</a></li>
+
+					<li class="carbolon-li"><a href="{:U('member/credit')}">
+
+						<div class="carbolon-icon"><img src="__MB__images//icon03.png"></div>
+
+						<div class="carbolon-name">银币信用</div>
+
+					</a></li>
+
+					<li class="carbolon-li"><a href="{:U('Recharge/upgrade')}">
+
+						<div class="carbolon-icon"><img src="__MB__images//icon04.png"></div>
+
+						<div class="carbolon-name">会员升级</div>
+
+					</a></li>
+
+				</ul>
+				<div class="clear-float"></div>
+			</div>
+			
+			
+			<!--轮播banner-->
+			<div class="swiper-container" style="margin-top: 0.2rem;">
+				<div class="swiper-wrapper">
+					<volist name="lux" id="lu">
+						<div class="swiper-slide"><a href="javascript:;">
+							<div class="banner-image vertical-center">
+								<!--<div class="all-auto"><img src="__MB__images//banner1.jpg"></div>-->
+								<div class="all-auto"><img src="{:attach($lu['content'],'advert')}"></div>
+							</div>
+						</a></div>
+					</volist>
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
+			<!--banner-->
+			
+			
+			
+			<!--服务导航-->
+			<div class="carbolon active">
+				<ul class="carbolon-ul">
+					<li class="carbolon-li active"><a href="javascript:;">
+						<div class="carbolon-icon"><img src="__MB__images//icon67.png"></div>
+						<div class="carbolon-name">生活超市</div>
+					</a></li>
+					
+					<li class="carbolon-li active"><a href="javascript:;">
+						<div class="carbolon-icon"><img src="__MB__images//icon68.png"></div>
+						<div class="carbolon-name">全球购</div>
+					</a></li>
+					
+					<li class="carbolon-li active"><a href="javascript:;">
+						<div class="carbolon-icon"><img src="__MB__images//icon69.png"></div>
+						<div class="carbolon-name">服装城</div>
+					</a></li>
+					
+					<li class="carbolon-li active"><a href="javascript:;">
+						<div class="carbolon-icon"><img src="__MB__images//icon70.png"></div>
+						<div class="carbolon-name">臻生鲜</div>
+					</a></li>
+					
+					<li class="carbolon-li active"><a href="javascript:;">
+						<div class="carbolon-icon"><img src="__MB__images//icon71.png"></div>
+						<div class="carbolon-name">臻惠玩</div>
+					</a></li>
+					
+					<li class="carbolon-li active"><a href="javascript:;">
+						<div class="carbolon-icon"><img src="__MB__images//icon72.png"></div>
+						<div class="carbolon-name">金果商城</div>
+					</a></li>
+					
+					<li class="carbolon-li active"><a href="javascript:;">
+						<div class="carbolon-icon"><img src="__MB__images//icon73.png"></div>
+						<div class="carbolon-name">银元宝</div>
+					</a></li>
+					
+					<li class="carbolon-li active"><a href="javascript:;">
+						<div class="carbolon-icon"><img src="__MB__images//icon74.png"></div>
+						<div class="carbolon-name">生活服务</div>
+					</a></li>
+					
+					<div class="clear-float"></div>
+				</ul>
+			</div>
+			<!--服务导航-->
+			
+			
+			<!--滚动信息-->
+			<div class="scroll-message">
+				<div class="row-box inner-auto">
+					<div class="scroll-message-left">
+						<div class="scroll-message-title"><img src="__MB__images//icon75.png"></div>
+					</div>
+					<div class="row-flex">
+						<div class="scroll-message-data">
+							<ul class="scroll-message-ul">
+								<li class="scroll-message-li"><a href="javascript:;">用户99444****112 刚刚购买元宝成功刚刚购买元宝成功</a></li>
+								<li class="scroll-message-li"><a href="javascript:;">用户99444****112 刚刚购买元宝成功刚刚购买元宝成功</a></li>
+								<li class="scroll-message-li"><a href="javascript:;">用户99444****112 刚刚购买元宝成功刚刚购买元宝成功</a></li>
+							</ul>
+						</div>
+					</div>
+					
+					<div class="scroll-message-more"><a href="javascript:;">更多</a></div>
+					<!--new_list.html-->
+				</div>
+			</div>
+			<!--滚动信息-->
+			<div class=""><img src="{:attach($new_user['content'],'advert')}"></div>
+			
+			<!--秒杀-->
+			<div class="activity-wrap"><a href="javascript:;">
+				<div class="inner-auto row-box">
+					<div class="activity-left">
+						<div class="activity-name">臻怡家秒杀<span>20点场</span></div>
+					</div>
+					<div class="row-flex">
+						<div class="activity-time vertical-center"><div class="vertical-auto">00</div></div>
+						<div class="activity-txt">:</div>
+						<div class="activity-time vertical-center"><div class="vertical-auto">00</div></div>
+						<div class="activity-txt">:</div>
+						<div class="activity-time vertical-center"><div class="vertical-auto">00</div></div>
+						<div class="clear-float"></div>
+					</div>
+					<div class="activity-right">臻选尖货秒</div>
+				</div>
+			</a></div>
+			
+			<div class="activity-content">
+				<ul class="activity-ul">
+					<li class="activity-li"><a href="javascript:;">
+						<div class="activity-img vertical-center">
+							<div class="vertical-auto"><img src="__MB__images//img.jpg"></div>
+						</div>
+						<div class="activity-money">￥120.00</div>
+						<div class="activity-money active">￥140.00</div>
+					</a></li>
+					
+					<li class="activity-li"><a href="javascript:;">
+						<div class="activity-img vertical-center">
+							<div class="vertical-auto"><img src="__MB__images//img.jpg"></div>
+						</div>
+						<div class="activity-money">￥120.00</div>
+						<div class="activity-money active">￥140.00</div>
+					</a></li>
+					
+					<li class="activity-li"><a href="javascript:;">
+						<div class="activity-img vertical-center">
+							<div class="vertical-auto"><img src="__MB__images//img.jpg"></div>
+						</div>
+						<div class="activity-money">￥120.00</div>
+						<div class="activity-money active">￥140.00</div>
+					</a></li>
+					
+					<li class="activity-li"><a href="javascript:;">
+						<div class="activity-img vertical-center">
+							<div class="vertical-auto"><img src="__MB__images//img.jpg"></div>
+						</div>
+						<div class="activity-money">￥120.00</div>
+						<div class="activity-money active">￥140.00</div>
+					</a></li>
+					
+					<li class="activity-li"><a href="javascript:;">
+						<div class="activity-img vertical-center">
+							<div class="vertical-auto"><img src="__MB__images//img.jpg"></div>
+						</div>
+						<div class="activity-money">￥120.00</div>
+						<div class="activity-money active">￥140.00</div>
+					</a></li>
+					
+					<li class="activity-li"><a href="javascript:;">
+						<div class="activity-img vertical-center">
+							<div class="vertical-auto"><img src="__MB__images//img.jpg"></div>
+						</div>
+						<div class="activity-money">￥120.00</div>
+						<div class="activity-money active">￥140.00</div>
+					</a></li>
+					<div class="clear-float"></div>
+				</ul>
+			</div>
+			<!--秒杀-->
+			
+			<!--分类-->
+			<!--<div class="classification">
+				<div class="classification-tier">
+					<div class="classification-text-img"><img src="__MB__images//text1.png"></div>
+					<div class="classification-title">发现品质生活</div>
+					<div class="classification-img-box">
+						<volist name="fl[0]" id="xx">
+							<a href="{:U('index/cate')}">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="{:attach($xx['img'],'item_cate')}"></div>
+								</div>
+							</a>
+						</volist>
+						<div class="clear-float"></div>
+					</div>
+				</div>
+				<div class="classification-tier">
+					<div class="classification-text-img"><img src="__MB__images//text2.png"></div>
+					<div class="classification-title">教你买买买</div>
+					<div class="classification-img-box">
+						<volist name="fl[1]" id="xx">
+							<a href="{:U('index/cate')}">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="{:attach($xx['img'],'item_cate')}"></div>
+								</div>
+							</a>
+						</volist>
+						<div class="clear-float"></div>
+					</div>
+				</div>
+				<div class="classification-tier">
+					<div class="classification-text-img"><img src="__MB__images//text3.png"></div>
+					<div class="classification-title">专属您的购物指南</div>
+					<div class="classification-img-box">
+						<volist name="fl[2]" id="xx">
+							<a href="{:U('index/detail',array('id'=>$xx['id']))}">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="{:attach($xx['img'],'item')}"></div>
+								</div>
+							</a>
+						</volist>
+						<div class="clear-float"></div>
+					</div>
+				</div>
+				<div class="classification-tier">
+					<div class="classification-text-img"><img src="__MB__images//text4.png"></div>
+					<div class="classification-title">赫斯顿红酒系列 天天1元抢</div>
+					<div class="classification-img-box">
+						<volist name="fl[3]" id="xx">
+							<a href="{:U('index/cate')}">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="{:attach($xx['img'],'item_cate')}"></div>
+								</div>
+							</a>
+						</volist>
+						<div class="clear-float"></div>
+					</div>
+				</div>
+				<div class="classification-tier">
+					<div class="classification-text-img"><img src="__MB__images//text5.png"></div>
+					<div class="classification-title">三星Note8现货抢购 vivo X20</div>
+					<div class="classification-img-box">
+						<volist name="fl[4]" id="xx">
+							<a href="{:U('index/detail',array('id'=>$xx['id']))}">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="{:attach($xx['img'],'item')}"></div>
+								</div>
+							</a>
+						</volist>
+						<div class="clear-float"></div>
+					</div>
+				</div>
+				<div class="classification-tier">
+					<div class="classification-inner">
+						<div class="classification-text-img"><img src="__MB__images//text6.png"></div>
+						<div class="classification-title">炸裂尖货上新</div>
+						<a href="{:U('index/detail',array('id'=>$xx['id']))}">
+							<div class="classification-img-tier vertical-center">
+								<div class="vertical-auto"><img src="{:attach($fl[5]['img'],'item')}"></div>
+							</div>
+						</a>
+					</div>
+					<div class="classification-inner">
+						<div class="classification-text-img"><img src="__MB__images//text7.png"></div>
+						<div class="classification-title">闪购天天陪你闪购天天陪你闪购天天陪你</div>
+						<a href="javascript:;">
+							<div class="classification-img-tier vertical-center">
+								<div class="vertical-auto"><img src="{:attach($fl[6]['img'],'item')}"></div>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="clear-float"></div>
+			</div>-->
+			<!--分类-->
+			
+			<!--爱生活-->
+			<!--<div class="livelihood-wrap">
+				<div class="livelihood-title-img"><img src="__MB__images//text8.png"></div>
+				<div class="livelihood-inner-con">
+					<volist name="all_ash" id="ash" key="k">
+					<div <if condition="$k lt 5">class="classification-tier"<else />class="classification-tier-min"</if>>
+						<div class="livelihood-title">{$ash.name}</div>
+						<div class="classification-img-box">
+							
+							<if condition="$k lt 5">
+								<volist name="ash['xx']" id="xx">
+									<a href="{:U('index/cate')}">
+										<div class="classification-img-tier vertical-center">
+											<div class="vertical-auto"><img src="{:attach($xx['img'],'item_cate')}"></div>
+										</div>
+									</a>
+								</volist>
+							<else />
+								<volist name="ash['xx']" id="xx" offset="0" length='1'>
+									<a href="{:U('index/cate')}">
+										<div class="classification-img-tier vertical-center">
+											<div class="vertical-auto"><img src="{:attach($xx['img'],'item_cate')}"></div>
+										</div>
+									</a>
+								</volist>
+							</if>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					</volist>
+					<div class="clear-float"></div>
+				</div>
+			</div>-->
+			<!--爱生活-->
+		
+			<!--购品质-->
+			<!--<div class="livelihood-wrap">
+				<div class="livelihood-title-img"><img src="__MB__images//text9.png"></div>
+				<div class="livelihood-inner-con">
+					<volist name="allpp" id="pp">
+					<div class="classification-tier">
+						<div class="livelihood-title">{$pp.name}</div>
+						<div class="classification-img-box">
+							<volist name="pp['xx']" id="xx" >
+								<a href="{:U('index/detail',array('id'=>$xx['id']))}">
+									<div class="classification-img-tier vertical-center">
+										<div class="vertical-auto"><img src="{:attach($xx['img'],'item')}"></div>
+									</div>
+								</a>
+							</volist>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					</volist>-->
+			<!--购品质-->
+			
+			
+			
+			<!--猜你喜欢-->
+
+			<!--<div class="suspect-wrap">
+				<div class="suspect-title"><span>—</span>猜你喜欢<span>—</span></div>
+				<ul class="suspect-ul">
+					<volist name="favour" id="val">
+					<li class="suspect-li"><a href="{:U('index/detail',array('id'=>$val['id']))}">
+						<div class="suspect-img vertical-center">
+							<div class="vertical-auto"><img src="{:get_thumb(attach($val['img'],'item'),'_b')}"></div>
+						</div>
+						<div class="suspect-img-name">
+                        {$val.title}
+						<div class="suspect-money">
+							<span>￥{$val.price}</span>{:payer($val['id'])}人已付款
+						</div>
+					</a>
+                    </li>
+					</volist>
+					<div class="clear-float"></div>
+
+				</ul>
+
+			</div>-->
+
+			<!--猜你喜欢-->
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!--分类-->
+			<div class="classification">
+				<div class="classification-tier">
+					<div class="classification-text-img"><img src="__MB__images/text1.png"></div>
+					<div class="classification-title">发现品质生活</div>
+					<div class="classification-img-box">
+							<div class="classification-img-tier vertical-center">
+								<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+							</div>
+							<div class="classification-img-tier vertical-center">
+								<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+							</div>
+						<div class="clear-float"></div>
+					</div>
+				</div>
+				<div class="classification-tier">
+					<div class="classification-text-img"><img src="__MB__images/text2.png"></div>
+					<div class="classification-title">教你买买买</div>
+					<div class="classification-img-box">
+							<div class="classification-img-tier vertical-center">
+								<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+							</div>
+							<div class="classification-img-tier vertical-center">
+								<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+							</div>
+						<div class="clear-float"></div>
+					</div>
+				</div>
+				<div class="classification-tier">
+					<div class="classification-text-img"><img src="__MB__images/text3.png"></div>
+					<div class="classification-title">专属您的购物指南</div>
+					<div class="classification-img-box">
+							<div class="classification-img-tier vertical-center">
+								<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+							</div>
+							<div class="classification-img-tier vertical-center">
+								<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+							</div>
+						<div class="clear-float"></div>
+					</div>
+				</div>
+				<div class="classification-tier">
+					<div class="classification-text-img"><img src="__MB__images/text4.png"></div>
+					<div class="classification-title">赫斯顿红酒系列 天天1元抢</div>
+					<div class="classification-img-box">
+							<div class="classification-img-tier vertical-center">
+								<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+							</div>
+							<div class="classification-img-tier vertical-center">
+								<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+							</div>
+						<div class="clear-float"></div>
+					</div>
+				</div>
+				<div class="classification-tier">
+					<div class="classification-text-img"><img src="__MB__images/text5.png"></div>
+					<div class="classification-title">三星Note8现货抢购 vivo X20</div>
+					<div class="classification-img-box">
+							<div class="classification-img-tier vertical-center">
+								<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+							</div>
+							<div class="classification-img-tier vertical-center">
+								<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+							</div>
+						<div class="clear-float"></div>
+					</div>
+				</div>
+				<div class="classification-tier">
+					<div class="classification-inner">
+						<div class="classification-text-img"><img src="__MB__images/text6.png"></div>
+						<div class="classification-title">炸裂尖货上新</div>
+							<div class="classification-img-tier vertical-center">
+								<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+							</div>
+					</div>
+					<div class="classification-inner">
+						<div class="classification-text-img"><img src="__MB__images/text7.png"></div>
+						<div class="classification-title">闪购天天陪你闪购天天陪你闪购天天陪你</div>
+							<div class="classification-img-tier vertical-center">
+								<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+							</div>
+					</div>
+				</div>
+				<div class="clear-float"></div>
+			</div>
+			<!--分类-->
+			
+			<!--爱生活-->
+			<div class="livelihood-wrap">
+				<div class="livelihood-title-img"><img src="__MB__images/text8.png"></div>
+				<div class="livelihood-inner-con">
+					<div class="classification-tier">
+						<div class="livelihood-title">玩3C</div>
+						<div class="livelihood-txt">iPhone 8新品上市 老款降价</div>
+						<div class="classification-img-box">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					
+					<div class="classification-tier">
+						<div class="livelihood-title">臻怡家家电</div>
+						<div class="livelihood-txt">国庆放电，最高减700元！</div>
+						<div class="classification-img-box">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					
+					<div class="classification-tier">
+						<div class="livelihood-title">臻怡家超市</div>
+						<div class="livelihood-txt">低至5折 满199减100</div>
+						<div class="classification-img-box">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					
+					<div class="classification-tier">
+						<div class="livelihood-title">臻怡家家电</div>
+						<div class="livelihood-txt">国庆放电，最高减700元！</div>
+						<div class="classification-img-box">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					
+					<div class="classification-tier-min">
+						<div class="livelihood-title">臻怡家家电</div>
+						<div class="livelihood-txt">国庆放电，最高减700元！</div>
+						<div class="classification-img-box">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					
+					<div class="classification-tier-min">
+						<div class="livelihood-title">臻怡家家电</div>
+						<div class="livelihood-txt">国庆放电，最高减700元！</div>
+						<div class="classification-img-box">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					
+					<div class="classification-tier-min">
+						<div class="livelihood-title">臻怡家家电</div>
+						<div class="livelihood-txt">国庆放电，最高减700元！</div>
+						<div class="classification-img-box">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					
+					<div class="classification-tier-min">
+						<div class="livelihood-title">臻怡家家电</div>
+						<div class="livelihood-txt">国庆放电，最高减700元！</div>
+						<div class="classification-img-box">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					<div class="clear-float"></div>
+				</div>
+			</div>
+			<!--爱生活-->
+			
+			<!--购品质-->
+			<div class="livelihood-wrap">
+				<div class="livelihood-title-img"><img src="__MB__images/text9.png"></div>
+				<div class="livelihood-inner-con">
+					<div class="classification-tier">
+						<div class="livelihood-title">臻怡家超市</div>
+						<div class="livelihood-txt active">低至5折 满199减100</div>
+						<div class="classification-img-box">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					
+					<div class="classification-tier">
+						<div class="livelihood-title">臻怡家家电</div>
+						<div class="livelihood-txt active">国庆放电，最高减700元！</div>
+						<div class="classification-img-box">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					
+					<div class="classification-tier-min">
+						<div class="livelihood-title">臻怡家家电</div>
+						<div class="livelihood-txt active">国庆放电，最高减700元！</div>
+						<div class="classification-img-box">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					
+					<div class="classification-tier-min">
+						<div class="livelihood-title">臻怡家家电</div>
+						<div class="livelihood-txt active">国庆放电，最高减700元！</div>
+						<div class="classification-img-box">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					
+					<div class="classification-tier-min">
+						<div class="livelihood-title">臻怡家家电</div>
+						<div class="livelihood-txt active">国庆放电，最高减700元！</div>
+						<div class="classification-img-box">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					
+					<div class="classification-tier-min">
+						<div class="livelihood-title">臻怡家家电</div>
+						<div class="livelihood-txt active">国庆放电，最高减700元！</div>
+						<div class="classification-img-box">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					
+					<div class="classification-tier-min">
+						<div class="livelihood-title">臻怡家家电</div>
+						<div class="livelihood-txt active">国庆放电，最高减700元！</div>
+						<div class="classification-img-box">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					
+					<div class="classification-tier-min">
+						<div class="livelihood-title">臻怡家家电</div>
+						<div class="livelihood-txt active">国庆放电，最高减700元！</div>
+						<div class="classification-img-box">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					
+					<div class="classification-tier-min">
+						<div class="livelihood-title">臻怡家家电</div>
+						<div class="livelihood-txt active">国庆放电，最高减700元！</div>
+						<div class="classification-img-box">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					
+					<div class="classification-tier-min">
+						<div class="livelihood-title">臻怡家家电</div>
+						<div class="livelihood-txt active">国庆放电，最高减700元！</div>
+						<div class="classification-img-box">
+								<div class="classification-img-tier vertical-center">
+									<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+								</div>
+							<div class="clear-float"></div>
+						</div>
+					</div>
+					
+					<div class="clear-float"></div>
+				</div>
+			</div>
+			<!--购品质-->
+			
+			<!--猜你喜欢-->
+			<div class="suspect-wrap">
+				<div class="suspect-title"><span>—</span>猜你喜欢<span>—</span></div>
+				<ul class="suspect-ul">
+					<li class="suspect-li">
+						<div class="suspect-img vertical-center">
+							<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+						</div>
+						<div class="suspect-img-name">精美礼盒亚菲儿女士香水持久淡香清新50ml香水女士精美礼盒亚菲儿女士香水持久淡香清新50ml香水女士精美礼盒亚菲儿女士香水持久淡香清新50ml香水女士</div>
+						<div class="suspect-money">
+							<span>￥125.00</span>100人已付款
+						</div>
+					</li>
+					<li class="suspect-li">
+						<div class="suspect-img vertical-center">
+							<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+						</div>
+						<div class="suspect-img-name">精美礼盒亚菲儿女士香水持久淡香清新50ml香水女士精美礼盒亚菲儿女士香水持久淡香清新50ml香水女士精美礼盒亚菲儿女士香水持久淡香清新50ml香水女士</div>
+						<div class="suspect-money">
+							<span>￥125.00</span>100人已付款
+						</div>
+					</li>
+					<li class="suspect-li">
+						<div class="suspect-img vertical-center">
+							<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+						</div>
+						<div class="suspect-img-name">精美礼盒亚菲儿女士香水持久淡香清新50ml香水女士精美礼盒亚菲儿女士香水持久淡香清新50ml香水女士精美礼盒亚菲儿女士香水持久淡香清新50ml香水女士</div>
+						<div class="suspect-money">
+							<span>￥125.00</span>100人已付款
+						</div>
+					</li>
+					<li class="suspect-li">
+						<div class="suspect-img vertical-center">
+							<div class="vertical-auto"><img src="__MB__images/img.jpg"></div>
+						</div>
+						<div class="suspect-img-name">精美礼盒亚菲儿女士香水持久淡香清新50ml香水女士精美礼盒亚菲儿女士香水持久淡香清新50ml香水女士精美礼盒亚菲儿女士香水持久淡香清新50ml香水女士</div>
+						<div class="suspect-money">
+							<span>￥125.00</span>100人已付款
+						</div>
+					</li>
+					
+					<div class="clear-float"></div>
+				</ul>
+			</div>
+			<!--猜你喜欢-->
+		<!--content-->
+</body>		
+</block>
+<block name="script">	
+		<link rel="stylesheet" href="__MB__css/swiper.css" />
+		<script src="__MB__js/swiper.min.js"></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script>
+
+				//banner
+
+				var swiper = new Swiper('.swiper-container',
+
+				{
+
+					pagination: '.swiper-pagination',
+
+					paginationClickable: true,
+
+					autoplay:3000,
+
+					autoplayDisableOnInteraction:false,
+
+					loop:true
+
+				});
+
+
+
+                wx.config({
+
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+
+                    appId: "{$js['appId']}", // 必填，公众号的唯一标识
+
+                    timestamp: "{$js['timestamp']}", // 必填，生成签名的时间戳
+
+                    nonceStr: "{$js['nonceStr']}", // 必填，生成签名的随机串
+
+                    signature: "{$js['signature']}",// 必填，签名，见附录1
+
+                    jsApiList: [ 'scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+
+                }); 
+
+
+
+                wx.ready(function(){
+
+                    $("#scanQRCode").on("click",function(){
+
+                        wx.scanQRCode({
+
+                            needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+
+                            scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+
+                            success: function (res) {
+
+                                var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+
+                            }
+
+                        });
+
+                    })
+
+                });
+
+			</script>
+
+</block>
+
+</html>

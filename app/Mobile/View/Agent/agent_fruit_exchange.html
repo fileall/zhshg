@@ -1,0 +1,149 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+<body class="body-bgColor">
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">金果兑换</div>
+        <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+        <div class="header-right"></div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="content">
+    <!--<div class="payment-wrap">
+        <div class="payment-logo"><span><img src="images/icon30.png"></span></div>
+        <div class="payment-name">向臻惠生活馆付款</div>
+        <div class="payment-money">￥100.00</div>
+    </div>-->
+    <div>
+        <div class="merchant-form row-box y-bg-white" style="margin-top: 0;">
+            <div class="merchant-currency font-28">面额：</div>
+            <div class="row-flex">
+                <div class="merchant-form-input vertical-center">
+                    <div class="vertical-auto" style="width: 100%;">
+                        <input class="font-32" type="number" placeholder="请输入兑换券面额"  id="face_value">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="merchant-form row-box y-bg-white" style="margin-top: 1px;">
+            <div class="merchant-currency font-28">数量：</div>
+            <div class="row-flex">
+                <div class="merchant-form-input vertical-center">
+                    <div class="vertical-auto" style="width: 100%;">
+                        <input class="font-32" type="number" placeholder="请输入兑换券数量" id="page_num">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="submit-button y-width94"><a id="pay-button" href="javascript:;">立即兑换</a></div>
+</div>
+<!--content-->
+
+<!--余额支付密码弹窗-->
+<div class="payment-window">
+    <div class="payment-inner-win">
+        <div class="payment-form">
+            <div class="y-color-999">
+                <div class="payment-left pay-close">x</div>
+                <div class="payment-title">输入支付密码</div>
+                <div class="payment-title y-border-top">支付0金果</div>
+            </div>
+            <!--密码区-->
+            <div class="pay-input-group row-box">
+                <div class="row-flex pass-input-wrap">
+                    <div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+                    <input type="password" readonly="readonly" value="">
+                </div>
+                <div class="row-flex pass-input-wrap">
+                    <div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+                    <input type="password" readonly="readonly" value="">
+                </div>
+                <div class="row-flex pass-input-wrap">
+                    <div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+                    <input type="password" readonly="readonly" value="">
+                </div>
+                <div class="row-flex pass-input-wrap">
+                    <div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+                    <input type="password" readonly="readonly" value="">
+                </div>
+                <div class="row-flex pass-input-wrap">
+                    <div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+                    <input type="password" readonly="readonly" value="">
+                </div>
+                <div class="row-flex pass-input-wrap">
+                    <div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+                    <input type="password" readonly="readonly" value="">
+                </div>
+            </div>
+            <!--密码区-->
+            <div class="y-text-right y-width94 y-mar-top20">
+                <a class="y-color-red" href="{:U('member/set_pw_pay',['set_pw_pay'=>10])}">忘记密码？</a>
+            </div>
+            <!--按钮去-->
+            <div class="pay-btn-group">
+                <button class="pay-button figure" value="1" type="button">1</button>
+                <button class="pay-button figure" value="2" type="button">2</button>
+                <button class="pay-button figure" value="3" type="button">3</button>
+                <button class="pay-button figure" value="4" type="button">4</button>
+                <button class="pay-button figure" value="5" type="button">5</button>
+                <button class="pay-button figure" value="6" type="button">6</button>
+                <button class="pay-button figure" value="7" type="button">7</button>
+                <button class="pay-button figure" value="8" type="button">8</button>
+                <button class="pay-button figure" value="9" type="button">9</button>
+                <button class="pay-button pay-button2" type="button"></button>
+                <button class="pay-button figure" value="0" type="button">0</button>
+                <button class="pay-button empty pay-button2" type="button"><i class="fa fa-times"></i></button>
+                <div class="clear-float"></div>
+            </div>
+            <!--按钮去-->
+        </div>
+    </div>
+</div>
+<!--余额支付密码弹窗-->
+<input type="hidden" value="8" id="origin_type" />
+<input type="hidden" value="{:U('agent_fruit_exchange')}" id="sealing_ye" />
+
+<!--footer-->
+<!--footer-->
+</body>
+</block>
+
+<block name="footer"></block>
+<block name="script">
+    <script>
+    $(".y-buy-li").click(function(){
+        $(this).addClass("y-buy-li-select").siblings().removeClass("y-buy-li-select")
+    })
+    $("#pay-button").click(function(){
+        // var reg = /^[1-9]+$/;
+        var reg =/^[1-9]\d*$/;
+        var face_value = $("#face_value").val();
+        if(!reg.test(face_value)){
+            layer.msg('面额请输入整数！',{icon:0,time:2000})
+            return false;
+        }
+        var page_num = $("#page_num").val();
+        if(!reg.test(page_num)){
+            layer.msg('数量请输入整数！',{icon:0,time:2000})
+            return false;
+        }
+        var nums=face_value*page_num;
+        $('.payment-title.y-border-top').html('支付金额'+nums+'金果');
+
+        $(".payment-window").addClass("active");
+        $(".payment-form").addClass("active");
+    })
+    $(".pay-close").click(function(){
+        $(".payment-window").removeClass("active");
+        $(".payment-form").removeClass("active");
+    })
+</script>
+</block>
+</html>

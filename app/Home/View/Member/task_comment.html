@@ -1,0 +1,32 @@
+<include file="Public/member_top" />
+
+    <!--右测导航栏开始-->
+    <div class="x-right-colunm">
+        <div class="x-right-colunm-inner mytaskComment">
+            <div class="x-headline bb1">老师批语</div>
+            <div class="mytaskCommentBox">
+                <h3 class="l-title">老师作业：</h3>
+                <div class="l-font">
+                    {:code2html($info['task'])}
+                </div>
+            </div>
+            <div class="mytaskCommentBox">
+                <h3 class="l-title">我的答题：</h3>
+                <div class="l-font">
+                    {$info['answer']}
+                </div>
+            </div>
+            <div class="mytaskCommentBox">
+                <h3 class="l-title">老师批语：</h3>
+                <div class="l-font mytaskComment-com" >
+                    {:code2html($info['comment'])}
+                </div>
+            </div>
+        </div>
+
+
+    </div><!--/x-right-colunm-->
+    <!--右测导航栏结束-->
+</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+
+<body>
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">我要升级</div>
+        <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+        <div class="header-right"></div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="content">
+    <div class="y-upgrade-content y-text-center y-bg-f5">
+        <div class="outstanding-box y-outstanding-box vertical-center">
+            <div class="vertical-auto">
+                <div class="y-upgrade-icon">
+                    <img src="__MB__images/y_icon36.png"/>
+                </div>
+                <div class="outstanding-title font-28">当前头衔：{$member.vips_name}</div>
+            </div>
+        </div>
+        <div class="y-upgrade-text">
+            <p class="y-upgrade-title y-bg-f5">升级条件</p>
+            <p class="y-color-999 font-28">您需要推荐{$vips_next.upgrade_condition}个会员即可成为银掌柜</p>
+            <p class="y-color-999 font-28">赶紧升级为{$vips_next.name}吧</p>
+        </div>
+        <div class="enter-form-btn y-enter-form-btn" >
+            <a href="javascript:;"><button type="button" id="sj">升级为{$vips_next.name}&nbsp;&nbsp;{$vips_next.upgrade_price}元</button></a>
+        </div>
+    </div>
+    <div class="employ-explain y-shaped-msg">
+        <div class="employ-explain-title y-color-333">成为掌柜有哪些好处?</div>
+        <ul class="font-28 y-mar-top20">
+            <li class="employ-explain-txt">1.分享好友购物可赚取更多悦买工资和银币；</li>
+            <li class="employ-explain-txt">2.有权在银楼置换更多银币；</li>
+
+            <!--<li class="employ-explain-txt">1.成为掌柜奖励一定数额银币</li>-->
+            <!--<li class="employ-explain-txt">2.成为掌柜奖励一定数额金果</li>-->
+            <!--<li class="employ-explain-txt">3.下级会员成掌柜奖励工资</li>-->
+            <!--<li class="employ-explain-txt">4.下级会员奖励银币</li>-->
+            <!--<li class="employ-explain-txt">5.下级会员购买元宝奖励银币</li>-->
+            <!--<li class="employ-explain-txt">6.下级商家盈利奖励银币</li>-->
+        </ul>
+    </div>
+</div>
+<!--content-->
+
+<!--footer-->
+<!--footer-->
+</body>
+    </body>
+</block>
+<block name="footer"></block>
+<block name="script">
+<script>
+    //点击购买
+    $('#sj').click(function(){
+        $.post('{:U("upgrade/make_order_upgrade")}',{after_vip:"{$vips_next.id}"},function(d){
+            if(d.status != 0){
+                window.location.href=d.url;
+            }else{
+                layer.msg(d.msg,{icon:0,time:1000});
+            }
+        })
+    })
+</script>
+</block>
+</html>

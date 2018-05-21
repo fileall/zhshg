@@ -1,0 +1,41 @@
+<extend name="Base/common"/> 
+
+<block name="header"></block>
+<block name="body">
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">消息详情</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="information">
+				<div class="information-inner">
+					<div class="information-h4">
+						{$new_details.title}
+						<div class="information-date">{:date('Y-m-d',$new_details['add_time'])}</div>
+					</div>
+					<div class="information-p">
+						<!--{:htmlspecialchars_decode(html_entity_decode($new_details['info']))}-->
+						{:code2html($new_details['info'])}
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>
+<block name="footer"></block>		
+<block name="script"></block>		
+</html>

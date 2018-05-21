@@ -1,0 +1,27 @@
+<volist name="lists" id="val">
+<li class="filtrate-list-li">
+<a href="mobile.php?m=Mobile&c=Index&a=shop_details&id={$val.id}">
+	<div class="filtrate-box row-box">
+		<div class="filtrate-list-left">
+			<div class="filtrate-list-img vertical-center">
+				<div class="vertical-auto">
+                <img src="{$val['img']}"></div>
+			</div>
+		</div>
+		
+		<div class="row-flex">
+			<div class="store-name">{$val.title}</div>
+			<div class="store-date">营业时间：{$val.shop_hours}</div>
+			<div class="store-txt">{$val.desc}</div>
+			<!--<div class="store-txt"><span class="zhi">支</span>支持 金元宝，银元宝，金果支付</div>
+			<div class="store-txt"><span class="bei">倍</span>赠送5倍银币</div>-->
+		</div>
+		
+		<div class="filtrate-list-right">
+			{$val.distance}km
+		</div>
+	</div>
+</a>
+</li>
+
+</volist>

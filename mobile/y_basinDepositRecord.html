@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<title></title>
+		<script src="js/fontSize.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/custom.js"></script>
+		<script type="text/javascript" src="js/prefixfree.min.js" ></script>
+	</head>
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">寄存明细</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content y-bg-white">
+			<!--为空时显示的背景图-->
+			<div class="y-record-bg y-hide">
+				<div class="y-record-bg-content"></div>
+				<p class="y-record-bg-text">这里空空如也~</p>
+			</div>
+			<!--弹出窗-->
+			<div class="y-alert-bg y-recordAlert-bg y-hide">
+				<div class="y-recordAlert y-alert-div">
+					<div class="y-alert-content y-recordAlert-content">确定提取到我的钱包？</div>
+					<div class="jus-bet y-alert-Button y-recordAlert-Button y-text-center">
+						<p class="y-alert-bankButton y-color-999">取消</p>
+						<p><a href="javascript:;" class="y-color-red y-block">确定</a></p>
+					</div>
+				</div>
+			</div>
+			<!--弹出窗-->
+			<ul>
+				<li class="y-bg-white y-declare-li">
+					<div class="declare-tier-top jus-bet font-32">
+						<div>本次寄存赠送100银币</div>
+						<div>50000</div>
+					</div>
+					<div class="declare-tier-bottom jus-bet ali-cen font-24">
+						<div class="y-color-999">2017-09-15 13:12:35</div>
+						<div class="y-color-666">剩余5天</div>
+					</div>
+				</li>
+				
+				<li class="y-declare-li">
+					<div class="declare-tier-top jus-bet font-32">
+						<div>本次寄存赠送100银币</div>
+						<div>50000</div>
+					</div>
+					<div class="declare-tier-bottom jus-bet ali-cen font-24">
+						<div class="y-color-999">2017-09-15 13:12:35</div>
+						<div class="y-bg-red y-record-button">提取</div>
+					</div>
+				</li>
+				<li class="y-declare-li">
+					<div class="declare-tier-top jus-bet font-32">
+						<div>本次寄存赠送100银币</div>
+						<div>50000</div>
+					</div>
+					<div class="declare-tier-bottom jus-bet ali-cen font-24">
+						<div class="y-color-999">2017-09-15 13:12:35</div>
+						<div class="y-color-666">已提取</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!--content-->
+		<!--footer-->
+		<!--footer-->
+	</body>
+	<script>
+		$(".y-record-button").click(function(){
+			$(".y-recordAlert-bg").show();
+		})
+		$(".y-alert-bankButton").click(function(){
+			$(".y-recordAlert-bg").hide();
+		})
+	</script>
+</html>

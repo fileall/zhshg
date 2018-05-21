@@ -1,0 +1,163 @@
+<include file="Public/mall_top" />
+<div class="bgf0f3f5">
+ 	<!--面包屑导航-->
+	<div class="ysw-crumbs">
+		<div class="wrap">
+			<a href="/" class="item hover-blue">首页</a>
+			<span class="item ico">&gt;</span>
+			<a href="{:U(Member/index)}" class="item hover-blue">商城</a>
+			<span class="item ico">&gt;</span>
+			<span class="item">商品列表</span>
+			<span class="fr">共{$count}个结果</span>
+		</div>
+	</div>
+	<!--面包屑导航-end-->
+ 	
+ 	<div class="wrap mall moreGoods">
+ 		<div class="techerList-type  wrap  bgfff">
+			<!--筛选电子产品-->	
+			<div class="type clear">
+				<span class="name">分类：</span>
+				<ul class="type-list clear fl">
+					<li><a href="{:U('Mall/dz_goods',array('id'=>0,'brand_id'=>$brand_id,'price_id'=>$price_id))}" class="<if condition="$id">hover-blue<else />all</if>">全部</a></li>
+					<volist name="cate_list" id="val">
+						<li><a href="{:U('Mall/dz_goods',array('id'=>$val['id'],'brand_id'=>$brand_id,'price_id'=>$price_id))}" class="<if condition="$id eq $val['id']">all<else />hover-blue</if>">{$val['name']}</a></li>
+					</volist>
+				</ul>
+			</div>
+			<div class="type clear">
+				<span class="name">品牌：</span>
+				<ul class="type-list clear fl">
+					<li><a href="{:U('Mall/dz_goods',array('id'=>$id,'brand_id'=>0,'price_id'=>$price_id))}" class="<if condition="$brand_id">hover-blue<else />all</if>">全部</a></li>
+					<volist name="brand_list" id="val">
+						<li><a href="{:U('Mall/dz_goods',array('id'=>$id,'brand_id'=>$val['id'],'price_id'=>$price_id))}" class="<if condition="$brand_id eq $val['id']">all<else />hover-blue</if>">{$val['name']}</a></li>
+					</volist>
+				</ul>
+			</div>
+			<div class="type clear">
+				<span class="name">价格：</span>
+				<ul class="type-list clear fl">
+					<li><a href="{:U('Mall/dz_goods',array('id'=>$id,'brand_id'=>$brand_id,'price_id'=>0))}" class="<if condition="$price_id">hover-blue<else />all</if>">全部</a></li>
+					<volist name="price_range" id="val">
+						<if condition="$val['end']">
+							<li><a href="{:U('Mall/dz_goods',array('id'=>$id,'brand_id'=>$brand_id,'price_id'=>$key))}" class="<if condition="$price_id eq $key">all<else />hover-blue</if>">{$val['start']}-{$val['end']}</a></li>
+						<else />
+							<li><a href="{:U('Mall/dz_goods',array('id'=>$id,'brand_id'=>$brand_id,'price_id'=>$key))}" class="<if condition="$price_id eq $key">all<else />hover-blue</if>">{$val['start']} 以上</a></li>
+						</if>
+					</volist>
+				</ul>
+			</div><!--筛选电子产品-end-->
+		</div>
+		<!--排序
+		<div class="techer-sort goodslist-sort clear">
+			<a href="javacript:;" class="item active">
+				<span>智能排序</span>
+			</a>
+			<a href="javacript:;" class="item">
+				<span class="ico-sort on">人气</span>
+			</a>
+			<a href="javacript:;" class="item">
+				<span class="ico-sort on">评价数</span>
+			</a>
+			<a href="javacript:;" class="item">
+				<span class="ico-sort on">价格</span>
+			</a>
+		</div>排序-end-->
+	
+ 		<!--电子产品-->
+	 	<div class="mall-box">
+	 		<ul class="mall-goodsList one clear">
+				<volist name="list" id="val" >
+					<li class="item">
+						<a href="{:U('Mall/goodsDetail',array('id'=>$val['id']))}">
+							<div class="mall-goodsImg">
+								<img src="{:attach($val['img'],'item')}" alt="" />
+							</div>
+						</a>
+						<p class="mall-goodsPrice">¥ {$val['price']}</p>
+						<a href="goodsDetail.html"><h3 class="mall-goodsName">{$val['title']}</h3></a>
+						<div class="clear mall-goodsBtns">
+							<if condition="$val['coll_nums']">
+								<a href="javascript:void(0);" class="collect active" data-id="{$val['id']}">已收藏</a>
+							<else />
+								<a href="javascript:void(0);" class="collect" data-id="{$val['id']}">收藏</a>
+							</if>
+							<a href="javascript:void(0);" class="joinCar" data-id="{$val['id']}">加入购物车</a>
+						</div>
+					</li>
+				</volist>
+	 		</ul>
+	 	</div>
+	 	<!--电子产品-end-->
+	 	<div class="news-page">
+			<!--分页
+			<div class="l-page">
+				<div class="box clear">
+					<a href="" class="prev">&lt;&lt;上一页</a>
+					<span class="active">1</span>
+					<a href="" class="item">2</a>
+					<a href="" class="item">3</a>
+					<a href="" class="item">4</a>
+					<a href="" class="next">下一页&gt;&gt;</a>
+				</div>
+			</div>
+			分页-end-->
+			{$page}
+		</div>
+ 	</div>
+ 	
+</div> 	
+ 	
+ 	<!--公共底部-->
+	<include file="Public/footer" />
+	<!--公共底部-end-->
+
+ 	<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__PC__/plugins/layui-v1.0.9/layui/layui.js" type="text/javascript"></script>
+	<script src="__PC__js/l_main.js"></script>
+	<script>
+        var uid = "{$uid}";
+        //layui-layer
+        layui.use('layer',function(){
+            var layer = layui.layer;
+        });
+        //收藏
+        $('.collect').click(function(){
+            var id = $(this).data('id'),
+                self = $(this);
+            if(uid){
+                $.post("{:U('Mall/collect_item')}",{id:id},function (result) {
+                    if(result[0] == 1){
+                        self.addClass('active').text('已收藏');
+                        layer.msg(result[1],{icon:1,time:2000});
+                    }else{
+                        layer.msg(result[1],{icon:2,time:2000});
+                    }
+                },'json')
+            }else{
+                layer.alert('请先登录！', {icon: 5, skin: 'layer-ext-moon'},function () {
+                    window.location.href="{:U('Login/enter')}";
+                })
+            }
+        });
+        //加入购物车
+        $('.joinCar').click(function(){
+            var id = $(this).data('id');
+            if(uid){
+                $.post("{:U('Mall/join_cart')}",{id:id,nums:1},function (result) {
+                    if(result[0] == 1){
+                        layer.msg(result[1],{icon:1,time:2000});
+                    }else{
+                        layer.msg(result[1],{icon:2,time:2000});
+                    }
+                },'json')
+            }else{
+                layer.alert('请先登录！', {icon: 5, skin: 'layer-ext-moon'},function () {
+                    window.location.href="{:U('Login/enter')}";
+                })
+            }
+        });
+	</script>
+  
+</body>
+</html>

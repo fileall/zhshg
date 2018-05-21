@@ -1,0 +1,50 @@
+<include file="Public/order_top" />
+	
+	<!--内容-->
+	<div class="shopCart3  wrap">
+		<!--信息-->
+		<div class="shopCart3-info">
+			<h3>微信扫码支付</h3>
+			<p class="info-p"><strong>请使用微信客户端扫一扫功能完成付款！订单号：{$info['order_sn']}</strong> </p>
+			<p class="info-p">请您在订单提交成功后尽快完成付款，兴智教育提供在线支付保障请您放心购买</p>
+		</div>
+		<!--扫一扫-->
+		<div class="clear shopCart4">
+			<div class="fl left">
+				<h3 class="shopCart4-title">微信支付</h3>
+				<img src="http://paysdk.weixin.qq.com/example/qrcode.php?data=<?php echo urlencode($url);?>" alt="" class="shopCart4-code"/>
+				<div class="shopCart4-tip">
+					<p>请使用微信扫一扫</p>
+					<p>扫描二维码支付</p>
+				</div>
+			</div>
+			<div class="fr right">
+				<img src="__PC__images/shopCart4-bg_03.jpg" class="right-bg"/>
+			</div>
+		</div>
+		<!--支付成功跳转shopCart5.html-->
+	</div>
+	<!--内容-end-->
+	
+ 	<!--公共底部-->
+	<include file="Public/footer" />
+ 	<!--公共底部-end-->
+ 	<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+ 	<script src="__PC__js/l_main.js"></script>
+	<script>
+		$(function () {
+		    var check_pay_ok = function(){
+                $.get("{:U('ItemOrder/ckeck_pay_ok')}"+"&id={$info['id']}",function (result) {
+                    if(result == 2){
+                        window.location.href="{:U('ItemOrder/payOk')}"+"&id={$info['id']}";
+                    }
+                })
+                setTimeout(function () {
+                    check_pay_ok();
+                },2000)
+			}
+            check_pay_ok();
+        })
+	</script>
+</body>
+</html>

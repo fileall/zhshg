@@ -1,0 +1,183 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">我的钱包</div>
+				<a href="/index.php?s=/Member/mine.html">
+					<div class="header-left"><i class="fa fa-angle-left"></i></div>
+				</a>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<!--我的钱包-->
+			<div class="burse-wrap row-box">
+				<div class="row-flex">
+					<a class="burse-link one" href="{:U('member/set_pw_pay',array('is_w'=>1))}">支付密码</a>
+				</div>
+				<div class="row-flex">
+					<a class="burse-link two" href="{:U('member/w_purse')}">余额</br>￥{$mem['prices']}</a>
+				</div>
+				<div class="row-flex">
+					<a class="burse-link three" href="{:U('member/w_bank')}">银行卡</a>
+				</div>
+			</div>
+			<!--我的钱包-->
+			
+			<!---币种-->
+			<div class="currency-wrap">
+				<ul class="currency-ul">
+					<li class="currency-li">
+						<a class="currency-link vertical-center" href="{:U('member/w_ingotA')}">
+							<div class="vertical-auto" style="width: 100%;">
+								<div class="currency-name">金元宝</div>
+								<div class="currency-money">{$mem['gold_acer']}</div>
+							</div>
+						</a>
+						
+						<a class="currency-link vertical-center" href="{:U('member/w_ingotB')}">
+							<div class="vertical-auto" style="width: 100%;">
+								<div class="currency-name">银元宝</div>
+								<div class="currency-money">{$mem['silver_acer']}</div>
+							</div>
+						</a>
+						<div class="clear-float"></div>
+					</li>
+					
+					<li class="currency-li">
+						<!--<a class="currency-link vertical-center" href="javascript:;">-->
+						<a class="currency-link vertical-center" href="{:U('member/w_ingotJB')}">
+							<div class="vertical-auto" style="width: 100%;">
+								<div class="currency-name">金币</div>
+								<div class="currency-money">{$mem['gold_coin']}</div>
+							</div>
+						</a>
+					
+						<!--<a class="currency-link vertical-center" href="javascript:;">-->
+						<a class="currency-link vertical-center" href="{:U('member/w_ingotYB')}">
+							<div class="vertical-auto" style="width: 100%;">
+								<div class="currency-name">银币</div>
+								<div class="currency-money">{$mem['silver_coin']}</div>
+							</div>
+						</a>
+						
+						<div class="clear-float"></div>
+					</li>
+					
+					<li class="currency-li">
+						<a class="currency-link vertical-center" href="{:U('member/w_jinguo')}">
+							<div class="vertical-auto" style="width: 100%;">
+								<div class="currency-name">金果</div>
+								<div class="currency-money">{$mem.gold_fruit}</div>
+							</div>
+						</a>
+						
+						<div class="clear-float"></div>
+					</li>
+					
+					<li class="currency-li margin">
+						<a class="currency-link vertical-center" href="{:U('member/sealing_pay')}">
+							<div class="vertical-auto" style="width: 100%;">
+								<div class="currency-name">元宝购买</div>
+								<div class="currency-money">越买越划算哦~</div>
+							</div>
+						</a>
+						
+						<a class="currency-link vertical-center" href="{:U('member/w_basin')}">
+							<div class="vertical-auto" style="width: 100%;">
+								<div class="currency-name">聚宝盆</div>
+								<div class="currency-money">你的财富聚集地！</div>
+							</div>
+						</a>
+						
+						<div class="clear-float"></div>
+					</li>
+				</ul>
+			</div>
+			<!---币种-->
+			
+			<!--<a href="purse.html">
+			<div class="wallet-wrap">
+				<div class="wallet-inner vertical-center">
+					<div class="vertical-auto">
+						<div class="wallet-money">2405.03</div>
+						<div class="wallet-unit">余额(元)</div>
+					</div>
+				</div>
+			</div>
+			</a>-->
+			
+			<!--<ul class="gold-silver-ul">
+				<a href="ingotA.html">
+				<li class="gold-silver-li riborder vertical-center">
+					<div class="vertical-auto">
+						<div class="wallet-money small">2405</div>
+						<div class="wallet-unit">金元宝(个)</div>
+					</div>
+				</li>
+				</a>
+				<a href="ingotA.html">
+				<li class="gold-silver-li vertical-center">
+					<div class="vertical-auto">
+						<div class="wallet-money small">2405</div>
+						<div class="wallet-unit">银元宝(个)</div>
+					</div>
+				</li>
+				</a>
+				<div class="clear-float"></div>
+			</ul>-->
+			
+			<!--<div class="gold-silver-wrap">
+				<ul class="gold-silver-nav-ul">
+					<li class="gold-silver-nav-li vertical-center"><a href="ingotA.html">
+						<div class="gold-silver-icon"><img src="images/icon22.png"></div>
+						<div class="gold-silver-name">元宝购买</div>
+					</a></li>
+					
+					<li class="gold-silver-nav-li vertical-center"><a href="bank.html">
+						<div class="gold-silver-icon"><img src="images/icon23.png"></div>
+						<div class="gold-silver-name">银行卡</div>
+					</a></li>
+					
+					<li class="gold-silver-nav-li vertical-center"><a href="basin.html">
+						<div class="gold-silver-icon"><img src="images/icon48.png"></div>
+						<div class="gold-silver-name">聚宝盆</div>
+					</a></li>
+					
+					<li class="gold-silver-nav-li vertical-center"><a href="golden_transfer.html">
+						<div class="gold-silver-icon"><img src="images/icon25.png"></div>
+						<div class="gold-silver-name">金果交易</div>
+					</a></li>
+					
+					<li class="gold-silver-nav-li vertical-center"><a href="record.html">
+						<div class="gold-silver-icon"><img src="images/icon26.png"></div>
+						<div class="gold-silver-name">收支明细</div>
+					</a></li>
+					
+					<li class="gold-silver-nav-li vertical-center"><a href="transfer.html">
+						<div class="gold-silver-icon"><img src="images/icon27.png"></div>
+						<div class="gold-silver-name">线下转账</div>
+					</a></li>
+					
+					<div class="clear-float"></div>
+				</ul>
+			</div>-->
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	
+		
+	</body>
+</block>
+<block name="footer"></block>
+<block name="script"></block>
+</html>

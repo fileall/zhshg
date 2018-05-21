@@ -1,0 +1,220 @@
+<extend name="Base/common"/> 
+<block name="header"></block>		
+<block name="body">
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">个人信息</div>
+				<a href="{:U('member/myset')}">
+					<div class="header-left"><i class="fa fa-angle-left"></i></div>
+				</a>
+				<!--<div class="header-right">
+					<div class="conserve-btn">保存</div>
+				</div>-->
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<ul class="set-con-ul">
+				<li class="set-con-li person">
+					<form action="{:U('member/avatar')}" name="avatar" method="post" enctype="multipart/form-data">
+						<div class="set-con-name">个人信息</div>
+						<div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+							<div class="person-imges">
+								<img id="avatar" src="{:attach($member['avatar'],'useravatar')}">
+							</div>
+						<!--<input type="file" class="aa">-->
+						<input type="" class="aa">
+						<div class="clear-float"></div>
+					</form>	
+				</li>
+			
+				<form action="{:U('member/material')}"  method="post" name="up">				
+				<input type="hidden" class="hide" name="avatar" value="{$member['avatar']}"/><!--ajax返回的文件名-->
+				
+				
+				<li class="set-con-li"><a href="{:U('member/set_person',array('is_page'=>1))}">
+					<div class="set-con-name">昵称</div>
+					<div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+					<div class="set-con-phone color">{$member['nickname']}</div>
+					<div class="clear-float"></div>
+				</a></li>
+				
+				<li class="set-con-li">
+					<div class="set-con-name">真实姓名</div>
+					<div class="set-con-id" id="realname">{$member.realname}</div>
+					<div class="clear-float"></div>
+				</li>
+				
+				<li class="set-con-li">
+					<div class="set-con-name">手机</div>
+					<div class="set-con-id">{$member.mobile}</div>
+					<div class="clear-float"></div>
+				</li>
+				
+				<li class="set-con-li"><a href="{:U('member/set_person',array('is_page'=>2))}">
+					<div class="set-con-name">性别</div>
+					<div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+					<div class="set-con-phone color">
+						<if condition="$member['sex'] == 1">男<elseif condition="$member['sex'] == 2" />女
+						<else/>未选择</if>
+
+					</div>
+					<div class="clear-float"></div>
+				</a></li>
+				
+				<li class="set-con-li"><a href="javascript:;">
+					<div class="set-con-name">地区</div>
+					<div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+					<div class="set-con-phone color">{$member['address']}</div>
+					<div class="clear-float"></div>
+				</a></li>
+				</form>	
+			</ul>
+			
+			<div class="secede-txt">退出登录</div>
+			
+		</div>
+		<!--content-->
+		
+		<!--footer--><!--间距-->
+		<block name="footer"></block>
+	</body>
+</block>	
+		
+<block name="script">
+<script>
+	//退出登录	
+	$('.secede-txt').click(function(){
+	  layer.confirm('是否退出登录?', {
+			icon: 3,
+			title: '提示', 
+	  },function(){ 
+			$.get('{:U("login/login_out")}',function(d){
+				if(d.status==1){
+//					layer.msg(''+d.msg+'');
+					window.location.href=d.url;
+				}
+			},"JSON")
+		})
+	}) 
+	
+	//用户名字提示实名认证
+	$('#realname').click(function(){
+		layer.confirm('实名认证,享受更多权力', {icon:3,btn: ['确定','取消']},function(){
+			window.location.href='{:U("member/set_attestation")}';
+		})
+	})
+	
+	
+	</script>
+	<!--微信多图上传-->
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script>
+		wx.config({  
+	        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+	        appId: "{$js['appId']}", // 必填，公众号的唯一标识
+	        timestamp: "{$js['timestamp']}", // 必填，生成签名的时间戳
+	        nonceStr: "{$js['nonceStr']}", // 必填，生成签名的随机串
+	        signature: "{$js['signature']}",// 必填，签名，见附录1
+	        jsApiList: [ 'chooseImage','previewImage','uploadImage','downloadImage','getLocalImgData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	    }); 
+    	//选择图片
+	    $(".aa").click(function(){
+		    wx.chooseImage({
+			    count: 1, // 默认9
+			    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+			    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+			    success: function (res) {
+			        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+			        uploadImage(localIds);
+			    }
+			});
+		})
+	    
+	    //上传图片
+	    function uploadImage(localIds)
+	    {
+	    	var localId = localIds.pop()
+	    	wx.uploadImage({
+			    localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+			    isShowProgressTips: 1, // 默认为1，显示进度提示
+			    success: function (res) {
+			    	var serverId = res.serverId; // 返回图片的服务器端ID
+//			    	location.href = "/index.php?m=Mobile&c=Member&a=uploadImage&media_id="+serverId;
+		    	 	 download(serverId);
+			    	if (localIds.length > 0) {  
+			    		uploadImage(localIds)
+			    	} 
+			    }
+			});
+	    }
+	    
+	     //临时文件预览
+       function download(serverId) {
+//      	location.href = "/index.php?m=Mobile&c=Merchant&a=uploadImage&media_id="+serverId;
+            $.post("/index.php?m=Mobile&c=Member&a=uploadImage", {'media_id': serverId}, function (data) {
+            	if (data.sta == 1) {
+					$.post('',{avatar:data.name,is_avatar:1},function(mess){
+						if(mess.status==1){
+							alert(mess.msg);
+							$(".person-imges").html(''
+	            			+'<img  src="data/attachment/useravatar/'+data.name+'" />'
+							+'<input type="hidden" name="useravatar"  value="">');
+						}else{
+							alert(mess.msg);
+						}
+					});
+					
+                }
+            }, 'json');
+        }
+	
+	
+	
+	
+	
+	
+	
+	//上传头像
+//	$('.aa').change(function() {
+//		var a = $(this);
+//		var fd = new FormData('form[name="avatar"]');//序列化
+//		fd.append('file', a[0].files[0]);
+//	
+//		if(a.val() != '') {
+//			$.ajax({
+//				url: "{:U('Member/zed')}",
+//				dataType: "JSON",
+//				data: fd,
+//				type: "POST",
+//				contentType: false,
+//				processData: false,
+//				success: function(d) {
+//					if(d != 0) {
+//						$.post('',{avatar:d['img'],is_avatar:1},function(mess){
+//							if(mess.status==1){
+//								$('#avatar').attr('src', '/data/attachment/useravatar/'+d['img']);//展示头像
+//								$('.hide').val(d['img']);//上传后返回的照片名字
+//							}else{
+//								layer.msg(mess.msg,{icon:0,time:2000})
+//							}
+//							
+//						})
+//						
+//						
+//					}
+//				}
+//			})
+//		}
+//	})
+//})
+</script>
+</block>	
+	
+</html>

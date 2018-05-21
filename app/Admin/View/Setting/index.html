@@ -1,0 +1,176 @@
+<include file="Public:header" />
+<!--网站设置-->
+<div class="pad_lr_10">
+	<div class="box-title">
+		站点设置
+	</div>
+	<form id="info_form" action="{:u('setting/edit')}" method="post">
+	<table width="100%" class="table_form">
+        <tr>
+            <th width="150">版权所有 :</th>
+            <td><input type="text" name="setting[site_name]" class="input-text" size="50" value="{:C('pin_site_name')}"></td>
+        </tr>
+        <tr>
+            <th>{:L('site_name')}|{:L('seo_title')} :</th>
+            <td><input type="text" name="setting[site_title]" class="input-text" size="50" value="{:C('pin_site_title')}"></td>
+        </tr>
+        <tr>
+            <th>{:L('seo_keys')} :</th>
+            <td><input type="text" name="setting[site_keyword]" class="input-text" size="50" value="{:C('pin_site_keyword')}"></td>
+        </tr>
+        <tr>
+            <th>{:L('seo_desc')} :</th>
+            <td><textarea rows="3" cols="50" name="setting[site_description]">{:C('pin_site_description')}</textarea></td>
+        </tr>
+        <tr>
+            <th>{:L('site_icp')} :</th>
+            <td><input type="text" name="setting[site_icp]" class="input-text" size="50" value="{:C('pin_site_icp')}"></td>
+        </tr>
+        <tr>
+            <th>{:L('statistics_code')} :</th>
+            <td><textarea rows="3" cols="50" name="setting[statistics_code]">{:C('pin_statistics_code')}</textarea></td>
+        </tr>
+		<tr>
+            <th>网址 :</th>
+            <td><input type="text" name="setting[site_url]" class="input-text" size="50" value="{:C('pin_site_url')}">不带http://</td>
+        </tr>
+		<tr>
+            <th>邮箱 :</th>
+            <td><input type="text" name="setting[email]" class="input-text" size="50" value="{:C('pin_email')}"></td>
+        </tr>
+		<tr>
+            <th>电话 :</th>
+            <td><input type="text" name="setting[tel]" class="input-text" size="50" value="{:C('pin_tel')}"></td>
+        </tr>
+		<tr>
+            <th>手机 :</th>
+            <td><input type="text" name="setting[mobile]" class="input-text" size="50" value="{:C('pin_mobile')}"></td>
+        </tr>
+		<tr>
+            <th>地址 :</th>
+            <td><input type="text" name="setting[address]" class="input-text" size="50" value="{:C('pin_address')}"></td>
+        </tr>
+        <tr>
+            <th>银币日成长比例 :</th>
+            <td>
+                <input type="text" name="setting[silver_coin]" class="input-text" size="20" value="{:C('pin_silver_coin')}">/万
+            </td>
+        </tr>
+        
+        <tr>
+            <th>银币转余额比例 :</th>
+            <td>
+                <input type="text" name="setting[jb_ye]" class="input-text" size="20" value="{:C('pin_jb_ye')}">%
+            </td>
+        </tr>
+        
+        <tr>
+            <th>银币转余额手续费 :</th>
+            <td>
+                <input type="text" name="setting[jb_ye_sxf]" class="input-text" size="20" value="{:C('pin_jb_ye_sxf')}">%
+            </td>
+        </tr>
+        <tr>
+            <th>银币转余额金果占比 :</th>
+            <td>
+                <input type="text" name="setting[jb_ye_jg]" class="input-text" size="20" value="{:C('pin_jb_ye_jg')}">%
+            </td>
+        </tr>
+         <tr>
+            <th>金果市场价 :</th>
+            <td>
+                <input type="text" name="setting[jg_scj]" class="input-text" size="20" value="{:C('pin_jg_scj')}">元
+            </td>
+        </tr>
+        <tr>
+            <th>金果互转手续费 :</th>
+            <td>
+                <input type="text" name="setting[jg_sxf]" class="input-text" size="20" value="{:C('pin_jg_sxf')}">%
+            </td>
+        </tr>
+        <tr>
+            <th>元宝互转手续费 :</th>
+            <td>
+                <input type="text" name="setting[yb_sxf]" class="input-text" size="20" value="{:C('pin_yb_sxf')}">%
+            </td>
+        </tr>
+        <tr>
+            <th>余额提现手续费 :</th>
+            <td>
+                <input type="text" name="setting[tx_sxf]" class="input-text" size="20" value="{:C('pin_tx_sxf')}">元
+            </td>
+        </tr>
+        <tr>
+            <th>单笔最高提现金额 :</th>
+            <td>
+                <input type="text" name="setting[tx_db_je]" class="input-text" size="20" value="{:C('pin_tx_db_je')}">万
+            </td>
+        </tr>
+        <tr>
+            <th>每日最高提现金额 :</th>
+            <td>
+                <input type="text" name="setting[tx_mr_je]" class="input-text" size="20" value="{:C('pin_tx_mr_je')}">万
+            </td>
+        </tr>
+        <tr>
+            <th>银楼置换银币:</th>
+            <td>
+                <input type="text" name="setting[yl_bs]" class="input-text" size="20" value="{:C('pin_yl_bs')}">倍
+            </td>
+        </tr>
+        <tr>
+            <th>聚宝盆银币收益:</th>
+            <td>
+                <input type="text" name="setting[jbp_bs]" class="input-text" size="20" value="{:C('pin_jbp_bs')}">倍
+            </td>
+        </tr>
+        <tr>
+            <th>聚宝盆周期:</th>
+            <td>
+                <input type="text" name="setting[jbp_zq]" class="input-text" size="20" value="{:C('pin_jbp_zq')}">天
+            </td>
+        </tr>
+        <tr>
+            <th>提现周期:</th>
+            <td>
+                <input type="text" name="setting[tx_zq]" class="input-text" size="20" value="{:C('pin_tx_zq')}">天
+            </td>
+        </tr>
+
+
+    	<tr>
+        	<th>{:L('site_status')} :</th>
+        	<td>
+            	<label><input type="radio" class="J_change_status" <if condition="C('pin_site_status') eq '1'">checked="checked"</if> value="1" name="setting[site_status]"> {:L('open')}</label> &nbsp;&nbsp;
+                <label><input type="radio" class="J_change_status" <if condition="C('pin_site_status') eq '0'">checked="checked"</if> value="0" name="setting[site_status]"> {:L('close')}</label>
+            </td>
+    	</tr>
+        <tr id="J_closed_reason" <if condition="C('pin_site_status') eq 1">class="hidden"</if>>
+        	<th>{:L('closed_reason')} :</th>
+        	<td><textarea rows="4" cols="50" name="setting[closed_reason]" id="closed_reason">{:C('pin_closed_reason')}</textarea></td>
+    	</tr>
+        <tr>
+        	<th></th>
+        	<td><input type="hidden" name="menuid"  value="{$menuid}"/><input type="submit" class="btn btn_submit" value="{:L('submit')}"/></td>
+    	</tr>
+
+
+    </table>
+	</form>
+    <br/>
+    <br/>
+</div>
+<include file="Public:footer" />
+<script>
+$(function(){
+    $('.J_change_status').live('click', function(){
+        if($(this).val() == '0'){
+            $('#J_closed_reason').fadeIn();
+        }else{
+            $('#J_closed_reason').fadeOut();
+        }
+    });
+});
+</script>
+</body>
+</html>

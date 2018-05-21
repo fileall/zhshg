@@ -1,0 +1,65 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">我的金元宝</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<div class="notecase">
+			<div class="notecase-inner">
+				<div class="notecase-txt">元宝个数(个)</div>
+				<div class="notecase-number">{$member['gold_acer']}</div>
+				<a class="notecase-link" href="{:U('member/sealing_pay')}">购买元宝</a>
+			</div>
+		</div>
+		<div style="width: 100%;height: 3.5rem;"></div>
+		
+		<!--content-->
+		<div class="content">
+			<div class="notecase-tis">购买消费明细</div>
+			
+
+
+			<ul class="notecase-ul">
+				<volist name="ye" id="y">
+				<if condition="$y['type'] == 2">
+					<li class="notecase-li">
+						<div class="notecase-left">
+							<div class="notecase-type">购买</div><!--在线充值-->
+							<div class="notecase-date">{:date('Y-m-d',$y['add_time'])}</div>
+						</div>
+						<div class="notecase-right">+{$y['totalprices']}</div>
+						<div class="clear-float"></div>
+					</li>
+				<elseif condition="$y['type'] == 1" />	
+					<li class="notecase-li">
+						<div class="notecase-left">
+							<div class="notecase-type">消费</div><!--消费-->
+							<div class="notecase-date">{:date('Y-m-d',$y['add_time'])}</div>
+						</div>
+						<div class="notecase-right active">-{$y['totalprices']}</div>
+						<div class="clear-float"></div>
+					</li>
+				</if>
+				</volist>
+			
+			</ul>
+			
+			<div class="more-text">查看更多&gt;</div>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>	
+<block name="footer"></block>
+</html>

@@ -1,0 +1,88 @@
+<include file="Public/order_top" />
+	
+	<!--内容-->
+	<div class="wrap marT20 shopCart2 bgfff">
+		<div class="shopCart mar0">
+			<!--课程信息-->
+			<h3 class="courseBuyBoxTitle">核对信息</h3>
+			<table class="courseBuyInfo">
+				<thead>
+					<tr>
+						<th>学员姓名</th>
+						<th>手机号</th>
+						<th>课程名称</th>
+						<th>学习周期</th>
+						<th>价格</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{$user_info['realname']}</td>
+						<td>{$user_info['mobile']}</td>
+						<td>{$info[title]}</td>
+						<td>{$info[cycle]}个月</td>
+						<td>￥{$info[price]}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="clear courseBuyInfo-zx"> 
+				<h3>咨询老师：</h3>
+				<div class="item"> 
+					<p> 
+						<label for="">姓名：</label>
+						<input type="text" id="name" placeholder="没有可不填" class="bigText" /> &nbsp;&nbsp;&nbsp;
+						<label for="">微信号：</label>  
+						<input type="text" id="we_chat" placeholder="没有可不填" class="bigText" />
+					</p>
+				</div>
+				
+			</div>
+		</div><!--课程信息-end-->
+
+		<!--统计-->
+			<div class="clear padTB marB20">
+				<div class="fr shopCart2-btn">
+					<h3>应付总额：<strong>￥{$info[price]}</strong></h3>
+					<a href="javascript:;" class="btn blue">确认购买</a>
+				</div> 
+			</div>
+		<!--统计-end-->
+	</div>
+	<!--内容-end-->
+	
+ 	<!--公共底部-->
+	<include file="Public/footer" /> 
+ 	<!--公共底部-end-->
+
+ 	<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+ 	<script src="__PC__js/l_main.js"></script>
+	<script src="__PC__plugins/layui-v1.0.9/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		layui.use('layer',function(){
+			var layer = layui.layer;
+		});
+
+        function setCookie(c_name,value,expiredays)
+        {
+            var exdate=new Date()
+            exdate.setDate(exdate.getDate()+expiredays)
+            document.cookie=c_name+ "=" +escape(value)+
+                ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+        }
+
+		//会员资料完善判断
+		$('.blue').click(function () {
+			var name = "{$user_info['realname']}";
+			if(!name){
+				layer.msg('亲，请先完善个人信息！', {icon: 5});
+				setTimeout(function () {
+					window.location.href="{:U('Member/index')}";
+				},2000)
+			}else{
+                setCookie('set_teacher',JSON.stringify({name:$('#name').val(),we_chat:$('#we_chat').val()}));
+				window.location.href="{:U('Order/shopCart')}";
+			}
+		})
+	</script>
+</body>
+</html>

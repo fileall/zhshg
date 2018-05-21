@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<title></title>
+		<script src="js/fontSize.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/custom.js"></script>
+	</head>
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">商铺详情</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<!--banner-->
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<div class="banner-image vertical-center">
+							<div class="all-auto"><img src="images/banner1.jpg"></div>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						<div class="banner-image vertical-center">
+							<div class="all-auto"><img src="images/banner1.jpg"></div>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						<div class="banner-image vertical-center">
+							<div class="all-auto"><img src="images/banner1.jpg"></div>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
+			<!--banner-->
+			
+			<div class="shop-message">
+				<ul class="shop-message-ul">
+					<li class="shop-message-li">
+						<div class="shop-message-box row-box">
+							<div class="shop-message-name">商铺名称</div>
+							
+							<div class="row-flex">
+								<div class="shop-message-txt">云水茶楼</div>
+								<a class="shop-message-link" href="shop_map.html">商铺地图</a>
+								<div class="clear-float"></div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="shop-message-li">
+						<div class="shop-message-box row-box">
+							<div class="shop-message-name">营业时间</div>
+							
+							<div class="row-flex">
+								<div class="shop-message-txt">08:30至23:00</div>
+								<a class="shop-message-link" href="tel:123456789"><span><img src="images/icon49.png"></span></a>
+								<div class="clear-float"></div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="shop-message-li">
+						<div class="shop-message-box row-box">
+							<div class="shop-message-name">商铺类型</div>
+							
+							<div class="row-flex">
+								<div class="shop-message-txt">休闲/娱乐</div>
+								<div class="clear-float"></div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="shop-message-li">
+						<div class="shop-message-box row-box">
+							<div class="shop-message-name">所在位置</div>
+							
+							<div class="row-flex">
+								<div class="shop-message-txt">江西省南昌市青山湖区上海路92号</div>
+								<div class="clear-float"></div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="shop-message-li">
+						<div class="shop-message-box row-box">
+							<div class="row-flex">
+								<div class="store-txt"><span class="zhi">付</span>支持 金元宝，银元宝，金果支付</div>
+								<div class="store-txt"><span class="bei">送</span>赠送5倍银币</div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="shop-message-li">
+						<div class="shop-message-box">
+							<div class="shop-message-name">商铺简介</div>
+							
+							<div class="row-flex y-mar-top20">
+								<div class="shop-message-txt">
+									主要经营茶水类，有红茶、绿茶、白茶、普洱茶、龙井、毛尖等多种商品。并提供卡座包间等多种服务。有经验丰富的茶艺师为你服务。
+								</div>
+								<div class="clear-float"></div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+		<link rel="stylesheet" href="css/swiper.css" />
+		<script src="js/swiper.min.js"></script>
+		<script>
+		//banner
+		var swiper = new Swiper('.swiper-container', 
+		{
+			pagination: '.swiper-pagination',
+			paginationClickable: true,
+			autoplayDisableOnInteraction:false,
+			loop:true
+		});
+		</script>
+	</body>
+</html>

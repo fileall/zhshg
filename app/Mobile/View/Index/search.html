@@ -1,0 +1,102 @@
+<extend name="Base/common"/> 
+<block name="header">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">搜索</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+			</block>
+		
+		<block name="body">
+		<div class="grabble-wrap">
+			<div class="grabble-inner row-box">
+				<div class="row-flex">
+					<div class="row-flex vertical-center grabble-input">
+						<div class="vertical-auto" style="width: 100%;"><input type="text" name="search" placeholder="请输入商品"></div>
+					</div>
+				</div>
+				<div class="grabble-icon">
+					<div class="grabble-icon-btn"><a href="javascript:;">
+						<button type="button"><i class="fa fa-search"></i></button>
+					</a></div>
+				</div>
+			</div>
+		</div>
+		<div style="width: 100%;height: 0.8rem;"></div>
+		
+		<!--content-->
+		<div class="content">
+			<div class="records-wrap">
+				<div class="records-title">热门搜索</div>
+				<div class="hot-content">
+					<ul class="hot-con-ul">
+						<volist name="searchKeywords" id="val">
+							<li class="hot-con-li"><a href="{:U('commodity',array('search'=>$val['keywords']))}">{$val['keywords']}</a></li>
+						</volist>
+						<div class="clear-float"></div>
+					</ul>
+				</div>
+				
+				<!--<div class="records-title">历史搜索</div>
+				<ul class="records-ul">
+					<li class="row-box records-li">
+						<div class="row-flex">
+							<a href="commodity.html"><div class="records-name">历史搜索标题</div></a>
+						</div>
+						<div class="records-delete">
+							<i class="fa fa-trash-o"></i>
+						</div>
+					</li>
+						
+					<li class="row-box records-li">
+						<div class="row-flex">
+							<a href="commodity.html"><div class="records-name">历史搜索标题</div></a>
+						</div>
+						<div class="records-delete">
+							<i class="fa fa-trash-o"></i>
+						</div>
+					</li>
+						
+					<li class="row-box records-li">
+						<div class="row-flex">
+							<a href="commodity.html"><div class="records-name">历史搜索标题</div></a>
+						</div>
+						<div class="records-delete">
+							<i class="fa fa-trash-o"></i>
+						</div>
+					</li>
+						
+					<li class="row-box records-li">
+						<div class="row-flex">
+							<a href="commodity.html"><div class="records-name">历史搜索标题</div></a>
+						</div>
+						<div class="records-delete">
+							<i class="fa fa-trash-o"></i>
+						</div>
+					</li>
+				</ul>-->
+			</div>
+			
+		</div>
+		<!--content-->
+</block>
+<block name="footer"></block>
+<block name="script">
+<script type="text/javascript">
+    $(".fa-search").click(function(){
+        var search = $('input[name="search"]').val()
+        if (search ==""){
+            layer.msg('请输入搜索内容')
+            return;
+        }
+        //var urls = '/sh/index.php/Classify/subclassify';
+        location.href = "{:U('commodity')}&search="+search;
+    });
+</script>
+</block>
+</html>

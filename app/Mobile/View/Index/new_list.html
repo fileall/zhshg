@@ -1,0 +1,51 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">消息列表</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		<!--content-->
+		<div class="content">
+			<ul class="message-list-ul">
+				<volist name="new_list" id="new">
+					
+					<li class="message-list <if condition="$new['is_read'] neq 1">active</if>"><!--未读消息-->
+						<a href="{:U('index/new_details',array('id'=>$new['id']))}">
+							<div class="row-box">
+								<div class="message-list-left">●</div>
+								<div class="row-flex">
+									<div class="message-list-txt">{$new.title}</div>
+								</div>
+								<div class="message-list-date">{:date('Y-m-d',$new['add_time'])}</div>
+							</div>
+						</a>
+					</li>
+				</volist>
+				
+			</ul>
+			<!--<div class="more-text">查看更多></div>-->
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>
+<block name="footer"></block>		
+<block name="script">
+<script>
+//	$('.message-list').click(function(){
+//		$(this).addClass('active');
+//	})
+</script>	
+	
+</block>		
+</html>

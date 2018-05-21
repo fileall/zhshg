@@ -1,0 +1,148 @@
+<include file="Public/top" />
+	
+	<!--面包屑导航-->
+	<div class="ysw-crumbs">
+		<div class="wrap">
+			<a href="{:U('Curriculum/classroom')}" class="item hover-blue">语数外课堂</a>
+			<span class="item ico">&gt;</span>
+			<span class="item">老师课堂</span>
+		</div>
+	</div>
+	<!--面包屑导航-end-->
+	
+	<!--内容-->
+	<div class="techerList-list bgf0f3f5">
+		<div class="clear wrap">
+			<!--左边-->
+			<div class="techerList-left bgfff">
+				<ul class="liveList-tab clear">
+					<li class="item">
+						<a href="javascript:;">{$cate_list[$stage_id]['name']?$cate_list[$stage_id]['name']:"阶段"}</a>
+						<dl class="liveList-downMenu hide">
+							<volist name="stage" id="val"> 
+								<dd>
+									<a href="{:U('Curriculum/techerList',array('stage_id'=>$val['id'],'seniority_id'=>$seniority_id))}">
+										{$val['name']}
+									</a>
+								</dd>
+							</volist>
+						</dl>
+					</li>
+					<li class="item">
+						<a href="javascript:;">{$cate_list[$grade_id]['name']?$cate_list[$grade_id]['name']:"年级"}</a>
+						<dl class="liveList-downMenu hide" style="display: none;">
+							<volist name="grade" id="val">
+								<dd>
+									<a href="{:U('Curriculum/techerList',array('stage_id'=>$stage_id,'grade_id'=>$val['id'],'seniority_id'=>$seniority_id))}">
+										{$val['name']}
+									</a>
+								</dd>
+							</volist>
+						</dl>
+					</li>
+					<li class="item">
+						<a href="javascript:;">{$cate_list[$subject_id]['name']?$cate_list[$subject_id]['name']:"科目"}</a>
+						<dl class="liveList-downMenu hide" style="display: none;">
+							<volist name="subject" id="val">
+								<dd>
+									<a href="{:U('Curriculum/techerList',array('stage_id'=>$stage_id,'grade_id'=>$grade_id,'subject_id'=>$val['id'],'seniority_id'=>$seniority_id))}">
+										{$val['name']}
+									</a>
+								</dd>
+							</volist>
+						</dl>
+					</li>
+					<!--<li class="item">
+						<a href="javascript:;">{$seniority[$seniority_id]['name']?$seniority[$seniority_id]['name']:"教龄"}</a>
+						<dl class="liveList-downMenu hide">
+							<volist name="seniority" id="val">
+								<dd>
+									<a href="{:U('Curriculum/techerList',array('stage_id'=>$stage_id,'grade_id'=>$grade_id,'subject_id'=>$subject_id,'seniority_id'=>$key))}">
+										{$val['name']}
+									</a>
+								</dd>
+							</volist>
+						</dl>
+					</li>-->
+				</ul>
+				<!--排序-->
+				<!--<div class="techer-sort clear">
+					<a href="javacript:;" class="item active">
+						<span>智能排序</span>
+					</a>
+					<a href="javacript:;" class="item">
+						<span class="ico-sort on">人气</span>
+					</a>
+					<a href="javacript:;" class="item">
+						<span class="ico-sort on">评价数</span>
+					</a>
+					<a href="javacript:;" class="item">
+						<span class="ico-sort on">价格</span>
+					</a>
+				</div>-->
+				<!--教师列表-->
+
+				<ul class="liveList-list bgfff">
+					<volist name="list" id="val">
+						<li class="item clear">
+							<div class="left-img">
+								<a href="{:U('Curriculum/techerDetail',array('id'=>$val['id']))}">
+									<img src="{:attach($val['img'],'curriculum')}" alt="">
+								</a>
+							</div>
+							<div class="right-info">
+								<a href="{:U('Curriculum/techerDetail',array('id'=>$val['id']))}" class="hover-blue">
+									<h3 class="live-title">{$val['title']}</h3>
+								</a>
+								<p class="live-pro">
+									{:code2html($val['info'])}
+								</p>
+								<div class="clear">
+									<span class="fr howMuch">{$val['people']}人预约</span>
+								</div>
+								<div class="clear live-yuyue">
+									<span>课时数：{$val['nums']}节</span>
+									<span>类别：{$val['cate_name']}</span>
+									<a href="{:U('Curriculum/techerDetail',array('id'=>$val['id']))}" class="fr btn orange">
+										立即预约
+									</a>
+								</div>
+							</div>
+						</li>
+					</volist>
+				</ul>
+				
+				<div class="news-page">
+					<!--分页-->
+						{$page}
+					<!--分页-end-->
+					</div>
+			</div><!--左边-end-->
+			<!--右边-->
+			<div class="techerList-right">
+				<h3 class="title">热门老师推荐</h3>
+				<ul class="hotTecher-list bgfff">
+					<volist name="tj_list" id="val">
+						<li class="clear">
+							<a href="{:U('Curriculum/techerDetail',array('id'=>$val['id']))}">
+								<h3 class="hotTecher-name">{$val['title']}</h3>
+								<img src="{:attach($val['img'],'curriculum')}" alt="" class="hotTecher-img"/>
+							</a>
+						</li>
+					</volist>
+				</ul>
+			</div><!--右边-end-->
+		</div>
+	</div>
+	<!--内容-end-->
+	
+ 	<!--公共底部-->
+	<include file="Public/footer" />
+ 	<!--公共底部-end-->
+
+ 	<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+ 	<script src="__PC__js/l_main.js"></script>
+
+  
+</body>
+</html>

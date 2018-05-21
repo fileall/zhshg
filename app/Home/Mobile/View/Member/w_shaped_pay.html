@@ -1,0 +1,257 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">元宝支付</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right">
+					<!--<a class="transaction-link" href="transaction.html">交易记录</a>-->
+				</div>
+			</div>		
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<a href="javascript:;" > 
+				<div class="row-box sweep-wrap" id="scanQRCode" >
+					<div class="sweep-left">
+						<div class="sweep-icon"><img src="__MB__images/icon01.png"></div>
+					</div>
+					<div class="row-flex">
+						<div class="sweep-name">扫一扫</div>
+					</div>
+					<div class="sweep-right">
+						<div class="sweep-right-icon"><i class="fa fa-angle-right"></i></div>
+					</div>
+				</div>
+			</a>
+			
+			<form action="" name="" method="post">
+				<ul class="">
+					<li class="enter-form-li row-box">
+						<div class="enter-form-txt">或输入交易账户</div>
+						<div class="row-flex">
+							<div class="enter-form-input">
+								<input type="number" name="tel" placeholder="请输入电话号码" id="tel" value="{$tel}">
+							</div>
+						</div>
+					</li>
+					
+					<li class="enter-form-li row-box">
+						<div class="enter-form-txt">输入元宝金额</div>
+						<div class="row-flex">
+							<div class="enter-form-input">
+								<input type="number" name="totalprices" placeholder="0" id="prices">
+							</div>
+						</div>
+					</li>
+					
+					<!--<li class="enter-form-li row-box" id="yb_nums">
+						<div class="enter-form-txt">赠送银币数量</div>
+						<div class="row-flex">
+							<div class="enter-form-input">
+								<input id="get_coin" type="number" name="newpassword" placeholder="0" readonly>
+							</div>
+						</div>
+					</li>-->
+				</ul>
+				
+				<div class="illustrate">元宝将实时转入到对方账户，无法退回</div>
+				
+				<div class="enter-form-btn">
+					<button type="button" id="jyb_pay">立即支付</button>
+				</div>
+			</form>
+		</div>
+		<!--content-->
+		<!--元宝支付密码-->
+		<div class="shoe-shaped vertical-center" >
+			<div class="shoe-shaped-inner vertical-auto">
+				<div class="shoe-shaped-title">支付密码<div class="close-shoe-shaped"></div></div>
+				<div class="shoe-shaped-name">元宝支付</div>
+				<div class="shoe-shaped-money"><span><img src="__MB__images/icon19.png"></span><span id="look_prices"></span></div>
+				<div class="shoe-shaped-input vertical-center">
+					<div class="vertical-auto" style="width: 100%;"><input id="pw" type="password" placeholder="请输入您的支付密码"/></div>
+				</div>
+				<div class="shoe-shaped-btn"><button type="button" id="sure_tx">确认</button></div>
+			</div>
+		</div>
+		<!--元宝支付密码-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>	
+<block name="footer"></block>	
+<block name="script">
+	<link rel="stylesheet" href="__MB__css/swiper.css" />
+		<script src="__MB__js/swiper.min.js"></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script type="text/javascript" src="__MB__js/jquery.cookie.js"></script> 	
+	<script>
+	var zftype=$.cookie('zftype');
+	if(typeof(zftype)=="undefined" || (zftype==null)){
+		zftype=1;
+	}
+	console.log(zftype);
+	
+	$(function(){
+		if(zftype==3){
+			$('.header-title').html('金果支付');
+			$('#yb_nums').remove();
+		}
+	})
+//	$("#tel").blur(function(){
+//		console.log(11);return false;
+//		$.post('{:U("Member/get_coin_ajax")}',{tel:tel},function(d){
+//		 	if(d.status ==1){
+//		 		layer.msg(d.msg,{icon:1,time:1000},function(){
+//		 			var prices = $('#prices').val();
+//		 			$("#get_coin").val(d.get_coin*prices);
+//		 		})
+//		 	}
+//		 },'JSON')
+//	});
+	
+	$('#jyb_pay').click(function(){
+		var prices = $('#prices').val();
+		var tel = $('#tel').val();	
+		if(!$('#tel').val()){
+				layer.msg('请填写对方账户！',{icon:0,time:1000})
+				return false;
+		}
+		if(!$('#prices').val()){
+				layer.msg('请填写金额！',{icon:0,time:1000})
+				return false;
+		}
+		if(parseFloat(prices) < 0 | parseFloat(prices) == 0){
+			layer.msg('请确认您输入的数字是否正确！',{icon:0,time:1000})
+			return false;
+		}
+		
+//		if('{$member["gold_acer"]}' < parseFloat(prices)){
+//			layer.msg('您的余额不足！请选择其他支付方式',{icon:0,time:1000})
+//			return false;
+//		}
+		
+		$('#look_prices').html(prices);
+		$(".shoe-shaped").addClass("active");
+		$(".shoe-shaped-money span img").attr("src","__MB__images/icon31.png");
+//		prices=parseFloat(prices);
+//	 	$.post('',{zftype:zftype,prices:prices,tel:tel},function(d){
+//		 	if(d.status ==1){
+//		 		$("#get_coin").val(d.get_coin);
+//		 		layer.msg(d.msg,{icon:1,time:1000},function(){
+//		 			window.location.href='/index.php?s=/member/wallet.html';
+//		 			
+//		 		})
+//		 	}
+//		 	else{
+//		 		layer.msg(d.msg,{icon:0,time:1000})
+//		 	}
+//		 },'JSON')
+		
+	});
+	$('#sure_tx').click(function(){
+		
+		var prices = $('#prices').val();
+		var tel = $('#tel').val();
+		var pw =$('#pw').val();
+		prices=parseFloat(prices);
+		if(pw.length == 6){
+			 //输入密码后提交订单
+			 $.post('{:U("member/check_pay_order")}',{prices:prices,zftype:zftype,pw:pw,tel:tel},function(d){
+			 	if(d.status ==1){
+					 $.post('{:U("member/check_pay")}',{dingdan:d.dingdan,prices:prices,zftype:zftype,tel:tel},function(mess){
+		 				layer.msg(mess.msg,{icon:1,time:1000})
+			 			if(mess.status ==1){
+			 				window.location.href='/index.php?m=Mobile&c=member&a=pay_succeed&tel='+tel+'&liu_id='+d.liu_id;
+			 			}
+					 },'JSON')
+			 	}
+			 	else{
+			 		layer.msg(d.msg,{icon:0,time:1000})
+			 	}
+			 },'JSON');
+		}else{
+			layer.msg('请输入6位数的支付密码！',{icon:0,time:1000})
+		}		
+		
+		
+		
+		 
+	});
+	
+	</script>
+	
+	<script>
+
+				//banner
+
+				var swiper = new Swiper('.swiper-container',
+
+				{
+
+					pagination: '.swiper-pagination',
+
+					paginationClickable: true,
+
+					autoplay:3000,
+
+					autoplayDisableOnInteraction:false,
+
+					loop:true
+
+				});
+
+
+
+                wx.config({
+
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+
+                    appId: "{$js['appId']}", // 必填，公众号的唯一标识
+
+                    timestamp: "{$js['timestamp']}", // 必填，生成签名的时间戳
+
+                    nonceStr: "{$js['nonceStr']}", // 必填，生成签名的随机串
+
+                    signature: "{$js['signature']}",// 必填，签名，见附录1
+
+                    jsApiList: [ 'scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+
+                }); 
+
+
+
+                wx.ready(function(){
+
+                    $("#scanQRCode").on("click",function(){
+
+                        wx.scanQRCode({
+
+                            needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+
+                            scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+
+                            success: function (res) {
+
+                                var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+
+                            }
+
+                        });
+
+                    })
+
+                });
+
+			</script>
+
+</block>
+</html>

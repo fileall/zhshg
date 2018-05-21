@@ -1,0 +1,39 @@
+<!--编辑管理员-->
+<div class="dialog_content">
+	<form id="info_form" action="{:U('item_comment/edit')}" method="post">
+	<table width="100%" class="table_form">
+		<tr>
+      		<th width="80">评论内容 :</th>
+      		<td><textarea name="memos" id="memos" cols="50" rows="5">{$info.memos}</textarea></td>
+    	</tr>
+		<tr>
+      		<th width="80">回复 :</th>
+      		<td><textarea name="reply" id="reply" cols="50" rows="5">{$info.reply}</textarea></td>
+    	</tr>
+
+	</table>
+	<input type="hidden" name="id" value="{$info.id}" />
+	</form>
+</div>
+
+<script>
+var check_name_url = "{:U('admin/ajax_check_name', array('id'=>$info['id']))}";
+$(function(){
+	$.formValidator.initConfig({formid:"info_form",autotip:true});
+
+	$("#J_username").formValidator({ onshow:lang.please_input+lang.admin_username, onfocus:lang.please_input+lang.admin_username}).inputValidator({ min:1, onerror:lang.please_input+lang.admin_username}).ajaxValidator({type:"get", url:check_name_url, datatype:"html", async:'false', success:function(data){	if( data == "1" ){return true;}else{return false;}}, onerror:lang.admin_name_exists, onwait:lang.connecting_please_wait}).defaultPassed();
+	$("#J_password").formValidator({ empty:true, onshow:lang.not_edit_password, onfocus:lang.password+lang.between_6_to_20}).inputValidator({ min:6, max:20, onerror:lang.password+lang.between_6_to_20});
+	$("#J_repassword").formValidator({ empty:true, onshow:lang.not_edit_password, onfocus:lang.cofirmpwd}).compareValidator({desid:"J_password",operateor:"=",onerror:lang.passwords_not_match});
+
+	$('#info_form').ajaxForm({success:complate,dataType:'json'});
+    function complate(result){
+        if(result.status == 1){
+            $.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'});
+        }
+    }
+});
+</script>

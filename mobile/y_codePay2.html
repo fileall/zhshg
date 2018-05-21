@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<title></title>
+		<script src="js/fontSize.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/custom.js"></script>
+	</head>
+	
+	<body>
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">支付</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content y-contentPay2-content">
+			<div class="y-bg-white y-mar-top40">
+				<div class="y-codePay2-header">
+					<div class="y-codePay2-img">
+                        <img class="w100" src="images/img2.jpg"/>
+                    </div>
+                    <p class="y-text-center font-30 y-mar-top20">幸福里时光餐吧</p>
+				</div>
+				<div class="y-width94">
+					<p class="font-28">付款金额：</p>
+					<div class="y-codePay2-money ali-cen y-mar-top20 ">
+                        <p>&yen;</p>
+                        <input class="flex1 y-mar-left20 y-codePay2-input" type="number"/>
+                    </div>
+                    <input class="y-mar-top20 font-30 y-width100 y-border-none" type="text" maxlength="20" placeholder="添加备注（20字以内）"/>
+				</div>
+				
+			</div>
+			<div class="submit-button y-mar-top40">
+				<a class="extract-btn pay-button" href="javascript:;">确认支付</a>
+			</div>
+			<div class="y-codePay2-msg y-text-center y-width100 y-color-ccc">钱实时到对方账户，无法退款</div>
+		</div>
+		<!--content-->
+		<!--余额支付密码弹窗-->
+	<div class="payment-window">
+		<div class="payment-inner-win">
+		    <!--支付方式-->
+            <div class="y-codepay-alert y-color-999 y-bg-white">
+                <div class="payment-left pay-close">x</div>
+                <div class="payment-title">确认付款</div>
+                <div class="payment-num y-border-top y-color-333">&yen;99.00</div>
+                <div class="y-width94 y-alertpay-text">
+                    <div class="jus-bet font-30">
+                       <p>订单信息</p>
+                       <p>收款</p>
+                    </div>
+                    <div class="y-border-top">选择付款方式</div>
+                    <div class="y-border-top">
+                        <ul class="y-codepay-ul">
+                <li class="pay-li">
+                    <label form="yuanbao">
+                        <div class="row-box">
+                            <div class="pay-icon">
+                                <div class="pay-icon-img"><img src="images/icon28.png"></div>
+                            </div>
+                            
+                            <div class="row-flex">
+                                <div class="pay-name">元宝支付</div>
+                                <!--<div class="pay-name-t">元宝支付满100减10</div>-->
+                                <div class="clear-float"></div>
+                            </div>
+                            
+                            <div class="pay-input-box">
+                                <div class="pay-input-inner active"><input name="pay-name" type="radio" checked="checked" id="yuanbao"></div>
+                            </div>
+                        </div>
+                    </label>
+                </li>
+                
+                <li class="pay-li">
+                    <label form="yyb">
+                        <div class="row-box">
+                            <div class="pay-icon">
+                                <div class="pay-icon-img"><img src="images/y_icon42.png"></div>
+                            </div>
+                            
+                            <div class="row-flex">
+                                <div class="pay-name">元宝和银币支付</div>
+                                <!--<div class="pay-name-t">银宝支付满100减10</div>-->
+                                <div class="clear-float"></div>
+                            </div>
+                            
+                            <div class="pay-input-box">
+                                <div class="pay-input-inner"><input name="pay-name" type="radio" id="yyb"></div>
+                            </div>
+                        </div>
+                    </label>
+                </li>
+                </ul>
+                    </div>
+                </div>
+                <div class="submit-button y-mar-top40">
+                    <a class="extract-btn pay-button2" href="javascript:;">确认支付</a>
+                </div>
+            </div>
+            <!--支付方式-->
+			<!--支付密码-->
+			<div class="payment-form">
+				<div class="y-color-999">
+					<div class="payment-left pay-close">x</div>
+					<div class="payment-title">输入支付密码</div>
+					<div class="payment-title y-border-top">支付金额289元</div>
+				</div>
+				<!--密码区-->
+				<div class="pay-input-group row-box">
+					<div class="row-flex pass-input-wrap">
+						<div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+						<input type="password" readonly="readonly" value="">
+					</div>
+					<div class="row-flex pass-input-wrap">
+						<div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+						<input type="password" readonly="readonly" value="">
+					</div>
+					<div class="row-flex pass-input-wrap">
+						<div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+						<input type="password" readonly="readonly" value="">
+					</div>
+					<div class="row-flex pass-input-wrap">
+						<div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+						<input type="password" readonly="readonly" value="">
+					</div>
+					<div class="row-flex pass-input-wrap">
+						<div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+						<input type="password" readonly="readonly" value="">
+					</div>
+					<div class="row-flex pass-input-wrap">
+						<div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+						<input type="password" readonly="readonly" value="">
+					</div>
+				</div>
+				<!--密码区-->
+				<div class="y-text-right y-width94 y-mar-top20">
+				    <a href="y_codePaySuccess.html">点这跳转支付成功</a>
+					<a class="y-color-red" href="y_payPwdForget.html">忘记密码？</a>
+				</div>
+				<!--按钮去-->
+				<div class="pay-btn-group">
+					<button class="pay-button figure" value="1" type="button">1</button>
+					<button class="pay-button figure" value="2" type="button">2</button>
+					<button class="pay-button figure" value="3" type="button">3</button>
+					<button class="pay-button figure" value="4" type="button">4</button>
+					<button class="pay-button figure" value="5" type="button">5</button>
+					<button class="pay-button figure" value="6" type="button">6</button>
+					<button class="pay-button figure" value="7" type="button">7</button>
+					<button class="pay-button figure" value="8" type="button">8</button>
+					<button class="pay-button figure" value="9" type="button">9</button>
+					<button class="pay-button pay-button2" type="button"></button>
+					<button class="pay-button figure" value="0" type="button">0</button>
+					<button class="pay-button empty pay-button2" type="button"><i class="fa fa-times"></i></button>
+					<div class="clear-float"></div>
+				</div>
+				<!--按钮去-->
+			</div>
+			<!--支付密码-->
+			</div>    
+		
+	</div>
+	<!--余额支付密码弹窗-->
+	
+		<!--footer-->
+		<!--footer-->
+	</body>
+	<script type="text/javascript">
+	    //显示选择支付方式
+	    $(".pay-button").click(function(){
+	        //判断是否已经显示弹出窗，防止事件冒泡
+	        if (!$(".payment-window").is(".active")) {
+	        	$(".payment-window").addClass("active");
+                $(".y-codepay-alert").addClass("active");
+	        }else{
+	            return;
+	        }
+	    })
+	    //显示支付密码框
+	    $(".pay-button2").click(function(){
+	        $(".y-codepay-alert").removeClass("active");
+			$(".payment-form").addClass("active");
+		})
+	     //支付弹窗全部隐藏
+		$(".pay-close").click(function(){
+			$(".payment-window").removeClass("active");
+			$(".y-codepay-alert").removeClass("active");
+			$(".payment-form").removeClass("active");
+		})
+	</script>
+</html>

@@ -1,0 +1,73 @@
+<!--编辑角色-->
+<div class="dialog_content">
+	<form id="info_form" name="info_form" action="{:u('trader/edit')}" method="post">
+    <table width="100%" class="table_form">
+        <tr>
+            <th width="80">姓名 :</th>
+            <td><input type="text" name="username" id="username" class="input-text" value="{$info.username}"></td>
+        </tr>
+        <tr>
+            <th>头像 :</th>
+            <td>
+                <notempty name="info['avatar']"><span class="attachment_icon J_attachment_icon" file-type="image" file-rel="{:attach($info["avatar"],'trader')}"><img src="{:attach($info["avatar"],'trader')}" width="100" height="100" /></span><br /></notempty>
+                <input type="file" name="avatar" class="input-text"  style="width:200px;" />
+            </td>
+        </tr>
+        <tr>
+            <th width="80">手机 :</th>
+            <td><input type="text" name="mobile" id="mobile" class="input-text" value="{$info.mobile}"></td>
+        </tr>
+        <tr>
+            <th width="80">备用电话 :</th>
+            <td><input type="text" name="tel" id="tel" class="input-text" value="{$info.tel}">没有可不填</td>
+        </tr>
+        <tr>
+            <th width="80">微信 :</th>
+            <td><input type="text" name="weixin" id="weixin" class="input-text" value="{$info.weixin}"></td>
+        </tr>
+        <tr>
+            <th width="80">QQ :</th>
+            <td><input type="text" name="qq" id="qq" class="input-text" value="{$info.qq}"></td>
+        </tr>
+        <tr>
+            <th width="80">级别 :</th>
+            <td><input type="text" name="rank" id="rank" class="input-text" value="start" value="{$info.start}"></td>
+        </tr>
+        <tr>
+            <th width="80">级别数 :</th>
+            <td><input type="text" name="level" id="level" class="input-text" value="{$info.level}">请填写1-5的数字</td>
+        </tr>
+
+        <tr>
+            <th width="80">排序 :</th>
+            <td><input type="text" name="ordid" id="ordid" class="input-text" value="{$info.ordid}"></td>
+        </tr>
+        <tr>
+            <th>{:L('enabled')} :</th>
+            <td>
+                <input type="radio" name="status" class="radio_style" value="1" <if condition="$info.status eq 1"> checked="checked"</if>> &nbsp;{:L('yes')}&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="status" class="radio_style" value="0" <if condition="$info.status eq 0"> checked="checked"</if>> &nbsp;{:L('no')}
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" name="id" id="id" value="{$info.id}" />
+    </form>
+</div>
+<script src="__PUBLIC_ADMIN__js/fileuploader.js"></script>
+<script>
+$(function(){
+    $.formValidator.initConfig({formid:"info_form",autotip:true});
+    $("#name").formValidator({ onshow:lang.please_input+lang.role_name, onfocus:lang.please_input+lang.role_name, oncorrect:lang.input_right}).inputValidator({ min:1, onerror:lang.please_input+lang.role_name}).defaultPassed();
+
+    $('#info_form').ajaxForm({success:complate,dataType:'json'});
+    function complate(result){
+        if(result.status == 1){
+            $.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'});
+        }
+    }
+})
+</script>

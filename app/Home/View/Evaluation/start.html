@@ -1,0 +1,78 @@
+<include file="Public/top" />
+
+<!--面包屑导航-->
+<div class="ysw-crumbs bgfff">
+    <div class="wrap">
+        <a href="/" class="item hover-blue">首页</a>
+        <span class="item ico">&gt;</span>
+        <a href="{:U('Curriculum/homeEducation')}" class="item hover-blue">家庭教育指导</a>
+        <span class="item ico">&gt;</span>
+        <a href="{:U('Evaluation/evaluation')}" class="item hover-blue">免费测评</a>
+        <span class="item ico">&gt;</span>
+        <span class="item">{$info['title']}</span>
+    </div>
+</div>
+<!--面包屑导航-end-->
+
+<!--填写信息-->
+<form action="{:U('Evaluation/evaluation_list')}" method="post">
+    <input type="hidden" name="ExamType" value="{$info['type']}">
+    <div class="wrap ceshi2">
+        <div class="ceshi2BoxTitle">{$info['title']}</div>
+        <div class="ceshi2-form marB20">
+            <div class="item">
+                <div class="left"><em class="red">*</em>出生日期：</div>
+                <div class="right">
+                    <input type="text" name="birthday" class="brithday" placeholder="请选择孩子的出生日期" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})"  readonly="readonly"/>
+                </div>
+            </div>
+            <div class="item">
+                <div class="left"><em class="red">*</em>孩子性别：</div>
+                <div class="right clear">
+                        <span class="radioBox fl">
+                            <input type="radio" name="sex" checked="checked"/>&nbsp;
+                            <label for="男">男</label>
+                        </span>
+                    <span class="radioBox fl">
+                            <input type="radio" name="sex"/>&nbsp;
+                            <label for="女">女</label>
+                        </span>
+                </div>
+            </div>
+            <div class="item tc marT20">
+                <!--<a href="ceshi3.html" class="btn blue ceshi2-sub" >开始测评</a>-->
+                <button href="ceshi3.html" class="btn blue ceshi2-sub" >开始测评</button>
+            </div>
+        </div>
+    </div>
+</form>
+<!--填写信息-end-->
+
+<!--公共底部-->
+<include file="Public/footer" />
+<!--公共底部-end-->
+
+<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PC__js/l_main.js"></script>
+<script src="__PC__plugins/layui-v1.0.9/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function(){
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+        });
+        layui.use('layer', function(){
+            var layer = layui.layer;
+        });
+        //提交
+        $('.ceshi2-sub').click(function(){
+            var $birthday =$('.brithday');
+            if($birthday.val() == ''){
+                layer.msg('请选择孩子的出生日期',{icon:2,time:2000});
+                return false;
+            }
+        });
+
+    })
+</script>
+</body>
+</html>

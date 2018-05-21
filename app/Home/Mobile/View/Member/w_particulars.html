@@ -1,0 +1,50 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">交易记录</div>
+				<a href="/index.php?s=/member/w_golden_transfer.html">
+					<div class="header-left "><i class="fa fa-angle-left"></i></div>
+				</a>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="particulars-wrap">
+				<div class="particulars-title">
+					<div class="particulars-txt">时间</div>
+					<div class="particulars-txt">转入账户</div>
+					<div class="particulars-txt">金果数量</div>
+					<div class="clear-float"></div>
+				</div>
+				
+				<ul class="particulars-ul">
+					<volist name="jg_list" id="list">
+					<li class="particulars-li">
+						<div class="particulars-txt">{:date('Y-m-d',$list['add_time'])}</div>
+						<div class="particulars-txt">{$list.skperson}</div>
+						<div class="particulars-txt">{$list.totalprices}</div>
+						<div class="clear-float"></div>
+					</li>
+					</volist>
+				
+				</ul>
+				
+				<div class="more-text">查看更多></div>
+			</div>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>	
+<block name="footer"></block>
+<block name="script"></block>
+</html>

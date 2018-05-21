@@ -1,0 +1,70 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">转账记录</div>
+				<a href="/index.php?s=/member/w_transfer.html">
+					<div class="header-left "><i class="fa fa-angle-left"></i></div>
+				</a>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="particulars-wrap">
+				<div class="particulars-title">
+					<div class="particulars-txt">时间</div>
+					<div class="particulars-txt">凭证</div>
+					<div class="particulars-txt">银行</div>
+					<div class="clear-float"></div>
+				</div>
+				
+				<ul class="accounts-record-ul">
+					<volist name="zz_list" id="zz">
+						<li class="accounts-record-li">
+							<div class="particulars-txt">
+								<div class="accounts-record-txt">{:date('Y-m-d',$zz['create_time'])}</div>
+							</div>
+							<div class="particulars-txt">
+								<div class="accounts-record-img"><img src="{:attach($zz['img_code'],'useravatar')}"></div>
+							</div>
+							<div class="particulars-txt">
+								<div class="accounts-record-txt">{$zz['branch_name']}</div>
+							</div>
+							<div class="clear-float"></div>
+						</li>
+					</volist>
+				</ul>
+				
+				<div class="more-text">查看更多></div>
+			</div>
+		</div>
+		<!--content-->
+		
+		<!--查看大图-->
+		<div class="max-image">
+			<div class="max-image-inner">
+				<div class="max-image-box vertical-center">
+					<div class="vertical-auto"><img class="max-img" src="__MB__images/img.jpg"></div>
+					<div class="close-max-image"><i class="fa fa-close"></i></div>
+				</div>
+			</div>
+		</div>
+		<!--查看大图-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>
+<block name="footer"></block>
+<block name="script">
+	<script>
+		
+	</script>
+</block>	
+</html>

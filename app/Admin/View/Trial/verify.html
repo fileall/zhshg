@@ -1,0 +1,78 @@
+<include file="Public:header" />
+<!--编辑商品-->
+<form name="info_form" id="info_form" action="{:u('trial/verify')}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="{$info.id}" />
+<div class="pad_lr_10">
+	<div class="col_tab">
+
+		<div class="J_panes">
+        <div class="content_list pad_10">
+		<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+            <tr>
+                <th>活动名称 :</th>
+                <td><span>{$info.title}</span></td>
+            </tr>
+            <tr>
+                <th>申请人 :</th>
+                <td><span>{$info.nickname}</span></td>
+            </tr>
+            <tr>
+                <th>发放数量 :</th>
+                <td><span>{$info.grant_num}</span></td>
+            </tr>
+            <tr>
+				<th>商品价格 :</th>
+				<td><span>{$info.price}</span>元</td>
+			</tr>
+            <tr>
+                <th>总商品价格 :</th>
+                <td><span>{$info['price']*$info['grant_num']}</span>元</td>
+            </tr>
+			<tr>
+            	<th>已打担保金 :</th>
+                <td>{$info.bond}</td>
+            </tr>
+            <tr>
+                <th>每单佣金 :</th>
+                <td><input type="text" name="rates" class="input-text" size="50" value="{$info.rates}"></td>
+            </tr>
+            <tr>
+                <th>开始时间 :</th>
+                <td><input type="text" name="start_time" class="input-text" size="50" value="{:date('Y-m-d H:i:s',$info['start_time'])}" id="J_time_start"></td>
+            </tr>
+            <tr>
+                <th>活动持续 :</th>
+                <td><input type="text" name="deadline" class="input-text" size="10" value="{$info.deadline}">天</td>
+            </tr>
+		</table>
+		</div>
+
+
+        </div>
+		<div class="mt10">
+            <input type="submit" value="审核通过" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;">
+            <input type="button" value="审核不通过" id="do_verify_back" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;">
+        </div>
+	</div>
+</div>
+<input type="hidden" name="menuid"  value="{$menuid}"/>
+<input type="hidden" name="id" value="{$info.id}" />
+</form>
+<include file="Public:footer" />
+<link rel="stylesheet" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script src="__STATIC__/js/calendar/calendar.js"></script>
+<script>
+    Calendar.setup({
+        inputField : "J_time_start",
+        ifFormat   : "%Y-%m-%d %H:%M:%S",
+        showsTime  : true,
+        timeFormat : "24"
+    });
+    $('#do_verify_back').click(function(){
+        $("form[name='info_form']").attr('action','{:U("trial/verify_back")}');
+        $("form[name='info_form']").submit();
+    })
+</script>
+
+</body>
+</html>

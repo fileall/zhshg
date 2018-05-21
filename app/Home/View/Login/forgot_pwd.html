@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="__PC__plugins/layui-v1.0.9/layui/css/modules/layer/default/layer.css">
+    <link rel="stylesheet" href="__PC__css/index.css">
+    <script src="__PC__js/jquery-1.11.2.min.js"></script>
+    <!--<script src="__PC__js/custom.js"></script>-->
+</head>
+
+<body>
+<div class="top-col">
+    <div class="enter-logo">
+        <a href="/">
+            <img src="__PC__images/logo.png">
+        </a>
+    </div>
+    <!--<div class="enter-title">欢迎登录</div>-->
+
+    <div class="assist"><a title="帮助中心" href="">
+        <i class="fa fa-question-circle"></i><span>帮助中心</span>
+    </a></div>
+    <div class="return-home"><a title="返回首页" href="/">
+        <i class="fa fa-home"></i><span>返回首页</span>
+    </a></div>
+
+    <div class="clear-float"></div>
+</div>
+<form>
+    <div class="enter-bjimng">
+        <div class="enter-inner-box">
+            <div class="enter-right-inner">
+                <form action="" method="poat" name="">
+                    <div class="register-wrap active">
+                        <div class="discover">找回密码</div>
+
+                        <div class="tabs-form-box">
+
+                            <div class="tabs-tier">
+                                <ul>
+                                    <li class="enter-input-li">
+                                        <div class="enter-form-box">
+                                            <input class="register-input" name="mobile" id="mobile" placeholder="请输入您的手机号" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                                        </div>
+                                    </li>
+
+                                    <li class="enter-input-li">
+                                        <div class="enter-form-box">
+                                            <input class="register-input" name="code" placeholder="请输入短信验证码" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                                            <input type="button" class="verification" value="获取验证码">
+                                        </div>
+                                    </li>
+
+                                    <li class="enter-input-li">
+                                        <div class="enter-form-box">
+                                            <input class="register-input" name="password" type="password" placeholder="请输入新密码">
+                                        </div>
+                                    </li>
+
+                                    <li class="enter-input-li">
+                                        <div class="enter-form-box">
+                                            <input class="register-input" name="confirm_password" type="password" placeholder="请再次输入新密码">
+                                        </div>
+                                    </li>
+
+                                    <li class="enter-input-li">
+                                        <div class="enter-form-box">
+                                            <div class="enter-form-btn">
+                                                <button type="button">确定</button>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="enter-input-li">
+                                        <div class="enter-bottom-link">
+                                            <div class="enter-bottom-pass active"><a href="{:U('Login/enter')}">立即登录</a></div>
+                                            <div class="clear-float"></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--footer-->
+<include file="Public/login_footer" />
+<!--footer-->
+
+<!--自定义滚动条-->
+<script src="__PC__plugins/layui-v1.0.9/layui/lay/modules/layer.js"></script>
+<script>
+    $(function () {
+        //获取验证码倒计时
+        var COUNTDOWN = 60;
+        function settime(obj){
+            if(COUNTDOWN == 0){
+                obj.value = "获取验证码";
+                COUNTDOWN = 60;
+                return;
+            }else{
+                obj.value = COUNTDOWN + "秒";
+                COUNTDOWN--;
+            }
+            setTimeout(function(){settime(obj)},1000);
+        }
+
+        //发送短信验证码
+        $(".verification").click(function(){
+            if($(this).val() != "获取验证码"){
+                return false;
+            }else{
+                settime(this);
+                $.ajax({
+                    type: "post",
+                    url: "{:U('Login/pwd_send_sms')}",
+                    async:false,
+                    data: {mobile:$("#mobile").val()},
+                    dataType: "json",
+                    success: function(result){
+                        layer.msg(result[1]);
+                    }
+                });
+            }
+        });
+
+        //提交登录
+        $('button').click(function () {
+            var chekc = true,
+                data = $("form").serialize();
+
+            //验证必填项
+            $('input').each(function () {
+                var self = $(this),
+                    val = self.val(),
+                    str = self.attr('placeholder');
+
+                if(!val){
+                    layer.msg(str);
+                    return chekc = false;
+                }
+            })
+            if(chekc === false) return false;
+
+            //提交注册
+            $.ajax({
+                type: "post",
+                url: "{:U('Login/forgot_pwd')}",
+                async:false,
+                data: data,
+                dataType: "json",
+                success: function(result){
+                    layer.msg(result[1]);
+                    if(result[0] == 1){
+                        setTimeout(function () {
+                            window.location.href="{:U('Login/enter')}";
+                        },2000)
+                    }
+                }
+            });
+        })
+    })
+</script>
+</body>
+</html>

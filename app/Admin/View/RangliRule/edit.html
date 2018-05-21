@@ -1,0 +1,36 @@
+<!--商家让利编辑-->
+<div class="dialog_content">
+	<form id="info_form" action="{:U('RangliRule/edit')}" method="post">
+
+		<table width="100%" class="table_form">
+			<tr>
+				<th>让利倍数:</th>
+				<td>
+					<input type="text" name="rangli" class="input-text" value="{$info['rangli']}" >
+				</td>
+			</tr>
+
+			<tr>
+				<th>营利返银:</th>
+				<td>
+					<input type="text" name="rl_nums" class="input-text" value="{$info['rl_nums']}" >
+				</td>
+			</tr>
+		</table>
+		</table>
+		<input type="hidden" name="id" id="id" value="{$info.id}" />
+	</form>
+</div>
+<script>
+    $('#info_form').ajaxForm({success:complate,dataType:'json'});
+    function complate(result){
+        if(result.status == 1){
+            $.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'});
+        }
+    }
+
+</script>

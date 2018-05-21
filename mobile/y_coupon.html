@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<title></title>
+		<script src="js/fontSize.js"></script>
+		<link rel="stylesheet" href="css/index.css" />
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/custom.js"></script>
+		<script type="text/javascript" src="js/prefixfree.min.js" ></script>
+	</head>
+	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">我的优惠券</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right y-header-right"><a href="y_couponRecord.html">使用明细</a></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="y-tab">
+				<div class="y-tab-title">
+					<div class="y-tab-title-text y-tab-title-sed">未使用（0）</div>
+					<div class="y-tab-title-text">已使用（0）</div>
+					<div class="y-tab-title-text">已过期（0）</div>
+				</div>
+				<div class="y-tab-content">
+					<!--未使用-->
+					<div class="y-tab-item y-block">
+						<div class="coupon-item coupon-item-bg1 bg_img flex">
+							<div class="coupon-item-left y-color-red jus-cen ali-cen">
+								<p class="font-36">&yen;</p>
+								<p>150</p>
+							</div>
+							<div class="coupon-item-center">
+								<p class="coupon-center-name">全场通用优惠券</p>
+								<p class="coupon-center-time y-color-999">2017.10.01-2017.10.07</p>
+							</div>
+							<div class="coupon-item-right y-text-center y-color-write">
+								<p>满10000元</p>
+								<p>可用</p>
+							</div>
+						</div>
+						<div class="coupon-item coupon-item-bg1 bg_img flex">
+							<div class="coupon-item-left y-color-red jus-cen ali-cen">
+								<p class="font-36">&yen;</p>
+								<p>50</p>
+							</div>
+							<div class="coupon-item-center">
+								<p class="coupon-center-name">全场通用优惠券</p>
+								<p class="coupon-center-time y-color-999">2017.10.01-2017.10.07</p>
+							</div>
+							<div class="coupon-item-right y-text-center y-color-write">
+								<p>满10000元</p>
+								<p>可用</p>
+							</div>
+						</div>
+					</div>
+					<!--已使用-->
+					<div class="y-tab-item">
+						<div class="coupon-item coupon-item-bg2 bg_img flex y-color-ccc">
+							<div class="coupon-item-left jus-cen ali-cen">
+								<p class="font-36">&yen;</p>
+								<p>150</p>
+							</div>
+							<div class="coupon-item-center">
+								<p class="coupon-center-name">全场通用优惠券</p>
+								<p class="coupon-center-time">2017.10.01-2017.10.07</p>
+							</div>
+							<div class="coupon-item-right y-text-center y-color-write">
+								<p>满10000元</p>
+								<p>可用</p>
+							</div>
+						</div>
+					</div>
+					<!--已过期-->
+					<div class="y-tab-item">
+						<div class="coupon-item coupon-item-bg3 bg_img flex y-color-ccc">
+							<div class="coupon-item-left jus-cen ali-cen">
+								<p class="font-36">&yen;</p>
+								<p>50</p>
+							</div>
+							<div class="coupon-item-center">
+								<p class="coupon-center-name">全场通用优惠券</p>
+								<p class="coupon-center-time">2017.10.01-2017.10.07</p>
+							</div>
+							<div class="coupon-item-right y-text-center y-color-write">
+								<p>满10000元</p>
+								<p>可用</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--无优惠券显示的背景图-->
+			<div class="y-coupon-bg y-bg-img y-hide"></div>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+	<script type="text/javascript">
+		$(".y-tab-title-text").click(function(){
+			$(this).addClass("y-tab-title-sed").siblings().removeClass("y-tab-title-sed");
+			$(".y-tab-item").eq($(this).index()).addClass("y-block").siblings().removeClass("y-block");
+		})
+	</script>
+</html>

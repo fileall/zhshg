@@ -1,0 +1,50 @@
+<include file="Public:header" />
+<div class="dialog_content">
+<form id="info_form" action="{:u('send_money/add')}" method="post">
+<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+    <tr>
+      <th width="80">商户手机:</th>
+      <td><input type="text" name="tel" id="tel" class="input-text" size="30"><span id="cx" class="btn">点击查询银行卡</span></td>
+    </tr>
+    <tr>	
+      <th>选择卡号:</th>
+       <td>
+        <select name="bankcard_id">
+		    <option value="0" id="first">--请点击查询后再选择--</option>
+        </select>
+      </td>
+      <!--<td><input type="text" name="bank_nums" class="input-text" size="40"></td>-->
+    </tr>
+    <tr>	
+      <th>提现金额:</th>
+      <td><input type="text" name="amount" class="input-text" size="30"></td>
+    </tr>
+     <!--<tr>	
+      <th>手续费 :</th>
+      <td><input type="text" name="url" class="input-text" size="40"></td>
+    </tr>-->
+     <tr>	
+      <td> <input type="submit"  class="btn" value="提交" /></td>
+    </tr>
+                   
+    
+    
+</table>
+</form>
+</div>
+<include file="Public:footer" />
+<script>
+	$('#cx').click(function(){
+		var tel = $('#tel').val();
+		$.post("{:U('send_money/cx_tel')}",{tel:tel},function(mess){
+			var info =  eval(mess); 
+			var s = '<option value="0" id="first">--请点击查询后再选择--</option>';
+	       for(var i=0;i<info.length;i++){
+	       		s +='<option value="'+info[i].id+'">'+info[i].nums+'</option>';
+	       }
+			$("select").html(s);
+			
+		})
+	});
+
+</script>

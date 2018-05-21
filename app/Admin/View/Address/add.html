@@ -1,0 +1,263 @@
+<div class="dialog_content">
+	<form id="info_form" name="info_form" action="{:u('address/add')}" method="post">
+	<table width="100%" class="table_form">
+		<tr>
+				<th width="120">*地区：</th>
+                <td><select class="J_cate_select mr10 fuck"  name="fuck[]"  data-pid="0" data-uri="{:U('place/ajax_getchilds', array('type'=>0))}" data-selected=""></select><input type="hidden" name="cate_id" id="J_cate_id" value="" /><input type="hidden" name="type" id="J_type" value="" /></td>
+			</tr>
+            <tr>
+				<th>*地址：</th>
+			  <td><input type="text" name="address" id="J_title" class="input-text" size="30"></td>
+			</tr>
+	    <tr>
+			<th>负责人 :</th>
+			<td><input type="text" name="shperson" id="J_title" class="input-text" size="30"></td>
+		</tr>
+        
+		<tr>
+	   <tr>
+
+            <th>负责人电话：</th>
+
+            <td><input type="text" name="mobile" id="J_title" class="input-text" size="30"></td>
+
+       </tr>
+	</table>
+	</form>
+</div>
+<script src="__PUBLIC_ADMIN__js/kindeditor/kindeditor-min.js"></script>
+
+<include file="Public:footer" />
+
+<script type="text/javascript">
+(function($){
+    //联动菜单
+    $.fn.cate_select = function(options) {
+        var settings = {
+            target_class:'J_cate_select',
+            field: 'J_cate_id',
+            top_option: lang.please_select,
+        };
+        if(options) {
+            $.extend(settings, options);
+        }
+
+        var self = $(this),
+            pid = self.attr('data-pid'),
+            uri = self.attr('data-uri'),
+            selected = self.attr('data-selected'),
+            selected_arr = [];
+        if(selected != undefined && selected != '0'){
+        	if(selected.indexOf('|')){
+        		selected_arr = selected.split('|');
+        	}else{
+        		selected_arr = [selected];
+        	}
+        }
+        //self.nextAll('.J_cate_select').remove();
+        self.nextAll('.'+settings.target_class).remove();
+        $('<option value="">--'+settings.top_option+'--</option>').appendTo(self);
+        $.getJSON(uri, {id:pid}, function(result){
+            if(result.status == '1'){
+                for(var i=0; i<result.data.length; i++){
+                $('<option value="'+result.data[i].id+'">'+result.data[i].name+'</option>').appendTo(self);
+                }
+            }
+            if(selected_arr.length > 0){
+            	//IE6 BUG
+            	setTimeout(function(){
+            		self.find('option[value="'+selected_arr[0]+'"]').attr("selected", true);
+	        		self.trigger('change');
+            	}, 1);
+            }
+        });
+
+        var j = 1;
+        $('.'+settings.target_class).die('change').live('change', function(){
+            var _this = $(this),
+            _pid = _this.val();
+            _this.nextAll('.'+settings.target_class).remove();
+            if(_pid != ''){
+                $.getJSON(uri, {id:_pid}, function(result){
+                    if(result.status == '1'){
+                        var _childs = $('<select class="'+settings.target_class+' mr10" name="fuck[]" data-pid="'+_pid+'"><option value="">--'+settings.top_option+'--</option></select>')
+                        for(var i=0; i<result.data.length; i++){
+                            $('<option value="'+result.data[i].id+'">'+result.data[i].name+'</option>').appendTo(_childs);
+                        }
+                        _childs.insertAfter(_this);
+                        if(selected_arr[j] != undefined){
+                        	//IE6 BUG
+                        	//setTimeout(function(){
+			            		_childs.find('option[value="'+selected_arr[j]+'"]').attr("selected", true);
+				        		_childs.trigger('change');
+			            	//}, 1);
+			            }
+                        j++;
+                    }
+                });
+                $('#'+settings.field).val(_pid);
+            }else{
+            	$('#'+settings.field).val(_this.attr('data-pid'));
+            }
+        });
+    }
+})(jQuery);
+
+$('.J_cate_select').cate_select('请选择');
+
+$(function() { 		
+
+//	$(".fuck").change(function(){
+//		  var cate_id=$(this).val();
+//		  var brand_id="{$info['brand_id']}";
+//		  $.ajax({
+//		  	type:"post",
+//		  	url:"{:U('Item/ajax_get')}",
+//		  	async:true,
+//		  	data:"cate_id="+cate_id,
+//		  	success:function(a){
+//		  		$("#brand_id").empty();
+//		  		if(a!=0){
+//		  			var a=eval('('+a+')');		  		
+//			  		$.each(a, function(k,v) {
+//			  			 if(brand_id==v.id){
+//			  			 	$("#brand_id").append('<option selected="selected" value ="'+v.id+'">'+v.name+'</option>');
+//			  			 }else{
+//			  			 	$("#brand_id").append('<option  value ="'+v.id+'">'+v.name+'</option>');
+//			  			 }			 		 
+//			  		});
+//		  		}		  		
+//		  	}
+//		  });
+//	})
+	
+  
+	KindEditor.create('.info', {
+
+		uploadJson : '{:U("attachment/editer_upload")}',
+
+		fileManagerJson : '{:U("attachment/editer_manager")}',
+
+		allowFileManager : true
+
+	});
+
+	
+
+	
+
+	$('ul.J_tabs').tabs('div.J_panes > div');
+
+	//自动获取标签
+
+	$('#J_gettags').live('click', function() {
+
+		var title = $.trim($('#J_title').val());
+
+		if(title == ''){
+
+			$.pinphp.tip({content:lang.article_title_isempty, icon:'alert'});
+
+			return false;
+
+		}
+
+		$.getJSON('{:U("item/ajax_gettags")}', {title:title}, function(result){
+
+			if(result.status == 1){
+
+				$('#J_tags').val(result.data);
+
+			}else{
+
+				$.pinphp.tip({content:result.msg});
+
+			}
+
+		});
+
+	});
+
+	$.formValidator.initConfig({formid:"info_form",autotip:true});
+
+	$("#J_title").formValidator({onshow:'请填写地址',onfocus:'请填写地址'}).inputValidator({min:1,onerror:'请填写地址'});
+
+	
+
+});
+
+
+
+function add_file()
+
+{
+
+    $("#next_upload_file .uplode_file").clone().insertAfter($("#first_upload_file .uplode_file:last"));
+
+}
+
+function del_file_box(obj)
+
+{
+
+	$(obj).parent().parent().remove();
+
+}
+
+function add_attr()
+
+{
+
+    $("#hidden_attr .add_item_attr").clone().insertAfter($("#item_attr .add_item_attr:last"));
+
+}
+
+function del_attr(obj)
+
+{
+
+	$(obj).parent().parent().remove();
+
+}
+
+</script>
+
+<table id="next_upload_file" style="display:none;">
+
+<tbody class="uplode_file">
+
+   <tr>
+
+      <th width="100"><a href="javascript:void(0);" onclick="del_file_box(this);" class="blue"><img src="__STATIC__/css/bgimg/tv-collapsable.gif" /></a>上传文件 :</th>
+
+      <td><input type="file" name="imgs[]"></td>
+
+   </tr>
+
+</tbody>
+
+</table>
+
+<table id="hidden_attr" style="display:none;">
+
+<tbody class="add_item_attr">
+
+<tr>
+
+    <th width="200">
+
+    <a href="javascript:void(0);" class="blue" onclick="del_attr(this);"><img src="__STATIC__/css/bgimg/tv-collapsable.gif" /></a>属性名 :<input type="text" name="attr[name][]" class="input-text" size="20">
+
+    </th>
+
+    <td>属性值 :<input type="text" name="attr[value][]" class="input-text" size="30"></td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+<if condition="$info">
+    <div class="clear fl"><!--隐藏加hide类-->
+        <p class="fl">您好，<em class="cor">{$info['realname']}</em>，欢迎您！</p>
+        <a href="{:U('Login/sign_out')}" class="hover-blue fl">退出</a>
+    </div>
+<else />
+    <div class="clear fl"><!--隐藏加hide类-->
+        <a href="{:U('Login/register')}" class="hover-blue">注册</a>
+        <i class="fl">|</i>
+        <a href="{:U('Login/enter')}" class="bg">登录</a>
+        <i class="fl">|</i>
+        <a href="" class="hover-blue">教师入驻</a>
+    </div>
+</if>
+

@@ -1,0 +1,168 @@
+<style>
+	.print-box{width:  700px;min-height: 400px;margin: 0 auto;padding-bottom: 8px;}
+	.print-box .print-title{width: 100%;height: 80px;}
+	.print-box .clear-float{clear: both;}
+	.print-box .logo{float: left;width: 120px;height: 80px;}
+	.print-box .title{float: left;line-height: 80px;}
+	.print-box .title span{font-size: 22px;margin-left: 20px;}
+	.print-box .contact{float: right;margin-right: 5px;}
+	img{display: block;max-width: 100%;height: auto;}
+	.phone{font-size: 22px;text-align: right;padding-top:18px;}
+	.domain-name{font-size: 15px;text-align: right;}
+	.area{min-height:330px;margin: 0 auto;background-color: #fff;-webkit-border-radius: 10px;-o-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;}
+	.area-user{margin: 0 auto;padding-top: 8px;}
+	.area-user-name{float: left;font-size: 12px;}
+	.area-user-phone{float: left;font-size: 12px;margin-left: 10px;}
+	.area-user-name span{display: inline-block;border-bottom: 1px solid #000000;padding-bottom: 2px;width: 60px;}
+	.area-user-phone span{display: inline-block;border-bottom: 1px solid #000000;padding-bottom: 2px;width: 80px;}
+	.area-user-grade{float: right;}
+	.calorie{float: right;font-size: 12px;}
+	.code{float: right;margin-right: 10px;}
+	.code-img{width: 80px;}
+	.calorie-select{float: left;width: 12px;height: 12px;border: 1px solid #000000;margin-left: 4px;text-align: center;line-height: 12px;font-size: 16px;}
+	.calorie-name{float: right;margin-left: 3px;}
+	.calorie-select.active span{display: block;}
+	.area-location,.area-date{float: left;font-size: 12px;}
+	.area-location span,.area-date span{display: inline-block;border-bottom: 1px solid #000000;padding: 0 3px 2px 3px;}
+	.area-number{float: right;text-align: right;font-size: 12px;}
+	.area-number span{font-size: 12px;margin-left: 3px;}
+	.table-conent{font-size: 12px;margin: 0 auto;padding-top: 15px;min-height: 160px;}
+	.table-conent table{font-size: 12px;}
+	.cost{margin: 0 auto;padding-top: 20px;}
+	.cost-tier{float: left;font-size: 12px;margin-right: 10px;}
+	.cost-tier span{display: inline-block;border-bottom: 1px solid #000000;padding: 0 3px 2px 3px;min-width: 65px;}
+	.delivery{margin: 0 auto;padding-top: 10px;}
+	.delivery-img{float: left;margin-right: 10px;}
+	.delivery-images{width: 20px;margin: 0 auto;}
+	.delivery-img-txt{font-size: 12px;color: #000;text-align: center;padding-top: 2px;}
+	.delivery-message{float: left;padding-top: 30px;margin-left: 20px;}
+	.delivery-message-tier{float: right;font-size: 12px;margin-right: 6px;}
+	.delivery-message-tier span{display: inline-block;border-bottom: 1px solid #000000;padding: 0 3px 2px 3px;min-width: 44px;}
+</style>
+<!--打印单-->
+<div class="print-box" id="box">
+	<div class="print-title">
+		<div class="logo"><img src="/theme/admin/images/logo.png"></div>
+		<div class="title"><span></span><span></span></div>
+		<div class="contact">
+			<div class="phone">{:C('pin_customer')}</div>
+			<div class="domain-name">{:C('pin_site_url')}</div>
+		</div>
+		<div class="code"><div class="code-img"><img src="/theme/admin/images/code.jpg"></div></div>
+		<div class="clear-float"></div>
+	</div>
+	
+	<div class="area">
+		<div class="area-user">
+			<div class="area-user-name">尊敬的用户：<span><if condition="$info['shtype'] eq 1">{$info['shperson']}<else />{$info['user_mobile']}</if></span></div>
+			<div class="area-user-phone">联系电话：<span><if condition="$info['shtype'] eq 1">{$info['mobile']}<else />{$info['user_mobile']}</if></span></div>
+			<div class="area-user-grade">
+				<volist name="vips" id="val">
+					<div class="calorie">
+						<div class="calorie-name">{$val['title']|mb_substr=###,0,2,"UTF8"}</div>
+						<div class="calorie-select "><if condition="$val['id'] eq $info['vips']">•</if></div>
+					</div>
+				</volist>
+				<div class="calorie">会员：</div>
+			</div>
+			<div class="clear-float"></div>
+		</div>
+		
+		<div class="area-user">
+			<div class="area-location"><if condition="$info['shtype'] eq 1">客户地址<else />自提地址</if>：<span>{$info['address']}</span></div>
+			<div class="area-date" style="margin-left: 8px;">订单时间：<span>{$info['add_time']|date="Y年m月d日",###}</span></div>
+			<div class="area-number">NO：{$info['dingdan']}<span>存根</span></div>
+			<div class="clear-float"></div>
+		</div>
+		
+		<div class="table-conent">
+			<table border="1" bordercolor="#575758" cellpadding="0" cellspacing="0" width="700">
+				<tr height="24" align="center">
+					<th width="60">序号</th>
+					<th width="210">名称</th>
+					<th width="100">规格</th>
+					<th width="60">数量</th>
+					<!--<th width="30">单位</th>-->
+					<th width="100">单价</th>
+					<th width="150">小计</th>
+				</tr>
+				<?php
+					$total_nums = 0;
+					$total_price = 0;
+				?>
+				<volist name="list" id="val">
+					<?php
+						$price = number_format($val['nums']*$val['prices'],2);
+						$total_nums += $val['nums'];
+						$total_price += $price;
+					?>
+					<tr height="24" align="center">
+						<td width="60">0{$i}</td>
+						<td width="210">{$val['title']}</td>
+						<td width="100">{$val['guige']}</td>
+						<td width="60">{$val['nums']}</td>
+						<!--<td width="30">瓶</td>-->
+						<td width="100">{$val['prices']}</td>
+						<td width="150">{$price}</td>
+					</tr>
+				</volist>
+				
+				<tr height="24" align="center">
+					<td width="60">合计</td>
+					<td width="210"></td>
+					<td width="100"></td>
+					<td width="60">{$total_nums}</td>
+					<!--<td width="30"></td>-->
+					<td width="100"></td>
+					<td width="150">{$total_price|number_format=###,2}</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="cost">
+			<div class="cost-tier">运费：<span>{$info['yunf']}</span></div>
+			<div class="cost-tier">余额支付：<span><if condition="$info['zftype'] eq 1">{$info['totalprices']}<else />0</if></span></div>
+			<div class="cost-tier">其他支付：<span><if condition="$info['zftype'] neq 1">{$info['totalprices']}<else />0</if></span></div>
+			<div class="cost-tier">折扣：<span>{$info['yhq_price']|default=0}</span></div>
+			<div class="cost-tier">您为订单支付：<span>{$info['totalprices']}</span></div>
+			<div class="clear-float"></div>
+		</div>
+		
+		<div class="delivery">
+			<div class="delivery-img">
+				<div class="delivery-images"><img src="/theme/admin/images/print1.png"></div>
+				<div class="delivery-img-txt">源头直采</div>
+				<div class="delivery-img-txt">品质纯真</div>
+			</div>
+			<div class="delivery-img">
+				<div class="delivery-images"><img src="/theme/admin/images/print2.png"></div>
+				<div class="delivery-img-txt">直供价格</div>
+				<div class="delivery-img-txt">同类超值</div>
+			</div>
+			<div class="delivery-img">
+				<div class="delivery-images"><img src="/theme/admin/images/print3.png"></div>
+				<div class="delivery-img-txt">没有中转</div>
+				<div class="delivery-img-txt">让利消费</div>
+			</div>
+			<div class="delivery-img">
+				<div class="delivery-images"><img src="/theme/admin/images/print4.png"></div>
+				<div class="delivery-img-txt">网上商城</div>
+				<div class="delivery-img-txt">http://zhshg.0791jr.com</div>
+			</div>
+			<div class="delivery-img">
+				<div class="delivery-images"><img src="/theme/admin/images/print5.png"></div>
+				<div class="delivery-img-txt">同城配送</div>
+				<div class="delivery-img-txt">1小时必达</div>
+			</div>
+			<div class="delivery-message">
+				<div class="delivery-message-tier">收货人：<span></span></div>
+				<div class="delivery-message-tier">收款人：<span>臻惠生活馆</span></div>
+				<div class="delivery-message-tier">配送员：<span></span></div>
+			</div>
+			<div class="clear-float"></div>
+		</div>
+</div>
+<!--打印单-->
+<script>
+    window.print();
+</script>

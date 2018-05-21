@@ -1,0 +1,47 @@
+<!--编辑栏目-->
+<div class="dialog_content">
+	<form id="info_form" action="{:U('merchant_cate/edit')}" method="post">
+		<table width="100%" class="table_form">
+			<tr>
+				<th width="100">{:L('item_cate_parent')} :</th>
+				<td>
+					<select class="J_cate_select mr10" data-pid="0" data-uri="{:U('merchant_cate/ajax_getchilds')}" data-selected="{$info.spid}"></select>
+					<input type="hidden" name="pid" id="J_cate_id" />
+				</td>
+			</tr>
+			<tr>
+				<th>{:L('item_cate_name')} :</th>
+				<td>
+					<input type="text" name="name" value="{$info.name}" id="J_name" class="input-text" size="30">
+					<input type="hidden" value="" name="fcolor" id="J_color">
+					<a href="javascript:;" class="color_picker_btn"><img class="J_color_picker" data-it="J_name" data-ic="J_color" src="__STATIC__/images/color.png"></a>
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" name="id" value="{$info.id}" />
+	</form>
+</div>
+<script>
+$(function(){
+    //表单
+    $.formValidator.initConfig({formid:"info_form",autotip:true});
+    $('#J_name').formValidator({onshow:'请输入名称',onfocus:'请输入名称'}).inputValidator({min:1,onerror:'请输入名称'});
+
+    $('#info_form').ajaxForm({success:complate, dataType:'json'});
+    function complate(result){
+        if(result.status == 1){
+            $.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'});
+        }
+    }
+    $('.J_cate_select').cate_select({top_option:'选择分类'});
+
+    // $('.J_cate_select').cate_select();
+
+})
+	//颜色选择器
+	// $('.J_color_picker').colorpicker();
+</script>

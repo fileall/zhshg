@@ -1,0 +1,109 @@
+<!--添加栏目-->
+<div class="dialog_content">
+	<form id="info_form" action="{:u('place/add')}" method="post">
+	<table width="100%" class="table_form">
+		<tr> 
+			<th width="120">{:L('article_cate_parent')} :</th>
+			<td>
+				<select class="J_cate_place_select mr10" data-pid="0" data-uri="{:U('place/ajax_getchilds')}" data-selected="{$spid}"></select>
+				<input type="hidden" name="pid" id="J_pid" />
+			</td>
+		</tr>
+		<tr>
+			<th>名称 :</th>
+			<td><input type="text" name="name" id="name" class="input-text" size="30"></td>
+		</tr>
+        <tr>
+            <th>全拼 :</th>
+            <td><input type="text" name="py" id="py" class="input-text" size="30"></td>
+        </tr>
+        <tr>
+            <th>首拼字母 :</th>
+            <td><input type="text" name="letter" id="letter" class="input-text" size="30"><span>比如南昌，就填n</span></td>
+        </tr>
+
+        <tr>
+            <th>经纬度 :</th>
+            <td>
+                <input name="longitude" class="input-text" value="{$info.longitude}" size="18" id="longitude" >
+                <input name="latitude" class="input-text" value="{$info.latitude}" size="18" id="latitude">
+            </td>
+        </tr>
+        <tr>
+            <th>城市code :</th>
+            <td><input type="text" class="input-text" size="30" value="{$info.bd_city_code}" id="city_code" name="bd_city_code">
+                <span>对应百度地图里的城市code</span></td>
+        </tr>
+        <tr>
+            <th>省/市 :</th>
+            <td>
+                <volist name="place_type" id="val">
+                    <label><input type="radio" name="type" value="{$key}">{$val}</label>&nbsp;&nbsp;
+                </volist>
+            </td>
+        </tr>
+
+        <tr class="is_hot" style="display: none">
+            <th>热门城市 :</th>
+            <td>
+                <label><input type="radio" name="is_hot" value="1">是</label>&nbsp;&nbsp;
+                <label><input type="radio" name="is_hot" value="0" checked="checked">否</label>&nbsp;&nbsp;
+            </td>
+        </tr>
+
+        <tr>
+		<th>{:L('enabled')} :</th>
+            <td>
+                <label><input type="radio" name="status" value="1" checked> {:L('yes')}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="status" value="0"> {:L('no')}</label>
+            </td>
+        </tr>
+
+	</table>
+	</form>
+</div>
+
+<script>
+$(function(){
+
+    $('input[name=type]').click(function(){
+        var type = $(this).val();
+        if(type == 2){
+            $('.is_hot').show(200);
+        }else{
+            $('.is_hot').hide(200);
+        }
+    })
+
+    $('input[name=name],input[name=longitude],input[name=latitude],input[name=bd_city_code]').blur(function(){
+        change();
+    });
+    function change(){
+        var kw = $('input[name=name]').val();
+        $.ajax({
+            type: "post",
+            url: "{:U('place/get_city_info')}",
+            data:{kw:kw},
+            dataType: "json",
+            success: function(data){
+                $('input[name=longitude]').val(data.lng);
+                $('input[name=latitude]').val(data.lat);
+                $('input[name=bd_city_code]').val(data.city_code);
+            }
+        });
+    }
+
+	$('#info_form').ajaxForm({success:complate,dataType:'json'});
+	function complate(result){
+		if(result.status == 1){
+			$.dialog.get(result.dialog).close();
+			$.pinphp.tip({content:result.msg});
+
+		} else {
+			$.pinphp.tip({content:result.msg, icon:'alert'});
+		}
+	}
+
+    $('.J_cate_place_select').cate_select({top_option:lang.all,field:'J_pid',target_class:'J_cate_place_select'}); //分类联动
+});
+</script>

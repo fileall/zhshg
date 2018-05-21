@@ -1,0 +1,33 @@
+<include file="Public:header" />
+<!--文章列表-->
+<div class="pad_lr_10" >
+    <div class="J_tablelist table_list" data-acturi="{:U('QdRule/ajax_edit')}">
+        <table width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th>等级</th>
+                <th>名称</th>
+                <th>区域内会员购元宝<br/>返银(倍)</th>
+                <th>区域内会员成掌柜<br/>送余额(元)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="val" >
+                <tr>
+                    <td align="center">{$val['id']}</td>
+                    <td align="center">{$val['name']}</td>
+                    <td align="center"><span data-tdtype="edit" data-field="reward_silver_multiple" data-id="{$val.id}" class="tdedit">{$val['reward_silver_multiple']}</span></td>
+                    <td align="center"><span data-tdtype="edit" data-field="upgrade_recharge" data-id="{$val.id}" class="tdedit">{$val['upgrade_recharge']}</span></td>
+
+                    <!--<td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="acer_consume_silver" data-value="{$val.acer_consume_silver}" src="__PUBLIC_ADMIN__images/toggle_<if condition="$val.acer_consume_silver eq 0">disabled<else/>enabled</if>.gif" /></td>-->
+                    <!--<td align="center"><a href="{:u('GradeRule/edit', array('id'=>$val['id'], 'menuid'=>$menuid))}">{:L('edit')}</a> &lt;!&ndash;| <a href="javascript:void(0);" class="J_confirmurl" data-acttype="ajax" data-uri="{:u('GradeRule/delete', array('id'=>$val['id']))}" data-msg="{:sprintf(L('confirm_delete_one'),$val['title'])}">{:L('delete')}</a>&ndash;&gt;</td>-->
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<include file="Public:footer" />
+</body>
+</html>

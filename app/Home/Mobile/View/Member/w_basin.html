@@ -1,0 +1,99 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">聚宝盆</div>
+				<a href="/index.php?s=/member/wallet.html">
+					<div class="header-left"><i class="fa fa-angle-left"></i></div>
+				</a>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<div class="basin-top-col vertical-center">
+				<div class="vertical-auto" style="width: 100%;">
+					<a href="{:U('member/w_village_number')}">
+						<div class="wallet-money">{:floor ($all_acer_jc)}</div>
+						<div class="wallet-unit">元宝寄存总数(个)</div>
+					</a>
+				</div>
+			</div>
+			
+			<div class="basin-middle-col row-box">
+				<div class="row-flex basin-middle-tier">
+					<!--<a href="extract_money.html">-->
+					<a href="javascript:;" class="acer" data-acer="1">	
+						<div class="basin-middle-t">{:floor ($member['gold_acer_jc'])}</div>
+						<div class="basin-middle-p">金元宝(个)</div>
+					</a>	
+				</div>
+				<div class="row-flex">
+					<a href="javascript:;" class="acer" data-acer="2"> 
+						<div class="basin-middle-t">{:floor ($member['silver_acer_jc'])}</div>
+						<div class="basin-middle-p">银元宝(个)</div>
+					</a>	
+				</div>
+			</div>
+
+			
+			<ul>
+				<li class="declare-li">
+					<div class="declare-tier-top">
+						<div class="declare-left">{$sy}银币</div>
+						<div class="declare-right">低风险 收益多 零风险</div>
+						<div class="clear-float"></div>
+					</div>
+					
+					<div class="declare-tier-bottom">
+						<div class="declare-left">寄存{:C('pin_jbp_zq')}天/100金元宝</div>
+						<div class="declare-right">理财新选择</div>
+						<div class="clear-float"></div>
+					</div>
+				</li>
+				
+				<li class="declare-li">
+					<div class="declare-tier-top">
+						<div class="declare-left">{$sy}银币</div>
+						<div class="declare-right">低风险 收益多 零风险</div>
+						<div class="clear-float"></div>
+					</div>
+					
+					<div class="declare-tier-bottom">
+						<div class="declare-left">寄存{:C('pin_jbp_zq')}天/100银元宝</div>
+						<div class="declare-right">理财新选择</div>
+						<div class="clear-float"></div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<div class="footer-space"></div><!--间距-->
+		<div class="footer-wrap">
+			<div class="footer-inner inner-area">
+				<a href="{:U('member/w_village')}" class="check-link">寄存</a>
+			</div>
+		</div>
+		<!--footer-->
+	</body>
+</block>
+<block name="footer"></block>
+<block name="script">
+	<script>
+//	$('.acer').click(function(){
+//		$.post('U("member/w_extract_money")',{what_acer:$(this).data('acer')},function(d){
+//			window.location.href=d.url;
+//		});
+//	})
+	</script>	
+	
+</block>
+</html>

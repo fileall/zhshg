@@ -1,0 +1,55 @@
+
+<div class="dialog_content">
+    <form id="info_form" name="info_form" action="{:u('OutlineDeal/recharge')}" method="post">
+    <table width="100%" class="table_form">
+    	
+        <!--<tr>
+            <th width="80">转账账户 :</th>
+            <td>
+            	<select name="card_id" id="card_id">
+		        	<option value="">请选择</option>
+		        	<volist name="pt_card" id="v">
+		    			<option value="{$v['id']}">{$v['name']}</option>
+		    		</volist>
+        		</select>
+            </td>
+        </tr>
+        -->
+         <tr>
+            <th width="80">用户手机号 :</th>
+            <td><input type="text" id="mobile" name="mobile"  class="input-text"></td>
+        </tr>
+        
+          <tr>
+            <th width="80">充值金额 :</th>
+            <td><input type="text" name="prices"  class="input-text"></td>
+        </tr>
+        
+        
+        <tr>
+            <th width="80"> 登入密码:</th>
+            <td><input type="password"  name="password"  class="input-text"></td>
+        </tr>
+     
+    </table>
+    </form>
+</div>
+
+<script>
+    $(function(){
+		 $.formValidator.initConfig({formid:"info_form",autotip:true});
+		  $("#mobile").formValidator({ onshow:lang.please_input+'账户', onfocus:lang.please_input+'账户', oncorrect:lang.input_right}).inputValidator({ min:1, onerror:lang.please_input+'账户'});
+    $("#mobile").formValidator({ onshow:lang.please_input+'手机号', onfocus:lang.please_input+'手机号', oncorrect:lang.input_right}).inputValidator({ min:1, onerror:lang.please_input+'手机号'});
+	 $("#account_name").formValidator({ onshow:lang.please_input+'开户名', onfocus:lang.please_input+'开户名', oncorrect:lang.input_right}).inputValidator({ min:1, onerror:lang.please_input+'开户名'});
+        $('#info_form').ajaxForm({success:complate,dataType:'json'});
+        function complate(result){
+            if(result.status == 1){
+                $.dialog.get(result.dialog).close();
+                $.pinphp.tip({content:result.msg});
+                window.location.reload();
+            } else {
+                $.pinphp.tip({content:result.msg, icon:'alert'});
+            }
+        }
+    });
+</script>

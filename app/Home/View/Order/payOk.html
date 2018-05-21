@@ -1,0 +1,39 @@
+<include file="Public/order_top" />
+	
+	<!--内容-->
+	<div class="shopCart3  wrap">
+		<!--信息-->
+		<div class="shopCart3-info">
+			<h3>订单支付成功</h3>
+			<p class="info-p"><strong>订单支付成功！订单号：{$info['order_sn']}</strong> </p>
+		</div>
+		<!--提示-->
+		<div class="clear shopCart5">
+			<p>您可以在<a href="{:U('Member/index')}" class="cor">【个人中心】</a>页面查看您的订单进程。</a></p>
+			<p><span class="threeAutoBack">3</span>秒后自动返回。</p>
+		</div>
+		<!--支付成功跳转shopCart5.html-->
+	</div>
+	<!--内容-end-->
+	
+ 	<!--公共底部-->
+	<include file="Public/footer" />
+ 	<!--公共底部-end-->
+
+ 	<script src="__PC__js/jquery1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+ 	<script src="__PC__js/l_main.js"></script>
+	<script src="__PC__plugins/layui-v1.0.9/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function(){
+			layui.use('layer', function(){
+				var layer = layui.layer;
+			});
+			//自动返回
+			$('.threeAutoBack').autoBack({
+				toWhere:"{:U('Member/index')}"
+			});
+		})
+
+	</script>
+</body>
+</html>

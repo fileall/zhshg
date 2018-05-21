@@ -1,0 +1,108 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+<body class="body-bgColor">
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">怡买工资</div>
+        <div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+        <div class="header-right"></div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+<!--content-->
+<div class="content">
+    <div class="outstanding-box y-goldIngot-bg vertical-center">
+        <div class="vertical-auto" style="width: 100%;">
+            <div class="outstanding-title font-28">怡买工资</div>
+            <div class="outstanding-money">{$member.prices}</div>
+        </div>
+    </div>
+
+    <ul class="y-mar-top20 y-bg-white">
+        <li class="function-list-li y-shaped-item">
+            <a href="javascript:;" id="tx">
+                <div class="ali-cen">
+                    <div class="function-list-left">
+                        <div class="function-list-icon"><img src="__MB__images/y_icon38.png"></div>
+                    </div>
+                    <div class="jus-bet flex1 y-shaped-item-text">
+                        <div class="row-flex flex1">
+                            <div class="function-list-name" >我要提现</div>
+                        </div>
+
+                        <div class="function-list-right">
+                            <div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </li>
+
+        <li class="function-list-li y-shaped-item">
+            <a href="{:U('wallet/account',['type'=>1])}">
+                <div class="ali-cen">
+                    <div class="function-list-left">
+                        <div class="function-list-icon"><img src="__MB__images/y_icon37.png"></div>
+                    </div>
+                    <div class="jus-bet flex1 y-shaped-item-text">
+                        <div class="row-flex flex1">
+                            <div class="function-list-name">工资明细</div>
+                        </div>
+
+                        <div class="function-list-right">
+                            <div class="function-list-arrows"><i class="fa fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </li>
+
+
+    </ul>
+    <div class="employ-explain y-shaped-msg">
+        <div class="employ-explain-title">活动规则：</div>
+        <ul>
+            <li class="employ-explain-txt">一、银币来源：</li>
+            <li class="employ-explain-txt">1、通过银币成长获得工资</li>
+            <li class="employ-explain-txt">2、通过推荐好友升级掌柜获得工资</li>
+            <li class="employ-explain-txt">二、工资用途：</li>
+            <li class="employ-explain-txt">1、可充当现金券在商城进行购物</li>
+            <li class="employ-explain-txt">2、工资可直接提现至绑定的银行卡</li>
+
+        </ul>
+        <div class="employ-explain-title y-color-red">温馨提示：</div>
+        <ul class="font-24">
+            <!--1、工资满100即可提现，提现手续费为5元/笔；-->
+            <!--2、每周一可进行工资提现，单笔最高5千元；-->
+            <!--3、提现不限笔数，提现后三天到账；-->
+            <!--4、普通会员仅限购买元宝使用，不可提现；(我要升级)-->
+            <li class="employ-explain-txt">1、工资满100即可提现，提现手续费为5元/笔；</li>
+            <li class="employ-explain-txt">2、单笔最高5千元；</li>
+            <li class="employ-explain-txt">3、提现不限笔数，提现后三天到账；</li>
+            <li class="employ-explain-txt">4、普通会员仅限购买元宝使用，不可提现；
+                <a class="y-color-red font-28" href="{:U('upgrade/upgrade')}">(我要升级)</a></li>
+        </ul>
+    </div>
+</div>
+<!--content-->
+</body>
+</block>
+<block name="footer"></block>
+<block name="script">
+    <script>
+        $('#tx').click(function(){
+            var is_tx="{$is_tx}";
+            if(is_tx != 1){
+                layer.msg('您还不具备提现资格！',{icon:0,time:1000})
+                return false;
+            }else{
+                location.href="{:U('wallet/balance_extract',['page_type'=>1])}";
+            }
+        })
+    </script>
+</block>
+</html>

@@ -1,0 +1,61 @@
+<include file="Public/member_top" />
+
+    <!--右测导航栏开始-->
+    <div class="x-right-colunm">
+        <div class="x-right-colunm-inner">
+            <div class="x-goods-inner">
+                <div class="x-goods-top l-clear">
+                    <div class="x-goods-title">
+                        <volist name="list" id="val">
+                            <span <if condition="$i eq 1">class="active"</if>>{$val['name']}</span>
+                        </volist>
+                    </div>
+                </div>
+            </div>
+            <div class="x-date-box">
+                <volist name="list" id="val" key="k">
+                    <div class="x-date-content <if condition="$k neq 1">l-hide</if>">
+                        <ul class="mycourseList l-clear">
+                            <volist name="val['info']['vod_list']" id="va">
+                                <a href="{:U('Curriculum/watch_videos',array('id'=>$val['info']['c_id'],'ex_id'=>$va['id']))}">
+                                    <li>
+                                        <div class="mycourse-video"><img src="{$va['media_img']}" alt="" /></div>
+                                        <h3 class="mycourse-title">{$va['ext_name']}</h3>
+                                        <div class="BlackBg" >
+                                            <div class="nowtosee"><p>立即<br>观看</p></div>
+                                        </div>
+                                    </li>
+                                </a>
+                            </volist>
+                        </ul>
+                    </div>
+                </volist>
+
+            <!--<div class="x-order-content">
+                &lt;!&ndash;分页&ndash;&gt;
+                <div class="x-paging-box">
+                    <form action="" name="" method="post">
+                        <button class="x-paging-skip" type="button">跳转</button>
+
+                        <div class="x-paging-txt">页</div>
+                        <input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" value="1" class="x-num-page"/>
+                        <div class="x-paging-txt">向第</div>
+
+                        <button class="x-paging-prev" type="button">下一页</button>
+
+                        <div class="x-page-number">1/10</div>
+
+                        <button class="x-paging-prev" type="button">上一页</button>
+                    </form>
+                    <div style="clear: both;"></div>&lt;!&ndash;clearFloat&ndash;&gt;
+                </div>
+            </div>-->
+        </div>
+    </div>
+</div>
+<!--右测导航栏结束-->
+
+<div style="clear: both;"></div><!--clearFloat-->
+</div>
+</body>
+</html>

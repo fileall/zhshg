@@ -1,0 +1,136 @@
+<extend name="Base/common"/>
+<block name="header"></block>
+<block name="body">
+<body class="body-bgColor">
+<!--header-->
+<div class="header-wrap">
+    <div class="header-inner">
+        <div class="header-title">我是商家</div><a href="{:U('Member/mine')}">
+        <div class="header-left"><i class="fa fa-angle-left"></i></div></a>
+        <div class="header-right"></div>
+    </div>
+</div>
+<div class="header-space"></div>
+<!--header-->
+
+
+<!--content-->
+<if condition="!$merchant">
+    <div class="not-merchant">
+        <img src="__MB__images/y_bg6.png" alt="" class="not-merchant-bg"/>
+        <p class="not-merchant-tip">您还不是商家哦~</p>
+        <a href="{:U('merchant_add')}" class="not-merchant-btn jus-ali">去申请</a>
+    </div>
+<elseif condition="$merchant['status'] == '1'" />
+    <div class="not-merchant">
+        <img src="__MB__images/y_bg6.png" alt="" class="not-merchant-bg"/>
+        <p class="not-merchant-tip">申请失败</p>
+        <a href="{:U('merchant_add',['merchant_id'=>$merchant['id']])}" class="not-merchant-btn jus-ali">重新申请</a>
+    </div>
+<elseif condition="$merchant['status'] == '0'" />
+    <div class="not-merchant">
+        <img src="__MB__images/y_bg6.png" alt="" class="not-merchant-bg"/>
+        <p class="not-merchant-tip">您的店铺正在审核中~</p>
+        <a href="javascript:;" class="not-merchant-btn jus-ali">待审核</a>
+    </div>
+<elseif condition="$merchant['status'] == 2 || $merchant['status'] == 3" />
+    <div class="content">
+        <!--person-->
+        <div class="person-wrap y-person-wrap">
+            <div class="person-inner row-box">
+                <div class="row-flex">
+                    <div class="person-photo vertical-center y-person-photo">
+                        <div class="vertical-auto"><img src="{:attach($merchant['img'],'avatar')}"></div>
+                    </div>
+                    <div class="person-message">
+                        <div class="person-name">{$merchant['title']}</div>
+                        <if condition="$merchant['status'] eq 2">
+                            <div class="y-merchant-person-grade y-mar-top20 ellipsis1 y-text-center">营业中</div>
+                            <elseif condition="$merchant['status'] eq 3"/>
+                            <div class="y-merchant-person-grade y-mar-top20 ellipsis1 y-text-center">闭店中</div>
+                        </if>
+
+                    </div>
+                </div>
+
+
+                <div class="popularize y-merchant-popularize vertical-center">
+                    <div class="vertical-auto">
+                        <a href="{:U('merchant_code')}">
+                            <div class="popularize-img"><img src="{:attach($merchant['ewm'],'ewm')}"></div>
+                            <div class="popularize-name">收款二维码</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--person-->
+
+        <ul class="flex flex-warp y-border-top y-bg-white y-mar-top20">
+            <li class="y-merchant-item y-border-right"><a href="{:U('merchant_ingot',['type'=>2])}">
+                <p class="font-36">{$merchant['gold_acer']}</p>
+                <p class="font-30">元宝货款</p></a>
+            </li>
+            <li class="y-merchant-item"><a href="{:U('merchant_fruit',['type'=>3])}l">
+                <p class="font-36">{$merchant['gold_fruit']}</p>
+                <p class="font-30">金果</p></a>
+            </li>
+            <li class="y-merchant-item y-border-right"><a href="{:U('merchant_store')}">
+                <div class="y-merchant-item-img">
+                    <img src="__MB__images/y_set.png"/>
+                </div>
+                <p class="font-30">店铺设置</p></a>
+            </li>
+            <!--<li class="y-merchant-item y-border-right"><a href="y_storeAddImg.html">-->
+                <!--<div class="y-merchant-item-img">-->
+                    <!--<img src="__MB__images/y_add.png"/>-->
+                <!--</div>-->
+                <!--<p class="font-30">添加店铺图片</p></a>-->
+            <!--</li>-->
+        </ul>
+        <if condition="$merchant.status eq 2">
+            <a href="javascript:;" class="peration" data-status="3"><div class="y-merchant-closeShop y-bg-red y-text-center font-28">关闭店铺</div></a>
+        <else />
+            <a href="javascript:;" class="peration" data-status="2"><div class="y-merchant-closeShop y-bg-red y-text-center font-28">开启店铺</div></a>
+        </if>
+    </div>
+    <else/>
+</if>
+<!--content-->
+
+
+<!--footer-->
+<!--footer-->
+</body>
+</block>
+<block name="footer"></block>
+<block name="script">
+<script>
+
+    $('.peration').click(function(){
+        var _this=$(this);
+        var status=_this.attr('data-status');
+        // var status_msg=(status==2)?'关闭店铺':'开启店铺';
+
+        if(status==2){
+           var change_html='关闭店铺'; var change_status=3;var change_html2='营业中';
+        }else{
+           var change_html='开启店铺'; var change_status=2;var change_html2='闭店中';
+        }
+        $.post("{:U('merchant_operation')}",{status:status},function(res){
+            if(res.status==1){
+                layer.msg(res.msg, {icon:1,time: 1000},function(){
+//                    window.location.href=window.location.href;
+                    _this.attr('data-status',change_status);
+                    _this.find('div').html(change_html);
+                    $('.y-merchant-person-grade.y-mar-top20').html(change_html2);
+                });
+            }else{
+                layer.msg(res.msg,{icon:0,time:1000})
+            }
+        },'JSON')
+    })
+</script>
+
+</block>
+</html>

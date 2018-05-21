@@ -1,0 +1,50 @@
+<!--添加栏目-->
+<div class="dialog_content">
+	<form id="info_form" action="{:U('MerchantCate/add')}" method="post">
+	<table width="100%" class="table_form">
+		<tr> 
+			<th width="100">{:L('item_cate_parent')} :</th>
+			<td>
+				<select class="J_cate_select mr10" data-pid="0" data-uri="{:U('MerchantCate/ajax_getchilds')}" data-selected="{$spid}"></select>
+				<input type="hidden" name="pid" id="J_cate_id" />
+				<input type="hidden" name="status" value="1" />
+			</td>
+		</tr>
+
+		<tr>
+			<th>{:L('item_cate_name')} :</th>
+			<td>
+				<input type="text" name="name" id="J_name" class="input-text" size="30">
+		        <input type="hidden" value="" name="fcolor" id="J_color">
+		        <a href="javascript:;" class="color_picker_btn"><img class="J_color_picker" data-it="J_name" data-ic="J_color" src="__STATIC__/images/color.png"></a>
+			</td>
+		</tr>
+	</table>
+	</form>
+</div>
+<script src="__STATIC__/js/jquery/plugins/colorpicker.js"></script>
+<script src="__STATIC__/js/fileuploader.js"></script>
+<script>
+$(function(){
+    //分类联动
+    $('.J_cate_select').cate_select({top_option:lang.all});
+
+    //表单
+	$.formValidator.initConfig({formid:"info_form",autotip:true});
+	$('#J_name').formValidator({onshow:'请输入名称',onfocus:'请输入名称'}).inputValidator({min:1,onerror:'请输入名称'});
+	
+	$('#info_form').ajaxForm({success:complate, dataType:'json'});
+	function complate(result){
+		if(result.status == 1){
+			$.dialog.get(result.dialog).close();
+			$.pinphp.tip({content:result.msg});
+			window.location.reload();
+		} else {
+			$.pinphp.tip({content:result.msg, icon:'alert'});
+		}
+	}
+
+
+
+});
+</script>

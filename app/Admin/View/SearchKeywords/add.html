@@ -1,0 +1,47 @@
+<!--编辑管理员-->
+<div class="dialog_content">
+	<form id="info_form" action="{:U('SearchKeywords/add')}" method="post">
+	<table width="100%" class="table_form">
+		<tr>
+      		<th width="80">关键字 :</th>
+      		<td><input type="text" name="keywords" id="J_keywords" class="input-text" value=""></td>
+    	</tr>
+		<tr>
+      		<th width="80">排序 :</th>
+      		<td><input type="text" name="ordid" class="input-text" value="10"></td>
+    	</tr>
+		<th>{:L('enabled')} :</th>
+		<td>
+			<label><input type="radio" name="status" value="1" checked> {:L('yes')}</label>&nbsp;&nbsp;
+			<label><input type="radio" name="status" value="0"> {:L('no')}</label>
+		</td>
+		<tr>
+			<th>提示 ：</th>
+			<td>
+				<P style="color:gray;"> 热门搜索展示最多为6个</P>
+			</td>
+		</tr>
+
+	</table>
+		<input type="hidden" name="add_time" value="{:time()}">
+	</form> 
+</div>
+
+<script>
+$(function(){
+	$.formValidator.initConfig({formid:"info_form",autotip:true});
+
+	$("#J_keywords").formValidator({ onshow:'请输入关键字', onfocus:'请输入关键字'}).inputValidator({ min:1, onerror:'请输入关键字'});
+
+	$('#info_form').ajaxForm({success:complate,dataType:'json'});
+    function complate(result){
+        if(result.status == 1){
+            $.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'}); 
+        }
+    }
+});
+</script>

@@ -1,0 +1,98 @@
+<extend name="Base/common"/> 
+
+<block name="header">
+	<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">设置</div>
+				<a href="/index.php?s=/member/mine.html">
+					<div class="header-left"><i class="fa fa-angle-left"></i></div>
+				</a>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+</block>
+
+<block name="body">	
+	<body class="body-bgColor">
+		
+		
+		<!--content-->
+		<div class="content">
+			<ul class="set-con-ul">
+				<!--<li class="set-con-li"><a href="{:U('member/set_person')}">
+					<div class="set-con-name">个人信息</div>
+					<div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+					<div class="clear-float"></div>
+				</a></li>
+				
+				<li class="set-con-li"><a href="javascript:;">
+					<div class="set-con-name">意见反馈</div>
+					<div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+					<div class="clear-float"></div>
+				</a></li>
+				
+				<li class="set-con-li"><a href="tel:4001089805">
+					<div class="set-con-name">客服电话</div>
+					<div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+					<div class="set-con-phone">400-1089-805</div>
+					<div class="clear-float"></div>
+				</a></li>
+				
+				<li class="set-con-li"><a href="javascript:;">
+					<div class="set-con-name">关于我们</div>
+					<div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+					<div class="clear-float"></div>
+				</a></li>-->
+				
+				<li class="set-con-li"><a href="{:U('member/set_attestation')}">
+					<div class="set-con-name">实名认证</div>
+					<div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+					<div class="clear-float"></div>
+				</a></li>
+				
+				<li class="set-con-li"><a href="{:U('set_safety')}">
+					<div class="set-con-name">账户安全</div>
+					<div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+					<div class="clear-float"></div>
+				</a></li>
+				
+				<li class="set-con-li"><a href="javascript:;"> 
+					<div class="set-con-name">收货地址</div>
+					<div class="set-con-icon"><i class="fa fa-angle-right"></i></div>
+					<div class="clear-float"></div>
+				</a></li>
+			</ul>
+			
+			<!--<div class="secede-txt">退出登录</div>-->
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<block name="footer"></block>
+		<!--footer-->
+	</body>
+</block>	
+
+<block name="script">
+<script>	
+	
+	//退出登录	
+	$('.secede-txt').click(function(){
+	  layer.confirm('是否退出登录?', {
+			icon: 3,
+			title: '提示', 
+	   },function(){ 
+			$.get('{:U("login/login_out")}',function(d){
+				if(d.status==1){
+//					layer.msg(''+d.msg+'');
+					window.location.href=d.url;
+				}
+			},"JSON")
+		})
+	}) 
+</script>	
+</block>
+</html>

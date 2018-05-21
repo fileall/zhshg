@@ -1,0 +1,283 @@
+<include file="Public/member_top" />
+
+    <!--右测导航栏开始-->
+    <div class="x-right-colunm">
+        <div class="x-right-colunm-inner">
+
+            <div class="x-headline">商品订单</div><!--title name-->
+
+            <div class="x-my-nav-box"><!--my indent nav-->
+                <ul class="x-my-nav l-clear">
+                    <li class="x-my-nav-li <if condition="!$status">active</if>">
+                    <a href="{:U('Member/item_order',array('type'=>$type))}">全部</a>
+                    </li>
+                    <li class="x-my-nav-li <if condition="$status eq 1">active</if>">
+                    <a href="{:U('Member/item_order',array('type'=>$type,'status'=>1))}">
+                        待付款<span>（{$count_list[1]|default=0}）</span>
+                    </a>
+                    </li>
+                    <li class="x-my-nav-li <if condition="$status eq 2">active</if>">
+                    <a href="{:U('Member/item_order',array('type'=>$type,'status'=>2))}">
+                        待发货<span>（{$count_list[2]|default=0}）</span>
+                    </a>
+                    </li>
+                    <li class="x-my-nav-li <if condition="$status eq 3">active</if>">
+                    <a href="{:U('Member/item_order',array('type'=>$type,'status'=>3))}">
+                        待收货<span>（{$count_list[3]|default=0}）</span>
+                    </a>
+                    </li>
+                    <li class="x-my-nav-li <if condition="$status eq 4">active</if>">
+                    <a href="{:U('Member/item_order',array('type'=>$type,'status'=>4))}">
+                        待评价<span>（{$count_list[4]|default=0}）</span>
+                    </a>
+                    </li>
+                    <li class="x-my-nav-li">
+                        <a href="javascript:;">已退款<span>（0）</span></a>
+                    </li>
+                </ul>
+
+                <div class="x-my-search">
+                    <form method="get">
+                        <input type="hidden" name="m" value="home" />
+                        <input type="hidden" name="c" value="Member" />
+                        <input type="hidden" name="a" value="item_order" />
+                        <div class="x-search-box">
+                            <input name="time_start" name="LAY_demorange_s" id="LAY_demorange_s" value="{$time_start}" placeholder="开始日期" />
+                            <input name="time_end" name="LAY_demorange_e" id="LAY_demorange_e" value="{$time_end}" placeholder="结束日期" />
+                            <input type="text" name="keywords" value="{$keywords}" placeholder="订单号"/>
+                            <button type="submit">搜索订单</button>
+                            <div style="clear: both;"></div><!--clearFloat-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+
+            <div class="x-order-content goodsOrder-con"><!--订单容器-->
+                <div class="x-order-tier"><!--订单状态层-->
+                    <volist name="list" id="val">
+                        <div class="x-order-tier-inner" data-id="{$val['id']}"><!--订单层-->
+                            <div class="x-title-state l-clear">
+                                <p class="x-title-state-p1">下单时间：<span>{$val['add_time']|date="Y-m-d",###}</span></p>
+                                <p class="x-title-state-p2">订单编号： <span>{$val['order_sn']}</span></p>
+                                <div class="fr x-title-stateBox">
+                                    <p class="p1">单价</p>
+                                    <p class="p1">数量</p>
+                                    <p class="p2">小计</p>
+                                    <p class="p2">状态</p>
+                                    <p class="p2">操作</p>
+                                </div>
+                            </div>
+                            <div class="x-indent-commodity"><!--订单商品-->
+                                <table border="0" cellspacing="0" cellpadding="0" width="974">
+                                    <tr height="86">
+                                        <td>
+                                            <volist name="val['list']" id="va">
+                                                <div class="x-commodity-tier l-clear">
+                                                    <div class="x-commodity-image"><!--商品图片-->
+                                                        <a href="{:U('Mall/goodsDetail',array('id'=>$va['item_id']))}">
+                                                            <img src="{:attach($va['img'],'item')}">
+                                                        </a>
+                                                    </div>
+
+                                                    <div class="x-commodity-name"><!--商品名称/规格-->
+                                                        <p class="x-commodity-p1">
+                                                            <a href="{:U('Mall/goodsDetail',array('id'=>$va['item_id']))}" class="hover-blue">
+                                                                {$va['title']}
+                                                            </a>
+                                                        </p>
+                                                        <!--<p class="x-commodity-p2">250ml×12盒</p>-->
+                                                    </div>
+
+                                                    <div class="x-commodity-amount">￥{$va['price']}</div>
+                                                    <div class="x-commodity-amount">{$va['nums']}</div>
+                                                </div>
+                                            </volist>
+                                        </td>
+                                        <td class="x-commodity-width">
+                                            <div class="x-commodity-text">
+                                                <p class="x-monty active">￥{$val['totalprices']}</p>
+                                                <p class="x-monty">含运费：￥{$val['freight']}</p>
+                                                <p class="x-monty">
+                                                    <switch name="val.pay_type">
+                                                        <case value="0">无</case>
+                                                        <case value="1">微信</case>
+                                                        <case value="2">支付宝</case>
+                                                    </switch>
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td class="x-commodity-width">
+                                            <div class="x-commodity-text">
+                                                <p class="x-monty">
+                                                    <switch name="val.status">
+                                                        <case value="1"><span style="color: red;">待付款</span></case>
+                                                        <case value="2"><span style="color: green;">待发货</span></case>
+                                                        <case value="3"><span style="color: blue;">待收货 </span></case>
+                                                        <case value="4"><span style="color: darkturquoise;">待评价 </span></case>
+                                                        <case value="5">已完成</case>
+                                                    </switch>
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td class="x-commodity-width">
+                                            <div class="x-commodity-text">
+                                                <switch name="val.status">
+                                                    <case value="1">
+                                                        <p class="x-monty">
+                                                            <a href="{:U('ItemOrder/shopCart',array('id'=>$val['id']))}">
+                                                                <span class="x-notarize" type="button">马上支付</span>
+                                                            </a>
+                                                        </p>
+                                                        <p class="x-monty">
+                                                            <a href="javascript:;" class="mykcindent-qxdd">
+                                                                取消订单
+                                                            </a>
+                                                        </p>
+                                                    </case>
+                                                    <case value="2">
+                                                        <p class="x-monty">
+                                                            <a href="javascript:;" class="apply-for-refund">申请退款</a>
+                                                        </p>
+                                                    </case>
+                                                    <case value="3">
+                                                        <p class="x-monty"><a class="apply-for-refund" href="javascript:;">申请退款</a></p>
+                                                        <p class="x-monty"><span class="x-notarize btn-qrsh" >确认收货</span></p>
+                                                    </case>
+                                                    <case value="4">
+                                                        <p class="x-monty">
+                                                            <a class="ft-color" href="{:U('Member/item_order_evaluate',array('id'=>$val['id']))}">我要评价</a>
+                                                        </p>
+                                                    </case>
+                                                </switch>
+                                                <p class="x-monty"><a href="{:U('Member/item_order_detail',array('id'=>$val['id']))}">查看详情</a></p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </volist>
+
+                    <!--分页-->
+                    <div class="x-paging-box l-clear">
+                        {$page}
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <!--右测导航栏结束-->
+
+    <div style="clear: both;"></div><!--clearFloat-->
+</div>
+<!--公共底部-->
+<include file="Public/footer" />
+<script src="__PC__plugins/layui-v1.0.9/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $(function(){
+        //layui-日期
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+            var start = {
+                max: '2099-06-16 23:59:59'
+                ,istoday: false
+                ,choose: function(datas){
+                    end.min = datas; //开始日选好后，重置结束日的最小日期
+                    end.start = datas //将结束日的初始值设定为开始日
+                }
+            };
+            var end = {
+                max: '2099-06-16 23:59:59'
+                ,istoday: false
+                ,choose: function(datas){
+                    start.max = datas; //结束日选好后，重置开始日的最大日期
+                }
+            };
+
+            document.getElementById('LAY_demorange_s').onclick = function(){
+                start.elem = this;
+                laydate(start);
+            }
+            document.getElementById('LAY_demorange_e').onclick = function(){
+                end.elem = this
+                laydate(end);
+            }
+        });
+        //layui-layer
+        layui.use('layer',function(){
+            var layer = layui.layer;
+
+            //取消订单
+            $('.mykcindent-qxdd').click(function(){
+                var par = $(this).parents('.x-order-tier-inner'),
+                    id = par.data('id');
+                layer.confirm('是否取消订单？', {
+                    btn: ['是','否'] //按钮
+                }, function(){
+                    $.get("{:U('Member/cancel_item_order')}",{id:id},function (result) {
+                        if(result == 1){
+                            layer.msg('已取消', {icon: 1});
+                            par.remove();
+                        }else{
+                            layer.msg('操作失败，请重试', {icon: 2});
+                        }
+                    })
+                });
+            });
+
+            //确认收货
+            $('.btn-qrsh').click(function(){
+                var par = $(this).parents('.x-order-tier-inner'),
+                    id = par.data('id');
+                layer.confirm('是否确认收货？', {
+                    btn: ['是','否'] //按钮
+                }, function(){
+                    $.get("{:U('Member/receipt_item_order')}",{id:id},function (result) {
+                        if(result == 1){
+                            layer.msg('确认成功', {icon: 1});
+                            setTimeout(function () {
+                                location.reload();
+                            },2000)
+                        }else{
+                            layer.msg('操作失败，请重试', {icon: 2});
+                        }
+                    })
+                });
+            });
+
+            //申请退款弹出框
+            $('.apply-for-refund').click(function(){
+                var layer_tk = layer.open({
+                    type: 1,
+                    title:'退款原因',
+                    area:['400px','300px'],
+                    skin: 'layui-layer-tk', //样式类名
+                    closeBtn: 1, //显示关闭按钮
+                    anim: 2,
+                    shadeClose: true, //开启遮罩关闭
+                    content: '<textarea placeholder="请输入退款原因"></textarea>',
+                    btn:["确定",'取消'] ,
+                    yes: function(index, layero){
+                        //按钮【确定】的回调
+                        if($('.layui-layer-content textarea').val() == ''){
+                            //验证退款原因不能为空
+                            layer.msg('请输入退款原因', {icon: 2});
+                            return;
+                        }
+                        layer.close(layer_tk);//关闭弹层
+                        layer.msg('您的退款申请已提交', {icon: 1});//成功提示
+                    }
+                });
+            });
+        })
+    })
+</script>
+</body>
+</html>

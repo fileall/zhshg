@@ -1,0 +1,156 @@
+<include file="Public:header" />
+<!--区代列表-->
+<div class="pad_lr_10" >
+    <form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <input type="hidden" name="m" value="admin" />
+                    <input type="hidden" name="c" value="service" />
+                    <input type="hidden" name="a" value="index" />
+                    <input type="hidden" name="menuid" value="{$menuid}" />
+					<if condition="$sm neq ''"><input type="hidden" name="sm" value="{$sm}" /></if>
+
+					区域：<select class="J_cate_select mr10" data-pid="0" data-uri="{:U('place/ajax_getchilds', array('type'=>0))}" data-selected="{$search.selected_ids}"></select>
+
+                    <input type="hidden" name="cate_id" id="J_cate_id" value="{$search.cate_id}" />
+
+
+					</select>
+                     &nbsp;&nbsp;添加时间：<input type="text" name="time_start" id="J_time_start" class="date"  value="{$search.time_start}" placeholder="时间开始">
+                    -
+                    <input type="text" name="time_end" id="J_time_end" class="date" value="{$search.time_end}" placeholder="时间结束">
+					 &nbsp;&nbsp;关键字：
+                    <input name="keyword" type="text" class="input-text" size="15" value="{$search.keyword}" />
+					<input type="submit" name="search" class="btn" value="搜索" />
+                    <input type="button"  class="btn export" value="下载报表" />
+                </div>
+                </td>
+            </tr>
+    </table>
+    </form>
+    
+<!--     <div class="explain_col">  
+     <form id="addform" action="{:U('Item/upload')}" method="post" enctype="multipart/form-data">
+        <input style=" width:65px;" type="file" name="excelData" value=""  datatype="*4-50" />
+       <input type="submit" class="btn btn-primary Sub" value="导入" />
+        
+    <a href="{:U('Item/goods_export')}" class="btn btn-primary Sub" >导出</a>
+     </form>
+    </div>-->
+   
+    
+    <if condition="$sm eq 'image'">
+    <div class="J_tablelist item_imglist clearfix">
+        <volist name="list" id="val">
+        <div class="item fl">
+            <label>
+            <input type="checkbox" class="J_checkitem check" value="{$val.id}" />
+            <div class="img clearfix"><img src="{:attach(get_thumb($val['img'], '_m'), 'item')}"></div>
+            </label>
+            <span class="line_x">{$val.title}</span>
+            <ul>
+                <li><a class="J_tooltip btn_blue" title="{$cate_list[$val['cate_id']]}">{:L('cate')}</a></li>
+                <li><a class="J_tooltip btn_blue" title="{$val.uname|default=L('item_no_author')}">{:L('author')}</a></li>
+            </ul>
+        </div>
+        </volist>
+    </div>
+    <else/>
+    <div class="J_tablelist table_list" data-acturi="{:U('service/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+            <tr>
+                <th width="20"><input type="checkbox"  name="checkall" class="J_checkall"></th>
+                <th>ID</th>
+                <th>头像</th>
+                <th>呢称</th>
+                <th>姓名</th>
+                <th>手机</th>
+                <th width="100">所属区域</th>
+                <th><span data-tdtype="order_by" data-field="prices">工资</span></th>
+                <th><span data-tdtype="order_by" data-field="gold_acer">元宝</span></th>
+                <th><span data-tdtype="order_by" data-field="gold_fruit">金果</span></th>
+                <th><span data-tdtype="order_by" data-field="silver_coin">银币</span></th>
+                <th><span data-tdtype="order_by" data-field="gold_fruit">兑换金果</span></th>
+                <th><span data-tdtype="order_by" data-field="add_time">添加日期</span></th>
+                 <th><span data-tdtype="order_by" data-field="status">{:L('status')}</span></th>
+                <th>{:L('operations_manage')}</th>
+            </tr>
+                       <!--{:dump($list)}-->
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <td align="center">{$val.id}</td>
+                <!--<td align="center"><span data-tdtype="edit" data-field="title" data-id="{$val.id}" class="tdedit" style="color:{$val.colors};">{$val.title}</span><notempty name="val['img']"><span class="attachment_icon J_attachment_icon" file-type="image" file-rel="{:attach($val['img'],'item')}"><img src="__PUBLIC_ADMIN__images/filetype/image_s.gif" /></span></notempty></td>-->
+                <td style="text-align:center; padding:5px;">
+                    <empty name="val['avatar']">未设置<else />
+                        <img src="{:attach($val['avatar'], 'avatar')}" width="32" class="J_preview" data-bimg="{:attach($val['avatar'], 'avatar')}">
+                    </empty>
+                </td>
+                <td align="center">{$val['nickname']}</td>
+                <td align="center" >{$val['realname']}</td>
+                <td align="center" >{$val['mobile']}</td>
+                <td align="center">
+                        {$place[$val['province_id']]}<br/>
+                        {$place[$val['city_id']]}<br/>
+                        {$place[$val['district_id']]}
+                </td>
+                <td align="center">
+                    <a class="blue" href="{:U('account/index',array('uid'=>$val['id'],'type'=>1))}">{$val.prices}</a>
+                </td>
+                <td align="center">
+                    <a class="blue" href="{:U('account/index',array('uid'=>$val['id'],'type'=>2))}">{$val.gold_acer}</a>
+                </td>
+                <td align="center">
+                    <a class="blue" href="{:U('account/index',array('uid'=>$val['id'],'type'=>3))}">{$val.gold_fruit}</a>
+                </td>
+                <td align="center">
+                    <a class="blue" href="{:U('account/index',array('uid'=>$val['id'],'type'=>4))}">{$val.silver_coin}</a>
+                </td>
+                <td align="center">
+
+                    <a href="javascript:;" class="J_showdialog" data-uri="{:U('service/coupon', array('uid'=>$val['id']))}" data_acttype="ajax" data-id="coupon" data-width="520" data-height="200">兑换</a>
+
+                </td>
+                <td align="center">{$val['reg_time']|date="Y-m-d",###}</td>
+                 <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{$val.status}" src="__PUBLIC_ADMIN__/images/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
+                <td align="center">
+                	<a href="{:u('service/edit', array('id'=>$val['id'], 'menuid'=>$menuid))}">{:L('edit')}</a> | 
+                	<a href="javascript:void(0);" class="J_confirmurl" data-uri="{:u('service/delete', array('id'=>$val['id']))}" data-acttype="ajax" data-msg="{:sprintf(L('confirm_delete_one'),$val['title'])}">{:L('delete')}</a></td>
+
+            </tr>
+            </volist>
+    	</tbody>
+    </table>
+    </div>
+    </if>
+	
+    <div class="songkebor">
+        <label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('service/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="批量删除" />
+        <div id="pages">{$page}</div>
+        <div style="clear: both;"></div>
+    </div>
+	
+
+</div>
+
+<include file="Public:footer" />
+<script>
+    laydate.render({
+        elem: '#J_time_start'
+    });
+
+    laydate.render({
+        elem: '#J_time_end'
+    });
+
+$('.J_preview').preview(); //查看大图
+$('.J_cate_select').cate_select({top_option:lang.all}); //分类联动
+$('.J_tooltip[title]').tooltip({offset:[10, 2], effect:'slide'}).dynamic({bottom:{direction:'down', bounce:true}});
+</script>
+
+</body>
+
+</html>

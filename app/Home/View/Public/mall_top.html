@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>{:C('pin_site_title')}</title>
+	<meta name="keywords" content="{:C('pin_site_keyword')}" />
+	<meta name="description" content="{:C('pin_site_description')}" />
+	<link rel="shortcut icon" type="image/x-icon" href="__PC__images/">
+	<link rel="stylesheet" href="__PC__plugins/amaze/assets/css/amazeui.min.css" />
+	<link rel="stylesheet" href="__PC__css/l_main.css" />
+	<link rel="stylesheet" href="__PC__css/animate.css" />
+</head>
+<body >
+<!--head-->
+<div class="head head2">
+	<!--顶部-->
+	<div class="top">
+		<div class="wrap clear">
+			<div class="left fl">
+				<span class="fl">欢迎进入兴智教育官方网站</span>
+				{:W('Wg/login_status')}
+			</div>
+			<ul class="right fr">
+				<li class="top-menu-box">
+					{:W('Wg/nav')}
+				</li>
+				<li class="top-menu-box"> 
+					<a href="{:U('Member/index')}" class="hover-blue">个人中心</a>
+				</li>
+				<li class="top-menu-box saoyisao">
+					<a href="" class="hover-blue">扫一扫</a>
+					<div class="down-menu">
+						<img src="__PC__images/foot-code_13.jpg" alt="" />
+					</div>
+				</li>
+				<li class="qq">
+					<a href="tencent://message/?uin=1563940776&amp;Site=No&amp;Menu=yes" target="_blank" class="hover-blue">在线咨询</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!--搜索框-->
+	<div class="search">
+		<div class="wrap clear">
+			<div class="logo fl">
+				<a href="/"><img src="__PC__images/logo.png" alt="logo" /></a>
+			</div>
+			<div class="search-box fl">
+				<div class="clear"> 
+					<input type="text" class="fl text" placeholder="请输入要搜索的课程或老师"/>
+					<input type="submit" value="搜索" class="fl sub"/>
+				</div>
+			</div>
+			<div class="fr my-shortCart"><a href="{:U('ItemOrder/cart')}">
+				<i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+				<span>我的购物车</span>
+				<span class="cor">（{$cart_num|default=0}）</span>
+			</a></div>
+		</div>
+	</div> 
+	<!--导航-->
+	<div class="nav nav2">
+		<div class="wrap">
+			<ul class="nav-list fl">
+				<li><a href="/" class="hover-blue">首页</a></li>
+				<li>
+					<a href="{:U('Curriculum/homeEducation')}" class="hover-blue <if condition="ACTION_NAME eq 'homeEducation'">active</if>">家庭教育指导</a>
+				</li>
+				<li>
+					<a href="{:U('Curriculum/classroom')}" class="hover-blue <if condition="ACTION_NAME eq 'classroom'">active</if>">语数外课堂</a>
+				</li>
+				<li>
+					<a href="{:U('Index/news')}" class="hover-blue <if condition="ACTION_NAME eq 'news'">active</if>">
+						新闻动态
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Mall/index')}" class="hover-blue <if condition="ACTION_NAME eq 'index'">active</if>">
+						在线商城
+					</a>
+				</li>
+				<li><a href="{:U('Index/service')}" class="hover-blue">售后服务</a></li>
+				<li>
+					<a href="{:U('Index/about')}" class="hover-blue <if condition="ACTION_NAME eq 'about'">active</if>">
+						关于我们
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div><!--head-end-->

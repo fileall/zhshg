@@ -1,0 +1,259 @@
+<include file="Public:header" />
+<!--会员列表-->
+<div class="pad_10" >
+   	<form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+        <tr>
+            <td>
+            <div class="explain_col">
+                <input type="hidden" name="m" value="admin" />
+                <input type="hidden" name="c" value="MemberCard" />
+                <input type="hidden" name="a" value="index" />
+                <input type="hidden" name="menuid" value="{$menuid}" />
+            	添加日期：
+                <input type="text" name="time_start" id="time_start" class="date" size="12" value="{$search.time_start}">
+                -
+                <input type="text" name="time_end" id="time_end" class="date" size="12" value="{$search.time_end}">
+            	&nbsp;&nbsp;出售日期：  
+                <input type="text" name="use_time_start" id="use_time_start" class="date" size="12" value="{$search.use_time_start}">
+                -
+                <input type="text" name="use_time_end" id="use_time_end" class="date" size="12" value="{$search.use_time_end}">
+                <if condition="$_SESSION['admin']['role_id'] neq 3">
+	                &nbsp;&nbsp;所属门店：
+	                <select name="store_id" id="store_id">
+	                	<option value="">-{:L('all')}-</option>
+	                	<volist name="store" id="val">
+	                    	<option value="{$val['id']}" <if condition="$search.store_id eq $val['id']">selected="selected"</if>>{$val['username']}</option>
+	                    </volist>
+	                </select>
+                </if>
+                &nbsp;&nbsp;业务员:
+                <select name="salesman" id="salesman">
+                	<option value="">-所有-</option>
+                </select>
+                &nbsp;&nbsp;卡号 :
+                <input name="card" type="text" class="input-text" size="25" value="{$search.card}" />
+                <input type="hidden" name="type" value="{$search.type}" />
+                <input type="hidden" name="status" value="{$search['status']}" />
+                &nbsp;&nbsp;
+                <input type="submit" name="search" class="btn" value="{:L('search')}" />
+            </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </form>
+	 
+  	<!--<form name="searchform"  action="{:u('MemberCard/add')}" method="post" >
+	    <table width="100%" cellspacing="0" class="search_form">
+	        <tbody>
+	            <tr>
+	                <td>
+		                <div class="explain_col">
+		                    &nbsp;&nbsp;选择类别 :
+		                    <select name="cate" >
+		                    	<volist name="card_cate" id="val">
+                        			<option value="{$val['id']}">{$val['title']}（{$val['face_value']}元）</option>
+		                        </volist>
+		                    </select>
+		                    &nbsp;数量 :
+		                    <input name="nums" type="text" class="input-text" size="15" />
+		                    &nbsp;&nbsp;
+		                    <input type="submit"  class="btn" value="生成会员卡" />
+		                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                </div>
+	                </td>
+	            </tr>
+	        </tbody>
+	    </table>
+    </form>-->
+    
+<if condition="$_SESSION['admin']['role_id'] neq 3">    
+    <div class="explain_col">  
+     	<form id="addform" action="{:U('Member/ru_upload')}" method="post" enctype="multipart/form-data">
+	        <input style=" width:65px;" type="file" name="excelData" value=""  datatype="*4-50" />
+	       	<input type="submit" class="btn btn-primary Sub" value="导入" />
+	    	<!--<a href="{:U('Item/goods_export')}" class="btn btn-primary Sub" >导出</a>-->
+     	</form>
+    </div>
+</if>    
+
+	<div class="col_tab" style="margin-bottom: 3px;">
+		<ul class="J_tabs tab_but cu_li" style="padding-left:0px;">       
+	       	<li <if condition="$search['status'] eq null">class="current"</if> >
+	       		<a href="{:U('MemberCard/index',array('type'=>1,'menuid'=>$menuid))}">
+	       			未售会员卡{$nums[0]}
+	       		</a>
+	       	</li>
+	       	<li <if condition="$search['status']">class="current"</if> >
+	       		<a href="{:U('MemberCard/index',array('type'=>1,'status'=>1,'menuid'=>$menuid))}">
+	       			已售会员卡{$nums[1]}
+	       		</a>
+	       	</li>
+        </ul>
+    </div>
+  
+      
+    
+  <div class="J_tablelist table_list" data-acturi="{:U('MemberCard/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+<thead>
+            <tr>
+                <th width=20><input type="checkbox" id="checkall_t" class="J_checkall"></th>
+                <th width="110" align="left">绑定用户</th>
+                <th width="110" align="left">绑定手机</th>
+                <th width="101" align="left">卡号</th>
+                <th width="101" align="left">面值</th>
+              	<th width="110" align="left">余额</th>
+              	<!--<th width="150" align="left">分类</th>-->
+                <th width="110"  align="left">所属门店</th>
+                <th width="110"  align="left">业务员</th>
+              	
+                <th width="110" align="left">绑定日期</th>
+                <th width="115">{:L('status')}</th>
+                <th width="110" align="left">出售日期</th>
+                <th width="175">{:L('operations_manage')}</th>
+          </tr>
+        </thead>
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <td align="center">{$val.realname}</td>
+                <td align="center">{$val.mobile}</td>
+                <td align="center">{$val.card}</td>
+                <td align="center">{$val.face_value}</td>
+                <td align="center">
+                	{$val['price']}<!-- | 
+                 	<a href="javascript:;" class="J_showdialog" data-uri="{:u('MemberCard/balance', array('id'=>$val['id'], 'menuid'=>$menuid))}" data-title="详情-余额" data-id="edit" data-width="620" data-height="330">详情</a>-->
+                </td>
+               <!-- <td align="center">{:_cate($val['cate'],$cate_list)}</td>-->
+                <td align="center">{$store_name[$val['store']]}</td>  
+                <td align="center">{$salesman[$val['salesman']]}</td>  
+                
+                <td align="center">
+                	<if condition="$val['bang_time']">
+                		{$val['bang_time'] |date="Y-m-d",###}
+                	</if>	
+                </td>
+                <td align="center">{:_status($val['status'])}</td>
+                <td align="center">
+                	<if condition="$val['add_time']">
+                		{$val['add_time'] |date="Y-m-d",###}
+                	</if>	
+                </td>
+               <!-- <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{$val.status}" src="__STATIC__/images/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>-->
+                <td align="center">
+                    <a href="javascript:;" class="J_showdialog" data-uri="{:u('MemberCard/edit', array('id'=>$val['id'], 'menuid'=>$menuid))}" data-title="编辑卡号-{$val.card}" data-id="edit" data-width="520" data-height="100">编辑</a> |
+                    <a href="javascript:void(0);" class="J_confirmurl" data-uri="{:u('MemberCard/delete', array('id'=>$val['id']))}" data-acttype="ajax" data-msg="{:sprintf(L('confirm_delete_one'),$val['nickname'])}">{:L('delete')}</a></td>
+
+            </tr>
+            </volist>
+    </table>
+  </div>
+    <div class="songkebor">
+
+        <label class="select_all"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('MemberCard/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
+
+        <div id="pages">{$page}</div>
+
+    </div>
+</div>
+
+<include file="Public:footer" />
+
+<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script type="text/javascript" src="__STATIC__/js/calendar/calendar.js"></script>
+<script>
+var role_id = {$Think.session.admin.role_id};
+var id = {$Think.session.admin.id};
+var store_id = "{$search['store_id']}";
+
+//店长默认ID
+if(role_id == 3 || store_id > 0){
+	if(store_id > 0) id = store_id;
+	salesman(id);
+} 
+
+//选择门店事件
+$(function(){
+	$("#store_id").change(function(){
+		salesman($(this).val());
+	})
+})
+
+//获取门店下的业务员
+function salesman(id){
+	$.ajax({
+		type:"POST",
+		url:"{:U('Salesman/ajax_salesman')}",
+		data:'id='+id,
+		async:true,
+		dataType:'json',
+		success:function(msg){
+			var ht ='<option value="">请选择</option>';
+			$.each(msg, function(k,v) {
+				ht += '<option value="'+v.id+'">'+v.name+'</option>';
+			});
+			
+			$("#salesman").html(ht);
+		}
+	});        
+}
+
+$('.J_cate_select').cate_select({top_option:lang.all});
+Calendar.setup({
+    inputField : "time_start",
+    ifFormat   : "%Y-%m-%d",
+    showsTime  : false,
+    timeFormat : "24"
+});
+Calendar.setup({
+    inputField : "time_end",
+    ifFormat   : "%Y-%m-%d",
+    showsTime  : false,
+    timeFormat : "24"
+});
+Calendar.setup({
+    inputField : "use_time_start",
+    ifFormat   : "%Y-%m-%d",
+    showsTime  : false,
+    timeFormat : "24"
+});
+Calendar.setup({
+    inputField : "use_time_end",
+    ifFormat   : "%Y-%m-%d",
+    showsTime  : false,
+    timeFormat : "24"
+});
+</script>
+</body>
+
+</html>
+<?php
+	//状态
+	function _status($int){
+		switch ($int)
+		{
+		case 1:
+		  echo "<span style='color:green;'>已售</span>";
+		  break;  
+		case 0:
+		  echo "<span style='color:red;'>未售</span>";
+		  break;
+		}
+	}
+	
+	//解析分类
+	function _cate($cate,$cate_list){
+		if(!$cate) echo $cate;
+		$cate = explode(",",$cate);
+		foreach($cate as $v){
+			$str .= $cate_list[$v]." /";
+		}		
+		echo rtrim($str,"/");
+	}
+?>
+

@@ -1,0 +1,98 @@
+<if condition="$list eq null">
+    <div class="null-wrap vertical-center">
+        <div class="vertical-auto">
+            <div class="null-page">
+                <div class="null-page-icon"><img src="__MB__images/icon60.png"></div>
+                <div class="null-page-txt font-28">您暂时还没有订单哦~</div>
+            </div>
+        </div>
+    </div>
+    <else />
+    <!--空购物车-->
+    <div class="y-width100">         
+        <!--商品订单-->
+        <div class="goods-tier-box y-goods-tier-box y-block">
+            <volist name="list" id="night">
+                <div class="y-mar-top20 y-bg-white">
+                    <div class="goods-state-col">
+                        <div class="goods-state-numbers">订单编号：{$night.dingdan}</div>
+                        <div class="goods-state-name y-color-red">
+                            <switch name="night.status" >
+                                <case value="1">待付款</case>
+                                <case value="2">待发货</case>
+                                <case value="3">待收货</case>
+                                <case value="4">待评价</case>
+                                <case value="5">已评价</case>
+                                <case value="6">交易已取消</case>
+                                <default />默认情况
+                            </switch>
+                        </div>
+                        <div class="clear-float"></div>
+                    </div>
+
+                    <volist name="night['goods']" id="good">
+                        <a href="{:U('Orderlist/y_orderDetails',array('order_id'=>$night['id'],'zftype'=>$night['type']))}">
+                            <div class="row-box goods-tier-inner y-border-none">
+                                <div class="goods-img-box">
+                                    <div class="level-img vertical-center">
+                                        <div class="vertical-auto"><img src="{:attach($good['img'],item)}"></div>
+                                    </div>
+                                </div>
+                                <div class="flex y-order-text">
+                                    <div class="flavour-title ellipsis2">{$good.title}</div>
+                                    <div class="jus-bet ali-cen">
+                                        <if condition="$night['type'] eq 1">
+                                            <div class="y-color-red font-28">&yen;{$good.price}</div>
+                                            <else />
+                                            <div class="y-color-red font-28">金果{$good.price}</div>
+                                            <!--<div class="y-color-red font-28">金果{$good.sli_price}</div>-->
+                                        </if>
+                                        <div class="y-color-999">x{$good.num}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </volist>
+                    <!--<if condition="$night['zftype'] eq 3">-->
+                        <!--<div class="statistics">-->
+                            <!--<div class="y-width94 y-text-right">银币抵扣 合计：-->
+                                <!--<span class="font-28 y-color-red">-->
+                                    <!--¥{$night['coin_price_dk']}-->
+                                <!--</span></div>-->
+                        <!--</div>-->
+                    <!--</if>-->
+                    <div class="statistics">
+                        <div class="y-width94 y-text-right">共{$night.total_num}件商品 合计：<span class="font-28 y-color-red">
+                                 <if condition="$night['type'] eq 1">
+                                ¥{$night['total_amount']}
+                                     <else />
+                                     金果{$night['fruit_price']}
+                                 </if>
+                            </span></div>
+                    </div>
+
+                    <div class="goods-state-link-box">
+                        <if condition="$night['status'] eq 1">
+                            <if condition="$night['type'] eq 1">
+                                <a href="{:U('order/order_pay',array('oid'=>$night['id'],'zftype'=>$night['type']))}" class="goods-state-link one" >立即付款</a>
+                                <!--<a class="goods-state-link one" class="de" value="{$night['id']}" onclick="delete1()">取消订单</a>-->
+                                <elseif condition="$night['type'] eq 2"/>
+                          <a href="{:U('Goldfruitshop/y_pay',array('oid'=>$night['id'],'zftype'=>$night['type']))}" class="goods-state-link one" >立即付款</a>
+                            </if>
+                            <a class="goods-state-link one" id="de" value="{$night['id']}" onclick="delete1()">取消订单</a></if>
+                        <if condition="$night['status'] eq 3">
+                            <a class="goods-state-link one" id="shou" value="{$night['id']}" onclick="shouhuo()">确认收货</a></if>
+                        <if condition="$night['status'] eq 4">
+                            <a href="{:U('Orderlist/y_orderComment',array('oid'=>$night['id']))}" class="goods-state-link one" >去评价</a></if>
+                        <div class="clear-float"></div>
+                    </div>
+                </div>
+            </volist>
+        </div>
+        <!--<div class="goods-tier-box y-goods-tier-box">1</div>-->
+        <!--<div class="goods-tier-box y-goods-tier-box">2</div>-->
+        <!--<div class="goods-tier-box y-goods-tier-box">3</div>-->
+        <!--<div class="goods-tier-box y-goods-tier-box">4</div>-->
+        <!--商品订单-->
+    </div>
+</if>

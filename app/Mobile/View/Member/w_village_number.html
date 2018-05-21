@@ -1,0 +1,89 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">聚宝盆</div>
+				<a href="/index.php?s=/member/w_basin.html">
+				<div class="header-left"><i class="fa fa-angle-left"></i></div>
+				</a>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content">
+			<ul>
+				<volist name="jbp" id="j">
+					<li class="storage-li">
+						<div class="row-box storage-wrap">
+							<if condition="$j['status'] ==2">
+								<div class="storage-name">提取</div>
+							<else />
+								<div class="storage-name active">寄存</div>
+							</if>
+							<div class="row-flex">
+								<div class="storage-title">
+									<if condition="$j['zftype'] ==1">金
+									<else />银
+									</if>
+									元宝{:C('pin_jbp_zq')}天期限</div>
+								<div class="storage-date">{:date('Y-m-d H:i',$j['add_time'])}</div>
+							</div>
+							
+							<div class="storage-right">
+								<div class="storage-number">{$j['totalprices']}个</div>
+								<if condition="$j['status'] ==2">
+									<div class="storage-btn tq" data-id="{$j[id]}">提取</div>
+								<else />
+									<div class="storage-title">剩余{$j['other_days']}天</div>
+								</if>
+								
+								
+							</div>
+						</div>
+					</li>
+				</volist>
+			</ul>
+		</div>
+		<!--content-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>
+<block name="footer"></block>
+<block name="script">
+	<script>
+		$('.tq').click(function(){
+			var id=$(this).data('id');
+			layer.confirm('确定提取吗？', {btn: ['是的','取消']}, function(){
+				$.ajax({
+					type:'post',
+					url:'',
+					async:true,
+					data:{id:id},
+					dataType:'json',
+					success:function(d) {
+						if(d.status==1){
+							layer.msg(d.msg,{icon:1,time:1000},function(){
+								window.location.href = window.location.href;
+							})
+						}else{
+							layer.msg(d.msg,{icon:2,time:1000})
+						}
+					}
+				})
+				
+				
+			})
+
+			
+		})
+	</script>	
+</block>	
+</html>

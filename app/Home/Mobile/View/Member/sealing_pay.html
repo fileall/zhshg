@@ -1,0 +1,247 @@
+<extend name="Base/common"/> 
+<block name="header"></block>
+<block name="body">	
+	<body class="body-bgColor">
+		<!--header-->
+		<div class="header-wrap">
+			<div class="header-inner">
+				<div class="header-title">元宝购买</div>
+				<div class="header-left return-prev"><i class="fa fa-angle-left"></i></div>
+				<div class="header-right"></div>
+			</div>	
+		</div>
+		<div class="header-space"></div>
+		<!--header-->
+		
+		<!--content-->
+		<div class="content"> 
+			<!--<div class="payment-wrap">
+				<div class="payment-logo"><span><img src="__MB__images/icon30.png"></span></div>
+				<div class="payment-name">向臻惠生活馆付款</div>
+				<div class="payment-money">￥100.00</div>
+			</div>-->
+			<div class="buy-wrap">
+				<div class="buy-title">购买数量</div>
+				<div class="buy-input vertical-center">
+					<div class="vertical-auto" style="width: 100%;"><input id="prives" type="number" placeholder="请输入元宝个数"></div>
+				</div>
+				
+				
+					<ul class="buy-ul">
+						<li class="buy-li"><span>20个</span></li>
+						<li class="buy-li"><span>50个</span></li>
+						<li class="buy-li"><span>100个</span></li>
+						<li class="buy-li"><span>300个</span></li>
+						<li class="buy-li"><span>500个</span></li>
+						<li class="buy-li"><span>1000个</span></li>
+						
+						<div class="clear-float"></div>
+					</ul>
+					
+					<div class="sealing-title">
+						
+					<!--100RMB购买元宝可得100金元宝, 同时赠送5000银币。--> 
+					100RMB购买元宝可得100元宝<if condition="$selive">,同时赠送{$selive}银币</if>。  
+					<!--{$goal}金元宝<if condition="$selive_yb">和{$selive_yb}银元宝</if>-->
+				</div> 
+				
+			</div>
+			<!--支付选项-->
+			<div class="pay-wrap">
+				<ul>
+					
+					
+					<li class="pay-li active">
+						<label form="weixing">
+							<div class="row-box">  
+								<div class="pay-icon">
+									<div class="pay-icon-img"><img src="__MB__images/icon17.png"></div>
+								</div>
+								
+								<div class="row-flex">
+									<div class="pay-name">微信支付</div> 
+									<div class="pay-name-t"></div>
+									<div class="clear-float"></div>
+								</div>
+								
+								<div class="pay-input-box">
+									<div class="pay-input-inner active" data-pay_type="1"><input name="pay-name" type="radio" id="weixing" checked="checked"></div>
+								</div>
+							</div>
+						</label>
+					</li>
+					
+					<li class="pay-li active">
+						<label form="yue">
+							<div class="row-box">
+								<div class="pay-icon">
+									<div class="pay-icon-img"><img src="__MB__images/icon64.png"></div>
+								</div>
+								
+								<div class="row-flex">
+									<div class="pay-name">余额支付</div>
+									<div class="pay-name-t"></div>
+									<div class="clear-float"></div>
+								</div>
+								
+								<div class="pay-input-box">
+									<div class="pay-input-inner" data-pay_type="3"><input name="pay-name" type="radio" id="yue"></div>
+								</div>
+							</div>
+						</label>
+					</li>
+				</ul>
+			</div>
+			
+			<form action="" method="post" name="chong"></form>
+			<div class="submit-button"><a href="javascript:;" id="now_pay">立即购买</a></div>
+			<!--支付选项-->
+		</div>
+		<!--content-->
+		
+		<!--余额支付密码弹窗-->
+	<div class="payment-window">
+		<div class="payment-inner-win">
+			<div class="payment-form">
+				<!--密码区-->
+				<div class="pay-input-group row-box">
+					<div class="row-flex pass-input-wrap">
+						<div class="pass-input-dot" ><i class="fa fa-circle"></i></div>
+						<input type="password" readonly="readonly" name="xx" value="">
+					</div>
+					<div class="row-flex pass-input-wrap">
+						<div class="pass-input-dot" ><i class="fa fa-circle"></i></div>
+						<input type="password" readonly="readonly" name="xx" value="">
+					</div>
+					<div class="row-flex pass-input-wrap">
+						<div class="pass-input-dot" ><i class="fa fa-circle"></i></div>
+						<input type="password" readonly="readonly" name="xx"value="">
+					</div>
+					<div class="row-flex pass-input-wrap">
+						<div class="pass-input-dot" ><i class="fa fa-circle"></i></div>
+						<input type="password" readonly="readonly" name="xx" value="">
+					</div>
+					<div class="row-flex pass-input-wrap">
+						<div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+						<input type="password" readonly="readonly" name="xx" value="">
+					</div>
+					<div class="row-flex pass-input-wrap">
+						<div class="pass-input-dot"><i class="fa fa-circle"></i></div>
+						<input type="password" readonly="readonly" name="xx" value="">
+					</div>
+				</div>
+				<!--密码区-->
+				
+				
+				<!--按钮去-->
+				<div class="pay-btn-group">
+					<button class="pay-button figure" value="1" type="button"  value="1">1</button>
+					<button class="pay-button figure" value="2" type="button"  value="2">2</button>
+					<button class="pay-button figure" value="3" type="button"  value="3">3</button>
+					<button class="pay-button figure" value="4" type="button"  value="4">4</button>
+					<button class="pay-button figure" value="5" type="button"  value="5">5</button>
+					<button class="pay-button figure" value="6" type="button"  value="6">6</button>
+					<button class="pay-button figure" value="7" type="button"  value="7">7</button>
+					<button class="pay-button figure" value="8" type="button"  value="8">8</button>
+					<button class="pay-button figure" value="9" type="button"  value="9">9</button>
+					<button class="pay-button cancel" type="button"><i class="fa fa-arrow-left"></i></button>
+					<button class="pay-button figure" value="0" type="button">0</button>
+					<button class="pay-button empty" type="button"><i class="fa fa-times"></i></button>
+					<div class="clear-float"></div>
+				</div>
+				<!--按钮去-->
+			</div>
+		</div>
+	</div>
+	<!--余额支付密码弹窗-->
+		
+		<!--footer-->
+		<!--footer-->
+	</body>
+</block>
+<block name="footer"></block>
+
+<block name="script">
+	<script>
+		$('.buy-li').click(function(){	
+			var a = $(this).find('span').html();
+			var xx = a.replace('个',"");
+			$('#prives').val(xx);
+			
+		});
+		
+		//点击购买
+		$('#now_pay').click(function(){
+			if(!$('#prives').val()){
+				layer.msg('请填写金额！',{icon:0,time:1000})
+				return false;
+			}
+			
+			if($('#prives').val() < 0){
+				layer.msg('金额不能为负数！',{icon:0,time:1000})
+				return false;
+			}
+			
+
+			var zf_type = $(".pay-wrap > ul > li").find(".pay-input-inner.active").data("pay_type");
+			//生成订单
+			 var prices = $('#prives').val();
+			 var item_type = 1;//订单类型1元宝
+			 if(zf_type==1){
+			 	$.post('{:U("Member/recharge_make2")}',{price:prices,zftype:zf_type,item_type:item_type},function(d){
+			 	
+				
+			 	if(d.status ==1){
+					$.ajax({
+						type:"post",
+						url:"",
+						async:true,
+						data:{'price':prices,'dingdan':d.dingdan,'item_type':item_type},
+						dataType:'json',
+						success:function(res) {
+		//					alert(res.err_code);
+							chooseWXPay(res.err_msg);    
+						}
+					});
+			 	}
+			 	else{
+			 		layer.msg(d.msg);
+			 	}
+			 
+			 })
+			 }
+			 
+			
+		})
+		
+		function chooseWXPay(sting){ 
+			var config = JSON.parse(sting)
+		   WeixinJSBridge.invoke(
+		       'getBrandWCPayRequest', {
+		           "appId":config.appId,     //公众号名称，由商户传入     
+		           "timeStamp":config.timeStamp,         //时间戳，自1970年以来的秒数      
+		           "nonceStr":config.nonceStr, //随机串     
+		           "package":config.package,   
+		           "signType":"MD5",         //微信签名方式：     
+		           "paySign":config.paySign //微信签名 
+		       },
+		       function(res){     
+		           if(res.err_msg == "get_brand_wcpay_request:ok" ) {   
+		                // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+		                layer.msg('充值成功',{icon:1,time:1000},function(){
+		              	  location.href = "/index.php?s=/member/wallet.html"; 
+		                });
+
+//		                $.post('/index.php?m=Home&c=Order&a=wxpayok', {'err_msg':res.err_msg}, function(data){
+//		                	location.href = "/index.php?m=Home&c=Order&a=payRight"; 
+//		               },'json')  
+		           }
+		       }
+		   ); 
+		}
+		</script>
+	
+	
+	
+</block>	
+</html>

@@ -1,0 +1,165 @@
+<include file="Public:header" />
+<!--会员列表-->
+<div class="pad_10" >
+
+  <form name="searchform" method="get"  >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <input type="hidden" name="m" value="admin" />
+                    <input type="hidden" name="c" value="Member" />
+                    <input type="hidden" name="a" value="index" />
+                    <input type="hidden" name="menuid" value="{$menuid}" />
+
+                    <input type="hidden" name="cate_id" id="J_cate_id" value="{$search.cate_id}" />
+                    &nbsp;&nbsp;注册日期：<input type="text" name="time_start" id="J_time_start" class="date" value="{$search.time_start}" placeholder="时间开始">
+                    -
+                    <input type="text" name="time_end" id="J_time_end" class="date"  value="{$search.time_end}" placeholder="时间截止">
+                    &nbsp;&nbsp;会员等级：
+                    <select name="vips">
+                        <option value="">全部</option>
+                        <volist name="grade" id="val">
+                            <option value="{$key}" <if condition="$search['vips'] eq $key">selected</if> >{$val}</option>
+                        </volist>
+                    </select>
+                    &nbsp;&nbsp;关键字 :
+                    <input name="keyword" type="text" class="input-text"  value="{$search.keywords}" placeholder="会员名/手机" />
+                    <input type="submit"  class="btn look_index" value="搜索" />
+                    <input type="button"  class="btn export" value="下载报表" />
+                </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+
+    <!--<div class="explain_col">
+        <form id="addform" action="{:U('Member/member_upload')}" method="post" enctype="multipart/form-data">
+            <input type="file" style=" width:65px;" name="excelData" value="" datatype="*4-50" nullmsg="" />
+            <input type="submit" class="btn btn-primary Sub" value="导入" />
+            <a href="/download/member_import.xls" class="btn btn-primary Sub" >下载导入模板</a>
+            <input type="button" class="btn" data-tdtype="batch_action" data-uri="{:U('Member/export')}" data-name="id" data-msg="确定导出已经选中的学生吗？" value="导出" />
+        </form>
+    </div>-->
+
+  <div class="J_tablelist table_list" data-acturi="{:U('member/ajax_edit')}">
+        <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width="20"><input type="checkbox" id="checkall_t" class="J_checkall"></th>
+                <th>id</th>
+                <th>头像</th>
+                <th>昵称</th>
+                <!--<th>姓名</th>-->
+                <th>手机</th>
+                <th>级别</th>
+                <th>推荐<br/>会员</th>
+                <th>推荐<br/>商家</th>
+                <th>聚宝盆</th>
+                <th><span data-tdtype="order_by" data-field="prices">工资</span></th>
+                <th><span data-tdtype="order_by" data-field="gold_acer">元宝</span></th>
+                <th><span data-tdtype="order_by" data-field="gold_fruit">金果</span></th>
+                <th><span data-tdtype="order_by" data-field="silver_coin">银币</span></th>
+                <th>推荐人</th>
+                <th><span data-tdtype="order_by" data-field="reg_time">注册日期</span></th>
+                <!--<th width="100">升级日期</th>-->
+                <th><span data-tdtype="order_by" data-field="status">{:L('status')}</span></th>
+                <th>{:L('operations_manage')}</th>
+          </tr>
+        </thead>
+
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <!--<td align="center">{$p*10-10+$i}</td>-->
+                <td align="left">{$val.id}</td>
+                <td style="text-align:center; padding:5px;">
+                    <empty name="val['avatar']">未设置<else />
+                        <img src="{:attach($val['avatar'], 'avatar')}" width="32" class="J_preview" data-bimg="{:attach($val['avatar'], 'avatar')}">
+                    </empty>
+                </td>
+                <td align="center">{$val['nickname']}</td>
+                <!--<td align="center">{$val['realname']}</td>-->
+                <td align="center">{$val.mobile}</td>
+                <td align="center">{$grade[$val['vips']]}</td>
+                <td>
+                    <if condition="recommend_nums($val['id'])">
+                    <a class="red" href="{:U('member/next_list',array('id'=>$val['id'],'menuid'=>$menuid))}">{:recommend_nums($val['id'])}</a></if>
+                </td>
+                <!--<td align="center">{$val.relation_mobile}</td>-->
+                <td>
+                    <if condition="recommend_merchant($val['id'])">
+                        <a class="red" href="{:U('member/merchant_list',array('id'=>$val['id'],'menuid'=>$menuid))}">{:recommend_merchant($val['id'])}</a></if>
+                </td>
+                <td align="center">{$val['gold_acer_jc']}</td>
+
+                <td align="center">
+                    <a class="blue" href="{:U('account/index',array('uid'=>$val['id'],'type'=>1))}">{$val.prices}</a>
+                </td>
+                <td align="center">
+                    <a class="blue" href="{:U('account/index',array('uid'=>$val['id'],'type'=>2))}">{$val.gold_acer}</a>
+                </td>
+                <td align="center">
+                    <a class="blue" href="{:U('account/index',array('uid'=>$val['id'],'type'=>3))}">{$val.gold_fruit}</a>
+                </td>
+                <td align="center">
+                    <a class="blue" href="{:U('account/index',array('uid'=>$val['id'],'type'=>4))}">{$val.silver_coin}</a>
+                </td>
+                <td align="center">{$member[$val['relation_id']]}</td>
+
+                <td align="center">{$val['reg_time']|date="Y-m-d",###}</td>
+                <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{$val.status}" src="__STATIC__/images/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
+                 <td align="center">
+                     <a href="{:U('member/edit',array('id'=>$val['id']))}">编辑</a>
+                     <!--<a href="javascript:;" class="J_showdialog" data-uri="{:u('member/edit', array('id'=>$val['id'], 'menuid'=>$menuid,'type'=>1))}" data-title="升级-{$val.nickname}" data-id="edit" data-width="500" data-height="20">升级</a> |-->
+                     <!--<a href="javascript:;" class="J_showdialog" data-uri="{:u('member/edit', array('id'=>$val['id'], 'menuid'=>$menuid,'type'=>2))}" data-title="修改-{$val.nickname}" data-id="edit" data-width="500" data-height="20">修改</a>-->
+                </td>
+            </tr>
+            </volist>
+    </table>
+  </div>
+ 
+   <div class="songkebor">
+
+        <label class="select_all"><input  style="display: none;" type="checkbox" name="checkall" class="J_checkall">分页&nbsp;&nbsp;&nbsp;总条数:{$count}条</label>
+        <!--{:L('select_all')}/{:L('cancel')}-->
+
+        <!--<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('member/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="批量删除" />-->
+        <div id="pages">{$page}</div>
+        
+        
+
+    </div>
+</div>
+
+<include file="Public:footer" />
+
+</body>
+
+</html>
+
+<script>
+    laydate.render({
+        elem: '#J_time_start'
+    });
+
+    laydate.render({
+        elem: '#J_time_end'
+    });
+
+
+    $('.J_preview').preview(); //查看大图
+
+
+    $(".export").click(function(){
+    	$("input[name='a']").val("export");
+    	$("form").submit();
+     })
+    
+     $(".look_index").click(function(){
+    	$("input[name='a']").val("index");
+    	$("form").submit()
+    })
+</script>

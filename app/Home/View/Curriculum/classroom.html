@@ -1,0 +1,101 @@
+<include file="Public/top" />
+
+<!--banner-->
+<div class="banner" style="background:url('{:attach($cate_info['img'],'article_cate')}') no-repeat center top;"></div>
+<!--banner-end-->
+
+<!--语数外课堂-->
+<div class="wrap clear mb40">
+    <!--直播/回放-->
+    <div class="ysw-title one clear">
+        <div class="bigTitle fl">直播/回放</div>
+        <ul class="smallTitle fl">
+            <volist name="list" id="val">
+                <li><a href="javascript:;" class="hover-blue <if condition="$i eq 1">active</if>">{$val['name']}</a></li>
+            </volist>
+        </ul>
+        <a href="{:U('Curriculum/liveList')}" class="more fr hover-blue">更多&gt;&gt;</a>
+    </div>
+    <div class="ysw-tabBox zb">
+        <volist name="list" id="val" key="k">
+            <div class="item <if condition="$k neq 1">hide</if>">
+                <ul class="clear">
+                    <volist name="val['list']" id="va">
+                        <li class="box">
+                            <a href="{:U('Curriculum/playbackDetail',array('id'=>$va['id']))}">
+                                <img src="{:attach($va['img'],'curriculum')}" alt="" class="box-img"/>
+                                <div class="keTitle">
+                                    <p class="p1">{$va['title']}</p>
+                                    <p class="clear">
+                                        <span class="fl">{$va['class_time']}</span>
+                                        <span class="fr">{$va['people']}人想学</span>
+                                    </p>
+                                </div>
+                                <div class="boxBg">
+                                    <div class="NowYy NowYy2">立即<br>预约</div>
+                                </div>
+                            </a>
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+        </volist>
+    </div>
+    <!--直播-end-->
+
+    <!--老师课堂-->
+    <div class="ysw-title two clear">
+        <div class="bigTitle fl">老师课堂</div>
+        <ul class="smallTitle fl">
+            <volist name="list" id="val">
+                <li><a href="javascript:;" class="hover-blue <if condition="$i eq 1">active</if>">{$val['name']}</a></li>
+            </volist>
+        </ul>
+        <a href="{:U('Curriculum/techerList')}" class="more fr hover-blue">更多&gt;&gt;</a>
+    </div>
+    <div class="ysw-tabBox ls">
+        <volist name="list" id="val" key="k">
+            <div class="item <if condition="$k neq 1">hide</if>">
+                <ul class="clear">
+                    <volist name="val['teacher']" id="va">
+                        <li class="box">
+                            <a href="{:U('Curriculum/techerDetail',array('id'=>$va['id']))}">
+                                <img src="{:attach($va['img'],'curriculum')}" alt="" class="box-img"/>
+                                <div class="techInfo">
+                                    <p class="techName">{$va['title']}</p>
+                                    <!--<p class="xueli">教龄{$va['seniority']}年</p>-->
+                                    <p class="clear">
+                                        <span class="fl">共{$va['nums']}节</span>
+                                        <span class="fr">{$va['people']}人报名</span>
+                                    </p>
+                                </div>
+                                <div class="boxBg">
+                                    <div class="NowYy">立即<br>预约</div>
+                                </div>
+                            </a>
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+        </volist>
+    </div>
+    <!--老师课堂-end-->
+</div>
+<!--语数外课堂-end-->
+
+<!---->
+<!--<div class="ysw_adver">
+    <div class="wrap">
+        <a href="{:U('Evaluation/evaluation')}"><img src="__PC__images/classroom1.jpg" alt="" /></a>
+    </div>
+</div>-->
+
+<!--公共底部-->
+<include file="Public/footer" />
+<!--公共底部-end-->
+
+<script src="__PC__js/jquery-1.10.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PC__js/l_main.js"></script>
+
+</body>
+</html>

@@ -37,7 +37,9 @@ class AutoController extends Controller {
             $goal_to_price = 100;
 
             #金果比银币的倍数(所以转换时：金果=银币/$goal_to_jg)
-            $goal_to_jg = 100*C('pin_jg_scj');
+            //$goal_to_jg = 100*C('pin_jg_scj');
+            $goal_to_jg = 100;
+
 
             #掉出的银币个数最低值(5=10000*成长率)
             $gold_auto_critical = 5;
@@ -87,7 +89,7 @@ class AutoController extends Controller {
                     $arr[] = account_arr(4, $v['id'],'-'.$conversions_num,'银币成长',$now);
                     if (!$account_model->addAll($arr)) {
                         $member_model->rollback();
-                        file_put_contents('aoto_coin.log','['.date('Y-m-d H:i:s').']明细记录更新失败'.PHP_EOL,FILE_APPEND);
+                        file_put_contents('AotoCoinError.log','['.date('Y-m-d H:i:s').']明细记录更新失败'.PHP_EOL,FILE_APPEND);
                         $bool = true;//明细生成失败=>回滚=>while循环重新开始币种成长
                         break;
                     }
@@ -97,7 +99,7 @@ class AutoController extends Controller {
 
                     if ($res === false) {
                         $member_model->rollback();
-                        file_put_contents('aoto_coin.log','['.date('Y-m-d H:i:s').']用户数据更新失败'.PHP_EOL,FILE_APPEND);
+                        file_put_contents('AotoCoinError.log','['.date('Y-m-d H:i:s').']用户数据更新失败'.PHP_EOL,FILE_APPEND);
                         $bool = true;//用户表修改失败=>回滚并跳出for循环=>while循环重新开始币种成长
                         break;
                     } else{

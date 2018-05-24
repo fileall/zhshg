@@ -27,7 +27,7 @@
 		<script src="/theme/mobile/js/swiper.min.js"></script>
 	<!--<script>-->
 	<!--var URL = '/mobile.php?s=/Item';-->
-	<!--var SELF = '/mobile.php?s=/item/gwc_settlement/item_id/2100/attr_id/1692/num/1.html';-->
+	<!--var SELF = '/mobile.php?s=/item/gwc_settlement/item_id/2548/attr_id/3967/num/1.html';-->
 	<!--var ROOT_PATH = '';-->
 	<!--var APP	 =	 '/mobile.php?s=';-->
 	<!--//语言项目-->

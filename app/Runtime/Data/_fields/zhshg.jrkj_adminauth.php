@@ -1,0 +1,1 @@
+a:3:{i:0;s:7:"role_id";i:1;s:7:"menu_id";s:5:"_type";a:2:{s:7:"role_id";s:10:"tinyint(3)";s:7:"menu_id";s:11:"smallint(6)";}}

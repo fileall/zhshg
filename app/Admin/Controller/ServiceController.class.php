@@ -149,13 +149,7 @@ class ServiceController extends AdminCoreController
             if(!false == $user->where(['mobile'=>$data['mobile']])->find()){
                 $this->error('手机号重复');
             }
-            /*if($data['district_id']){
-                $data['vips_qd'] = 1;
-            }elseif($data['city_id']){
-                $data['vips_qd'] = 2;
-            }elseif($data['province_id']){
-                $data['vips_qd'] = 3;
-            }*/
+
             //添加头像
             if (!empty($_FILES['avatar']['name'])) {
                 $result = $this->_upload($_FILES['avatar'], 'avatar', array('width' => C('pin_article_cate_img.width'), 'height' => C('pin_article_cate_img.height')));
@@ -482,13 +476,14 @@ class ServiceController extends AdminCoreController
 
     public function _before_update($data)
     {
-            if($data['district_id']){
-                $data['vips_qd'] = 1;
-             }elseif($data['city_id']){
-                $data['vips_qd'] = 2;
-             }elseif($data['province_id']){
-                 $data['vips_qd'] = 3;
-            }
+        if($data['district_id']){
+            $data['vips_qd'] = 1;
+         }elseif($data['city_id']){
+            $data['vips_qd'] = 2;
+         }elseif($data['province_id']){
+             $data['vips_qd'] = 3;
+        }
+
         if($data['password'] == 'd85c61834e9239b7bef468a430bbb3dc'||is_null($data['password'])){
             unset($data['password']);
         }
@@ -594,35 +589,22 @@ class ServiceController extends AdminCoreController
         ob_end_clean();
 
         $map = $this->_search();
-//  	$list = $this->_mod->where($map)->relation(true)->select();
         $list = $this->_mod->where($map)->select();
-        $member = $this->_mod->where(['id' => ['in', array_column($list, 'relation_id')]])->getField('id,mobile');
-        $grade = M('GradeRule')->getfield('id,name');
-
-        $sj['_string'] = ' item_type = 5 and status = 2 and dingdan != 0 and member_id in(' . implode(',', array_column($list, 'id')) . ')';
-        $member_recharge = M('MemberRecharge')->where($sj)->getField('member_id,add_time');
-
+        $place_ids=array_unique(array_merge (array_column($list,'province_id'),array_column($list,'city_id'),array_column($list,'district_id')));
+        $place=M('place')->where(['id'=>['in',$place_ids]])->getField('id,name');
         $data = array();
         foreach ($list as $k => $v) {
             $data[$k]['xh'] = $k + 1; //序号
             $data[$k]['id'] = $v['id']; //id
+            $data[$k]['nickname'] = $v['nickname']; //呢称
             $data[$k]['realname'] = $v['realname']; //会员名
             $data[$k]['mobile'] = $v['mobile']; //手机
-            $data[$k]['vips'] = $grade[$v['vips']]; //级别
-            $data[$k]['recommend_nums'] = recommend_nums($v['id']); //推荐人数
-            $data[$k]['relation'] = $member[$v['relation_id']]; //推荐人
-
-            $data[$k]['gold_acer_jc'] = $v['gold_acer_jc']; //聚宝盆金元宝
-            $data[$k]['silver_acer_jc'] = $v['silver_acer_jc']; //聚宝盆银元宝
-            $data[$k]['prices'] = $v['prices'];//余额
+            $data[$k]['place'] = $place[$v['province_id']].$place[$v['city_id']].$place[$v['district_id']];
+            $data[$k]['prices'] = $v['prices'];//工资
             $data[$k]['gold_acer'] = $v['gold_acer'];//金元宝
-            $data[$k]['silver_acer'] = $v['silver_acer'];//银元宝
-            $data[$k]['silver_coin'] = $v['silver_coin'];//银币
-            $data[$k]['gold_coin'] = $v['gold_coin'];//金币
             $data[$k]['gold_fruit'] = $v['gold_fruit'];//金果
+            $data[$k]['silver_coin'] = $v['silver_coin'];//银币
             $data[$k]['reg_time'] = date('Y-m-d H:i', $v['reg_time']);//注册日期
-            $sj_time = date('Y-m-d H:i', $member_recharge[$v['id']]);//升级日期
-            $data[$k]['sj_time'] = $sj_time ? $sj_time : '';
             ($v['status'] == 0) && $data[$k]['status'] = '冻结';//状态
             ($v['status'] == 1) && $data[$k]['status'] = '正常';
 
@@ -631,21 +613,15 @@ class ServiceController extends AdminCoreController
         $headArr = array();
         $headArr[] = '序号';
         $headArr[] = 'id';
+        $headArr[] = '呢称';
         $headArr[] = '会员名';
         $headArr[] = '手机';
-        $headArr[] = '级别';
-        $headArr[] = '推荐人数';
-        $headArr[] = '推荐人';
-        $headArr[] = '聚宝盆金元宝';
-        $headArr[] = '聚宝盆银元宝';
-        $headArr[] = '余额';
-        $headArr[] = '金元宝';
-        $headArr[] = '银元宝';
-        $headArr[] = '银币';
-        $headArr[] = '金币';
+        $headArr[] = '地区';
+        $headArr[] = '工资';
+        $headArr[] = '元宝';
         $headArr[] = '金果';
+        $headArr[] = '银币';
         $headArr[] = '注册日期';
-        $headArr[] = '升级日期';
         $headArr[] = '状态';
         $filename = "会员列表";
         $this->getExceltjab($filename, $headArr, $data);

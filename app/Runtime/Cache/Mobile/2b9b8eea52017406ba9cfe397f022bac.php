@@ -27,7 +27,7 @@
 		<script src="/theme/mobile/js/swiper.min.js"></script>
 	<!--<script>-->
 	<!--var URL = '/index.php?s=/Wallet';-->
-	<!--var SELF = '/index.php?s=/wallet/pay_to_merchant/transfer_type/1.html&code=061tL4HN09RX242eqGHN0q6YGN0tL4HR&state=STATE';-->
+	<!--var SELF = '/index.php?s=/wallet/pay_to_merchant/transfer_type/2.html&code=011uudBq1OFBTn0tgjAq1fTlBq1uudBR&state=STATE';-->
 	<!--var ROOT_PATH = '';-->
 	<!--var APP	 =	 '/index.php?s=';-->
 	<!--//语言项目-->
@@ -217,15 +217,15 @@
                 return false;
             }
 
-            if('<?php echo ($field); ?>' == '元宝'&&(nums>'<?php echo ($member["gold_acer"]); ?>')){
-                layer.confirm('元宝余额不足,去充值?', {
-                    btn: ['是的','取消'] //按钮
-                }, function(){
-                    location.href='<?php echo U("wallet/acer_buy");?>';
-                })
-                return false;
-
-            }
+            // if('<?php echo ($field); ?>' == '元宝'&&(nums>'<?php echo ($member["gold_acer"]); ?>')){
+            //     layer.confirm('元宝余额不足,去充值?', {
+            //         btn: ['是的','取消'] //按钮
+            //     }, function(){
+            //         location.href='<?php echo U("wallet/acer_buy");?>';
+            //     })
+            //     return false;
+            //
+            // }
 
             $('.payment-title.y-border-top').html('支付金额'+nums+'元');
 

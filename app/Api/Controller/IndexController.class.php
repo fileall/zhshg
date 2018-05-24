@@ -221,9 +221,10 @@ class IndexController extends Controller {
 //                    }
 
                     //各区代得工资&&明细
-                    $province_id=$member['province_id'];
-                    $city_id=$member['city_id'];
-                    $district_id=$member['district_id'];
+                    $province_id=$member['province_id']?$member['province_id']:0;
+                    $city_id=$member['city_id']?$member['city_id']:0;
+                    $district_id=$member['district_id']?$member['district_id']:0;
+
                     $where['is_qd']=1;//vips_qd区代等级 1区2市3省
                     $where['_string']='(vips_qd =3 and province_id ='.$province_id.')'
                         .'or ( vips_qd =2 and  city_id='. $city_id.')'

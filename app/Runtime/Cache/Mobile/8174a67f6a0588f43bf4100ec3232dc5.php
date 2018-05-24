@@ -27,7 +27,7 @@
 		<script src="/theme/mobile/js/swiper.min.js"></script>
 	<!--<script>-->
 	<!--var URL = '/index.php?s=/Wallet';-->
-	<!--var SELF = '/index.php?s=/wallet/account/type/3.html';-->
+	<!--var SELF = '/index.php?s=/wallet/account/type/1.html';-->
 	<!--var ROOT_PATH = '';-->
 	<!--var APP	 =	 '/index.php?s=';-->
 	<!--//语言项目-->

@@ -180,11 +180,12 @@ class UpgradeController extends HomeController
             }
         }
 
-        //各区代得银币&&明细
+        //各区代得工资&&明细
         if($after_vip==2){//第一次成为掌柜才有
-            $province_id=$mem['province_id'];
-            $city_id=$mem['city_id'];
-            $district_id=$mem['district_id'];
+            $province_id=$mem['province_id']?$mem['province_id']:0;
+            $city_id=$mem['city_id']?$mem['city_id']:0;
+            $district_id=$mem['district_id']?$mem['district_id']:0;
+
             $where['is_qd']=1;//vips_qd区代等级 1区2市3省
             $where['_string']='(vips_qd =3 and province_id ='.$province_id.')'
                 .'or ( vips_qd =2 and  city_id='. $city_id.')'
@@ -245,7 +246,8 @@ class UpgradeController extends HomeController
         $data['body'] = '会员升级';
         $data['number'] = $pos['dingdan'];
         $data['price'] =  $price* 100;//单位分
-//        $data['price'] = 0.01 * 100;//单位分
+        if($this->uid==67) $data['price'] = 1;//单位分
+
         $data['openid'] = session('openid');
         $config = A('Api/Wxpay')->orderParameter($data);//回调里：价钱，该订单状态，改支付方式
 

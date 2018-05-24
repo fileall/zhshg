@@ -1,292 +1,81 @@
-<include file="Public:header" />
-<form id="info_form" action="{:u('Admin/edit')}" method="post" enctype="multipart/form-data">
-<div class="pad_lr_10">
-	<div class="col_tab">
-		<ul class="J_tabs tab_but cu_li">
-			<li class="current">{:L('article_basic')}</li>
-           <!-- <li>图集</li>-->
-		</ul>
-		<div class="J_panes">
-			<div class="content_list pad_10">
-				<table width="100%" cellspacing="0" class="table_form">
-					<tr>
-						<th>所属部门 :</th>
-						<td>
-							<select name="d_id" class="w174">
-								<volist name="d_list" id="val">
-									<option value="{$val.id}" <if condition="$val['id'] eq $info['d_id']">selected="selected"</if>>{$val.name}</option>
-								</volist>
-							</select>
-						</td>
-					</tr>
-					<!--<tr>
-						<th>所属职位 :</th>
-						<td>
-							<select name="role_id" class="w174">
-								<volist name="role_list" id="val">
-									<option value="{$val.id}" <if condition="$val['id'] eq $info['role_id']">selected="selected"</if>>{$val.name}</option>
-								</volist>
-							</select>
-						</td>
-					</tr>-->
-					<tr>
-						<th>性别 :</th>
-						<td>
-							<select name="sex" class="w174">
-								<option value="1" <if condition="$info['sex'] eq 1">selected</if> >男</option>
-								<option value="2" <if condition="$info['sex'] eq 2">selected</if> >女</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<th width="80"><span class="corF00">*</span>账号 :</th>
-						<td><input type="text" name="username" id="J_username" class="input-text" value="{$info.username}" size="30"></td>
-					</tr>
-					<tr>
-						<th>{:L('password')} :</th>
-						<td>
-							<input type="password" name="password" id="J_password" class="input-text" size="30">
-							<label class="corF00">不修改则不用填</label>
-						</td>
-					</tr>
-					<tr>
-						<th>{:L('cofirmpwd')} :</th>
-						<td>
-							<input type="password" name="repassword" id="J_repassword" class="input-text" size="30">
-							<label class="corF00">不修改则不用填</label>
-						</td>
-					</tr>
-					<tr>
-						<th>姓名 :</th>
-						<td><input type="text" name="name" class="input-text" value="{$info.name}" size="30"></td>
-					</tr>
-					<tr>
-						<th>手机 :</th>
-						<td><input type="text" name="mobile" class="input-text" value="{$info.mobile}" size="30"></td>
-					</tr>
-					<tr>
-						<th>{:L('admin_email')} :</th>
-						<td><input type="text" name="email" class="input-text" value="{$info.email}" size="30"></td>
-					</tr>
-					<tr>
-						<th>生日 :</th>
-						<td><input type="text" name="birthday" id="birthday" value="{$info.birthday}" class="date" size="30"></td>
-					</tr>
-					<tr>
-						<th>地址 :</th>
-						<td><input type="text" name="address" class="input-text" size="60" value="{$info.address}"></td>
-					</tr>
-					<tr>
-						<th>简介:</th>
-						<td><textarea name="intro" class="info" style="width:68%;height:400px;visibility:hidden;resize:none;">{$info.intro}</textarea></td>
-					</tr>
-					<tr>
-						<th width="120">教学阶段 :</th>
-						<td>
-							<select class="J_cate_select mr10" data-pid="1" data-uri="{:U('CurriculumCate/ajax_getchilds')}" data-selected="{$spid}"></select><input type="hidden" name="cate_id" id="J_cate_id" value="{$info['cate_id']}" />
-							<label class="corF00">非老师职位可以不用选择</label>
-						</td>
-					</tr>
-					<tr>
-						<th>教龄 :</th>
-						<td>
-							<input type="text" name="seniority" class="input-text" size="30" value="{$info.seniority}">
-							<label class="corF00">非老师职位可以不用填写</label>
-						</td>
-					</tr>
-<!--					<tr>
-						<th>{:L('publish')} :</th>
-						<td>
-							<label><input type="radio" name="is_tj" class="radio_style" value="1" <if condition="$info.is_tj eq '1'">checked="checked"</if>> {:L('yes')}</label>&nbsp;&nbsp;
-							<label><input type="radio" name="is_tj" class="radio_style" value="0" <if condition="$info.is_tj eq '0'">checked="checked"</if>> {:L('no')}</label>
-							<label class="corF00">非老师职位可以不用选择</label>
-						</td>
-					</tr>-->
-				</table>
-			</div>
+<!--编辑管理员-->
+<div class="dialog_content">
+	<form id="info_form" action="{:U('admin/edit')}" method="post">
+	<table width="100%" class="table_form">
+		<tr>
+      		<th width="90">{:L('admin_username')} :</th>
+      		<td><input type="text" name="username" id="J_username" class="input-text" value="{$info.username}"></td>
+    	</tr>
+    	<tr> 
+      		<th>{:L('password')} :</th>
+      		<td><input type="password" name="password" id="J_password" class="input-text"></td>
+    	</tr>
+    	<tr>
+      		<th>{:L('cofirmpwd')} :</th>
+      		<td><input type="password" name="repassword" id="J_repassword" class="input-text"></td>
+    	</tr>
+      <tr>
+        <th>{:L('admin_email')} :</th>
+        <td><input type="text" name="email" class="input-text" value="{$info.email}" size="30"></td>
+      </tr>
+		<if condition="$info.id neq 1">
+    	<tr>
+      		<th>{:L('admininrole')} :</th>
+      		<td>
+      			<select name="role_id">
+					<option value="0">请选择</option>
+        			<volist name="role_list" id="val">
+        			<option value="{$val.id}" <if condition="$val['id'] eq $info['role_id']">selected="selected"</if>>{$val.name}</option>
+            		</volist>
+        		</select>
+      		</td>
+    	</tr>
+		</if>
 
-			<!--商品附图-->
-			<div class="content_list pad_10 "><!--hidden-->
-				<table width="100%" cellpadding="2" cellspacing="1" class="table_form" id="first_upload_file">
-					<tbody class="uplode_file">
-					<tr>
-						<th class="td_left" style="text-align: left;">
-							<a class="btn" id="logo_upload_btn" href="javascript:;" >上传商品副图</a>
-						</th>
-					</tr>
-					<tr>
-						<td>
-							<div id="logo_upload_area" style='width:80%'> 
-								<div id='photos_area' class="photos_area clearfix">
-									<volist name="img_list" id="val" >
-										<div class='item'>
-											<img src="{:attach($val['url'],'admin')}"  width='100px' height='100px'/>
-											<div class='operate'><i class='toleft'>左移</i><i class='toright'>右移</i><i class='del' data-id="{$val['id']}">删除</i></div>
-										</div>
-									</volist>
-								</div>
-							</div>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
-
-        </div>
-		<div class="mt10"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit btn_submit2" ><br /><br /><br /></div>
-	</div>
+		<!--<tr>
+			<th>区域名称 :</th>
+			<td>
+				<input type="text" name="area_name" id="area_name" class="input-text" value="{$info.area_name}">
+			</td>
+		</tr>
+    	<if condition="$info.id neq 1">
+		    <tr>
+		      <th>所属区域 :</th>
+		      <td>
+		      	<select name="city_id">
+					<option value="0">请选择</option>
+		        	<volist name="area_list" id="val">
+		        		<option <if condition="$val['id'] eq $info['ppid'] or $val['id'] eq $info['pid']">selected="selected"</if> value="{$val.id}">{$val.area_name}</option>
+		            </volist>
+		        </select>
+		      </td>
+		    </tr>
+		<else />
+		    <input type="hidden" name="city_id" class="input-text" value="{$city_id}">
+		</if>-->
+	</table>
+	<input type="hidden" name="id" value="{$info.id}" />
+	</form>
 </div>
-<input type="hidden" name="menuid"  value="{$menuid}"/>
-<input type="hidden" name="id" id="id" value="{$info.id}" />
-</form>
-<include file="Public:footer" />
-<!--上传图片css-->
-<style type="text/css">
-	.progress{position:relative;padding: 1px; border-radius:3px; margin:30px 0 0 0;}
-	.bar{background-color: green; display:block; width:0%; height:20px; border-radius:3px;}
-	.percent{position:absolute; height:20px; display:inline-block;top:3px; left:2%; color:#fff}
-	.progress{
-		height: 100px;
-		padding: 30px 0 0;
-		width:100px;
-		border-radius: 0;
-	}
-
-	.photos_area .item {
-		float: left;
-		margin: 0 10px 10px 0;
-		position: relative;
-	}
-	.photos_area .item{position: relative;float:left;margin:0 10px 10px 0;}
-	.photos_area .item img{border: 1px solid #cdcdcd;}
-	.photos_area .operate{background: rgba(33, 33, 33, 0.7) none repeat scroll 0 0; bottom: 0; padding:5px 0; left: 0; position: absolute; width: 102px; z-index: 5; line-height: 21px; text-align: center;}
-	.photos_area .operate i{cursor: pointer; display: inline-block; font-size: 0; height: 12px; line-height: 0; margin: 0 5px; overflow: hidden; width: 12px; background: url("Plugins/plupload/icon_sucaihuo.png") no-repeat scroll 0 0;}
-	.photos_area .operate .toright{background-position: -13px -13px; position: relative;top:1px;}
-	.photos_area .operate .toleft{background-position: 0 -13px; position: relative;top:1px;}
-	.photos_area .operate .del{background-position: -13px 0; position: relative;top:0px;}
-	.photos_area .preview{background-color: #fff; font-family: arial; line-height: 90px; text-align: center; z-index: 4; left: 0; position: absolute; top: 0; height: 90px; overflow: hidden; width: 90px;}
-
-	.vad { margin: 120px 0 5px; font-family: Consolas,arial,宋体,sans-serif; text-align:center;}
-	.vad a { display: inline-block; height: 36px; line-height: 36px; margin: 0 5px; padding: 0 50px; font-size: 14px; text-align:center; color:#eee; text-decoration: none; background-color: #222;}
-	.vad a:hover { color: #fff; background-color: #000;}
-	.thead { width: 728px; height: 90px; margin: 0 auto; border-bottom: 40px solid #fff;}
-</style>
-
-<script src="/Plugins/plupload/plupload.full.min.js"></script><!--上传图片插件-->
-<script src="__PUBLIC_ADMIN__js/kindeditor/kindeditor.js"></script>
-<link rel="stylesheet" type="text/css" href="__PUBLIC_ADMIN__js/calendar/calendar-blue.css"/>
-<script src="__PUBLIC_ADMIN__js/calendar/calendar.js"></script>
 
 <script>
-$(function() {
-    $('.J_cate_select').cate_select('请选择');
+var check_name_url = "{:U('admin/ajax_check_name', array('id'=>$info['id']))}";
+$(function(){
+	$.formValidator.initConfig({formid:"info_form",autotip:true});
 
-    Calendar.setup({
-        inputField : "birthday",
-        ifFormat   : "%Y-%m-%d",
-        showsTime  : false,
-        timeFormat : "24"
-    });
+	$("#J_username").formValidator({ onshow:lang.please_input+lang.admin_username, onfocus:lang.please_input+lang.admin_username}).inputValidator({ min:1, onerror:lang.please_input+lang.admin_username}).ajaxValidator({type:"get", url:check_name_url, datatype:"html", async:'false', success:function(data){	if( data == "1" ){return true;}else{return false;}}, onerror:lang.admin_name_exists, onwait:lang.connecting_please_wait}).defaultPassed();
+	$("#J_password").formValidator({ empty:true, onshow:lang.not_edit_password, onfocus:lang.password+lang.between_6_to_20}).inputValidator({ min:6, max:20, onerror:lang.password+lang.between_6_to_20});
+	$("#J_repassword").formValidator({ empty:true, onshow:lang.not_edit_password, onfocus:lang.cofirmpwd}).compareValidator({desid:"J_password",operateor:"=",onerror:lang.passwords_not_match});
 
-    //上传图片
-    var uploader = new plupload.Uploader({
-        runtimes: 'gears,html5,html4,silverlight,flash',
-        browse_button: 'logo_upload_btn',
-        url: "{:U('Admin/ajax_upload_img')}",
-        flash_swf_url: 'plupload/Moxie.swf',
-        silverlight_xap_url: 'plupload/Moxie.xap',
-        filters: {
-            max_file_size: '25mb',
-            mime_types: [
-                {title: "files", extensions: "jpg,png,gif,jpeg"}
-            ]
-        },
-        multi_selection: true,
-        init: {
-            FilesAdded: function(up, files) {
-                $("#btn_submit").attr("disabled", "disabled").addClass("disabled").val("正在上传...");
-                var item = '';
-                plupload.each(files, function(file) { //遍历文件
-                    item += "<div class='item' id='" + file['id'] + "'><div class='progress'><span class='bar'></span><span class='percent'>0%</span></div></div>";
-                });
-                $("#photos_area").append(item);
-                uploader.start();
-            },
-            UploadProgress: function(up, file) { //上传中，显示进度条
-                var percent = file.percent;
-                $("#" + file.id).find('.bar').css({"width": percent + "%"});
-                $("#" + file.id).find(".percent").text(percent + "%");
-            },
-            FileUploaded: function(up, file, info) {
-                var data = eval("(" + info.response + ")");
-                var datasrc=data.src;
-                data.src='data/attachment/admin/'+datasrc;
-
-                $("#" + file.id).html("<input type=hidden name='imgs[]' value='"+datasrc+"'><img src='"+data.src+"' alt='"+data.name+"' width='100px' height='100px'>\n\
-	<div class='operate'><i class='toleft'>左移</i><i class='toright'>右移</i><i class='del'>删除</i></div>")
-
-                $("#btn_submit").removeAttr("disabled").removeClass("disabled").val("提 交");
-                if (data.error != 0) {
-                    alert(data.error);
-                }
-            },
-            Error: function(up, err) {
-                if (err.code == -601) {
-                    alert("请上传jpg,png,gif,jpeg,zip或rar！");
-                    $("#btn_submit").removeAttr("disabled").removeClass("disabled").val("提 交");
-                }
-            }
+	$('#info_form').ajaxForm({success:complate,dataType:'json'});
+    function complate(result){
+        if(result.status == 1){
+            $.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+        } else {
+            $.pinphp.tip({content:result.msg, icon:'alert'});
         }
-    });
-    uploader.init();
-    //左右切换和删除图片
-    $(document).delegate(".toleft","click", function() {
-        var item = $(this).parent().parent(".item");
-        var item_left = item.prev(".item");
-        if ($("#photos_area").children(".item").length >= 2) {
-            if (item_left.length == 0) {
-                item.insertAfter($("#photos_area").children(".item:last"));
-            } else {
-                item.insertBefore(item_left);
-            }
-        }
-    })
-
-    $(document).delegate(".toright","click", function() {
-        var item = $(this).parent().parent(".item");
-        var item_right = item.next(".item");
-        if ($("#photos_area").children(".item").length >= 2) {
-            if (item_right.length == 0) {
-                item.insertBefore($("#photos_area").children(".item:first"));
-            } else {
-                item.insertAfter(item_right);
-            }
-        }
-    })
-
-    $(document).delegate(".del","click", function() {
-        var self = $(this),
-        	id = self.data('id');
-        if(id){
-			$.get("{:U('Admin/del_imgs')}",{id:id},function (result) {
-				if(result == 1){
-                    self.parent().parent(".item").remove();
-				}else{
-				    alert('操作失败，请重试');
-				}
-            })
-		}else{
-            self.parent().parent(".item").remove();
-		}
-    })
-
-    KindEditor.create('.info', {
-        uploadJson : '{:U("attachment/editer_upload")}',
-        fileManagerJson : '{:U("attachment/editer_manager")}',
-        allowFileManager : true
-    });
-	$('ul.J_tabs').tabs('div.J_panes > div');
+    }
 });
 </script>
-</body>
-</html>

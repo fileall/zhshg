@@ -27,7 +27,7 @@
 		<script src="/theme/mobile/js/swiper.min.js"></script>
 	<!--<script>-->
 	<!--var URL = '/index.php?s=/Login';-->
-	<!--var SELF = '/index.php?s=/login/register/ewid/2.html';-->
+	<!--var SELF = '/index.php?s=/login/register/ewid/9.html';-->
 	<!--var ROOT_PATH = '';-->
 	<!--var APP	 =	 '/index.php?s=';-->
 	<!--//语言项目-->

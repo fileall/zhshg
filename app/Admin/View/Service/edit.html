@@ -19,6 +19,17 @@
 							<td><input type="text" name="nickname" class="input-text" size="30" value="{$info.nickname}"></td>
 						</tr>
 						<tr>
+							<th>级别 :</th>
+							<td>
+								<switch name="info['vips_qd']" >
+									<case value="1">区代</case>
+									<case value="2">市代</case>
+									<case value="3">省代</case>
+									<default  />
+								</switch>
+							</td>
+						</tr>
+						<tr>
 							<th>真实姓名 :</th>
 							<td>{$info.realname}
 								<empty name="info['realname']">未设置</empty>

@@ -82,17 +82,14 @@ $(function() {
 </div><?php endif; ?>
 <!--角色管理-->
 <div class="pad_lr_10">
-    <div class="J_tablelist table_list" data-acturi="<?php echo U('admin_role/ajax_edit');?>">
+    <div class="J_tablelist table_list" data-acturi="<?php echo U('AdminRole/ajax_edit');?>">
     <table width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th width="40"><input type="checkbox" name="checkall" class="J_checkall"></th>
                 <th>ID</th>
-      			<th align="left">姓名</th>
-                <th align="left">性别</th>
-                <th align="left">联系电话</th>
-                <th align="left">部门</th>
-                <th align="left">部门描述</th>
+      			<th align="left"><?php echo L('role_name');?></th>
+                <th align="left"><?php echo L('role_desc');?></th>
                 <th><?php echo L('sort_order');?></th>
                 <th><?php echo L('role_status');?></th>
                 <th width="150"><?php echo L('operations_manage');?></th>
@@ -100,22 +97,18 @@ $(function() {
         </thead>
     	<tbody>
         	<?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?><tr>
-                <td align="center">
-            		<input type="checkbox" class="J_checkitem" value="<?php echo ($val["id"]); ?>">
-                </td>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="<?php echo ($val["id"]); ?>"></td>
                 <td align="center"><?php echo ($val["id"]); ?></td>
-                <td><span data-tdtype="edit" data-field="name" class="tdedit" data-id="<?php echo ($val["id"]); ?>"><?php echo ($val["name"]); ?></span></td>
-                <td>男</td>
-                <td>15270933146</td>
-                <td>财务部</td>
+                <td><?php echo ($val["name"]); ?></td>
                 <td><?php echo ($val["remark"]); ?></td>
-                <td align="center"><span data-tdtype="edit" data-field="ordid" data-id="<?php echo ($val["id"]); ?>" class="tdedit"><?php echo ($val["ordid"]); ?></span></td>
+                <td align="center"><?php echo ($val["ordid"]); ?></td>
                 <td align="center">
                     <img data-tdtype="toggle" data-field="status" data-id="<?php echo ($val["id"]); ?>" data-value="<?php echo ($val["status"]); ?>" src="/theme/admin/images/toggle_<?php if($val["status"] == 0): ?>disabled<?php else: ?>enabled<?php endif; ?>.gif" />
                 </td>
                 <td align="center">
-                	<a href="<?php echo U('admin_role/auth', array('id'=>$val['id'],'menuid'=>$menuid));?>"><?php echo L('role_auth');?></a> | 
-                    <a href="javascript:;" class="J_showdialog" data-uri="<?php echo U('admin_role/edit', array('id'=>$val['id']));?>" data-title="<?php echo L('edit');?> - <?php echo ($val["name"]); ?>"  data-id="edit" data-width="450" data-height="190"><?php echo L('edit');?></a>| <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="<?php echo U('admin_role/delete', array('id'=>$val['id']));?>" data-msg="<?php echo sprintf(L('confirm_delete_one'),$val['name']);?>"><?php echo L('delete');?></a>
+                	<a href="<?php echo U('AdminRole/auth', array('id'=>$val['id'],'menuid'=>$menuid));?>"><?php echo L('role_auth');?></a> |
+                    <a href="javascript:;" class="J_showdialog" data-uri="<?php echo U('AdminRole/edit', array('id'=>$val['id']));?>" data-title="<?php echo L('edit');?> - <?php echo ($val["name"]); ?>"  data-id="edit" data-width="580" data-height="190"><?php echo L('edit');?></a> |
+                    <a href="javascript:;" class="J_confirmurl" data-acttype="ajax" data-uri="<?php echo U('AdminRole/delete', array('id'=>$val['id']));?>" data-msg="<?php echo sprintf(L('confirm_delete_one'),$val['name']);?>"><?php echo L('delete');?></a>
                 </td>
             </tr><?php endforeach; endif; else: echo "" ;endif; ?>
     	</tbody>
@@ -123,7 +116,7 @@ $(function() {
     </div>
     <div class="btn_wrap_fixed">
         <label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall"><?php echo L('select_all');?>/<?php echo L('cancel');?></label>
-        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="<?php echo U('admin_role/delete');?>" data-name="id" data-msg="<?php echo L('confirm_delete');?>" value="<?php echo L('delete');?>" />
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="<?php echo U('AdminRole/delete');?>" data-name="id" data-msg="<?php echo L('confirm_delete');?>" value="<?php echo L('delete');?>" />
         <div id="pages"><?php echo ($page); ?></div>
     </div>
 </div>

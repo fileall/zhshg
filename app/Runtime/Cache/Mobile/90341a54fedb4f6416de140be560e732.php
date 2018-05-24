@@ -27,7 +27,7 @@
 		<script src="/theme/mobile/js/swiper.min.js"></script>
 	<!--<script>-->
 	<!--var URL = '/index.php?s=/Index';-->
-	<!--var SELF = '/index.php?s=/Index/cate.html';-->
+	<!--var SELF = '/index.php?s=/Index/cate/pid/867.html';-->
 	<!--var ROOT_PATH = '';-->
 	<!--var APP	 =	 '/index.php?s=';-->
 	<!--//语言项目-->

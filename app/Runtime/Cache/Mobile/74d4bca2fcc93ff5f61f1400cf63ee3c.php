@@ -61,7 +61,7 @@
                     flow.load({
                         elem: '#LAY_demo1' //流加载容器
                         ,done: function(page, next){ //执行下一页的回调
-                            $.get("/index.php?s=/Orderlist/y_order/status/2.html",{p:page,status:status},function (res) {
+                            $.get("/index.php?s=/Orderlist/y_order/status/1.html",{p:page,status:status},function (res) {
                                 next(res.list, page < res.length); //假设总页数为 10
                                 if(res.length==0){
                                     $(".layui-flow-more").empty();

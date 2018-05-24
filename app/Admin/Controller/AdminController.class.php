@@ -2,235 +2,235 @@
 
 namespace Admin\Controller;
 
-class AdminController extends AdminCoreController {
-	
-	public function _initialize() {
+class AdminController extends AdminCoreController
+{
+    public function _initialize()
+    {
         parent::_initialize();
         $this->_mod = D('Admin');
         $this->set_mod('Admin');
     }
 
-    protected function _search() { 
-        $map = array();
-        $admin = session('admin');
-        if($admin['role_id'] != 1){
-            $map['role_id'] = array('neq',1);
-        }
-
-        return $map;
-    }
-	
-    public function _before_index() {
-        //部门
-        $d_list = M('Department')->getfield('id,name');
-
-        $this->assign('d_list',$d_list);
-        $this->list_relation = true;
-        //默认排序
-        $this->sort = 'id';
-        $this->order = 'asc';
-    }
-
-    //导出
-    public function export(){
-        //导出
-        ob_end_clean();
-        set_time_limit(0);
-        ini_set('memory_limit', '800M');
-        $d_list = M('Department')->getfield('id,name');
-        //列表
-        $list = $this->_mod->relation(true)->select();
-        //处理列表
-        $data = array();
-        foreach ($list as $k=>$val){
-            $data[$k] = array(
-                $val['username'],
-                $val['name'],
-                $val['id'],
-                $val['mobile'],
-                ($val['sex']==1) ? "男": "女",
-                $val['birthday'],
-                $d_list[$val['d_id']],
-                $val['role']['name'],
-                date("Y-m-d",$val['add_time']),
-                ($val['status']==1) ? "正常": "禁用"
-            );
-        }
-        $headArr=array(
-            '账号',
-            '姓名',
-            '工号',
-            '手机',
-            '性别',
-            '生日',
-            '部门',
-            '职位',
-            '创建时间',
-            '状态',
-        );
-        $this->getExcel("员工",$headArr,$data);
-    }
-
-    //导入
-    public function admin_upload()
+    public function index()
     {
-        $data_list = $this->ru_upload();
-        //部门
-        $d_list = M('Department')->getfield('name,id');
-        //职位
-        $role = M('AdminRole')->getfield('name,id');
-        //dump($role);exit;
+        /*$map = $this->_search();
+        $count      = $this->_mod ->where($map)->count();// 查询满足要求的总记录数
+        $Page       = new \Think\Page($count,20);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $show       = $Page->show();// 分页显示输出
+        $member = $this->_mod ->where($map)->relation(true)->order('city_id asc,id asc')
+                       ->limit($Page->firstRow.','.$Page->listRows)->select();*/
+        $this->get_admin_list('','',20);
+    }
 
-        $data = array();
-        foreach ($data_list as $k=>$v){
-            $data[] = array(
-                'username' => $v['A'],
-                'password' => st_md5($v['B']),
-                'name' => $v['C'],
-                'mobile' => $v['D'],
-                'sex' => ($v['E'] === "男") ? 1 : 0,
-                'birthday' => $v['F'],
-                'd_id' => $d_list[$v['G']],
-                'role_id' => $role[$v['H']],
-                'add_time' => time()
-            );
-        }
-        unset($data_list);
-        //添加数据
-        $this->_mod->startTrans();
-        $ok = $this->_mod->addAll($data);
-        if($ok){
-            $this->_mod->commit();
-            $this->success('导入成功');
+
+    public function _before_index()
+    {
+        $this->list_relation = true;
+    }
+
+    public function _before_add()
+    {
+        /*if($_SESSION['admin']['role_id'] == 1){
+            $city_id = M('place')->where('type=2 and status=1')->select();
         }else{
-            $this->_mod->rollback();
-            $this->error('导入失败');
+            $city_id = $_SESSION['admin']['city_id'];
+        }*/
+        //$city_id = region_division();
+
+//        $city_id = M('ItemCate')->field('id,name')->where('pid=0 and spid=0')->select();
+        $role_str = array();
+        $area_str = array();
+        $str['status'] = 1;
+        $role_id = $_SESSION['admin']['role_id'];
+        $area_list = array();
+        switch ($role_id){
+            case 15:
+                $role_str['id'] = array('in',array(16,17));
+                break;
+            case 16:
+                $role_str['id'] = 17;
+                $area_str['role_id'] = 15;
+                break;
+            case 17:
+                $role_str['id'] = 0;
+                $area_str['role_id'] = 16;
+                break;
+            default:
+                $role_str['id'] = array('in',array(15,16,17));
+//                $area_str['_string'] = '(role_id = 16 AND ppid)'I('id','','intval');
         }
-    }
 
-    public function _before_add() {
-    	$admin = session('admin');
-    	if($admin['role_id'] != 1){
-			$where = "id != 1 and ";
-		}
-		$where .= "status=1";
+        $role_list = M('admin_role')->where($str)->select();
+        !empty($area_str) && $area_list = $this->_mod->field('id,area_name')->where($area_str)->select();
 
-        //职位
-        $role_list = M('admin_role')->where($where)->select();
-        //部门
-        $d_list = M('Department')->select();
-
+        $this->assign('area_list',$area_list);
         $this->assign('role_list', $role_list);
-        $this->assign('d_list', $d_list);
+//        $this->assign('city_id', $city_id);
     }
-	
-    public function _before_insert($data='') {
-        if( ($data['password']=='')||(trim($data['password']=='')) ){
+
+    public function _before_insert($data='')
+    {
+        $data = $this->set_before($data);
+        /*$admin = session('admin');
+        $data['city_id'] = $admin['city_id'];*/
+        return $data;
+    }
+
+    public function set_before($data='')
+    {
+        if( ('' == $data['password']) || (trim('' == $data['password'])) ){
             unset($data['password']);
         }else{
             $data['password'] = md5($data['password']);
         }
-		$data['add_time'] = time();
+        $city_id = I('city_id','','intval');
+        if ($city_id){
+            if (17 == $data['role_id']){//小区推广员
+                $data['cid'] = $this->_mod->where(array('id'=>$city_id))->getField('cid');
+                $data['pid'] = $city_id;
+            }else{//一级推广员
+                $data['cid'] = $city_id;
+                $data['pid'] = $city_id;
+            }
+        }
         return $data;
     }
 
-    public function _after_insert($id){
-        //上传相册
-        $item_imgs = array();
-        if($_POST['imgs']){
-            foreach ($_POST['imgs'] as $k=>$v){
-                $item_imgs[] = array(
-                    'article_id' => $id,
-                    'url'    => $v,
-                    'order'   => $k+1,
-                );
-            }
-        }
-        //更新图片和相册
-        $item_imgs && M('AdminImg')->addAll($item_imgs);
-    }
-
-    public function _before_edit() {
-        $id = I('id','','intval');
-        //相册
-        $img_list = M('AdminImg')->where(array('article_id'=>$id))->select();
-        //获取分类信息
-        $info = $this->_mod->field('id,cate_id')->where(array('id'=>$id))->find();
-
-        $spid = D('CurriculumCate')->where(array('id'=>$info['cate_id']))->getField('spid');
-        if( $spid==0 ){
-            $spid = $info['cate_id'];
-        }else{
-            $spid .= $info['cate_id'];
-        }
-
-        $this->assign('img_list', $img_list);
-        $this->assign('spid', ltrim(ltrim($spid,'1'),'|'));
+    public function _before_edit()
+    {
         $this->_before_add();
     }
 
-    public function _before_update($data=''){
-        //处理密码
+    public function _before_update($data='')
+    {
         if( ($data['password']=='')||(trim($data['password']=='')) ){
             unset($data['password']);
         }else{
             $data['password'] = md5($data['password']);
         }
-
-        //上传相册
-        $item_imgs = array();
-        if($_POST['imgs']){
-            foreach ($_POST['imgs'] as $k=>$v){
-                $item_imgs[] = array(
-                    'article_id' => $data['id'],
-                    'url'    => $v,
-                    'order'   => $k+1,
-                );
-            }
-        }
-        //更新图片和相册
-        $item_imgs && M('AdminImg')->addAll($item_imgs);
-
         return $data;
     }
 
-    public function ajax_check_name() {
+    public function ajax_check_name()
+    {
         $name = I('username','', 'trim');
         $id = I('id','', 'intval');
-        if ($this->_mod->name_exists($name, $id)) {
+        if ($this->_mod->name_exists($name,'username', $id)) {
             echo 0;
         } else {
             echo 1;
         }
     }
 
-    //异步上传图片
-    public function ajax_upload_img(){
-        $date_dir = date('ym/d/'); //上传目录
-        $result = $this->_upload($_FILES['file'], 'admin/'.$date_dir, array());
-
-        if ($result['error']) {
-            echo json_encode(array("error" => $result['info']));
+    public function ajax_check_area_name()
+    {
+        $area_name = I('area_name','','trim');
+        $id = I('id','', 'intval');
+        if ($this->_mod->name_exists($area_name,'area_name', $id)){
+            echo 0;
         } else {
-            $data['thumb_img'] = $date_dir .$result['info'][0]['savename'];
-            echo json_encode(array("error" => "0", "src" => $data['thumb_img'], "name" => $result['info'][0]['savename']));
+            echo 1;
         }
-        exit;
     }
 
-    //删除图集
-    public function del_imgs(){
-        $id = I('id','','intval');
-        //删除原图
-        $old_img = M('AdminImg')->where(array('id'=>$id))->getField('url');
-        $old_img = '.'.attach($old_img,'admin');
-        is_file($old_img) && @unlink($old_img);
-        //删除数据
-        $del = M('AdminImg')->delete($id);
-        if($del){
-            echo 1;
+    public function ajax_role()
+    {
+        $role = I('role_id','','trim');
+        if (18 == $role || 19 == $role){
+            $role_id = (18 == $role) ? 17 : 18;
+            $arr = $this->_mod->field('id,area_name')->where(array('role_id'=>$role_id))->select();
+        }
+        $this->ajax_return(1,'',$arr);
+    }
+
+    //查询管理员列表
+    public function get_admin_list($str1,$page)
+    {
+        $arr    = $this->_mod->field('id')->where($str1)->select();
+        $count  = empty($arr) ? 0 : count($arr);
+        $Page   = new \Think\Page($count,$page);
+        $show   = $Page->show();// 分页显示输出
+
+        $member = D()->table('__ADMIN__ an')
+            ->join('__ADMIN_ROLE__ ane on ane.id=an.role_id','left')
+            ->field('ane.name,an.id,an.username,an.last_time,an.last_ip,an.status')
+            ->where(array('an.id'=>array('in',array_column($arr,'id'))))
+            ->limit($Page->firstRow.','.$Page->listRows)
+            ->group('an.id')
+            ->select();
+
+        $this->assign('list',$member);
+        $this->assign('page',$show);// 赋值分页输出
+        $this->assign('list_table', true);
+        $this ->display();
+    }
+
+
+    //推广员发放工资
+    public function promoters()
+    {
+        if (IS_POST){
+            $ids = I('post.ids');
+            $prices = I('post.prices');
+            $type = I('post.type');
+            $prices1 = $this->_mod->where('id in('.$ids.')')->order('prices')->getField('prices');
+
+            if (2 == $type && $prices > $prices1){
+                IS_AJAX && $this->ajax_return(0, L('lack_of_balance'));
+                $this->error(L('lack_of_balance'));
+            }
+
+            $arr = array();
+            foreach (explode(',',$ids) as $item) {
+                $arr[] = array(
+                    'aid'       => $item,
+                    'cid'       => $_SESSION['admin']['id'],
+                    'type'      => $type,
+                    'price'     => $prices,
+                    'add_time'  => $_SERVER['REQUEST_TIME'],
+                );
+            }
+
+            $set = (2 == $type) ? 'setDec' : 'setInc';
+
+            if (false !== $this->_mod->where('id in('.$ids.')')->$set('prices',$prices) && false !== M('PromotersPayrollRecords')->addAll($arr))
+                $this->ajax_return(1, L('operation_success'));
+            else
+                IS_AJAX && $this->ajax_return(0, L('operation_failure'));
+
         }else{
-            echo 0;
+            $ids = trim(I('id'), ',');
+            $type = I('type','','intval');
+            $this->assign('type',$type);
+            $this->assign('ids', $ids);
+
+            $resp = $this->fetch();
+            $this->ajax_return(1, '', $resp);
+        }
+    }
+
+    /**
+     * 获取紧接着的下一级分类ID
+     */
+    public function ajax_getchilds()
+    {
+
+        $id = I('id',0, 'intval');
+        $type = I('type', null, 'intval');
+        $map = array(
+            'pid'       => $id,
+            'role_id'   => array('between',array(15,17)),
+        );
+        if (!is_null($type)) {
+            $map['type'] = $type;
+        }
+
+        $return = $this->_mod->field('id,area_name as name')->where($map)->select();
+
+        if ($return) {
+            $this->ajax_return(1, L('operation_success'), $return);
+        } else {
+            $this->ajax_return(0, L('operation_failure'));
         }
     }
 

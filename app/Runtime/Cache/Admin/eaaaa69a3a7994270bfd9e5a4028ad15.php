@@ -7,7 +7,7 @@
     <title><?php echo L('website_manage');?></title>
     <script>
 	var URL = '/jradmin.php/index';
-	var SELF = '/jradmin.php';
+	var SELF = '/jradmin.php?m=admin&c=index&a=index';
 	var ROOT_PATH = '';
 	var APP	 =	 '/jradmin.php';
 	//语言项目

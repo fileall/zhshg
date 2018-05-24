@@ -18,9 +18,17 @@ class TestController extends  HomeController
     }
 
     public function index(){
-//$aaa=M('account')->where(['id'=>['in','734,733,732,735']])->delete();
-//var_dump($aaa);
-//die;
+        $member=M('member')->where('id=36')->find();
+        $province_id=$member['province_id']?$member['province_id']:0;
+        $city_id=$member['city_id']?$member['city_id']:0;
+        $district_id=$member['district_id']?$member['district_id']:0;
+        $where['is_qd']=1;//vips_qd区代等级 1区2市3省
+        $where['_string']='(vips_qd =3 and province_id ='.$province_id.')'
+            .'or ( vips_qd =2 and  city_id='. $city_id.')'
+            .'or ( vips_qd =1 and district_id='.$district_id.')';
+        $qds=M('member')->where($where)->select();//区代列表
+        $qd_rule=M('qd_rule')->getField('id,name,reward_silver_multiple,upgrade_recharge');//区代等级规则
+var_dump($qds);die;
         $this->display();
     }
 

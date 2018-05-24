@@ -27,7 +27,7 @@
 		<script src="/theme/mobile/js/swiper.min.js"></script>
 	<!--<script>-->
 	<!--var URL = '/index.php?s=/Wallet';-->
-	<!--var SELF = '/index.php?s=/wallet/scan_pay/merchant_id/1.html&code=0019qfwR0Tn1R72rmcxR0Q7pwR09qfwK&state=STATE';-->
+	<!--var SELF = '/index.php?s=/wallet/scan_pay/merchant_id/3.html&code=0211m3U50semYI1JFnX50AfcU501m3UT&state=STATE';-->
 	<!--var ROOT_PATH = '';-->
 	<!--var APP	 =	 '/index.php?s=';-->
 	<!--//语言项目-->

@@ -12,7 +12,7 @@ class IndexController extends AdminCoreController {
 //              'city_id' => 1,
 //      ));
     }
-	public function index() {
+	/*public function index() {
         $top_menus = $this->_mod->admin_menu(0);
         $this->assign('top_menus', $top_menus);
 		$city_id = $_SESSION['admin']['city_id'];
@@ -22,6 +22,14 @@ class IndexController extends AdminCoreController {
         $this->display();
         $Home = A('Home/Home');
         //$Home->auto();
+    }*/
+    public function index()
+    {
+        $top_menus = $this->_mod->admin_menu($_SESSION['admin']['role_id'],0,'',['display'=>1]);
+        $this->assign('top_menus', $top_menus);
+        $my_admin = array('username'=>$_SESSION['admin']['username'], 'rolename'=>$_SESSION['admin']['role_id'],'name'=>'');
+        $this->assign('my_admin', $my_admin);
+        $this->display();
     }
     public function test(){
         //header("Content-type:text/html;charset=utf-8");
@@ -110,26 +118,72 @@ class IndexController extends AdminCoreController {
         Image::buildImageVerify(4,1,'gif','50','24');
     }
 
-    public function left() {
-        $menuid = I('menuid',"",'intval');
-        if ($menuid) {
-            $left_menu = $this->_mod->admin_menu($menuid);
+
+    public function left()
+    {
+        $menuid = I('menuid', 'intval');
+        if (is_numeric($menuid)) {
+            $role_id = $_SESSION['admin']['role_id'];
+            $left_menu = $this->_mod->admin_menu($role_id,$menuid,'',['display'=>1]);
             foreach ($left_menu as $key=>$val) {
-                $left_menu[$key]['sub'] = $this->_mod->admin_menu($val['id']);
+                $left_menu[$key]['sub'] = $this->_mod->admin_menu($role_id,$val['id'],'',['display'=>1]);
             }
         } else {
+            $left_menu[0] = array('id'=>0,'name'=>L('common_menu'));
+            $left_menu[0]['sub'] = array();
+            if ($r = $this->_mod->where(array('often'=>1))->select()) {
+                $left_menu[0]['sub'] = $r;
+            }
+            array_unshift($left_menu[0]['sub'], array('id'=>0,'name'=>L('common_menu_set'),'controller_name'=>'index','action_name'=>'often'));
+        }
+
+        $this->assign('left_menu', $left_menu);
+        $this->display();
+    }
+
+    public function often()
+    {
+        if (isset($_POST['do'])) {
+            $id_arr = isset($_POST['id']) && is_array($_POST['id']) ? $_POST['id'] : '';
+            $this->_mod->where(array('ofen'=>1))->save(array('often'=>0));
+            $id_str = implode(',', $id_arr);
+            $this->_mod->where('id IN('.$id_str.')')->save(array('often'=>1));
+            $this->success(L('operation_success'));
+        } else {
+            $role_id = $_SESSION['admin']['role_id'];
+            $r = $this->_mod->admin_menu($role_id,0);
+            $list = array();
+            foreach ($r as $v) {
+                $v['sub'] = $this->_mod->admin_menu($role_id,$v['id']);
+                foreach ($v['sub'] as $key=>$sv) {
+                    $v['sub'][$key]['sub'] = $this->_mod->admin_menu($role_id,$sv['id']);
+                }
+                $list[] = $v;
+            }
+            $this->assign('list', $list);
+            $this->display();
+        }
+    }
+//    public function left() {
+//        $menuid = I('menuid',"",'intval');
+//        if ($menuid) {
+//            $left_menu = $this->_mod->admin_menu($menuid);
+//            foreach ($left_menu as $key=>$val) {
+//                $left_menu[$key]['sub'] = $this->_mod->admin_menu($val['id']);
+//            }
+//        } else {
             /*$left_menu[0] = array('id'=>0,'name'=>L('common_menu'));
             $left_menu[0]['sub'] = array();
             if ($r = $this->_mod->where(array('often'=>1))->select()) {
                 $left_menu[0]['sub'] = $r;
             }
             array_unshift($left_menu[0]['sub'], array('id'=>0,'name'=>L('common_menu_set'),'module_name'=>'index','action_name'=>'often_menu'));*/
-        }
-        $this->assign('left_menu', $left_menu);
-        $this->display();
-    }
+//        }
+//        $this->assign('left_menu', $left_menu);
+//        $this->display();
+//    }
 
-    public function often() {
+/*    public function often() {
         if (isset($_POST['do'])) {
             $id_arr = isset($_POST['id']) && is_array($_POST['id']) ? $_POST['id'] : '';
             $this->_mod->where(array('ofen'=>1))->save(array('often'=>0));
@@ -149,7 +203,7 @@ class IndexController extends AdminCoreController {
             $this->assign('list', $list);
             $this->display();
         }
-    }
+    }*/
 
     public function map() {
         $r = $this->_mod->admin_menu(0);

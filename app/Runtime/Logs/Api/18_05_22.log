@@ -1,0 +1,218 @@
+[ 2018-05-22T19:58:33+08:00 ] 140.207.54.76 /notify.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000292s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000368s ]
+INFO: Run Common\Behavior\CheckLangBehavior [ RunTime:0.000294s ]
+NOTIC: [8] Use of undefined constant GROUP_NAME - assumed 'GROUP_NAME' /home/wwwroot/zhshg.0791jr.com/web/app/Common/Behavior/load_langBehavior.class.php 第 29 行.
+INFO: Run Common\Behavior\load_langBehavior [ RunTime:0.000361s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001121s ]
+SQL: SHOW COLUMNS FROM `jrkj_member` [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `jrkj_account` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jrkj_order_recharge` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jrkj_grade_rule` [ RunTime:0.0006s ]
+NOTIC: [8] Undefined variable: result /home/wwwroot/zhshg.0791jr.com/web/app/Api/Controller/IndexController.class.php 第 350 行.
+SQL: SELECT * FROM `jrkj_order_recharge` WHERE `dingdan` = '188029664392' LIMIT 1   [ RunTime:0.0003s ]
+SQL: UPDATE `jrkj_order_recharge` SET `status`='2',`pay_time`='1526990313',`zftype`='1' WHERE `id` = 79 [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jrkj_member` WHERE `id` = 77 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `jrkj_buy_send` [ RunTime:0.0004s ]
+SQL: SELECT * FROM `jrkj_buy_send`  [ RunTime:0.0001s ]
+SQL: SHOW COLUMNS FROM `jrkj_buy_send_account` [ RunTime:0.0005s ]
+SQL: SELECT * FROM `jrkj_buy_send_account` WHERE `add_time` BETWEEN 1526918400 AND 1526990313 AND `uid` = 77 AND `bs_id` = 1 LIMIT 1   [ RunTime:0.0149s ]
+SQL: SELECT `send_coin` FROM `jrkj_buy_send` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: INSERT INTO `jrkj_buy_send_account` (`uid`,`bs_id`,`add_time`) VALUES ('77','1','1526990313') [ RunTime:0.0002s ]
+SQL: UPDATE `jrkj_member` SET `silver_coin`='10500',`gold_acer`='30' WHERE `id` = 77 [ RunTime:0.0002s ]
+SQL: SELECT `id`,`vips` FROM `jrkj_member` WHERE `id` = 9 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT `id`,`upgrade_one_price`,`tj_acer_silver` FROM `jrkj_grade_rule` WHERE `id` = 5 LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `jrkj_member` SET `silver_coin`=silver_coin+900 WHERE `id` = 9 [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jrkj_member` WHERE `is_qd` = 1 AND ( (vips_qd =3 and province_id =14)or ( vips_qd =2 and  city_id=16)or ( vips_qd =1 and district_id=20) )  [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jrkj_qd_rule` [ RunTime:0.0005s ]
+SQL: SELECT `id`,`name`,`reward_silver_multiple`,`upgrade_recharge` FROM `jrkj_qd_rule`  [ RunTime:0.0002s ]
+SQL: UPDATE `jrkj_member` SET `silver_coin`=silver_coin+90 WHERE `id` = 29 [ RunTime:0.0002s ]
+SQL: UPDATE `jrkj_member` SET `silver_coin`=silver_coin+240 WHERE `id` = 74 [ RunTime:0.0002s ]
+SQL: INSERT INTO `jrkj_account` (`type`,`uid`,`totalprices`,`change_desc`,`add_time`,`oid`,`account_type`,`attach_field`) VALUES ('2','77','30.00','充值元宝','1526990313','0','0','0'),('4','77','500','充值元宝赠送','1526990313','0','0','0'),('4','9','900','下线充值元宝','1526990313','0','0','0'),('4','29','90','区域内会员充值元宝','1526990313','0','0','0'),('4','74','240','区域内会员充值元宝','1526990313','0','0','0') [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000388s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000440s ]
+
+[ 2018-05-22T19:58:48+08:00 ] 140.207.54.75 /notify.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000267s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000374s ]
+INFO: Run Common\Behavior\CheckLangBehavior [ RunTime:0.000294s ]
+NOTIC: [8] Use of undefined constant GROUP_NAME - assumed 'GROUP_NAME' /home/wwwroot/zhshg.0791jr.com/web/app/Common/Behavior/load_langBehavior.class.php 第 29 行.
+INFO: Run Common\Behavior\load_langBehavior [ RunTime:0.000311s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001077s ]
+SQL: SHOW COLUMNS FROM `jrkj_member` [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `jrkj_account` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jrkj_order_recharge` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jrkj_grade_rule` [ RunTime:0.0006s ]
+NOTIC: [8] Undefined variable: result /home/wwwroot/zhshg.0791jr.com/web/app/Api/Controller/IndexController.class.php 第 350 行.
+SQL: SELECT * FROM `jrkj_order_recharge` WHERE `dingdan` = '188029664392' LIMIT 1   [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000546s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000633s ]
+
+[ 2018-05-22T19:59:03+08:00 ] 140.207.54.76 /notify.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000267s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000371s ]
+INFO: Run Common\Behavior\CheckLangBehavior [ RunTime:0.000285s ]
+NOTIC: [8] Use of undefined constant GROUP_NAME - assumed 'GROUP_NAME' /home/wwwroot/zhshg.0791jr.com/web/app/Common/Behavior/load_langBehavior.class.php 第 29 行.
+INFO: Run Common\Behavior\load_langBehavior [ RunTime:0.000391s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001143s ]
+SQL: SHOW COLUMNS FROM `jrkj_member` [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `jrkj_account` [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `jrkj_order_recharge` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jrkj_grade_rule` [ RunTime:0.0005s ]
+NOTIC: [8] Undefined variable: result /home/wwwroot/zhshg.0791jr.com/web/app/Api/Controller/IndexController.class.php 第 350 行.
+SQL: SELECT * FROM `jrkj_order_recharge` WHERE `dingdan` = '188029664392' LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000445s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000498s ]
+
+[ 2018-05-22T19:59:34+08:00 ] 140.207.54.76 /notify.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000289s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000352s ]
+INFO: Run Common\Behavior\CheckLangBehavior [ RunTime:0.000279s ]
+NOTIC: [8] Use of undefined constant GROUP_NAME - assumed 'GROUP_NAME' /home/wwwroot/zhshg.0791jr.com/web/app/Common/Behavior/load_langBehavior.class.php 第 29 行.
+INFO: Run Common\Behavior\load_langBehavior [ RunTime:0.000327s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001054s ]
+SQL: SHOW COLUMNS FROM `jrkj_member` [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `jrkj_account` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jrkj_order_recharge` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jrkj_grade_rule` [ RunTime:0.0005s ]
+NOTIC: [8] Undefined variable: result /home/wwwroot/zhshg.0791jr.com/web/app/Api/Controller/IndexController.class.php 第 350 行.
+SQL: SELECT * FROM `jrkj_order_recharge` WHERE `dingdan` = '188029664392' LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000380s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000450s ]
+
+[ 2018-05-22T20:02:34+08:00 ] 140.207.54.74 /notify.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000264s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000357s ]
+INFO: Run Common\Behavior\CheckLangBehavior [ RunTime:0.000308s ]
+NOTIC: [8] Use of undefined constant GROUP_NAME - assumed 'GROUP_NAME' /home/wwwroot/zhshg.0791jr.com/web/app/Common/Behavior/load_langBehavior.class.php 第 29 行.
+INFO: Run Common\Behavior\load_langBehavior [ RunTime:0.000331s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001092s ]
+SQL: SHOW COLUMNS FROM `jrkj_member` [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `jrkj_account` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jrkj_order_recharge` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `jrkj_grade_rule` [ RunTime:0.0005s ]
+NOTIC: [8] Undefined variable: result /home/wwwroot/zhshg.0791jr.com/web/app/Api/Controller/IndexController.class.php 第 350 行.
+SQL: SELECT * FROM `jrkj_order_recharge` WHERE `dingdan` = '188029664392' LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000413s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000464s ]
+
+[ 2018-05-22T20:32:36+08:00 ] 140.207.54.75 /notify.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000268s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000358s ]
+INFO: Run Common\Behavior\CheckLangBehavior [ RunTime:0.000281s ]
+NOTIC: [8] Use of undefined constant GROUP_NAME - assumed 'GROUP_NAME' /home/wwwroot/zhshg.0791jr.com/web/app/Common/Behavior/load_langBehavior.class.php 第 29 行.
+INFO: Run Common\Behavior\load_langBehavior [ RunTime:0.000337s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001070s ]
+SQL: SHOW COLUMNS FROM `jrkj_member` [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `jrkj_account` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jrkj_order_recharge` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `jrkj_grade_rule` [ RunTime:0.0005s ]
+NOTIC: [8] Undefined variable: result /home/wwwroot/zhshg.0791jr.com/web/app/Api/Controller/IndexController.class.php 第 350 行.
+SQL: SELECT * FROM `jrkj_order_recharge` WHERE `dingdan` = '188029664392' LIMIT 1   [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000392s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000463s ]
+
+[ 2018-05-22T21:02:38+08:00 ] 140.207.54.74 /notify.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000287s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000344s ]
+INFO: Run Common\Behavior\CheckLangBehavior [ RunTime:0.000280s ]
+NOTIC: [8] Use of undefined constant GROUP_NAME - assumed 'GROUP_NAME' /home/wwwroot/zhshg.0791jr.com/web/app/Common/Behavior/load_langBehavior.class.php 第 29 行.
+INFO: Run Common\Behavior\load_langBehavior [ RunTime:0.000322s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001042s ]
+SQL: SHOW COLUMNS FROM `jrkj_member` [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `jrkj_account` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `jrkj_order_recharge` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `jrkj_grade_rule` [ RunTime:0.0006s ]
+NOTIC: [8] Undefined variable: result /home/wwwroot/zhshg.0791jr.com/web/app/Api/Controller/IndexController.class.php 第 350 行.
+SQL: SELECT * FROM `jrkj_order_recharge` WHERE `dingdan` = '188029664392' LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000378s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000430s ]
+
+[ 2018-05-22T21:32:39+08:00 ] 140.207.54.75 /notify.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000275s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000351s ]
+INFO: Run Common\Behavior\CheckLangBehavior [ RunTime:0.000278s ]
+NOTIC: [8] Use of undefined constant GROUP_NAME - assumed 'GROUP_NAME' /home/wwwroot/zhshg.0791jr.com/web/app/Common/Behavior/load_langBehavior.class.php 第 29 行.
+INFO: Run Common\Behavior\load_langBehavior [ RunTime:0.000322s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001046s ]
+SQL: SHOW COLUMNS FROM `jrkj_member` [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `jrkj_account` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jrkj_order_recharge` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `jrkj_grade_rule` [ RunTime:0.0006s ]
+NOTIC: [8] Undefined variable: result /home/wwwroot/zhshg.0791jr.com/web/app/Api/Controller/IndexController.class.php 第 350 行.
+SQL: SELECT * FROM `jrkj_order_recharge` WHERE `dingdan` = '188029664392' LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000379s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000432s ]
+
+[ 2018-05-22T22:02:41+08:00 ] 140.207.54.76 /notify.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000279s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000376s ]
+INFO: Run Common\Behavior\CheckLangBehavior [ RunTime:0.000291s ]
+NOTIC: [8] Use of undefined constant GROUP_NAME - assumed 'GROUP_NAME' /home/wwwroot/zhshg.0791jr.com/web/app/Common/Behavior/load_langBehavior.class.php 第 29 行.
+INFO: Run Common\Behavior\load_langBehavior [ RunTime:0.000315s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001083s ]
+SQL: SHOW COLUMNS FROM `jrkj_member` [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `jrkj_account` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jrkj_order_recharge` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jrkj_grade_rule` [ RunTime:0.0006s ]
+NOTIC: [8] Undefined variable: result /home/wwwroot/zhshg.0791jr.com/web/app/Api/Controller/IndexController.class.php 第 350 行.
+SQL: SELECT * FROM `jrkj_order_recharge` WHERE `dingdan` = '188029664392' LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000416s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000481s ]
+
+[ 2018-05-22T23:02:43+08:00 ] 140.207.54.74 /notify.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.008304s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000364s ]
+INFO: Run Common\Behavior\CheckLangBehavior [ RunTime:0.000318s ]
+NOTIC: [8] Use of undefined constant GROUP_NAME - assumed 'GROUP_NAME' /home/wwwroot/zhshg.0791jr.com/web/app/Common/Behavior/load_langBehavior.class.php 第 29 行.
+INFO: Run Common\Behavior\load_langBehavior [ RunTime:0.000317s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001108s ]
+SQL: SHOW COLUMNS FROM `jrkj_member` [ RunTime:0.0049s ]
+SQL: SHOW COLUMNS FROM `jrkj_account` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `jrkj_order_recharge` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `jrkj_grade_rule` [ RunTime:0.0006s ]
+NOTIC: [8] Undefined variable: result /home/wwwroot/zhshg.0791jr.com/web/app/Api/Controller/IndexController.class.php 第 350 行.
+SQL: SELECT * FROM `jrkj_order_recharge` WHERE `dingdan` = '188029664392' LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000404s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000459s ]
+

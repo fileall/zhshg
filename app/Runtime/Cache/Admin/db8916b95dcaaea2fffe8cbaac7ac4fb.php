@@ -246,6 +246,10 @@ $(function(){
     laydate.render({
         elem: '#J_time_end'
     });
+    $(".export").click(function(){
+        $("input[name='a']").val("export");
+        $("form").submit();
+    })
 
 $('.J_preview').preview(); //查看大图
 $('.J_cate_select').cate_select({top_option:lang.all}); //分类联动

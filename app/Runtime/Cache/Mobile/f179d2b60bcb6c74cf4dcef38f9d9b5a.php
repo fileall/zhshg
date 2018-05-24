@@ -27,7 +27,7 @@
 		<script src="/theme/mobile/js/swiper.min.js"></script>
 	<!--<script>-->
 	<!--var URL = '/index.php?s=/Wallet';-->
-	<!--var SELF = '/index.php?s=/wallet/acer_pay/dingdan/188485418517/money/30/oid/64.html&code=081TadM50Q1TOI17CCN508I1M50TadMT&state=STATE';-->
+	<!--var SELF = '/index.php?s=/wallet/acer_pay/dingdan/188029664392/money/30/oid/79.html&code=071E0rsR0rzCM72ScesR0GvAsR0E0rsn&state=STATE';-->
 	<!--var ROOT_PATH = '';-->
 	<!--var APP	 =	 '/index.php?s=';-->
 	<!--//语言项目-->

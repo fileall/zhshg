@@ -8,9 +8,11 @@ class AdminCoreController extends StoneController {
         parent::_initialize();
         $this->check_priv();
         $this->menuid = I('menuid', 0,'trim');
+        $role_id = $_SESSION['admin']['role_id'];
         if ($this->menuid) {
-            $sub_menu = D('menu')->sub_menu($this->menuid, $this->big_menu);
-
+           // $sub_menu = D('menu')->sub_menu($this->menuid, $this->big_menu);
+//            dump($this->menuid);die;
+            $sub_menu = D('menu')->sub_menu($role_id, $this->menuid, $this->big_menu);
             $selected = '';
             foreach ($sub_menu as $key=>$val) {
                 $sub_menu[$key]['class'] = '';
@@ -271,13 +273,23 @@ class AdminCoreController extends StoneController {
         if (in_array($controller_name , explode(',','index'))) {
             return true;
         }
-        $menu_mod = M('Menu');
+        if (in_array($controller_name , explode(',','order'))) {
+            return true;
+        }
+
+        $r = D()->table('__MENU__ m')
+            ->join('__ADMIN_AUTH__ a on m.id = a.menu_id','LEFT')
+            ->where(['m.controller_name'=>['in', [$controller_name, CONTROLLER_NAME]] , 'm.action_name'=>['in', [$action_name, ACTION_NAME]],'a.role_id'=>$_SESSION['admin']['role_id']])
+            ->getField('m.id');
+
+        /*$menu_mod = M('Menu');
         $menu_id = $menu_mod->where(array('controller_name'=>$controller_name , 'action_name'=>$action_name))->getField('id');
 		//echo $menu_id.'--'; echo $_SESSION['admin']['role_id'].'--';exit; 
         $priv_mod = D('Admin_auth');
-        $r = $priv_mod->where(array('menu_id'=>$menu_id, 'role_id'=>$_SESSION['admin']['role_id']))->count();
+        $r = $priv_mod->where(array('menu_id'=>$menu_id, 'role_id'=>$_SESSION['admin']['role_id']))->count();*/
 
         if (!$r) {
+            IS_AJAX && $this->ajax_return(0, L('_VALID_ACCESS_'));
             $this->error(L('_VALID_ACCESS_'));
         }
     }

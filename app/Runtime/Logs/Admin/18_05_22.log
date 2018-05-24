@@ -1,0 +1,114 @@
+[ 2018-05-22T15:23:10+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin_role&a=index&menuid=65
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'show' in 'where clause'
+
+[ 2018-05-22T15:23:12+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=index&menuid=435
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'show' in 'where clause'
+
+[ 2018-05-22T15:23:14+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=menu&a=index&menuid=6
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'show' in 'where clause'
+
+[ 2018-05-22T15:23:14+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=menu&a=index&menuid=6
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'show' in 'where clause'
+
+[ 2018-05-22T15:23:17+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin_role&a=index&menuid=65
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'show' in 'where clause'
+
+[ 2018-05-22T15:23:18+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin_role&a=index&menuid=65
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'show' in 'where clause'
+
+[ 2018-05-22T15:24:52+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=index&a=index
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'show' in 'where clause'
+
+[ 2018-05-22T17:34:50+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981689516
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:34:52+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981690918
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:34:52+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981691516
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:34:53+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981692036
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:34:53+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981692324
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:34:53+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981692498
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:34:53+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981692676
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:34:54+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981692866
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:34:54+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981693034
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:34:54+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981693634
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:34:55+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981694084
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:34:55+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981694490
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:34:56+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981694924
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:34:59+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981698508
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:35:22+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981721172
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:35:30+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981729190
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:36:12+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981771462
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:36:18+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981776980
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:36:22+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981780908
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:38:00+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981879306
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:38:01+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981880510
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:39:34+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981972974
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:39:35+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526981973950
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:40:08+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526982007664
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:40:13+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526982012406
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:40:15+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526982014467
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:40:26+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526982025596
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:41:10+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526982069200
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:43:42+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526982221753
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:43:43+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526982222739
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+
+[ 2018-05-22T17:43:45+08:00 ] 182.100.1.217 /jradmin.php?m=admin&c=admin&a=ajax_role&clientid=role_id&role_id=16&_=1526982224360
+ERR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'area_name' in 'field list'
+

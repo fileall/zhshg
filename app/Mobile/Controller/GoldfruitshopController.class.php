@@ -415,14 +415,17 @@ class GoldfruitshopController extends HomeController {
         $uid = is_login();
         $list1 = M('order')->where(['uid'=>$uid,'type'=>2])->field('id,add_time,status')->order('id desc')->select();
         $ids = array_column($list1,'id');
-        $list2 = M('order_list')->where(array('oid'=>array('in',$ids)))->field('oid as id,num,title,img,oldprice,item_id,attr_id')->order('id desc')->select();
-        foreach ($list1 as $k=>$v){
-            foreach ($list2 as $k1=>$v1)
-                if(false !== array_search($v['id'],$v1)){
-                    $list2[$k]['add_time'] = $v['add_time'];
-                    $list2[$k]['status'] = $v['status'];
-                }
+        if(!empty($ids)){
+            $list2 = M('order_list')->where(array('oid'=>array('in',$ids)))->field('oid as id,num,title,img,oldprice,item_id,attr_id')->order('id desc')->select();
+            foreach ($list1 as $k=>$v){
+                foreach ($list2 as $k1=>$v1)
+                    if(false !== array_search($v['id'],$v1)){
+                        $list2[$k]['add_time'] = $v['add_time'];
+                        $list2[$k]['status'] = $v['status'];
+                    }
+            }
         }
+
         $this->assign('list',$list2);
         $this->display();
     }

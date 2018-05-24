@@ -2,61 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7dcf3322-8b8a-434b-aa66-04e0a9f8287f" name="默认的" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Admin/Controller/AdminController.class.php" afterPath="$PROJECT_DIR$/app/Admin/Controller/AdminController.class.php" />
-      <change beforePath="$PROJECT_DIR$/app/Admin/Controller/AdminCoreController.class.php" afterPath="$PROJECT_DIR$/app/Admin/Controller/AdminCoreController.class.php" />
-      <change beforePath="$PROJECT_DIR$/app/Admin/Controller/AdminRoleController.class.php" afterPath="$PROJECT_DIR$/app/Admin/Controller/AdminRoleController.class.php" />
-      <change beforePath="$PROJECT_DIR$/app/Admin/Controller/IndexController.class.php" afterPath="$PROJECT_DIR$/app/Admin/Controller/IndexController.class.php" />
-      <change beforePath="$PROJECT_DIR$/app/Admin/Controller/ServiceController.class.php" afterPath="$PROJECT_DIR$/app/Admin/Controller/ServiceController.class.php" />
-      <change beforePath="$PROJECT_DIR$/app/Admin/Model/MenuModel.class.php" afterPath="$PROJECT_DIR$/app/Admin/Model/MenuModel.class.php" />
-      <change beforePath="$PROJECT_DIR$/app/Admin/View/Admin/edit.html" afterPath="$PROJECT_DIR$/app/Admin/View/Admin/edit.html" />
-      <change beforePath="$PROJECT_DIR$/app/Admin/View/AdminRole/add.html" afterPath="$PROJECT_DIR$/app/Admin/View/AdminRole/add.html" />
-      <change beforePath="$PROJECT_DIR$/app/Admin/View/AdminRole/auth.html" afterPath="$PROJECT_DIR$/app/Admin/View/AdminRole/auth.html" />
-      <change beforePath="$PROJECT_DIR$/app/Admin/View/AdminRole/edit.html" afterPath="$PROJECT_DIR$/app/Admin/View/AdminRole/edit.html" />
-      <change beforePath="$PROJECT_DIR$/app/Admin/View/AdminRole/index.html" afterPath="$PROJECT_DIR$/app/Admin/View/AdminRole/index.html" />
-      <change beforePath="$PROJECT_DIR$/app/Admin/View/Service/edit.html" afterPath="$PROJECT_DIR$/app/Admin/View/Service/edit.html" />
-      <change beforePath="$PROJECT_DIR$/app/Admin/View/Service/index.html" afterPath="$PROJECT_DIR$/app/Admin/View/Service/index.html" />
-      <change beforePath="$PROJECT_DIR$/app/Api/Controller/IndexController.class.php" afterPath="$PROJECT_DIR$/app/Api/Controller/IndexController.class.php" />
-      <change beforePath="$PROJECT_DIR$/app/Mobile/Controller/AutoController.class.php" afterPath="$PROJECT_DIR$/app/Mobile/Controller/AutoController.class.php" />
-      <change beforePath="$PROJECT_DIR$/app/Mobile/Controller/TestController.class.php" afterPath="$PROJECT_DIR$/app/Mobile/Controller/TestController.class.php" />
-      <change beforePath="$PROJECT_DIR$/app/Mobile/Controller/UpgradeController.class.php" afterPath="$PROJECT_DIR$/app/Mobile/Controller/UpgradeController.class.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Admin/3acb817db19209036c4be7f1d204ba0b.php" afterPath="$PROJECT_DIR$/app/Runtime/Cache/Admin/3acb817db19209036c4be7f1d204ba0b.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Admin/9635b9bfa8e72d96f2c93b177b145181.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Admin/b387aab36df358a06606d3432f025028.php" afterPath="$PROJECT_DIR$/app/Runtime/Cache/Admin/b387aab36df358a06606d3432f025028.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Admin/db8916b95dcaaea2fffe8cbaac7ac4fb.php" afterPath="$PROJECT_DIR$/app/Runtime/Cache/Admin/db8916b95dcaaea2fffe8cbaac7ac4fb.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Admin/eaaaa69a3a7994270bfd9e5a4028ad15.php" afterPath="$PROJECT_DIR$/app/Runtime/Cache/Admin/eaaaa69a3a7994270bfd9e5a4028ad15.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Admin/f29ffa330dabff21809aca56808c518e.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/028ba88685ecf7dcb162344095efabd1.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/0db1188b5a86a1ea3081ac817404dbee.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/18c5eb129f5bff907d937f962218c19a.php" afterPath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/18c5eb129f5bff907d937f962218c19a.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/20671df4a887d9677afbe1ff6c49357f.php" afterPath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/20671df4a887d9677afbe1ff6c49357f.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/25bd390c16606d1bbef05bc7e32713bd.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/2b9b8eea52017406ba9cfe397f022bac.php" afterPath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/2b9b8eea52017406ba9cfe397f022bac.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/33eac7660a473e181c8916575293b0d6.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/3b30b9a9bad7c8b23965bde3eeeaf33b.php" afterPath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/3b30b9a9bad7c8b23965bde3eeeaf33b.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/47d368414aebf24fb0017e6124f98123.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/5b0a8322ae4d09816d4be532fda70dbf.php" afterPath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/5b0a8322ae4d09816d4be532fda70dbf.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/5d00b888d48ee431617645e50eebb0b4.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/5e62373785aadca48678ab186b769114.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/627fe311d0a8f7588acd0170b5a06719.php" afterPath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/627fe311d0a8f7588acd0170b5a06719.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/6a5a8720b23708ea3be5ac9b9e9a8009.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/749b179db8610bddcf0f3432d8e8875c.php" afterPath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/749b179db8610bddcf0f3432d8e8875c.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/74d4bca2fcc93ff5f61f1400cf63ee3c.php" afterPath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/74d4bca2fcc93ff5f61f1400cf63ee3c.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/8174a67f6a0588f43bf4100ec3232dc5.php" afterPath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/8174a67f6a0588f43bf4100ec3232dc5.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/90341a54fedb4f6416de140be560e732.php" afterPath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/90341a54fedb4f6416de140be560e732.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/930182720c2568ea2c2a1de980e55719.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/943e92d1961452d28b2ae756dc160aee.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/b4f15e0587907af8f9714aca24b839e0.php" afterPath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/b4f15e0587907af8f9714aca24b839e0.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/c9daea668d088e4321e7e44eb1af25b0.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/cfded29c80f63b182c25433103e67496.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/ea1685cc4ca1547098098a4331910fe3.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/ed699429c701327aa02e9cafed4bb135.php" afterPath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/ed699429c701327aa02e9cafed4bb135.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/f179d2b60bcb6c74cf4dcef38f9d9b5a.php" afterPath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/f179d2b60bcb6c74cf4dcef38f9d9b5a.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/f3dcafdea946fc7988f56e64d6d12e2a.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/f5145a8e481e2d5ca9bb80c855b2e2b0.php" afterPath="$PROJECT_DIR$/app/Runtime/Cache/Mobile/f5145a8e481e2d5ca9bb80c855b2e2b0.php" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Data/_fields/zhshg.jrkj_department.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Logs/Admin/18_05_21.log" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Logs/Api/18_05_21.log" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/app/Runtime/Logs/Mobile/18_05_21.log" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/Mobile/Controller/GoldfruitshopController.class.php" afterPath="$PROJECT_DIR$/app/Mobile/Controller/GoldfruitshopController.class.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -79,101 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="IndexController.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Admin/Controller/IndexController.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4554">
-              <caret line="207" column="27" lean-forward="false" selection-start-line="207" selection-start-column="27" selection-end-line="207" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Admin/View/Index/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="792">
-              <caret line="36" column="49" lean-forward="false" selection-start-line="36" selection-start-column="44" selection-end-line="36" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TeamController.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Admin/Controller/TeamController.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IndexController.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Mobile/Controller/IndexController.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Admin/View/Menu/add.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="858">
-              <caret line="39" column="88" lean-forward="false" selection-start-line="39" selection-start-column="85" selection-end-line="39" selection-end-column="88" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdminCoreController.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Admin/Controller/AdminCoreController.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="10" column="49" lean-forward="false" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GoldfruitshopController.class.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GoldfruitshopController.class.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Mobile/Controller/GoldfruitshopController.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9152">
-              <caret line="416" column="41" lean-forward="false" selection-start-line="416" selection-start-column="41" selection-end-line="416" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MenuModel.class.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Admin/Model/MenuModel.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="32" column="14" lean-forward="true" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CacheController.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Admin/Controller/CacheController.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="12" column="29" lean-forward="false" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdminController.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Admin/Controller/AdminController.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3190">
-              <caret line="145" column="13" lean-forward="false" selection-start-line="145" selection-start-column="13" selection-end-line="145" selection-end-column="13" />
+            <state relative-caret-position="237">
+              <caret line="413" column="5" lean-forward="true" selection-start-line="413" selection-start-column="5" selection-end-line="413" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -233,6 +89,7 @@
         <option value="$PROJECT_DIR$/app/Admin/View/Index/index.html" />
         <option value="$PROJECT_DIR$/app/Admin/Controller/MemberZyRechargeController.class.php" />
         <option value="&lt;d7ac81fe-979f-44ea-a503-c2fdc7810017&gt;/app/Mobile/Controller/GoldfruitshopController.class.php" />
+        <option value="$PROJECT_DIR$/app/Mobile/Controller/GoldfruitshopController.class.php" />
       </list>
     </option>
   </component>
@@ -288,8 +145,21 @@
               <item name="zhshg" type="b2602c69:ProjectViewProjectNode" />
               <item name="zhshg" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Admin" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Model" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Mobile" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="zhshg" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zhshg" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Mobile" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="zhshg" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zhshg" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Mobile" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="View" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -339,12 +209,12 @@
       <workItem from="1527054417727" duration="7706000" />
       <workItem from="1527071742608" duration="1648000" />
       <workItem from="1527121948439" duration="1225000" />
-      <workItem from="1527126446612" duration="310000" />
+      <workItem from="1527126446612" duration="1069000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53376000" />
+    <option name="totallyTimeSpent" value="54135000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
@@ -383,13 +253,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Admin/View/Menu/edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-198">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Admin/View/Admin/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -666,50 +529,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Admin/Controller/IndexController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4554">
-          <caret line="207" column="27" lean-forward="false" selection-start-line="207" selection-start-column="27" selection-end-line="207" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Admin/View/Index/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="36" column="49" lean-forward="false" selection-start-line="36" selection-start-column="44" selection-end-line="36" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Admin/Controller/TeamController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Mobile/Controller/IndexController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Admin/View/Menu/add.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="858">
           <caret line="39" column="88" lean-forward="false" selection-start-line="39" selection-start-column="85" selection-end-line="39" selection-end-column="88" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Admin/Controller/AdminCoreController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="49" lean-forward="false" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
           <folding />
         </state>
       </provider>
@@ -730,18 +553,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Mobile/Controller/GoldfruitshopController.class.php">
+    <entry file="file://$PROJECT_DIR$/app/Admin/Model/MenuModel.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9152">
-          <caret line="416" column="41" lean-forward="false" selection-start-line="416" selection-start-column="41" selection-end-line="416" selection-end-column="41" />
+        <state relative-caret-position="-183">
+          <caret line="32" column="14" lean-forward="true" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Admin/Model/MenuModel.class.php">
+    <entry file="file://$PROJECT_DIR$/app/Admin/Controller/AdminCoreController.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="32" column="14" lean-forward="true" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
+        <state relative-caret-position="220">
+          <caret line="10" column="49" lean-forward="false" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Mobile/Controller/IndexController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Admin/Controller/TeamController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Admin/View/Index/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="36" column="49" lean-forward="false" selection-start-line="36" selection-start-column="44" selection-end-line="36" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Admin/Controller/IndexController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="207" column="27" lean-forward="false" selection-start-line="207" selection-start-column="27" selection-end-line="207" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-528">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Mobile/Controller/GoldfruitshopController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="413" column="5" lean-forward="true" selection-start-line="413" selection-start-column="5" selection-end-line="413" selection-end-column="5" />
           <folding />
         </state>
       </provider>
